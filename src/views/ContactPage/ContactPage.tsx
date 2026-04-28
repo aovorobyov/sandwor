@@ -15,10 +15,10 @@ export async function ContactPage() {
             <ul className={styles.linkList}>
               <li>
                 <a
-                  href="mailto:hello@sandwor.space"
+                  href="mailto:sandwor@mail.ru"
                   className={styles.link}
                 >
-                  hello@sandwor.space
+                  sandwor@mail.ru
                 </a>
               </li>
               <li>
@@ -33,7 +33,7 @@ export async function ContactPage() {
               </li>
               <li>
                 <a
-                  href="https://github.com/sandwor"
+                  href="https://github.com/aovorobyov"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.link}

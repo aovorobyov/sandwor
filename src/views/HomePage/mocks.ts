@@ -34,11 +34,11 @@ export const MOCK_POSTS: Post[] = [
 export const MOCK_PROJECTS: Project[] = [
   {
     id:          'sandwor',
-    title:       'sandwor.space',
+    title:       'sandwor.com',
     year:        '2025',
     description: 'Personal website built with Next.js 14, FSD architecture, and next-intl.',
     tags:        ['Next.js', 'TypeScript', 'CSS Modules'],
-    url:         'https://sandwor.space',
+    url:         'https://sandwor.com',
   },
   {
     id:          'side-project-1',

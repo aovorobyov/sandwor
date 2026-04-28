@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { locales } from '@/i18n';
 import { MOCK_POSTS } from '@/views/BlogPage';
 
-const BASE_URL = 'https://sandwor.space';
+const BASE_URL = 'https://sandwor.com';
 
 // Static page paths (excluding locale prefix — added below)
 const STATIC_PATHS = ['', '/blog', '/projects', '/notes', '/contact'];

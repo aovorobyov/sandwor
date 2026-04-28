@@ -3,10 +3,10 @@ import { ThemeProvider } from 'next-themes';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sandwor.space'),
+  metadataBase: new URL('https://sandwor.com'),
   title: {
-    template: '%s | sandwor.space',
-    default: 'sandwor.space',
+    template: '%s | sandwor',
+    default: 'sandwor',
   },
   description: 'Personal website',
 };

@@ -14,7 +14,7 @@ export async function Header() {
     <header className={styles.root}>
       <div className={styles.inner}>
         <Link href={`/${locale}`} className={styles.logo}>
-          sandwor.space
+          sandwor
         </Link>
 
         <nav className={styles.nav} aria-label="Main navigation">

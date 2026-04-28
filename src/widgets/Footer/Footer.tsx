@@ -4,8 +4,8 @@ import { NAV_LINKS } from '../Header/config';
 import styles from './Footer.module.css';
 
 const SOCIAL_LINKS = [
-  { href: 'https://github.com', label: 'GitHub' },
-  { href: 'https://t.me',       label: 'Telegram' },
+  { href: 'https://github.com/aovorobyov', label: 'GitHub' },
+  { href: 'https://t.me/sandwor',       label: 'Telegram' },
 ] as const;
 
 export async function Footer() {

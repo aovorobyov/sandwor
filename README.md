@@ -1,4 +1,4 @@
-# sandwor.space
+# sandwor.com
 
 Personal website scaffold built with Next.js 14, Feature-Sliced Design, and next-intl.
 

@@ -1,0 +1,15 @@
+.root {
+  padding-bottom: var(--space-24);
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-12) var(--container-pad) 0;
+}
+
+.title {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-8);
+}

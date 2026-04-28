@@ -1,0 +1,19 @@
+.root {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.root:last-child {
+  border-bottom: none;
+}
+
+.text {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  margin-bottom: var(--space-2);
+}
+
+.date {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}

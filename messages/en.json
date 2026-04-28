@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "home":     "Home",
+    "blog":     "Blog",
+    "projects": "Projects",
+    "notes":    "Notes",
+    "contact":  "Contact"
+  },
+  "home": {
+    "name":         "Alexander Vorobyov",
+    "bio":          "Web developer. I work on frontend and occasionally write about code and tools.",
+    "latest-posts": "Latest articles",
+    "all-posts":    "All articles →",
+    "projects":     "Projects",
+    "all-projects": "All projects →"
+  },
+  "blog": {
+    "title":      "Articles",
+    "filter-all": "All",
+    "read-more":  "Read →",
+    "min-read":   "{count} min read"
+  },
+  "projects": {
+    "title": "Projects",
+    "open":  "Open →"
+  },
+  "notes": {
+    "title": "Notes"
+  },
+  "contact": {
+    "title":   "Contact",
+    "name":    "Name",
+    "email":   "Email",
+    "message": "Message",
+    "submit":  "Send",
+    "success": "Message sent"
+  },
+  "footer": {
+    "rights": "© {year} Alexander Vorobyov"
+  }
+}

@@ -1,0 +1,17 @@
+.root {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: var(--transition);
+}
+
+.clickable {
+  display: block;
+  text-decoration: none;
+}
+
+.clickable:hover {
+  border-color: var(--text-muted);
+  background: var(--bg-subtle);
+}

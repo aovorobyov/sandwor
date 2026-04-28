@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
-import { locales, type Locale } from '@/i18n';
+import { locales, type Locale } from '@/i18n-routing';
 import { Header } from '@/widgets/Header';
 import { Footer } from '@/widgets/Footer';
 

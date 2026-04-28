@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { MOCK_POSTS } from '@/views/BlogPage';
 import styles from './ArticlePage.module.css';
+import { defaultLocale } from '@/i18n-routing';
 
 interface ArticlePageProps {
   slug: string;
@@ -14,6 +15,7 @@ export async function ArticlePage({ slug }: ArticlePageProps) {
 
   const t = await getTranslations();
   const locale = await getLocale();
+  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
 
   const formattedDate = new Date(post.date).toLocaleDateString(locale, {
     year: 'numeric',
@@ -24,7 +26,7 @@ export async function ArticlePage({ slug }: ArticlePageProps) {
   return (
     <main className={styles.root}>
       <div className={styles.container}>
-        <Link href={`/${locale}/blog`} className={styles.back}>
+        <Link href={`${localePrefix}/blog`} className={styles.back}>
           ← {t('nav.blog')}
         </Link>
 

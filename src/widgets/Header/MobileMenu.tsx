@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
+import { defaultLocale } from '@/i18n-routing';
 import { NAV_LINKS } from './config';
 import styles from './MobileMenu.module.css';
 
@@ -10,6 +11,7 @@ export function MobileMenu() {
   const [open, setOpen] = useState(false);
   const t = useTranslations();
   const locale = useLocale();
+  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
 
   return (
     <>
@@ -29,7 +31,7 @@ export function MobileMenu() {
           {NAV_LINKS.map(({ href, labelKey }: (typeof NAV_LINKS)[number]) => (
             <Link
               key={href}
-              href={`/${locale}${href}`}
+              href={`${localePrefix}${href}` || '/'}
               className={styles.link}
               onClick={() => setOpen(false)}
             >

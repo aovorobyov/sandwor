@@ -1,9 +1,8 @@
 import { getRequestConfig } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import { locales, type Locale, defaultLocale } from './i18n-routing';
 
-export const locales = ['ru', 'en'] as const;
-export type Locale = (typeof locales)[number];
-export const defaultLocale: Locale = 'ru';
+export { locales, type Locale, defaultLocale };
 
 export default getRequestConfig(async ({ locale }) => {
   // Validate incoming locale parameter

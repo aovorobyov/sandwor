@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { locales } from '@/i18n';
+import { locales } from '@/i18n-routing';
 import { MOCK_POSTS } from '@/views/BlogPage';
 
 const BASE_URL = 'https://sandwor.com';

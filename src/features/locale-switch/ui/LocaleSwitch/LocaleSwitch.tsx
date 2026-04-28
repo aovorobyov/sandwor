@@ -2,7 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
-import { locales, type Locale } from '@/i18n';
+import { defaultLocale, locales, type Locale } from '@/i18n-routing';
 import styles from './LocaleSwitch.module.css';
 
 export function LocaleSwitch() {
@@ -12,9 +12,30 @@ export function LocaleSwitch() {
 
   function switchLocale(locale: Locale) {
     if (locale === currentLocale) return;
-    // Replace the current locale segment; fall back to root if pathname is null
-    const currentPath = pathname ?? `/${currentLocale}`;
-    const newPath = currentPath.replace(`/${currentLocale}`, `/${locale}`);
+    const currentPath = pathname ?? '/';
+    const isDefaultTarget = locale === defaultLocale;
+
+    if (currentPath === '/') {
+      router.push(isDefaultTarget ? '/' : `/${locale}`);
+      return;
+    }
+
+    const segments = currentPath.split('/').filter(Boolean);
+    const firstSegment = segments[0] as Locale | undefined;
+    const hasLocalePrefix = locales.includes(firstSegment as Locale);
+
+    if (hasLocalePrefix) {
+      const restSegments = segments.slice(1);
+      const newPath = isDefaultTarget
+        ? `/${restSegments.join('/')}`
+        : `/${[locale, ...restSegments].join('/')}`;
+
+      router.push(newPath === '/' ? '/' : newPath.replace(/\/$/, ''));
+      return;
+    }
+
+    const newPath = isDefaultTarget ? currentPath : `/${[locale, ...segments].join('/')}`;
+
     router.push(newPath);
   }
 

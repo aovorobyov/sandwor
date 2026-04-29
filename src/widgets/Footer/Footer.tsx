@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { getTranslations, getLocale } from 'next-intl/server';
-import { defaultLocale } from '@/i18n-routing';
+import { getTranslations } from 'next-intl/server';
 import { NAV_LINKS } from '../Header/config';
 import styles from './Footer.module.css';
 
@@ -11,8 +10,6 @@ const SOCIAL_LINKS = [
 
 export async function Footer() {
   const t = await getTranslations();
-  const locale = await getLocale();
-  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
   const year = new Date().getFullYear();
 
   return (
@@ -20,7 +17,7 @@ export async function Footer() {
       <div className={styles.inner}>
         <nav className={styles.nav} aria-label="Footer navigation">
           {NAV_LINKS.map(({ href, labelKey }) => (
-            <Link key={href} href={`${localePrefix}${href}` || '/'} className={styles.link}>
+            <Link key={href} href={href} className={styles.link}>
               {t(labelKey)}
             </Link>
           ))}

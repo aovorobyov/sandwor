@@ -1,5 +1,4 @@
 import { useLocale, useTranslations } from 'next-intl';
-import { defaultLocale } from '@/i18n-routing';
 import { Badge } from '@/shared/ui/Badge';
 import { Card } from '@/shared/ui/Card';
 import type { Post } from '../../model/types';
@@ -12,7 +11,6 @@ export interface PostCardProps {
 export function PostCard({ post }: PostCardProps) {
   const t = useTranslations();
   const locale = useLocale();
-  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
 
   const formattedDate = new Date(post.date).toLocaleDateString(locale, {
     year: 'numeric',
@@ -21,7 +19,7 @@ export function PostCard({ post }: PostCardProps) {
   });
 
   return (
-    <Card href={`${localePrefix}/blog/${post.slug}`}>
+    <Card href={`/blog/${post.slug}`}>
       <article>
         <div className={styles.meta}>
           <time className={styles.date} dateTime={post.date}>

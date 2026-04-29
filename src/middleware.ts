@@ -5,22 +5,29 @@ import { locales, defaultLocale } from './i18n-routing';
 const intlMiddleware = createMiddleware({
   locales,
   defaultLocale,
-  localePrefix: 'as-needed',
+  localePrefix: 'never',
 });
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Explicitly rewrite non-prefixed paths to the default locale route tree.
-  // This avoids 404 when only /[locale] routes exist in App Router.
-  const hasLocalePrefix = locales.some(
+  // Backward compatibility for existing locale-prefixed links.
+  const matchedLocale = locales.find(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
   );
 
-  if (!hasLocalePrefix) {
-    const rewriteUrl = request.nextUrl.clone();
-    rewriteUrl.pathname = `/${defaultLocale}${pathname === '/' ? '' : pathname}`;
-    return NextResponse.rewrite(rewriteUrl);
+  if (matchedLocale) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = pathname.replace(new RegExp(`^/${matchedLocale}`), '') || '/';
+
+    const response = NextResponse.redirect(redirectUrl);
+    response.cookies.set('NEXT_LOCALE', matchedLocale, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365,
+      sameSite: 'lax',
+    });
+
+    return response;
   }
 
   return intlMiddleware(request);

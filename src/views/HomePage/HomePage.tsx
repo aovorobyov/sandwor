@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { getTranslations, getLocale } from 'next-intl/server';
-import { defaultLocale } from '@/i18n-routing';
+import { getTranslations } from 'next-intl/server';
 import { PostList } from '@/widgets/PostList';
 import { ProjectList } from '@/widgets/ProjectList';
 import { MOCK_POSTS, MOCK_PROJECTS } from './mocks';
@@ -8,8 +7,6 @@ import styles from './HomePage.module.css';
 
 export async function HomePage() {
   const t = await getTranslations();
-  const locale = await getLocale();
-  const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
 
   return (
     <main className={styles.root}>
@@ -26,7 +23,7 @@ export async function HomePage() {
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>{t('home.latest-posts')}</h2>
-            <Link href={`${localePrefix}/blog`} className={styles.seeAll}>
+            <Link href="/blog" className={styles.seeAll}>
               {t('home.all-posts')}
             </Link>
           </div>
@@ -39,7 +36,7 @@ export async function HomePage() {
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>{t('home.projects')}</h2>
-            <Link href={`${localePrefix}/projects`} className={styles.seeAll}>
+            <Link href="/projects" className={styles.seeAll}>
               {t('home.all-projects')}
             </Link>
           </div>

@@ -1,9 +1,9 @@
 .root {
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
   padding: var(--space-6);
-  transition: var(--transition);
+  transition: border-color 0.2s ease;
 }
 
 .clickable {
@@ -12,6 +12,5 @@
 }
 
 .clickable:hover {
-  border-color: var(--text-muted);
-  background: var(--bg-subtle);
+  border-color: var(--primary);
 }

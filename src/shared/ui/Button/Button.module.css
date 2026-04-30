@@ -3,7 +3,10 @@
   align-items: center;
   justify-content: center;
   font-weight: var(--weight-medium);
-  border-radius: var(--radius-md);
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-sm);
   transition: var(--transition);
   white-space: nowrap;
   cursor: pointer;
@@ -16,22 +19,31 @@
 
 /* Variants */
 .primary {
-  background: var(--accent);
-  color: #fff;
+  background: var(--primary);
+  color: var(--on-primary);
 }
 
 .primary:hover:not(:disabled) {
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .secondary {
-  background: var(--bg-subtle);
+  background: var(--bg);
   color: var(--text);
   border: 1px solid var(--border);
 }
 
 .secondary:hover:not(:disabled) {
-  border-color: var(--text-muted);
+  background: var(--bg-subtle);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--text);
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--bg-subtle);
 }
 
 /* Sizes */
@@ -41,6 +53,5 @@
 }
 
 .md {
-  padding: var(--space-2) var(--space-4);
-  font-size: var(--text-base);
+  padding: 12px 24px;
 }

@@ -12,22 +12,22 @@
 }
 
 .label {
-  font-size: var(--text-sm);
+  font-size: 14px;
   font-weight: var(--weight-medium);
   color: var(--text);
 }
 
 .textarea {
   width: 100%;
-  padding: var(--space-2) var(--space-3);
+  padding: 12px var(--space-4);
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   font: inherit;
   font-size: var(--text-base);
   color: var(--text);
-  resize: vertical;
-  transition: var(--transition);
+  resize: none;
+  transition: border-color 0.2s ease;
   outline: none;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .textarea:focus {
-  border-color: var(--accent);
+  border-color: var(--primary);
 }
 
 .success {

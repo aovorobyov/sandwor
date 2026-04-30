@@ -42,5 +42,33 @@
     "page-not-found": "Page not found",
     "page-not-found-description": "The page you are looking for does not exist.",
     "back-home": "← Back home"
+  },
+  "uikit": {
+    "title": "Design System Kit",
+    "description": "A collection of visual tokens and functional components.",
+    "light-mode": "Light Mode",
+    "dark-mode": "Dark Mode",
+    "buttons": "Buttons",
+    "btn-primary": "Primary Action",
+    "btn-secondary": "Secondary Action",
+    "btn-ghost": "Ghost",
+    "badges": "Badges",
+    "badge-neutral": "Neutral",
+    "badge-accent": "Accent",
+    "cards": "Cards",
+    "card-date": "March 27, 2002",
+    "card-title": "Designing for Focused Utility",
+    "card-description": "How we stripped away the noise to create a platform for meaningful architectural notes.",
+    "project-title": "Project Delta",
+    "project-category": "Architecture / Visualization",
+    "view-case": "View Case Study",
+    "form-elements": "Form Elements",
+    "form-label": "Label",
+    "form-placeholder": "Enter text...",
+    "form-message": "Message",
+    "form-message-placeholder": "Your thoughts...",
+    "note-entry": "Note Entry",
+    "note-quote": "Precision is not just about the numbers; it's about the feeling of alignment between intent and execution.",
+    "note-meta": "Note #429 · Architecture Principles"
   }
 }

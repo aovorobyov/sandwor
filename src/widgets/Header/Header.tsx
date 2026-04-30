@@ -33,6 +33,7 @@ export async function Header() {
         {/* Mobile-only burger, hidden on desktop via CSS */}
         <div className={styles.mobileControls}>
           <ThemeToggle />
+          <LocaleSwitch />
           <MobileMenu />
         </div>
       </div>

@@ -18,6 +18,7 @@ export function NoteItem({ note }: NoteItemProps) {
   return (
     <article className={styles.root}>
       <p className={styles.text}>{note.text}</p>
+      <div className={styles.separator} />
       <time className={styles.date} dateTime={note.date}>
         {formattedDate}
       </time>

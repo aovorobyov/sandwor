@@ -9,7 +9,7 @@ export default async function NotFound() {
 
   return (
     <main className={styles.root}>
-      <p className={styles.code}>404</p>
+      <span className={styles.code} role="img" aria-label="404" />
       <h1 className={styles.title}>{t('404.page-not-found')}</h1>
       <p className={styles.text}>{t('404.page-not-found-description')}</p>
       <Link href="/" className={styles.link}>

@@ -15,10 +15,22 @@ export async function ContactPage() {
             <ul className={styles.linkList}>
               <li>
                 <a
-                  href="mailto:sandwor@mail.ru"
+                  href="https://github.com/aovorobyov"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={styles.link}
                 >
-                  sandwor@mail.ru
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/sandwor/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  Instagram
                 </a>
               </li>
               <li>
@@ -33,12 +45,20 @@ export async function ContactPage() {
               </li>
               <li>
                 <a
-                  href="https://github.com/aovorobyov"
+                  href="mailto:aovorobyov@mail.ru"
+                  className={styles.link}
+                >
+                  Mail
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://vk.com/sandwor"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.link}
                 >
-                  GitHub
+                  VK
                 </a>
               </li>
             </ul>

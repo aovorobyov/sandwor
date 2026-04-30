@@ -9,10 +9,16 @@
 }
 
 .code {
-  font-size: var(--text-3xl);
-  font-weight: var(--weight-semibold);
-  color: var(--text-muted);
-  line-height: 1;
+  display: inline-block;
+  height: var(--text-3xl);
+  aspect-ratio: 170 / 60;
+  background-color: var(--accent);
+  -webkit-mask-image: url('/img/404.svg');
+  mask-image: url('/img/404.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
   margin-bottom: var(--space-4);
 }
 

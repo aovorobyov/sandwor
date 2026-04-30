@@ -18,6 +18,7 @@ export function ThemeToggle() {
   }
 
   const isDark = resolvedTheme === 'dark';
+  const iconUrl = isDark ? '/img/light.svg' : '/img/dark.svg';
 
   return (
     <button
@@ -25,7 +26,13 @@ export function ThemeToggle() {
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
-      {isDark ? '☀' : '🌙'}
+      <span
+        className={styles.icon}
+        style={{
+          maskImage: `url(${iconUrl})`,
+          WebkitMaskImage: `url(${iconUrl})`,
+        }}
+      />
     </button>
   );
 }

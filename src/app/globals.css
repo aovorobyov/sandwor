@@ -36,6 +36,9 @@ body {
   line-height: var(--leading-normal);
   -webkit-font-smoothing: antialiased;
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
 }
 
 img,

@@ -34,7 +34,7 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
   return (
     <NextIntlClientProvider messages={messages}>
       <Header />
-      <main>{children}</main>
+      <div style={{ flex: 1 }}>{children}</div>
       <Footer />
     </NextIntlClientProvider>
   );

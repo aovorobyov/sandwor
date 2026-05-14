@@ -4,7 +4,8 @@
     "blog":     "Blog",
     "projects": "Projects",
     "notes":    "Notes",
-    "contact":  "Contact"
+    "contact":  "Contact",
+    "uikit":    "Design System Kit"
   },
   "home": {
     "name":         "Alexander Vorobyov",

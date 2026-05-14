@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
-import { PostList } from '@/widgets/PostList';
-import { ProjectList } from '@/widgets/ProjectList';
-import { MOCK_POSTS, MOCK_PROJECTS } from './mocks';
+// import { PostList } from '@/widgets/PostList';
+// import { ProjectList } from '@/widgets/ProjectList';
+// import { MOCK_POSTS, MOCK_PROJECTS } from './mocks';
 import styles from './HomePage.module.css';
 
 export async function HomePage() {
@@ -19,7 +19,7 @@ export async function HomePage() {
       </section>
 
       {/* Latest posts */}
-      <section className={styles.section}>
+      {/* <section className={styles.section}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>{t('home.latest-posts')}</h2>
@@ -29,10 +29,10 @@ export async function HomePage() {
           </div>
           <PostList posts={MOCK_POSTS.slice(0, 3)} />
         </div>
-      </section>
+      </section> */}
 
       {/* Projects */}
-      <section className={styles.section}>
+      {/* <section className={styles.section}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>{t('home.projects')}</h2>
@@ -42,7 +42,7 @@ export async function HomePage() {
           </div>
           <ProjectList projects={MOCK_PROJECTS} />
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }

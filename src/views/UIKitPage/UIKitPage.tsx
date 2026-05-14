@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { Button } from '@/shared/ui/Button';
 import { Badge } from '@/shared/ui/Badge';
@@ -59,10 +60,12 @@ export async function UIKitPage() {
 
                   {/* Project Card */}
                   <div className={styles.projectCard}>
-                    <img
+                    <Image
                       className={styles.projectCardImage}
                       src="https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?w=800&q=80"
                       alt=""
+                      width={800}
+                      height={600}
                     />
                     <div className={styles.projectCardBody}>
                       <h4 className={styles.projectCardTitle}>{t('project-title')}</h4>
@@ -152,10 +155,12 @@ export async function UIKitPage() {
 
                   {/* Project Card */}
                   <div className={styles.projectCard}>
-                    <img
+                    <Image
                       className={styles.projectCardImage}
                       src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?w=800&q=80"
                       alt=""
+                      width={800}
+                      height={600}
                     />
                     <div className={styles.projectCardBody}>
                       <h4 className={styles.projectCardTitle}>{t('project-title')}</h4>

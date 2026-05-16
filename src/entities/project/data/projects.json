@@ -1,0 +1,102 @@
+[
+  {
+    "slug": "sandwor",
+    "title": {
+      "ru": "Бренд sandwor",
+      "en": "sandwor Brand"
+    },
+    "date": "2026-05",
+    "description": {
+      "ru": "Персональный сайт с блогом из Telegram, проектами и двуязычным интерфейсом для публикации опыта и работ.",
+      "en": "Personal portfolio site with a Telegram-powered blog, projects section, and a bilingual UI for sharing experience and work."
+    },
+    "image": null,
+    "tags": ["Next.js", "React", "TypeScript", "Node.js"],
+    "repoUrl": "https://github.com/aovorobyov/sandwor",
+    "siteUrl": "https://sandwor.vercel.app",
+    "body": {
+      "ru": "<p>sandwor — персональный сайт-портфолио с главной страницей, разделами проектов, заметок и контактов, а также блогом, который автоматически подтягивает публикации из Telegram-канала. Проект построен на <code>Next.js 14</code> и использует App Router, чтобы быстро отдавать статические страницы и при этом держать контент блога актуальным без ручного копирования постов.</p><h2>Технические решения</h2><p>Архитектура организована по <code>Feature-Sliced Design</code>: роутинг вынесен в слой <code>app</code>, бизнес-сущности разделены по <code>entities</code>, а крупные блоки страниц собраны в <code>widgets</code> и <code>views</code>. Локализация сделана через <code>next-intl</code> с режимом <code>localePrefix: 'never'</code>, поэтому язык переключается cookie-переключателем без префиксов в URL, а тема оформлена через <code>next-themes</code> с защитой от hydration mismatch на клиенте.</p><h2>Сложности</h2><p>Самая нетривиальная часть — интеграция с Telegram: посты парсятся с публичной страницы канала, очищаются от эмодзи и сервисных сообщений, получают заголовок из первого &lt;b&gt;-блока, а затем кешируются через <code>react.cache()</code> и <code>revalidate</code> на час. Для быстрого обновления контента без полного ребилда добавлен webhook, который сбрасывает тегированный кеш при новом посте.</p>",
+      "en": "<p>sandwor is a personal portfolio site featuring a home page, projects, notes, and contact sections, plus a blog that automatically pulls posts from a Telegram channel. Built on <code>Next.js 14</code> with App Router to serve static pages fast while keeping blog content fresh without manual copy-pasting.</p><h2>Technical decisions</h2><p>The codebase follows <code>Feature-Sliced Design</code>: routing lives in the <code>app</code> layer, business entities in <code>entities</code>, and larger UI blocks in <code>widgets</code> and <code>views</code>. Localisation is handled by <code>next-intl</code> with <code>localePrefix: 'never'</code>, so the language switches via a cookie toggle with no URL prefixes. Theming uses <code>next-themes</code> with hydration-mismatch protection on the client.</p><h2>Challenges</h2><p>The trickiest part was the Telegram integration: posts are parsed from the channel's public page, stripped of emoji and service messages, given a title from the first &lt;b&gt; block, then cached via <code>react.cache()</code> and <code>revalidate</code> for one hour. A webhook was added to purge the tagged cache on every new post, enabling instant content updates without a full rebuild.</p>"
+    }
+  },
+  {
+    "slug": "translation-module",
+    "title": {
+      "ru": "Translation Module для Tilda",
+      "en": "Translation Module for Tilda"
+    },
+    "date": "2026-03",
+    "description": {
+      "ru": "Client-side переключатель RU↔EN для сайтов на Tilda с локальным словарём, фоллбэком на MyMemory/LibreTranslate и двуязычным поиском.",
+      "en": "Client-side RU↔EN switcher for Tilda websites with a local dictionary, MyMemory/LibreTranslate fallback, and bilingual search."
+    },
+    "image": null,
+    "tags": ["JavaScript", "Tilda", "LocalStorage", "MutationObserver"],
+    "repoUrl": "https://github.com/aovorobyov/translation_module",
+    "siteUrl": null,
+    "body": {
+      "ru": "<p>Модуль реализует переключение языка (RU → EN) прямо в браузере без перезагрузки страницы. Скрипт собирается в единый минифицированный IIFE-бандл и вставляется в Tilda через поле «Свой JS». При клике на кнопку EN обходятся все текстовые узлы и атрибуты (<code>placeholder</code>, <code>value</code>) внутри контентных блоков Tilda, перевод берётся из локального словаря, а при отсутствии записи — последовательно из <code>MyMemory API</code> и <code>LibreTranslate</code>. Результаты кэшируются в <code>localStorage</code>, что исключает повторные сетевые запросы.</p><h2>Технические решения</h2><p>Оригинальный русский текст сохраняется в <code>data</code>-атрибутах элементов, благодаря чему возврат к RU происходит мгновенно без повторного обхода. <code>MutationObserver</code> автоматически переводит динамически добавляемый контент — попапы, слайдеры, аккордеоны — без дополнительной интеграции. Алгоритм матчинга строит два индекса: прямой (RU→EN) и обратный (EN→RU) со сортировкой ключей по убыванию длины, что предотвращает частичную замену длинных фраз.</p><h2>Двуязычный поиск</h2><p>Для каталога товаров реализован режим билингвального поиска: к каждому заголовку карточки добавляется скрытый <code>span</code> с RU- и EN-алиасами, а запрос пользователя на кириллице автоматически нормализуется в латиницу через словарь с API-фоллбэком. Словарь можно расширять без правки кода — через синхронизацию с Google Sheets CSV по настраиваемому TTL.</p>",
+      "en": "<p>The module enables in-browser language switching (RU → EN) without page reload. The script is compiled into a single minified IIFE bundle and embedded into Tilda via the Custom JS field. On clicking EN, all text nodes and attributes (<code>placeholder</code>, <code>value</code>) inside Tilda content blocks are traversed; translations are pulled from a local dictionary, and when a key is missing, from <code>MyMemory API</code> and <code>LibreTranslate</code> in sequence. Results are cached in <code>localStorage</code> to avoid redundant network requests.</p><h2>Technical decisions</h2><p>The original Russian text is stored in <code>data</code>-attributes on each element, so switching back to RU is instant with no re-traversal. A <code>MutationObserver</code> automatically translates dynamically added content — popups, sliders, accordions — without extra integration. The matching algorithm builds two indexes: forward (RU→EN) and reverse (EN→RU), with keys sorted by descending length to prevent partial replacement of longer phrases.</p><h2>Bilingual search</h2><p>For product catalogs, a bilingual search mode adds a hidden <code>span</code> with RU and EN aliases to each card title. User queries in Cyrillic are automatically normalised to Latin via the dictionary with an API fallback. The dictionary is extensible without touching code — via Google Sheets CSV sync with a configurable TTL.</p>"
+    }
+  },
+  {
+    "slug": "blockage-prediction-app",
+    "title": {
+      "ru": "Анализ блокировок в THz/mmWave-системах",
+      "en": "Blockage Prediction in THz/mmWave Systems"
+    },
+    "date": "2025-05",
+    "description": {
+      "ru": "Веб-приложение для сравнения моделей LSTM, CNN и CNN-LSTM при детектировании блокировок в THz/mmWave-сетях.",
+      "en": "Web app for comparing LSTM, CNN, and CNN-LSTM models for blockage detection in THz/mmWave wireless networks."
+    },
+    "image": null,
+    "tags": ["Next.js", "TypeScript", "React", "TensorFlow.js", "Python", "TailwindCSS"],
+    "repoUrl": "https://github.com/aovorobyov/blockage-prediction-app",
+    "siteUrl": null,
+    "body": {
+      "ru": "<p>Приложение предназначено для анализа и визуального сравнения трёх архитектур глубокого обучения — LSTM, CNN и гибридной CNN-LSTM — при решении задачи бинарной классификации блокировок сигнала в высокочастотных беспроводных системах THz/mmWave. Пользователь может загрузить собственный CSV-файл с последовательностями мощностей (матрица 8×64) или воспользоваться встроенным примером, после чего получить предсказания каждой из трёх моделей прямо в браузере.</p><h2>Технические решения</h2><p>Все три нейронных сети обучены на Python с помощью Keras и экспортированы в формат TensorFlow.js, что позволяет выполнять инференс полностью на стороне клиента без серверных вычислений. Входные данные нормализуются MinMaxScaler и подаются в модели в виде тензора формы <code>[1, 8, 64]</code>. Для сравнения моделей отображается таблица с метриками: accuracy, precision, recall и F1-score. Визуализация сигнала реализована через Chart.js с отображением уровня мощности в дБ по времени.</p><h2>Трудности и компромиссы</h2><p>Основная сложность заключалась в адаптации Keras-моделей к TensorFlow.js Converter v4.22.0 и корректной загрузке бинарных весов через статический хостинг Next.js. Архитектуры моделей существенно отличаются по способности улавливать временные зависимости: чистая LSTM показала наибольшую точность (68 %), тогда как CNN-LSTM достигла наилучшего recall (71 %), что важно для минимизации пропущенных блокировок в реальных сценариях.</p>",
+      "en": "<p>The app is designed for visual analysis and comparison of three deep learning architectures — LSTM, CNN, and hybrid CNN-LSTM — on the task of binary signal-blockage classification in THz/mmWave high-frequency wireless systems. Users can upload a custom CSV of power sequences (8×64 matrix) or use the built-in sample, then get predictions from all three models directly in the browser.</p><h2>Technical decisions</h2><p>All three neural networks were trained in Python with Keras and exported to TensorFlow.js format, enabling fully client-side inference with no server-side compute. Input data is normalised with MinMaxScaler and fed to the models as a tensor of shape <code>[1, 8, 64]</code>. A metrics table shows accuracy, precision, recall, and F1-score for each model. Signal visualisation is built with Chart.js, displaying power levels in dB over time.</p><h2>Challenges and trade-offs</h2><p>The main challenge was adapting Keras models to TensorFlow.js Converter v4.22.0 and correctly loading binary weights via Next.js static hosting. The architectures differ significantly in capturing temporal dependencies: pure LSTM achieved the highest accuracy (68 %), while CNN-LSTM reached the best recall (71 %), which is critical for minimising missed blockages in real-world scenarios.</p>"
+    }
+  },
+  {
+    "slug": "cafe-website",
+    "title": {
+      "ru": "Сайт кофейни",
+      "en": "Coffee Shop Website"
+    },
+    "date": "2024-05",
+    "description": {
+      "ru": "Сайт-меню московской кофейни с интерактивным меню, слайдерами новостей и картой контактов.",
+      "en": "Menu website for a Moscow coffee shop with interactive tabs, news sliders, and a contact map."
+    },
+    "image": null,
+    "tags": ["React", "Vite", "styled-components", "react-slick"],
+    "repoUrl": "https://github.com/aovorobyov/cream_soda",
+    "siteUrl": "https://aovorobyov.github.io/cream_soda",
+    "body": {
+      "ru": "<p>Одностраничный сайт для одноимённой московской кофейни с двумя заведениями. Сайт позволяет гостям ознакомиться с полным меню, узнать актуальные новости, посмотреть команду и найти контакты с картой.</p><h2>Архитектура и технические решения</h2><p>Приложение построено на <code>React 18</code> + <code>Vite</code>. Всё меню хранится в едином файле <code>data.js</code> и динамически рендерится через универсальный компонент <code>Card</code> в зависимости от выбранной вкладки. Переключение категорий реализовано через локальный <code>useState</code> без сторонних библиотек состояния.</p><p>Для слайдеров использована библиотека <code>react-slick</code> с настройкой автопрокрутки. В разделе контактов встроена Яндекс-карта через <code>iframe</code>. Проект задеплоен на GitHub Pages с базовым путём <code>/cream_soda/</code>, настроенным в <code>vite.config.js</code>.</p>",
+      "en": "<p>A single-page site for a Moscow coffee shop with two locations. Guests can browse the full menu, read the latest news, meet the team, and find contacts with a map.</p><h2>Architecture and technical decisions</h2><p>Built with <code>React 18</code> + <code>Vite</code>. The entire menu is stored in a single <code>data.js</code> file and rendered dynamically via a universal <code>Card</code> component based on the selected tab. Category switching uses local <code>useState</code> — no external state library needed.</p><p>Sliders use <code>react-slick</code> with auto-scroll. The contacts section embeds a Yandex Map via <code>iframe</code>. Deployed to GitHub Pages with the base path <code>/cream_soda/</code> configured in <code>vite.config.js</code>.</p>"
+    }
+  },
+  {
+    "slug": "hangman-game",
+    "title": {
+      "ru": "Игра Виселица",
+      "en": "Hangman Game"
+    },
+    "date": "2024-04",
+    "description": {
+      "ru": "Браузерная «Виселица» с виртуальной клавиатурой, 10 попытками, прогрессивной анимацией виселицы и переключением темы.",
+      "en": "Browser-based Hangman game with a virtual keyboard, 10 attempts, progressive gallows images, and a dark mode toggle."
+    },
+    "image": null,
+    "tags": ["JavaScript", "Vite", "Tailwind CSS"],
+    "repoUrl": "https://github.com/aovorobyov/HANGMAN_GAME",
+    "siteUrl": "https://aovorobyov.github.io/HANGMAN_GAME/",
+    "body": {
+      "ru": "<p>Браузерная игра «Виселица», написанная на ванильном JavaScript без UI-фреймворков. Игрок угадывает слово по буквам, кликая по экранной клавиатуре; при каждой ошибке счётчик попыток уменьшается, а изображение виселицы обновляется — всего предусмотрено 10 стадий плюс отдельный кадр победы.</p><h2>Технические решения</h2><p>Проект собирается с помощью <code>Vite</code>, стили — <code>Tailwind CSS</code>. Слово для угадывания хранится в <code>sessionStorage</code>, что исключает его обнаружение через глобальные переменные. Предпочтение темы сохраняется в <code>localStorage</code> и применяется через добавление класса <code>dark</code> к <code>&lt;html&gt;</code>. Все изображения виселицы предзагружаются через <code>&lt;link rel='preload'&gt;</code>, чтобы анимация смены стадий не мерцала.</p><p>Логика игры вынесена в <code>game.js</code>, утилиты — в <code>utils.js</code>, константы — в <code>consts.js</code>. Для добавления новых слов достаточно пополнить массив <code>WORDS</code>.</p>",
+      "en": "<p>A browser-based Hangman game written in vanilla JavaScript with no UI frameworks. The player guesses a word letter by letter via an on-screen keyboard; each mistake decrements the attempt counter and updates the gallows image — 10 stages in total plus a separate win frame.</p><h2>Technical decisions</h2><p>Built with <code>Vite</code>, styled with <code>Tailwind CSS</code>. The secret word is stored in <code>sessionStorage</code> to prevent discovery via global variables. Theme preference is persisted in <code>localStorage</code> and applied by toggling the <code>dark</code> class on <code>&lt;html&gt;</code>. All gallows images are preloaded via <code>&lt;link rel='preload'&gt;</code> so stage transitions never flicker.</p><p>Game logic lives in <code>game.js</code>, utilities in <code>utils.js</code>, and constants in <code>consts.js</code>. Adding new words requires only appending to the <code>WORDS</code> array.</p>"
+    }
+  }
+]

@@ -5,7 +5,7 @@
     "projects": "Projects",
     "notes":    "Notes",
     "contact":  "Contact",
-    "uikit":    "Design System Kit"
+    "uikit":    "UI Kit"
   },
   "home": {
     "name":         "Alexander Vorobyov",
@@ -23,7 +23,10 @@
   },
   "projects": {
     "title": "Projects",
-    "open":  "Open →"
+    "open":  "Open →",
+    "view":  "View →",
+    "repo":  "Repository ↗",
+    "site":  "Visit site ↗"
   },
   "notes": {
     "title": "Notes"

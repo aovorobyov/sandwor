@@ -14,7 +14,7 @@ export function ProjectList({ projects }: ProjectListProps) {
   return (
     <ul className={styles.grid}>
       {projects.map((project) => (
-        <li key={project.id}>
+        <li key={project.slug}>
           <ProjectCard project={project} />
         </li>
       ))}

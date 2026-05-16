@@ -1,8 +1,16 @@
+export interface ProjectLocalized {
+  en: string;
+  ru: string;
+}
+
 export interface Project {
-  id:          string;
-  title:       string;
-  year:        string;
-  description: string;
+  slug:        string;
+  title:       ProjectLocalized;
+  date:        string; // ISO month-year: '2025-04'
+  description: ProjectLocalized;
+  image:       string | null;
   tags:        string[];
-  url:         string | null;
+  repoUrl:     string | null;
+  siteUrl:     string | null;
+  body:        ProjectLocalized; // HTML
 }

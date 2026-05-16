@@ -1,5 +1,4 @@
 import type { Post } from '@/entities/post';
-import type { Project } from '@/entities/project';
 
 export const MOCK_POSTS: Post[] = [
   {
@@ -31,21 +30,3 @@ export const MOCK_POSTS: Post[] = [
   },
 ];
 
-export const MOCK_PROJECTS: Project[] = [
-  {
-    id:          'sandwor',
-    title:       'sandwor.com',
-    year:        '2025',
-    description: 'Personal website built with Next.js 14, FSD architecture, and next-intl.',
-    tags:        ['Next.js', 'TypeScript', 'CSS Modules'],
-    url:         'https://sandwor.com',
-  },
-  {
-    id:          'side-project-1',
-    title:       'Side Project Alpha',
-    year:        '2024',
-    description: 'A placeholder for a future project. Replace with real data.',
-    tags:        ['React', 'Node.js'],
-    url:         null,
-  },
-];

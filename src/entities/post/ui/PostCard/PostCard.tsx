@@ -42,9 +42,7 @@ export function PostCard({ post }: PostCardProps) {
         <h2 className={styles.title}>{post.title}</h2>
         <p className={styles.excerpt}>{post.excerpt}</p>
         <div className={styles.footer}>
-          <span className={styles.readTime}>
-            {t('blog.min-read', { count: post.readTime })}
-          </span>
+          <span className={styles.readTime}>{t('blog.min-read', { count: post.readTime })}</span>
           <span className={styles.readMore}>{t('blog.read-more')}</span>
         </div>
       </article>

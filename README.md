@@ -6,19 +6,19 @@ Personal website built with Next.js 14, Feature-Sliced Design, and next-intl.
 
 ## Stack
 
-| Technology | Version | Purpose |
-|---|---|---|
-| Next.js | 14 | Framework (App Router) |
-| React | 18 | UI library |
-| TypeScript | 5 | Type safety (strict mode) |
-| CSS Modules | built-in | Styling |
-| next-intl | 3 | i18n (ru / en) |
-| next-themes | 0.3 | Dark / Light theme |
-| node-html-parser | — | Telegram channel page parsing |
-| Jest | 29 | Test runner |
-| React Testing Library | 16 | Component testing |
-| ESLint | 8 | Linting |
-| Prettier | 3 | Formatting |
+| Technology            | Version  | Purpose                       |
+| --------------------- | -------- | ----------------------------- |
+| Next.js               | 14       | Framework (App Router)        |
+| React                 | 18       | UI library                    |
+| TypeScript            | 5        | Type safety (strict mode)     |
+| CSS Modules           | built-in | Styling                       |
+| next-intl             | 3        | i18n (ru / en)                |
+| next-themes           | 0.3      | Dark / Light theme            |
+| node-html-parser      | —        | Telegram channel page parsing |
+| Jest                  | 29       | Test runner                   |
+| React Testing Library | 16       | Component testing             |
+| ESLint                | 8        | Linting                       |
+| Prettier              | 3        | Formatting                    |
 
 ---
 
@@ -77,11 +77,11 @@ t.me/s/nafrontebezperemen  ──parse──►  src/entities/post/api/telegram.
 
 ### Кеширование
 
-| Слой | Поведение |
-|------|-----------|
-| `react.cache()` | Один fetch на SSR-рендер (дедупликация) |
-| `next: { tags, revalidate: 3600 }` | Data Cache: хранится 1 час в production |
-| Telegram Webhook | При новом посте мгновенно сбрасывает кеш через `revalidateTag()` |
+| Слой                               | Поведение                                                        |
+| ---------------------------------- | ---------------------------------------------------------------- |
+| `react.cache()`                    | Один fetch на SSR-рендер (дедупликация)                          |
+| `next: { tags, revalidate: 3600 }` | Data Cache: хранится 1 час в production                          |
+| Telegram Webhook                   | При новом посте мгновенно сбрасывает кеш через `revalidateTag()` |
 
 > В dev-режиме Data Cache отключён намеренно — Next.js fetches при каждом запросе.
 
@@ -164,6 +164,7 @@ Imports must only go **downward**. `shared` must never import from `features`.
 ## Как добавить новую страницу
 
 1. **Создать page-компонент** в `src/views/NewPage/`:
+
    ```
    src/views/NewPage/
    ├── NewPage.tsx
@@ -172,6 +173,7 @@ Imports must only go **downward**. `shared` must never import from `features`.
    ```
 
 2. **Добавить роут** в `src/app/[locale]/new-page/page.tsx`:
+
    ```tsx
    import { NewPage } from '@/views/NewPage';
    export default function Page() {
@@ -180,6 +182,7 @@ Imports must only go **downward**. `shared` must never import from `features`.
    ```
 
 3. **Добавить ключи переводов** в `messages/ru.json` и `messages/en.json`:
+
    ```json
    { "newpage.title": "Новая страница" }
    ```
@@ -205,12 +208,14 @@ Imports must only go **downward**. `shared` must never import from `features`.
 ## Как добавить новый компонент
 
 **FSD-правило:** определи слой по роли компонента:
+
 - Переиспользуемый без бизнес-контекста → `shared/ui/`
 - Бизнес-сущность → `entities/[entity]/ui/`
 - Пользовательское действие → `features/[feature]/ui/`
 - Крупный блок страницы → `widgets/[Widget]/`
 
 **Структура каждого слайса:**
+
 ```
 ComponentName/
 ├── ComponentName.tsx        # Компонент
@@ -219,6 +224,7 @@ ComponentName/
 ```
 
 **index.ts:**
+
 ```ts
 export { ComponentName } from './ComponentName';
 export type { ComponentNameProps } from './ComponentName';
@@ -233,6 +239,7 @@ export type { ComponentNameProps } from './ComponentName';
 Тестируем **поведение**, не детали реализации.
 
 **Пример теста компонента:**
+
 ```tsx
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -247,6 +254,7 @@ it('calls onClick when clicked', async () => {
 ```
 
 **Пример теста с моком next-intl:**
+
 ```tsx
 import { render, screen } from '@testing-library/react';
 import { NextIntlClientProvider } from 'next-intl';
@@ -265,6 +273,7 @@ it('renders translated text', () => {
 ```
 
 **Команды:**
+
 ```bash
 npm test                    # run all tests
 npm test -- --watch         # watch mode
@@ -280,6 +289,7 @@ npm test -- --coverage      # with coverage report
 Атрибут `data-theme="dark"` / `data-theme="light"` устанавливается на `<html>`.
 
 **Добавить новую CSS-переменную:**
+
 1. В `src/app/globals.css` добавь переменную в `:root` (светлая тема)
 2. Добавь переопределение в `[data-theme='dark']`
 
@@ -298,24 +308,30 @@ npm test -- --coverage      # with coverage report
 
 Mobile-first. Базовые значения — для мобайла, переопределение — в media-queries.
 
-| Breakpoint | px | Назначение |
-|---|---|---|
-| `sm` | 640 | Планшет |
-| `md` | 1024 | Десктоп |
-| `lg` | 1280 | Широкий десктоп |
+| Breakpoint | px   | Назначение      |
+| ---------- | ---- | --------------- |
+| `sm`       | 640  | Планшет         |
+| `md`       | 1024 | Десктоп         |
+| `lg`       | 1280 | Широкий десктоп |
 
 ```css
 /* Mobile (default) */
-.grid { grid-template-columns: 1fr; }
+.grid {
+  grid-template-columns: 1fr;
+}
 
 /* Tablet */
 @media (min-width: 640px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* Desktop */
 @media (min-width: 1024px) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 ```
 
@@ -357,6 +373,7 @@ CMD ["node", "server.js"]
 ```
 
 Добавь в `next.config.ts`:
+
 ```ts
 const nextConfig: NextConfig = {
   output: 'standalone',

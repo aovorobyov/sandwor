@@ -58,6 +58,25 @@
   margin-bottom: var(--space-4);
 }
 
+.body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.15s ease;
+}
+
+.body a:hover {
+  opacity: 0.75;
+}
+
+.cover {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg, 12px);
+  margin-bottom: var(--space-8);
+  display: block;
+}
+
 .body h2 {
   font-size: var(--text-xl);
   font-weight: var(--weight-semibold);

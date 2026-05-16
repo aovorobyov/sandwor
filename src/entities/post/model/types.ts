@@ -6,4 +6,5 @@ export interface Post {
   excerpt:  string;
   body:     string;    // HTML
   readTime: number;    // минуты
+  image?:   string;   // cover image URL
 }

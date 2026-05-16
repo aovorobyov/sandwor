@@ -1,19 +1,20 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ArticlePage } from '@/views/ArticlePage';
-import { MOCK_POSTS } from '@/views/BlogPage';
+import { getTelegramPosts, getTelegramPost } from '@/entities/post/api/telegram';
 
 interface Props {
   params: { locale: string; slug: string };
 }
 
-// Generate static paths for all posts at build time
-export function generateStaticParams() {
-  return MOCK_POSTS.map((post) => ({ slug: post.slug }));
+// Generate static paths for known posts at build time; new posts are ISR-rendered on demand
+export async function generateStaticParams() {
+  const posts = await getTelegramPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params: { locale, slug } }: Props): Promise<Metadata> {
-  const post = MOCK_POSTS.find((p) => p.slug === slug);
+  const post = await getTelegramPost(slug);
   const t = await getTranslations({ locale, namespace: '' });
 
   if (!post) {

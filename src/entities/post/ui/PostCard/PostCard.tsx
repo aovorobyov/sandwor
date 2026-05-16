@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { Badge } from '@/shared/ui/Badge';
 import { Card } from '@/shared/ui/Card';
@@ -21,6 +22,17 @@ export function PostCard({ post }: PostCardProps) {
   return (
     <Card href={`/blog/${post.slug}`}>
       <article>
+        {post.image && (
+          <div className={styles.imageWrap}>
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 400px"
+              className={styles.image}
+            />
+          </div>
+        )}
         <div className={styles.meta}>
           <time className={styles.date} dateTime={post.date}>
             {formattedDate}

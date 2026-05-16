@@ -1,6 +1,6 @@
 # sandwor.com
 
-Personal website scaffold built with Next.js 14, Feature-Sliced Design, and next-intl.
+Personal website built with Next.js 14, Feature-Sliced Design, and next-intl.
 
 ---
 
@@ -14,6 +14,7 @@ Personal website scaffold built with Next.js 14, Feature-Sliced Design, and next
 | CSS Modules | built-in | Styling |
 | next-intl | 3 | i18n (ru / en) |
 | next-themes | 0.3 | Dark / Light theme |
+| node-html-parser | — | Telegram channel page parsing |
 | Jest | 29 | Test runner |
 | React Testing Library | 16 | Component testing |
 | ESLint | 8 | Linting |
@@ -35,12 +36,88 @@ npm run lint
 
 ---
 
+## Переменные окружения
+
+Создай `.env.local` в корне проекта:
+
+```env
+TELEGRAM_CHANNEL_USERNAME=nafrontebezperemen   # без @
+TELEGRAM_BOT_TOKEN=<токен от @BotFather>
+TELEGRAM_WEBHOOK_SECRET=<случайная строка>
+```
+
+На Vercel добавь те же переменные в **Settings → Environment Variables**.
+
+---
+
+## Блог (интеграция с Telegram)
+
+Посты блога подтягиваются с публичной превью-страницы Telegram-канала (`t.me/s/<channel>`).
+
+### Как это работает
+
+```
+Telegram-канал
+     │
+     ▼
+t.me/s/nafrontebezperemen  ──parse──►  src/entities/post/api/telegram.ts
+                                               │
+                         ┌─────────────────────┤
+                         ▼                     ▼
+                    BlogPage              HomePage
+                  (все посты)         (3 последних)
+```
+
+- **Парсинг** — `node-html-parser` извлекает текст, дату, фото и жирный заголовок
+- **Заголовок** — первый `<b>...</b>` блок в посте; если его нет — первая строка текста
+- **Обложка** — фото из `.tgme_widget_message_photo_wrap` (если есть)
+- **Теги** — из хэштегов (`#тег`); дефолт — `«На фронтé без перемен»`
+- **Фильтрация** — сервисные посты (смена фото, создание канала) и посты короче 100 символов отсеиваются
+- **Эмодзи** — удаляются из текста и HTML
+
+### Кеширование
+
+| Слой | Поведение |
+|------|-----------|
+| `react.cache()` | Один fetch на SSR-рендер (дедупликация) |
+| `next: { tags, revalidate: 3600 }` | Data Cache: хранится 1 час в production |
+| Telegram Webhook | При новом посте мгновенно сбрасывает кеш через `revalidateTag()` |
+
+> В dev-режиме Data Cache отключён намеренно — Next.js fetches при каждом запросе.
+
+### Регистрация webhook
+
+Webhook уже зарегистрирован на `https://sandwor.vercel.app/api/telegram/webhook`.
+Для повторной регистрации (например, после смены домена):
+
+```bash
+curl "https://api.telegram.org/bot<TOKEN>/setWebhook\
+?url=https://<domain>/api/telegram/webhook\
+&secret_token=<TELEGRAM_WEBHOOK_SECRET>\
+&allowed_updates=%5B%22channel_post%22%5D"
+```
+
+### Файлы
+
+```
+src/
+├── entities/post/api/telegram.ts          # Fetch + парсинг + маппинг
+├── app/api/telegram/webhook/route.ts      # Webhook endpoint (revalidateTag)
+└── entities/post/model/types.ts           # Post interface (включает image?)
+```
+
+---
+
 ## Project Structure
 
 ```
 src/
 ├── app/               # Next.js App Router — routing only, no business logic
+│   ├── api/
+│   │   └── telegram/webhook/  # Webhook для on-demand revalidation
 │   └── [locale]/      # Locale-based routing (/ru, /en)
+│       └── blog/
+│           └── [slug]/        # Страница отдельного поста
 │
 ├── shared/            # Reusable code with no business context
 │   ├── ui/            # Base UI components (Button, Input, Badge, Card)
@@ -49,7 +126,10 @@ src/
 │   └── types/         # Common TypeScript types
 │
 ├── entities/          # Business entities
-│   ├── post/          # Post type + PostCard component
+│   ├── post/
+│   │   ├── api/       # telegram.ts — источник данных
+│   │   ├── model/     # Post interface
+│   │   └── ui/        # PostCard component
 │   ├── project/       # Project type + ProjectCard component
 │   └── note/          # Note type + NoteItem component
 │
@@ -66,9 +146,9 @@ src/
 │   └── NoteList/      # List of NoteItem components
 │
 └── views/              # Page-level components (testable, separate from app/)
-    ├── HomePage/
-    ├── BlogPage/
-    ├── ArticlePage/
+    ├── HomePage/       # Hero + 3 последних поста из Telegram
+    ├── BlogPage/       # Список всех постов с фильтром по тегам
+    ├── ArticlePage/    # Страница отдельного поста
     ├── ProjectsPage/
     ├── NotesPage/
     └── ContactPage/

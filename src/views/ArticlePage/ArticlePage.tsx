@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTranslations, getLocale } from 'next-intl/server';
-import { MOCK_POSTS } from '@/views/BlogPage';
+import { getTelegramPost } from '@/entities/post/api/telegram';
 import styles from './ArticlePage.module.css';
 
 interface ArticlePageProps {
@@ -9,7 +9,7 @@ interface ArticlePageProps {
 }
 
 export async function ArticlePage({ slug }: ArticlePageProps) {
-  const post = MOCK_POSTS.find((p) => p.slug === slug);
+  const post = await getTelegramPost(slug);
   if (!post) notFound();
 
   const t = await getTranslations();
@@ -38,11 +38,13 @@ export async function ArticlePage({ slug }: ArticlePageProps) {
             </div>
           </header>
 
+          {post.image && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={post.image} alt={post.title} className={styles.cover} />
+          )}
+
           {/* Trusted HTML from own CMS only — escape-safe */}
-          <div
-            className={styles.body}
-            dangerouslySetInnerHTML={{ __html: post.body }}
-          />
+          <div className={styles.body} dangerouslySetInnerHTML={{ __html: post.body }} />
         </article>
       </div>
     </main>

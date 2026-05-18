@@ -5,36 +5,36 @@ import { LocaleSwitch } from '@/features/locale-switch';
 import { NAV_LINKS } from './config';
 import { MobileMenu } from './MobileMenu';
 import { LogoLink } from './LogoLink';
-import styles from './Header.module.css';
+import s from './Header.module.css';
 
-export async function Header() {
-  const t = await getTranslations();
+export const Header = async () => {
+    const t = await getTranslations();
 
-  return (
-    <header className={styles.root}>
-      <div className={styles.inner}>
-        <LogoLink />
+    return (
+        <header className={s.root}>
+            <div className={s.inner}>
+                <LogoLink />
 
-        <nav className={styles.nav} aria-label="Main navigation">
-          {NAV_LINKS.map(({ href, labelKey }) => (
-            <Link key={href} href={href} className={styles.navLink}>
-              {t(labelKey)}
-            </Link>
-          ))}
-        </nav>
+                <nav className={s.nav} aria-label="Main navigation">
+                    {NAV_LINKS.map(({ href, labelKey }) => (
+                        <Link key={href} href={href} className={s.navLink}>
+                            {t(labelKey)}
+                        </Link>
+                    ))}
+                </nav>
 
-        <div className={styles.controls}>
-          <ThemeToggle />
-          <LocaleSwitch />
-        </div>
+                <div className={s.controls}>
+                    <span className={s.controlGap}><ThemeToggle /></span>
+                    <LocaleSwitch />
+                </div>
 
-        {/* Mobile-only burger, hidden on desktop via CSS */}
-        <div className={styles.mobileControls}>
-          <ThemeToggle />
-          <LocaleSwitch />
-          <MobileMenu />
-        </div>
-      </div>
-    </header>
-  );
-}
+                {/* Бургер только для мобильных, скрыт на десктопе через CSS */}
+                <div className={s.mobileControls}>
+                    <span className={s.controlGap}><ThemeToggle /></span>
+                    <span className={s.controlGap}><LocaleSwitch /></span>
+                    <MobileMenu />
+                </div>
+            </div>
+        </header>
+    );
+};

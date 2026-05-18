@@ -1,2 +1,2 @@
 export { ProjectList } from './ProjectList';
-export type { ProjectListProps } from './ProjectList';
+export type { ProjectListProps } from './ProjectList.types';

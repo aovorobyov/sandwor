@@ -1,23 +1,22 @@
+import type { FC } from 'react';
 import { ProjectCard } from '@/entities/project';
-import type { Project } from '@/entities/project';
-import styles from './ProjectList.module.css';
+import type { ProjectListProps } from './ProjectList.types';
+import s from './ProjectList.module.css';
 
-export interface ProjectListProps {
-  projects: Project[];
-}
+export const ProjectList: FC<ProjectListProps> = (props) => {
+    const { projects } = props;
 
-export function ProjectList({ projects }: ProjectListProps) {
-  if (projects.length === 0) {
-    return null;
-  }
+    if (projects.length === 0) {
+        return null;
+    }
 
-  return (
-    <ul className={styles.grid}>
-      {projects.map((project) => (
-        <li key={project.slug}>
-          <ProjectCard project={project} />
-        </li>
-      ))}
-    </ul>
-  );
-}
+    return (
+        <ul className={s.grid}>
+            {projects.map((project) => (
+                <li key={project.slug}>
+                    <ProjectCard project={project} />
+                </li>
+            ))}
+        </ul>
+    );
+};

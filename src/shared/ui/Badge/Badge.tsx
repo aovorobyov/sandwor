@@ -1,18 +1,14 @@
+import type { FC } from 'react';
 import { cn } from '@/shared/lib/cn';
-import styles from './Badge.module.css';
+import type { BadgeProps } from './Badge.types';
+import s from './Badge.module.css';
 
-export type BadgeVariant = 'neutral' | 'accent';
+export const Badge: FC<BadgeProps> = (props) => {
+    const { children, variant = 'neutral', className } = props;
 
-export interface BadgeProps {
-  children: React.ReactNode;
-  variant?: BadgeVariant;
-  className?: string;
-}
-
-export function Badge({ children, variant = 'neutral', className }: BadgeProps) {
-  return (
-    <span className={cn(styles.root, styles[variant], className)}>
-      {children}
-    </span>
-  );
-}
+    return (
+        <span className={cn(s.root, s[variant], className)}>
+            {children}
+        </span>
+    );
+};

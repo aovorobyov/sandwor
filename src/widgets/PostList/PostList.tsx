@@ -1,23 +1,22 @@
+import type { FC } from 'react';
 import { PostCard } from '@/entities/post';
-import type { Post } from '@/entities/post';
-import styles from './PostList.module.css';
+import type { PostListProps } from './PostList.types';
+import s from './PostList.module.css';
 
-export interface PostListProps {
-  posts: Post[];
-}
+export const PostList: FC<PostListProps> = (props) => {
+    const { posts } = props;
 
-export function PostList({ posts }: PostListProps) {
-  if (posts.length === 0) {
-    return null;
-  }
+    if (posts.length === 0) {
+        return null;
+    }
 
-  return (
-    <ul className={styles.grid}>
-      {posts.map((post) => (
-        <li key={post.slug}>
-          <PostCard post={post} />
-        </li>
-      ))}
-    </ul>
-  );
-}
+    return (
+        <ul className={s.grid}>
+            {posts.map((post) => (
+                <li key={post.slug}>
+                    <PostCard post={post} />
+                </li>
+            ))}
+        </ul>
+    );
+};

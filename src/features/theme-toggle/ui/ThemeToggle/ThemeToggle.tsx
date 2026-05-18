@@ -1,38 +1,43 @@
 'use client';
 
-import { useTheme } from 'next-themes';
+import type { FC } from 'react';
 import { useEffect, useState } from 'react';
-import styles from './ThemeToggle.module.css';
+import { useTheme } from 'next-themes';
+import s from './ThemeToggle.module.css';
 
-export function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
-  // Prevent hydration mismatch: show skeleton until mounted on client
-  const [mounted, setMounted] = useState(false);
+export const ThemeToggle: FC = () => {
+    const { resolvedTheme, setTheme } = useTheme();
+    /** Предотвращает расхождение гидрации: скелетон до монтирования на клиенте */
+    const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
-  if (!mounted) {
-    return <span className={styles.skeleton} aria-hidden />;
-  }
+    if (!isMounted) {
+        return <span className={s.skeleton} aria-hidden />;
+    }
 
-  const isDark = resolvedTheme === 'dark';
-  const iconUrl = isDark ? '/img/light.svg' : '/img/dark.svg';
+    const isDark = resolvedTheme === 'dark';
+    const iconUrl = isDark ? '/img/light.svg' : '/img/dark.svg';
 
-  return (
-    <button
-      className={styles.root}
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-    >
-      <span
-        className={styles.icon}
-        style={{
-          maskImage: `url(${iconUrl})`,
-          WebkitMaskImage: `url(${iconUrl})`,
-        }}
-      />
-    </button>
-  );
-}
+    const handleThemeToggle = () => {
+        setTheme(isDark ? 'light' : 'dark');
+    };
+
+    return (
+        <button
+            className={s.root}
+            onClick={handleThemeToggle}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+            <span
+                className={s.icon}
+                style={{
+                    maskImage: `url(${iconUrl})`,
+                    WebkitMaskImage: `url(${iconUrl})`,
+                }}
+            />
+        </button>
+    );
+};

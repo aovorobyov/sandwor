@@ -1,23 +1,22 @@
+import type { FC } from 'react';
 import { NoteItem } from '@/entities/note';
-import type { Note } from '@/entities/note';
-import styles from './NoteList.module.css';
+import type { NoteListProps } from './NoteList.types';
+import s from './NoteList.module.css';
 
-export interface NoteListProps {
-  notes: Note[];
-}
+export const NoteList: FC<NoteListProps> = (props) => {
+    const { notes } = props;
 
-export function NoteList({ notes }: NoteListProps) {
-  if (notes.length === 0) {
-    return null;
-  }
+    if (notes.length === 0) {
+        return null;
+    }
 
-  return (
-    <ul className={styles.list}>
-      {notes.map((note) => (
-        <li key={note.id}>
-          <NoteItem note={note} />
-        </li>
-      ))}
-    </ul>
-  );
-}
+    return (
+        <ul className={s.list}>
+            {notes.map((note) => (
+                <li key={note.id} className={s.item}>
+                    <NoteItem note={note} />
+                </li>
+            ))}
+        </ul>
+    );
+};

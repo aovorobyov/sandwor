@@ -1,33 +1,33 @@
+import type { FC } from 'react';
 import { cn } from '@/shared/lib/cn';
-import styles from './Input.module.css';
+import type { InputProps } from './Input.types';
+import s from './Input.module.css';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  error?: string;
-}
+export const Input: FC<InputProps> = (props) => {
+    const { label, error, id, className, ...rest } = props;
+    const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
 
-export function Input({ label, error, id, className, ...rest }: InputProps) {
-  const inputId = id ?? label?.toLowerCase().replace(/\s+/g, '-');
+    return (
+        <div className={s.wrapper}>
+            {label && (
+                <label htmlFor={inputId} className={s.label}>
+                    {label}
+                </label>
+            )}
 
-  return (
-    <div className={styles.wrapper}>
-      {label && (
-        <label htmlFor={inputId} className={styles.label}>
-          {label}
-        </label>
-      )}
-      <input
-        id={inputId}
-        className={cn(styles.input, error && styles.inputError, className)}
-        aria-invalid={!!error}
-        aria-describedby={error ? `${inputId}-error` : undefined}
-        {...rest}
-      />
-      {error && (
-        <p id={`${inputId}-error`} className={styles.error}>
-          {error}
-        </p>
-      )}
-    </div>
-  );
-}
+            <input
+                id={inputId}
+                className={cn(s.input, error && s.inputError, className)}
+                aria-invalid={!!error}
+                aria-describedby={error ? `${inputId}-error` : undefined}
+                {...rest}
+            />
+
+            {error && (
+                <p id={`${inputId}-error`} className={s.error}>
+                    {error}
+                </p>
+            )}
+        </div>
+    );
+};

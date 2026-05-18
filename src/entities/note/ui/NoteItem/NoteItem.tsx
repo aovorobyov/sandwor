@@ -1,27 +1,27 @@
+import type { FC } from 'react';
 import { useLocale } from 'next-intl';
-import type { Note } from '../../model/types';
-import styles from './NoteItem.module.css';
+import type { NoteItemProps } from './NoteItem.types';
+import s from './NoteItem.module.css';
 
-export interface NoteItemProps {
-  note: Note;
-}
+export const NoteItem: FC<NoteItemProps> = (props) => {
+    const { note } = props;
+    const locale = useLocale();
 
-export function NoteItem({ note }: NoteItemProps) {
-  const locale = useLocale();
+    const formattedDate = new Date(note.date).toLocaleDateString(locale, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    });
 
-  const formattedDate = new Date(note.date).toLocaleDateString(locale, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
+    return (
+        <article className={s.root}>
+            <p className={s.text}>{note.text}</p>
 
-  return (
-    <article className={styles.root}>
-      <p className={styles.text}>{note.text}</p>
-      <div className={styles.separator} />
-      <time className={styles.date} dateTime={note.date}>
-        {formattedDate}
-      </time>
-    </article>
-  );
-}
+            <div className={s.separator} />
+
+            <time className={s.date} dateTime={note.date}>
+                {formattedDate}
+            </time>
+        </article>
+    );
+};

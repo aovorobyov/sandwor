@@ -5,11 +5,14 @@
     "projects": "Projects",
     "notes":    "Notes",
     "contact":  "Contact",
-    "uikit":    "UI Kit"
+    "uikit":    "UI Kit",
+    "course":   "AI Course"
   },
   "home": {
     "name":         "Alexander Vorobyov",
     "bio":          "Web developer. I work on frontend and occasionally write about code and tools.",
+    "course-badge": "New course",
+    "course-cta": "Start course →",
     "latest-posts": "Latest articles",
     "all-posts":    "All articles →",
     "projects":     "Projects",
@@ -74,5 +77,56 @@
     "note-entry": "Note Entry",
     "note-quote": "Precision is not just about the numbers; it's about the feeling of alignment between intent and execution.",
     "note-meta": "Note #429 · Architecture Principles"
+  },
+  "course": {
+    "lessons": "Lessons",
+    "lessonOf": "Lesson {current} of {total}",
+    "lessonProgress": "Lesson {current} of {total} · {done} done",
+    "completed": "Done ✓",
+    "theory": "Theory",
+    "example": "Example",
+    "practice": "Practical task",
+    "taskDone": "✓ Task completed",
+    "chatYou": "You",
+    "chatAi": "AI",
+    "answerRequired": "Paste the AI response before continuing",
+    "markReady": "Done",
+    "lessonDone": "Lesson complete →",
+    "courseFinish": "Finish course →",
+    "viewResults": "Results →",
+    "landing": {
+      "startTitle": "Start course",
+      "startSub": "Enter your name — we'll generate a personal cheat sheet at the end",
+      "nameLabel": "Your name",
+      "namePlaceholder": "John Smith",
+      "startBtn": "Start course →",
+      "lessonsCount": "{count} lessons"
+    },
+    "completion": {
+      "titleWithName": "{name}, you did it!",
+      "titleNoName": "You did it!",
+      "sub": "You've completed the course and can now use AI for everyday tasks.",
+      "skillsHeading": "What you can do now:",
+      "downloadPdf": "Download cheat sheet",
+      "backToCourse": "Back to lessons"
+    },
+    "pdf": {
+      "headerTitle": "My AI Cheat Sheet",
+      "nameLabel": "Name",
+      "dateLabel": "Completed on",
+      "skillsTitle": "What I can do",
+      "promptsTitle": "Ready-to-use prompts",
+      "servicesTitle": "Three services to start with",
+      "service1Title": "ChatGPT",
+      "service1Url": "chat.openai.com",
+      "service1Desc": "The most popular AI assistant",
+      "service2Title": "Grok",
+      "service2Url": "grok.com",
+      "service2Desc": "AI from Elon Musk's team",
+      "service3Title": "Claude",
+      "service3Url": "claude.ai",
+      "service3Desc": "Anthropic's AI, great for text and analysis",
+      "printTitle": "Print / Save as PDF"
+    }
   }
 }

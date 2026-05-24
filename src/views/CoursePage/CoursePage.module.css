@@ -1,0 +1,51 @@
+.landing {
+    flex: 1;
+}
+
+/* Курс */
+.courseWrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.courseBody {
+    max-width: var(--container);
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--space-8) var(--container-pad);
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .courseBody {
+        grid-template-columns: 220px 1fr;
+        column-gap: var(--space-8);
+        align-items: start;
+    }
+}
+
+.sidebar {
+    margin-bottom: var(--space-6);
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        position: sticky;
+        top: 116px;
+        margin-bottom: 0;
+    }
+}
+
+.content {
+    min-width: 0;
+}
+
+/* Финал */
+.completion {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

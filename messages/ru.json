@@ -5,11 +5,14 @@
     "projects": "Проекты",
     "notes": "Заметки",
     "contact": "Контакты",
-    "uikit": "UI Kit"
+    "uikit": "UI Kit",
+    "course": "Курс по ИИ"
   },
   "home": {
     "name": "Александр Воробьев",
     "bio": "Веб-разработчик. Занимаюсь фронтендом, иногда пишу о коде и инструментах.",
+    "course-badge": "Новый курс",
+    "course-cta": "Начать курс →",
     "latest-posts": "Последние статьи",
     "all-posts": "Все статьи →",
     "projects": "Проекты",
@@ -74,5 +77,56 @@
     "note-entry": "Цитата",
     "note-quote": "Точность — это не только цифры; это ощущение гармонии между замыслом и исполнением.",
     "note-meta": "Заметка #429 · Принципы архитектуры"
+  },
+  "course": {
+    "lessons": "Уроки",
+    "lessonOf": "Урок {current} из {total}",
+    "lessonProgress": "Урок {current} из {total} · {done} пройдено",
+    "completed": "Пройден ✓",
+    "theory": "Теория",
+    "example": "Пример",
+    "practice": "Практическое задание",
+    "taskDone": "✓ Задание выполнено",
+    "chatYou": "Вы",
+    "chatAi": "ИИ",
+    "answerRequired": "Вставьте ответ нейросети перед тем как продолжить",
+    "markReady": "Готово",
+    "lessonDone": "Урок пройден →",
+    "courseFinish": "Завершить курс →",
+    "viewResults": "Результаты →",
+    "landing": {
+      "startTitle": "Начать курс",
+      "startSub": "Введите ваше имя — мы сформируем персональную шпаргалку в конце",
+      "nameLabel": "Ваше имя",
+      "namePlaceholder": "Иван Иванович",
+      "startBtn": "Начать курс →",
+      "lessonsCount": "{count} уроков"
+    },
+    "completion": {
+      "titleWithName": "{name}, вы справились!",
+      "titleNoName": "Вы справились!",
+      "sub": "Вы прошли курс и теперь умеете использовать искусственный интеллект для повседневных задач.",
+      "skillsHeading": "Что вы теперь умеете:",
+      "downloadPdf": "Скачать шпаргалку",
+      "backToCourse": "Вернуться к урокам"
+    },
+    "pdf": {
+      "headerTitle": "Моя шпаргалка по ИИ",
+      "nameLabel": "Имя",
+      "dateLabel": "Дата прохождения",
+      "skillsTitle": "Что я умею",
+      "promptsTitle": "Готовые запросы",
+      "servicesTitle": "Три сервиса, с которых начать",
+      "service1Title": "ChatGPT",
+      "service1Url": "chat.openai.com",
+      "service1Desc": "Самый популярный ИИ-ассистент",
+      "service2Title": "Grok",
+      "service2Url": "grok.com",
+      "service2Desc": "ИИ от команды Илона Маска, работает на русском",
+      "service3Title": "Claude",
+      "service3Url": "claude.ai",
+      "service3Desc": "ИИ от Anthropic, отличен для текстов и анализа",
+      "printTitle": "Печать / Сохранить как PDF"
+    }
   }
 }

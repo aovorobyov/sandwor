@@ -1,0 +1,40 @@
+.root {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+}
+
+.inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: var(--space-3) var(--container-pad);
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-right: var(--space-6);
+}
+
+.progressWrap {
+    flex: 1;
+    min-width: 0;
+}
+
+.progressLabel {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    text-align: right;
+    margin-bottom: 4px;
+}
+
+.resultsBtn {
+    flex-shrink: 0;
+    margin-left: var(--space-4);
+}

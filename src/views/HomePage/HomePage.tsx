@@ -4,6 +4,7 @@ import { PostList } from '@/widgets/PostList';
 import { ProjectList } from '@/widgets/ProjectList';
 import { getTelegramPosts } from '@/entities/post/api/telegram';
 import { getProjects } from '@/entities/project';
+import { CourseBanner } from './components/CourseBanner/CourseBanner';
 import s from './HomePage.module.css';
 
 export const HomePage = async () => {
@@ -20,6 +21,12 @@ export const HomePage = async () => {
                     <h1 className={s.name}>{t('home.name')}</h1>
 
                     <p className={s.bio}>{t('home.bio')}</p>
+                </div>
+            </section>
+
+            <section className={s.section}>
+                <div className={s.container}>
+                    <CourseBanner />
                 </div>
             </section>
 

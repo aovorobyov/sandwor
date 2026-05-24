@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { ThemeToggle } from '@/features/theme-toggle';
+import { AccentToggle } from '@/features/accent-toggle';
 import { LocaleSwitch } from '@/features/locale-switch';
 import { NAV_LINKS } from './config';
 import { MobileMenu } from './MobileMenu';
@@ -24,12 +25,14 @@ export const Header = async () => {
                 </nav>
 
                 <div className={s.controls}>
+                    <AccentToggle />
                     <span className={s.controlGap}><ThemeToggle /></span>
                     <LocaleSwitch />
                 </div>
 
                 {/* Бургер только для мобильных, скрыт на десктопе через CSS */}
                 <div className={s.mobileControls}>
+                    <AccentToggle />
                     <span className={s.controlGap}><ThemeToggle /></span>
                     <span className={s.controlGap}><LocaleSwitch /></span>
                     <MobileMenu />

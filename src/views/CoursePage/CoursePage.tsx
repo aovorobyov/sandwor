@@ -71,6 +71,7 @@ export const CoursePage: FC<CoursePageProps> = ({ courseId }) => {
 
     const handleSelectLesson = (index: number) => {
         updateState({ currentLesson: index });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleCompleteLesson = () => {
@@ -80,6 +81,8 @@ export const CoursePage: FC<CoursePageProps> = ({ courseId }) => {
             : [...completedLessons, currentLesson];
 
         const isLast = currentLesson + 1 >= lessons.length;
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
 
         if (isLast) {
             updateState({ completedLessons: nextCompleted });

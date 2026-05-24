@@ -1,6 +1,6 @@
 .root {
     background: var(--accent);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-sm);
     padding: var(--space-8);
     display: flex;
     align-items: center;
@@ -46,7 +46,7 @@
     font-size: var(--text-sm);
     font-weight: var(--weight-semibold);
     padding: 10px 20px;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
     transition: opacity 0.15s ease;
     white-space: nowrap;
 }
@@ -68,7 +68,7 @@
     flex-direction: column;
     align-items: center;
     background: rgba(255, 255, 255, 0.15);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
     padding: var(--space-2) var(--space-3);
     min-width: 72px;
 }

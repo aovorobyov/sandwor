@@ -26,7 +26,8 @@
     "title": "Статьи",
     "filter-all": "Все",
     "read-more": "Читать →",
-    "min-read": "{count} мин чтения"
+    "min-read": "{count} мин чтения",
+    "related-posts": "Похожие посты"
   },
   "projects": {
     "title": "Проекты",

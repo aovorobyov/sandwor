@@ -148,3 +148,19 @@ export async function getTelegramPost(slug: string): Promise<Post | undefined> {
   const posts = await getTelegramPosts();
   return posts.find((p) => p.slug === slug);
 }
+
+/**
+ * Возвращает похожие посты: сначала с тем же тегом (новейшие первыми), затем добивает
+ * самыми свежими из остальных, пока не наберётся `limit`. Текущий пост исключается.
+ */
+export async function getRelatedPosts(slug: string, limit = 3): Promise<Post[]> {
+  const posts = await getTelegramPosts();
+  const current = posts.find((p) => p.slug === slug);
+  if (!current) { return []; }
+
+  const others = posts.filter((p) => p.slug !== slug);
+  const sameTag = others.filter((p) => p.tag === current.tag);
+  const otherTag = others.filter((p) => p.tag !== current.tag);
+
+  return [...sameTag, ...otherTag].slice(0, limit);
+}

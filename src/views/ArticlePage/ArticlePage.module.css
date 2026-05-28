@@ -94,3 +94,15 @@
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
 }
+
+.related {
+    margin-top: var(--space-16);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--border);
+}
+
+.relatedTitle {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    margin-bottom: var(--space-6);
+}

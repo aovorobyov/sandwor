@@ -26,7 +26,8 @@
     "title":      "Articles",
     "filter-all": "All",
     "read-more":  "Read →",
-    "min-read":   "{count} min read"
+    "min-read":   "{count} min read",
+    "related-posts": "Related posts"
   },
   "projects": {
     "title": "Projects",

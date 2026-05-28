@@ -1,18 +1,22 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTranslations, getLocale } from 'next-intl/server';
-import { getTelegramPost } from '@/entities/post/api/telegram';
+import { getTelegramPost, getRelatedPosts } from '@/entities/post/api/telegram';
+import { PostList } from '@/widgets/PostList';
 import { JsonLd, buildBlogPosting } from '@/shared/lib/jsonLd';
 import type { ArticlePageProps } from './ArticlePage.types';
 import s from './ArticlePage.module.css';
 
 export const ArticlePage = async (props: ArticlePageProps) => {
     const { slug } = props;
-    const post = await getTelegramPost(slug);
-    if (!post) notFound();
+    const [post, relatedPosts, t, locale] = await Promise.all([
+        getTelegramPost(slug),
+        getRelatedPosts(slug, 3),
+        getTranslations(),
+        getLocale(),
+    ]);
 
-    const t = await getTranslations();
-    const locale = await getLocale();
+    if (!post) notFound();
 
     const formattedDate = new Date(post.date).toLocaleDateString(locale, {
         year: 'numeric',
@@ -61,6 +65,16 @@ export const ArticlePage = async (props: ArticlePageProps) => {
                         {/* Доверенный HTML только из своей CMS */}
                         <div className={s.body} dangerouslySetInnerHTML={{ __html: post.body }} />
                     </article>
+
+                    {relatedPosts.length > 0 && (
+                        <section className={s.related} aria-labelledby="related-title">
+                            <h2 id="related-title" className={s.relatedTitle}>
+                                {t('blog.related-posts')}
+                            </h2>
+
+                            <PostList posts={relatedPosts} />
+                        </section>
+                    )}
                 </div>
             </main>
         </>

@@ -12,26 +12,8 @@
   flex-direction: column;
 }
 
-@media (max-width: 767px) {
-  .list {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .item {
-    flex: 1 1 140px;
-  }
-}
-
 .item + .item {
   margin-top: var(--space-1);
-}
-
-@media (max-width: 767px) {
-  .item + .item {
-    margin-top: var(--space-1);
-    margin-left: var(--space-1);
-  }
 }
 
 .btn {

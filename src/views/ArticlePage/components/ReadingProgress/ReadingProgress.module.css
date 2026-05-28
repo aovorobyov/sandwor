@@ -1,0 +1,45 @@
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* Выше Header'а (z-index 100), чтобы бар перекрыл его в режиме чтения. */
+  z-index: 110;
+  background: var(--bg);
+  transform: translateY(-100%);
+  transition: transform 0.18s ease;
+  pointer-events: none;
+}
+
+.visible {
+  transform: translateY(0);
+}
+
+.inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+  height: 54px;
+  display: flex;
+  align-items: center;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.separator {
+  margin: 0 var(--space-2);
+  opacity: 0.5;
+}
+
+.bar {
+  height: 2px;
+  background: var(--bg-subtle);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(0);
+}

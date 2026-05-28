@@ -4,6 +4,7 @@ import { getTranslations, getLocale } from 'next-intl/server';
 import { getTelegramPost, getRelatedPosts } from '@/entities/post/api/telegram';
 import { PostList } from '@/widgets/PostList';
 import { JsonLd, buildBlogPosting } from '@/shared/lib/jsonLd';
+import { ReadingProgress } from './components/ReadingProgress';
 import type { ArticlePageProps } from './ArticlePage.types';
 import s from './ArticlePage.module.css';
 
@@ -24,6 +25,8 @@ export const ArticlePage = async (props: ArticlePageProps) => {
     day: 'numeric',
   });
 
+  const readTimeLabel = t('blog.min-read', { count: post.readTime });
+
   const blogPostingData = buildBlogPosting({
     title: post.title,
     description: post.excerpt,
@@ -37,6 +40,8 @@ export const ArticlePage = async (props: ArticlePageProps) => {
   return (
     <>
       <JsonLd data={blogPostingData} />
+
+      <ReadingProgress readTimeLabel={readTimeLabel} formattedDate={formattedDate} />
 
       <main className={s.root}>
         <div className={s.container}>
@@ -55,7 +60,7 @@ export const ArticlePage = async (props: ArticlePageProps) => {
                   {formattedDate}
                 </time>
 
-                <span>{t('blog.min-read', { count: post.readTime })}</span>
+                <span>{readTimeLabel}</span>
               </div>
             </header>
 

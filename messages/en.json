@@ -55,6 +55,24 @@
     "page-not-found-description": "The page you are looking for does not exist.",
     "back-home": "← Back home"
   },
+  "palette": {
+    "placeholder": "Search the site…",
+    "empty": "No results",
+    "hintNavigate": "navigate",
+    "hintSelect": "select",
+    "hintClose": "close",
+    "group": {
+      "navigation": "Navigation",
+      "theme": "Theme",
+      "locale": "Language",
+      "accent": "Appearance"
+    },
+    "themeLight": "Light theme",
+    "themeDark": "Dark theme",
+    "themeSystem": "System theme",
+    "switchLocale": "Switch language: {locale}",
+    "accentChange": "Change accent color"
+  },
   "uikit": {
     "title": "Design System Kit",
     "description": "A collection of visual tokens and functional components.",

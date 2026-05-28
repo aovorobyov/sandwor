@@ -1,23 +1,17 @@
 'use client';
 
 import type { FC } from 'react';
-import { useLocale } from 'next-intl';
-import { useRouter } from 'next/navigation';
 import { locales, type Locale } from '@/i18n-routing';
+import { useLocaleSwitch } from '../../lib/useLocaleSwitch';
 import s from './LocaleSwitch.module.css';
 
 export const LocaleSwitch: FC = () => {
-    const currentLocale = useLocale() as Locale;
-    const router = useRouter();
-
-    const switchLocale = (locale: Locale) => {
-        if (locale === currentLocale) return;
-        document.cookie = `NEXT_LOCALE=${locale}; Path=/; Max-Age=31536000; SameSite=Lax`;
-        router.refresh();
-    };
+    const { currentLocale, switchLocale } = useLocaleSwitch();
 
     const createLocaleHandler = (locale: Locale) => {
-        return () => switchLocale(locale);
+        return () => {
+            switchLocale(locale);
+        };
     };
 
     return (

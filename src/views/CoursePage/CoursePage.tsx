@@ -10,30 +10,17 @@ import { CourseTopbar } from './components/CourseTopbar';
 import { CourseSidebar } from './components/CourseSidebar';
 import { LessonContent } from './components/LessonContent';
 import { CourseCompletion } from './components/CourseCompletion';
+import { loadCourseState, saveCourseState } from './lib/courseStorage';
 import s from './CoursePage.module.css';
 
 interface CoursePageProps {
     courseId: string;
 }
 
-const STORAGE_KEY = 'ai-course-v1';
-
 const DEFAULT_STATE: CourseState = {
     name: '',
     currentLesson: 0,
     completedLessons: [],
-};
-
-const loadState = (): CourseState => {
-    try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) { return { ...DEFAULT_STATE, ...JSON.parse(raw) }; }
-    } catch {}
-    return DEFAULT_STATE;
-};
-
-const saveState = (state: CourseState) => {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
 };
 
 export const CoursePage: FC<CoursePageProps> = ({ courseId }) => {
@@ -48,7 +35,7 @@ export const CoursePage: FC<CoursePageProps> = ({ courseId }) => {
     const lessons = content?.lessons || [];
 
     useEffect(() => {
-        const saved = loadState();
+        const saved = loadCourseState() ?? DEFAULT_STATE;
         setCourseState(saved);
         if (saved.name) {
             setScreen(saved.completedLessons.length === lessons.length ? 'completion' : 'course');
@@ -59,7 +46,7 @@ export const CoursePage: FC<CoursePageProps> = ({ courseId }) => {
     const updateState = useCallback((next: Partial<CourseState>) => {
         setCourseState((prev) => {
             const merged = { ...prev, ...next };
-            saveState(merged);
+            saveCourseState(merged);
             return merged;
         });
     }, []);

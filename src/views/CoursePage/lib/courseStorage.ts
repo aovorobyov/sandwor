@@ -29,3 +29,9 @@ export const saveCourseState = (state: CourseState) => {
         localStorage.setItem(COURSE_STORAGE_KEY, JSON.stringify(state));
     } catch {}
 };
+
+export const clearCourseState = () => {
+    try {
+        localStorage.removeItem(COURSE_STORAGE_KEY);
+    } catch {}
+};

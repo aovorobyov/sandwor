@@ -14,12 +14,21 @@ export const CourseTopbar: FC<CourseTopbarProps> = ({
     completedCount,
     isAllCompleted,
     onViewResults,
+    onReset,
 }) => {
     const t = useTranslations('course');
 
     const label = completedCount > 0
         ? t('lessonProgress', { current: currentLesson + 1, total: totalLessons, done: completedCount })
         : t('lessonOf', { current: currentLesson + 1, total: totalLessons });
+
+    const handleReset = () => {
+        onReset();
+    };
+
+    const handleViewResults = () => {
+        onViewResults();
+    };
 
     return (
         <div className={s.root}>
@@ -32,13 +41,17 @@ export const CourseTopbar: FC<CourseTopbarProps> = ({
                     <ProgressBar value={completedCount} max={totalLessons} />
                 </div>
 
+                <button type="button" className={s.resetBtn} onClick={handleReset}>
+                    {t('reset')}
+                </button>
+
                 {isAllCompleted && (
                     <Button
                         type="button"
                         variant="primary"
                         size="sm"
                         className={s.resultsBtn}
-                        onClick={onViewResults}
+                        onClick={handleViewResults}
                     >
                         {t('viewResults')}
                     </Button>

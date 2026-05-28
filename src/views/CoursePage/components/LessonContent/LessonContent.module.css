@@ -15,6 +15,23 @@
     margin-right: var(--space-3);
 }
 
+.shareBtn {
+    margin-left: auto;
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.shareBtn:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+}
+
 .title {
     font-size: var(--text-2xl);
     font-weight: var(--weight-semibold);

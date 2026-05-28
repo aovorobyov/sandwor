@@ -9,6 +9,8 @@ import { Textarea } from '@/shared/ui/Textarea';
 import type { LessonContentProps } from './LessonContent.types';
 import s from './LessonContent.module.css';
 
+const COPIED_RESET_MS = 2000;
+
 export const LessonContent: FC<LessonContentProps> = ({
     lesson,
     lessonIndex,
@@ -20,6 +22,7 @@ export const LessonContent: FC<LessonContentProps> = ({
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [answer, setAnswer] = useState('');
     const [hasError, setHasError] = useState(false);
+    const [isLinkCopied, setIsLinkCopied] = useState(false);
 
     const handleAnswerChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setAnswer(e.target.value);
@@ -35,6 +38,15 @@ export const LessonContent: FC<LessonContentProps> = ({
         setIsSubmitted(true);
     };
 
+    const handleShare = async () => {
+        const url = `${window.location.origin}${window.location.pathname}?lesson=${lessonIndex + 1}`;
+        try {
+            await navigator.clipboard.writeText(url);
+            setIsLinkCopied(true);
+            window.setTimeout(() => setIsLinkCopied(false), COPIED_RESET_MS);
+        } catch {}
+    };
+
     const theoryParagraphs = lesson.theory.split('\n\n');
     const showDoneButton = isCompleted || isSubmitted;
 
@@ -46,6 +58,10 @@ export const LessonContent: FC<LessonContentProps> = ({
                 </span>
 
                 {isCompleted && <Badge variant="accent">{t('completed')}</Badge>}
+
+                <button type="button" className={s.shareBtn} onClick={handleShare}>
+                    {isLinkCopied ? t('linkCopied') : t('shareLesson')}
+                </button>
             </div>
 
             <h2 className={s.title}>{lesson.title}</h2>

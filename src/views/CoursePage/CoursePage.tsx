@@ -2,7 +2,7 @@
 
 import type { FC } from 'react';
 import { useCallback, useEffect, useState } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { COURSES_REGISTRY } from './config/registry';
 import type { CourseScreen, CourseState } from './types';
 import { CourseLanding } from './components/CourseLanding';
@@ -10,8 +10,10 @@ import { CourseTopbar } from './components/CourseTopbar';
 import { CourseSidebar } from './components/CourseSidebar';
 import { LessonContent } from './components/LessonContent';
 import { CourseCompletion } from './components/CourseCompletion';
-import { loadCourseState, saveCourseState } from './lib/courseStorage';
+import { clearCourseState, loadCourseState, saveCourseState } from './lib/courseStorage';
 import s from './CoursePage.module.css';
+
+const LESSON_QUERY_PARAM = 'lesson';
 
 interface CoursePageProps {
     courseId: string;
@@ -25,6 +27,7 @@ const DEFAULT_STATE: CourseState = {
 
 export const CoursePage: FC<CoursePageProps> = ({ courseId }) => {
     const locale = useLocale();
+    const t = useTranslations('course');
     const course = COURSES_REGISTRY[courseId];
     const content = course?.content[locale] || course?.content['en'] || course?.content[Object.keys(course.content)[0]];
 
@@ -35,7 +38,20 @@ export const CoursePage: FC<CoursePageProps> = ({ courseId }) => {
     const lessons = content?.lessons || [];
 
     useEffect(() => {
-        const saved = loadCourseState() ?? DEFAULT_STATE;
+        const saved = loadCourseState() ?? { ...DEFAULT_STATE };
+
+        // Deep-link `?lesson=N` (1-индексация) — переопределяет позицию, чтобы можно было
+        // расшарить конкретный урок. Игнорируется при невалидном/выходящем за границы значении.
+        const params = new URLSearchParams(window.location.search);
+        const lessonParam = params.get(LESSON_QUERY_PARAM);
+        if (lessonParam) {
+            const idx = Number(lessonParam) - 1;
+            if (Number.isInteger(idx) && idx >= 0 && idx < lessons.length) {
+                saved.currentLesson = idx;
+                saveCourseState(saved);
+            }
+        }
+
         setCourseState(saved);
         if (saved.name) {
             setScreen(saved.completedLessons.length === lessons.length ? 'completion' : 'course');
@@ -90,6 +106,18 @@ export const CoursePage: FC<CoursePageProps> = ({ courseId }) => {
         setScreen('course');
     };
 
+    const handleReset = () => {
+        if (!window.confirm(t('confirmReset'))) { return; }
+
+        clearCourseState();
+        setCourseState(DEFAULT_STATE);
+        setScreen('landing');
+
+        const url = new URL(window.location.href);
+        url.searchParams.delete(LESSON_QUERY_PARAM);
+        window.history.replaceState({}, '', url);
+    };
+
     if (!isMounted || !content) { return null; }
 
     const isAllCompleted = courseState.completedLessons.length === lessons.length;
@@ -116,6 +144,7 @@ export const CoursePage: FC<CoursePageProps> = ({ courseId }) => {
                         completedCount={courseState.completedLessons.length}
                         isAllCompleted={isAllCompleted}
                         onViewResults={handleViewResults}
+                        onReset={handleReset}
                     />
 
                     <div className={s.courseBody}>

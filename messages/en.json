@@ -99,6 +99,10 @@
     "lessonDone": "Lesson complete →",
     "courseFinish": "Finish course →",
     "viewResults": "Results →",
+    "reset": "Start over",
+    "confirmReset": "Reset all course progress? This cannot be undone.",
+    "shareLesson": "Share lesson",
+    "linkCopied": "Link copied ✓",
     "landing": {
       "startTitle": "Start course",
       "startSub": "Enter your name — we'll generate a personal cheat sheet at the end",

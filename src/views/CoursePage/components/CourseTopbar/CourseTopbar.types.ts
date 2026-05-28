@@ -5,4 +5,5 @@ export interface CourseTopbarProps {
     completedCount: number;
     isAllCompleted: boolean;
     onViewResults: () => void;
+    onReset: () => void;
 }

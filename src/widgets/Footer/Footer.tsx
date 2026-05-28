@@ -6,6 +6,7 @@ import s from './Footer.module.css';
 const SOCIAL_LINKS = [
     { href: 'https://github.com/aovorobyov', label: 'GitHub' },
     { href: 'https://t.me/sandwor', label: 'Telegram' },
+    { href: '/feed.xml', label: 'RSS' },
 ] as const;
 
 export const Footer = async () => {

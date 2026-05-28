@@ -9,6 +9,11 @@ export const metadata: Metadata = {
     default: 'sandwor',
   },
   description: 'Personal website',
+  alternates: {
+    types: {
+      'application/atom+xml': '/feed.xml',
+    },
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

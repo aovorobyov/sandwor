@@ -7,20 +7,22 @@ import { type Locale } from '@/i18n-routing';
 const LOCALE_COOKIE_MAX_AGE = 31536000;
 
 interface LocaleSwitchApi {
-    currentLocale: Locale;
-    switchLocale: (locale: Locale) => void;
+  currentLocale: Locale;
+  switchLocale: (locale: Locale) => void;
 }
 
 export const useLocaleSwitch = (): LocaleSwitchApi => {
-    const currentLocale = useLocale() as Locale;
-    const router = useRouter();
+  const currentLocale = useLocale() as Locale;
+  const router = useRouter();
 
-    const switchLocale = (locale: Locale) => {
-        if (locale === currentLocale) { return; }
+  const switchLocale = (locale: Locale) => {
+    if (locale === currentLocale) {
+      return;
+    }
 
-        document.cookie = `NEXT_LOCALE=${locale}; Path=/; Max-Age=${LOCALE_COOKIE_MAX_AGE}; SameSite=Lax`;
-        router.refresh();
-    };
+    document.cookie = `NEXT_LOCALE=${locale}; Path=/; Max-Age=${LOCALE_COOKIE_MAX_AGE}; SameSite=Lax`;
+    router.refresh();
+  };
 
-    return { currentLocale, switchLocale };
+  return { currentLocale, switchLocale };
 };

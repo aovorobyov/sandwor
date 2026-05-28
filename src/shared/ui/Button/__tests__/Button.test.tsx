@@ -17,7 +17,11 @@ describe('Button', () => {
 
   it('is disabled when the disabled prop is set', async () => {
     const handleClick = jest.fn();
-    render(<Button disabled onClick={handleClick}>Submit</Button>);
+    render(
+      <Button disabled onClick={handleClick}>
+        Submit
+      </Button>,
+    );
     const btn = screen.getByRole('button');
     expect(btn).toBeDisabled();
     await userEvent.click(btn);

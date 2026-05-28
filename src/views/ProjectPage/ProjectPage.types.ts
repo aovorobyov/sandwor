@@ -1,3 +1,3 @@
 export interface ProjectPageProps {
-    slug: string;
+  slug: string;
 }

@@ -1,81 +1,87 @@
 .root {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    transition: var(--transition);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
 }
 
 .inner {
-    max-width: var(--container);
-    margin: 0 auto;
-    padding: 0 var(--container-pad);
-    height: 56px;
-    display: flex;
-    align-items: center;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+  height: 56px;
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    transition: var(--transition);
-    margin-right: var(--space-6);
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: var(--transition);
+  margin-right: var(--space-6);
 }
 
 .logo:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .logoMask {
-    display: inline-block;
-    width: 112px;
-    aspect-ratio: 470 / 60;
-    background-color: var(--accent);
-    -webkit-mask-image: url('/img/logo.svg');
-    mask-image: url('/img/logo.svg');
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
+  display: inline-block;
+  width: 112px;
+  aspect-ratio: 470 / 60;
+  background-color: var(--accent);
+  -webkit-mask-image: url('/img/logo.svg');
+  mask-image: url('/img/logo.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 .nav {
-    display: none;
-    align-items: center;
-    flex: 1;
+  display: none;
+  align-items: center;
+  flex: 1;
 }
 
 .navLink {
-    font-size: var(--text-sm);
-    color: var(--text-muted);
-    transition: var(--transition);
-    margin-right: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  transition: var(--transition);
+  margin-right: var(--space-6);
 }
 
 .navLink:hover {
-    color: var(--text);
+  color: var(--text);
 }
 
 .controls {
-    display: none;
-    align-items: center;
-    margin-left: auto;
+  display: none;
+  align-items: center;
+  margin-left: auto;
 }
 
 .mobileControls {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
 }
 
 .controlGap {
-    margin-right: var(--space-3);
+  margin-right: var(--space-3);
 }
 
 @media (min-width: 640px) {
-    .nav             { display: flex; }
-    .controls        { display: flex; }
-    .mobileControls  { display: none; }
+  .nav {
+    display: flex;
+  }
+  .controls {
+    display: flex;
+  }
+  .mobileControls {
+    display: none;
+  }
 }

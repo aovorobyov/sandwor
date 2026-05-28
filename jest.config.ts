@@ -14,11 +14,7 @@ const config: Config = {
     '^messages/(.*)$': '<rootDir>/messages/$1',
   },
   testMatch: ['**/__tests__/**/*.test.{ts,tsx}'],
-  collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/**/index.ts',
-  ],
+  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts', '!src/**/index.ts'],
 };
 
 export default createJestConfig(config);

@@ -6,12 +6,12 @@ import { PostCard } from '../PostCard';
 import type { Post } from '../../../model/types';
 
 const MOCK_POST: Post = {
-  slug:     'test-post',
-  title:    'Test Post Title',
-  date:     '2025-04-10',
-  tag:      'TypeScript',
-  excerpt:  'A short excerpt for testing purposes.',
-  body:     '<p>Body content</p>',
+  slug: 'test-post',
+  title: 'Test Post Title',
+  date: '2025-04-10',
+  tag: 'TypeScript',
+  excerpt: 'A short excerpt for testing purposes.',
+  body: '<p>Body content</p>',
   readTime: 5,
 };
 

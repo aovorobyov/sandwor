@@ -14,7 +14,11 @@ export async function generateMetadata({
   };
 }
 
-export default function Page({ params: { locale } }: { params: { locale: string; slug?: string } }) {
+export default function Page({
+  params: { locale },
+}: {
+  params: { locale: string; slug?: string };
+}) {
   setRequestLocale(locale);
   return <BlogPage />;
 }

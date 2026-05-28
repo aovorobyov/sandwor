@@ -7,35 +7,44 @@ import { Button } from '@/shared/ui/Button';
 import type { CourseCompletionProps } from './CourseCompletion.types';
 import s from './CourseCompletion.module.css';
 
-export const CourseCompletion: FC<CourseCompletionProps> = ({ name, courseTitle, lessons, onBackToCourse }) => {
-    const t = useTranslations('course');
-    const [visibleSkills, setVisibleSkills] = useState<number[]>([]);
+export const CourseCompletion: FC<CourseCompletionProps> = ({
+  name,
+  courseTitle,
+  lessons,
+  onBackToCourse,
+}) => {
+  const t = useTranslations('course');
+  const [visibleSkills, setVisibleSkills] = useState<number[]>([]);
 
-    useEffect(() => {
-        lessons.forEach((_, index) => {
-            setTimeout(() => {
-                setVisibleSkills((prev) => [...prev, index]);
-            }, 150 * index);
-        });
-    }, [lessons]);
+  useEffect(() => {
+    lessons.forEach((_, index) => {
+      setTimeout(() => {
+        setVisibleSkills((prev) => [...prev, index]);
+      }, 150 * index);
+    });
+  }, [lessons]);
 
-    const handleDownloadPDF = () => {
-        const date = new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' });
+  const handleDownloadPDF = () => {
+    const date = new Date().toLocaleDateString(undefined, {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
 
-        const skillsHtml = lessons
-            .map((l) => `<li>✓ ${l.skill}</li>`)
-            .join('');
+    const skillsHtml = lessons.map((l) => `<li>✓ ${l.skill}</li>`).join('');
 
-        const promptsHtml = lessons
-            .map((l, i) => `
+    const promptsHtml = lessons
+      .map(
+        (l, i) => `
                 <div class="prompt-item">
                     <p class="prompt-title">${i + 1}. ${l.shortTitle}</p>
                     <p class="prompt-text">${l.promptTemplate}</p>
                 </div>
-            `)
-            .join('');
+            `,
+      )
+      .join('');
 
-        const html = `<!DOCTYPE html>
+    const html = `<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -104,49 +113,55 @@ export const CourseCompletion: FC<CourseCompletionProps> = ({ name, courseTitle,
 </body>
 </html>`;
 
-        const win = window.open('', '_blank');
-        if (!win) { return; }
-        win.document.write(html);
-        win.document.close();
-        setTimeout(() => win.print(), 300);
-    };
+    const win = window.open('', '_blank');
+    if (!win) {
+      return;
+    }
+    win.document.write(html);
+    win.document.close();
+    setTimeout(() => win.print(), 300);
+  };
 
-    const title = name ? t('completion.titleWithName', { name }) : t('completion.titleNoName');
+  const title = name ? t('completion.titleWithName', { name }) : t('completion.titleNoName');
 
-    return (
-        <div className={s.inner}>
-            <div className={s.emoji} aria-hidden="true">🎉</div>
+  return (
+    <div className={s.inner}>
+      <div className={s.emoji} aria-hidden="true">
+        🎉
+      </div>
 
-            <h1 className={s.title}>{title}</h1>
+      <h1 className={s.title}>{title}</h1>
 
-            <p className={s.sub}>{t('completion.sub')}</p>
+      <p className={s.sub}>{t('completion.sub')}</p>
 
-            <div className={s.divider} />
+      <div className={s.divider} />
 
-            <p className={s.skillsHeading}>{t('completion.skillsHeading')}</p>
+      <p className={s.skillsHeading}>{t('completion.skillsHeading')}</p>
 
-            <ul className={s.skillsList}>
-                {lessons.map((lesson, index) => (
-                    <li
-                        key={index}
-                        className={`${s.skillItem} ${visibleSkills.includes(index) ? s.skillItemVisible : ''}`}
-                    >
-                        <span className={s.skillCheck} aria-hidden="true">✓</span>
+      <ul className={s.skillsList}>
+        {lessons.map((lesson, index) => (
+          <li
+            key={index}
+            className={`${s.skillItem} ${visibleSkills.includes(index) ? s.skillItemVisible : ''}`}
+          >
+            <span className={s.skillCheck} aria-hidden="true">
+              ✓
+            </span>
 
-                        <span className={s.skillText}>{lesson.skill}</span>
-                    </li>
-                ))}
-            </ul>
+            <span className={s.skillText}>{lesson.skill}</span>
+          </li>
+        ))}
+      </ul>
 
-            <div className={s.actions}>
-                <Button type="button" variant="primary" className={s.actionBtn} onClick={handleDownloadPDF}>
-                    {t('completion.downloadPdf')}
-                </Button>
+      <div className={s.actions}>
+        <Button type="button" variant="primary" className={s.actionBtn} onClick={handleDownloadPDF}>
+          {t('completion.downloadPdf')}
+        </Button>
 
-                <Button type="button" variant="secondary" className={s.actionBtn} onClick={onBackToCourse}>
-                    {t('completion.backToCourse')}
-                </Button>
-            </div>
-        </div>
-    );
+        <Button type="button" variant="secondary" className={s.actionBtn} onClick={onBackToCourse}>
+          {t('completion.backToCourse')}
+        </Button>
+      </div>
+    </div>
+  );
 };

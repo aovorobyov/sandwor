@@ -1,7 +1,7 @@
 .list {
-    max-width: var(--container-text);
+  max-width: var(--container-text);
 }
 
 .item {
-    margin-bottom: var(--space-6);
+  margin-bottom: var(--space-6);
 }

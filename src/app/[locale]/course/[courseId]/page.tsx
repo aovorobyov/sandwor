@@ -6,42 +6,46 @@ import { COURSES_REGISTRY } from '@/views/CoursePage/config/registry';
 import { JsonLd, buildCourse } from '@/shared/lib/jsonLd';
 
 interface Props {
-    params: { courseId: string; locale: string };
+  params: { courseId: string; locale: string };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { courseId, locale } = params;
-    const course = COURSES_REGISTRY[courseId];
-    if (!course) { return {}; }
+  const { courseId, locale } = params;
+  const course = COURSES_REGISTRY[courseId];
+  if (!course) {
+    return {};
+  }
 
-    const content = course.content[locale] || course.content['en'];
-    return {
-        title: content?.title,
-        description: content?.tagline,
-    };
+  const content = course.content[locale] || course.content['en'];
+  return {
+    title: content?.title,
+    description: content?.tagline,
+  };
 }
 
 export default async function Page({ params }: Props) {
-    const { courseId, locale } = params;
-    const course = COURSES_REGISTRY[courseId];
-    if (!course) { notFound(); }
+  const { courseId, locale } = params;
+  const course = COURSES_REGISTRY[courseId];
+  if (!course) {
+    notFound();
+  }
 
-    const content = course.content[locale] || course.content['en'];
-    const t = await getTranslations({ locale, namespace: '' });
+  const content = course.content[locale] || course.content['en'];
+  const t = await getTranslations({ locale, namespace: '' });
 
-    const courseData = buildCourse({
-        title: content.title,
-        description: content.tagline,
-        courseId,
-        locale,
-        authorName: t('home.name'),
-    });
+  const courseData = buildCourse({
+    title: content.title,
+    description: content.tagline,
+    courseId,
+    locale,
+    authorName: t('home.name'),
+  });
 
-    return (
-        <>
-            <JsonLd data={courseData} />
+  return (
+    <>
+      <JsonLd data={courseData} />
 
-            <CoursePage courseId={courseId} />
-        </>
-    );
+      <CoursePage courseId={courseId} />
+    </>
+  );
 }

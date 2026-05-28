@@ -156,7 +156,9 @@ export async function getTelegramPost(slug: string): Promise<Post | undefined> {
 export async function getRelatedPosts(slug: string, limit = 3): Promise<Post[]> {
   const posts = await getTelegramPosts();
   const current = posts.find((p) => p.slug === slug);
-  if (!current) { return []; }
+  if (!current) {
+    return [];
+  }
 
   const others = posts.filter((p) => p.slug !== slug);
   const sameTag = others.filter((p) => p.tag === current.tag);

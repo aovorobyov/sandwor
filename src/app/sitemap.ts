@@ -33,10 +33,7 @@ const STATIC_PATHS = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, projects] = await Promise.all([
-    getTelegramPosts(),
-    Promise.resolve(getProjects()),
-  ]);
+  const [posts, projects] = await Promise.all([getTelegramPosts(), Promise.resolve(getProjects())]);
   const now = new Date();
 
   const staticEntries: MetadataRoute.Sitemap = STATIC_PATHS.map(

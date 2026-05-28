@@ -1,189 +1,263 @@
 import type { CourseConfig } from '../CourseConfig.types';
 
 export const aiBasicsCourse: CourseConfig = {
-    id: 'ai-basics',
-    content: {
-        ru: {
-            title: 'ИИ — твой новый помощник',
-            tagline: 'Практический курс для тех, кто хочет освоить ИИ и использовать его каждый день',
-            durationBadge: '1–2 часа',
-            benefits: [
-                'Никакого программирования — только обычные вопросы своими словами',
-                'Реальные задания: покупки, рецепты, рабочие документы, путешествия',
-                'В финале — PDF-шпаргалка с готовыми запросами под любую задачу',
-                'Все сервисы, которые мы используем — бесплатны',
-            ],
-            lessons: [
-                {
-                    title: 'Что такое ИИ и зачем он мне?',
-                    shortTitle: 'Что такое ИИ',
-                    theory: 'ИИ — это очень начитанный помощник, который прочитал весь интернет и готов отвечать на любые вопросы. Он не осуждает, не торопит и всегда доступен. Главное — уметь правильно его спросить.\n\nПредставьте нового сотрудника, который побывал везде, прочитал всё и готов помочь в чём угодно — тихо, терпеливо, в любое время суток. Чем точнее вы объясняете задачу, тем лучше он справляется. Это важно помнить: ИИ не угадывает — он отвечает именно на то, что вы спросили.\n\nЭто не робот из фантастических фильмов. Это инструмент, как калькулятор или навигатор. Только вместо маршрутов он прокладывает дорогу к знаниям и решениям.',
-                    chatUser: 'Объясни мне простыми словами, что такое искусственный интеллект, как будто я ни разу не сталкивался с технологиями',
-                    chatAI: 'Представьте энциклопедию, которая умеет отвечать на вопросы разговорным языком. Вы спрашиваете — она отвечает, объясняет, помогает разобраться. Именно так работает ИИ-ассистент. Он обучен на миллиардах текстов и умеет поддерживать диалог, давать советы, объяснять сложное простыми словами — и всё это мгновенно.',
-                    taskTitle: 'Попробуем прямо сейчас',
-                    taskText: 'Откройте любой ИИ-ассистент: ChatGPT (chat.openai.com), Grok (grok.com) или Claude (claude.ai) — все они бесплатны.\n\nНапишите им такой запрос, подставив своё:\n\n«Объясни мне [что-то из вашей жизни], простыми словами, без технических терминов»\n\nНапример: «Объясни мне, как работает рефлекторная дуга» или «Объясни, что такое ипотека с господдержкой».\n\nСкопируйте ответ, который вам дала нейросеть, и вставьте его в поле ниже:',
-                    taskPlaceholder: 'Вставьте сюда ответ нейросети...',
-                    encouragement: '🌟 Отлично! Вы только что сделали первый шаг в мире ИИ. Видите, как просто? Нейросеть отвечает человеческим языком, без жаргона и осуждения. Именно это делает её таким удобным помощником.',
-                    skill: 'Объяснять сложное простыми словами с помощью ИИ',
-                    promptTemplate: 'Объясни мне [тема] простыми словами, без технических терминов, как будто я это слышу впервые',
-                },
-                {
-                    title: 'Выбор товаров: сравниваем вместо гугления',
-                    shortTitle: 'Выбор товаров',
-                    theory: 'Один из самых полезных сценариев — попросить ИИ сравнить два конкретных товара. Не просто «что лучше», а реально скормить ему описания и попросить помочь с выбором.\n\nЭто работает лучше, чем читать сотни отзывов: ИИ выделит главное, сравнит по критериям, которые важны именно вам, и даст конкретную рекомендацию.\n\nСекрет хорошего результата — конкретный контекст: для кого берёте, какие критерии важны, какой бюджет. Чем точнее запрос — тем полезнее совет.',
-                    chatUser: 'Вот описание двух напольных весов с маркетплейса. Сравни их по точности, функциям и цене. Что выбрать для домашнего использования?\n\nВесы 1: ...\nВесы 2: ...',
-                    chatAI: 'Разберём оба варианта по ключевым критериям:\n\nПервые весы — точность до 100г, память на 10 пользователей, без анализа жира. Цена: 1 200 ₽.\n\nВторые — точность до 50г, анализ состава тела (жир, вода, мышцы), синхронизация с телефоном. Цена: 2 800 ₽.\n\nЕсли вам важен только вес — берите первые: проще и надёжнее. Если хотите следить за здоровьем в целом — вторые окупятся функциями.',
-                    taskTitle: 'Выберем напольные весы вместе с ИИ',
-                    taskText: 'Шаг 1. Зайдите на Ozon, Яндекс Маркет или Wildberries и найдите раздел «Напольные весы».\n\nШаг 2. Выберите любые два товара в диапазоне 1 000–3 000 рублей. Откройте страницу каждого.\n\nШаг 3. Скопируйте название и характеристики обоих товаров.\n\nШаг 4. Откройте ИИ-ассистент и напишите:\n\n«Вот описание двух напольных весов. Помоги выбрать для домашнего использования. Критерии: точность, удобство, долговечность.\nВесы 1: [название и характеристики]\nВесы 2: [название и характеристики]»\n\nЧто ответила нейросеть? Вставьте вывод или напишите своими словами:',
-                    taskPlaceholder: 'Какой вариант порекомендовал ИИ и почему?',
-                    encouragement: '👏 Прекрасно! Вы освоили один из самых практичных навыков — использовать ИИ как личного консультанта по покупкам. Больше не нужно читать сотни отзывов: просто скиньте описания и получите чёткий совет.',
-                    skill: 'Сравнивать товары и делать осознанный выбор с помощью ИИ',
-                    promptTemplate: 'Сравни два товара по критериям [что важно]. Товар 1: [описание]. Товар 2: [описание]. Что выбрать для [ваша цель]?',
-                },
-                {
-                    title: 'Работа с документами и Excel',
-                    shortTitle: 'Документы и Excel',
-                    theory: 'ИИ отлично справляется с офисными задачами — пишет письма, объясняет формулы, помогает структурировать документы. Больше не нужно искать формулу в интернете — просто опишите задачу словами.\n\nПредставьте коллегу, который знает Word, Excel, Google Таблицы вдоль и поперёк — и всегда готов помочь, не закатывая глаза. Именно таким помощником для вас станет ИИ-ассистент.\n\nМожно попросить написать вежливый отказ, составить отчёт, объяснить функцию, перевести таблицу из хаоса в порядок — и всё это за секунды.',
-                    chatUser: 'В Excel у меня таблица расходов. Как написать формулу, которая считает сумму только за март?',
-                    chatAI: 'Используйте функцию СУММЕСЛИМН. Если даты в столбце A, суммы в столбце B, формула выглядит так:\n\n=СУММЕСЛИМН(B:B; A:A; ">="&ДАТА(2024;3;1); A:A; "<="&ДАТА(2024;3;31))\n\nЭта формула суммирует все значения из столбца B, где дата в столбце A попадает в март 2024. Замените год при необходимости.',
-                    taskTitle: 'Решим реальную рабочую задачу',
-                    taskText: 'Вспомните любую задачу, с которой вы недавно возились на работе или дома:\n— нужно было написать письмо, но не знали как начать\n— застряли на формуле в Excel или таблице\n— нужно было составить список, план, инструкцию\n\nОпишите эту задачу ИИ-ассистенту своими словами, как объяснили бы коллеге.\n\nНапример: «Помоги мне написать вежливый отказ клиенту, который просит скидку 50%»\n\nНапишите запрос и вставьте ответ ниже:',
-                    taskPlaceholder: 'Вставьте ответ нейросети на вашу рабочую задачу...',
-                    encouragement: '💼 Отличная работа! ИИ может заменить часы поиска по форумам и справочникам. Теперь вы знаете: любую офисную задачу можно просто описать словами — и получить готовое решение.',
-                    skill: 'Решать офисные задачи: письма, формулы, документы с помощью ИИ',
-                    promptTemplate: 'Помоги мне [задача: написать письмо / объяснить формулу / составить документ]. Контекст: [ваша ситуация]. Оформи в виде [нужный формат].',
-                },
-                {
-                    title: 'Быт, здоровье, рецепты',
-                    shortTitle: 'Быт и рецепты',
-                    theory: 'ИИ удобен для повседневных вопросов — меню на неделю, что приготовить из остатков, как вывести пятно, что значит слово в анализе крови. Он даёт персонализированный ответ, а не список ссылок.\n\nЭто особенно ценно в вопросах здоровья: ИИ объяснит непонятный термин в анализах, расскажет о симптомах — на понятном языке, не заменяя врача, но помогая прийти к нему уже с вопросами.\n\nА ещё он отличный кулинарный помощник: скажите, что есть в холодильнике, — и получите рецепт ужина за минуту.',
-                    chatUser: 'Что можно приготовить из куриной грудки, картошки, лука и сметаны? Хочу что-то несложное, на ужин для двоих',
-                    chatAI: 'Из этих продуктов отлично получится запечённая курица со сметанным соусом. Простой рецепт:\n\n1. Нарежьте грудку на кусочки, картошку — кружочками.\n2. Выложите в форму слоями: картошка, лук кольцами, курица.\n3. Залейте соусом: сметана + чеснок + соль + перец.\n4. Запекайте 40 минут при 180°C.\n\nПолучается сочно и сытно. Приятного аппетита!',
-                    taskTitle: 'Ужин из того, что есть дома',
-                    taskText: 'Зайдите на кухню (или вспомните, что сейчас есть в холодильнике).\n\nПеречислите 4–6 продуктов, которые у вас есть прямо сейчас.\n\nНапишите ИИ-ассистенту:\n\n«У меня дома есть: [ваши продукты]. Придумай простой рецепт ужина для [количество] человек. Время готовки — не больше 40 минут.»\n\nВставьте рецепт, который предложил ИИ:',
-                    taskPlaceholder: 'Что предложил ИИ приготовить?',
-                    encouragement: '🍽️ Замечательно! Теперь у вас есть личный шеф-повар в кармане. Этот же приём работает для меню на неделю, диетических рекомендаций или вопросов о здоровье — просто спрашивайте.',
-                    skill: 'Планировать еду, быт и разбираться в вопросах здоровья с помощью ИИ',
-                    promptTemplate: 'У меня дома есть: [продукты]. Придумай простой рецепт [завтрака/обеда/ужина] для [кол-во] человек. Время готовки — не больше [X] минут.',
-                },
-                {
-                    title: 'Путешествия и планирование досуга',
-                    shortTitle: 'Путешествия',
-                    theory: 'Планировать поездки с ИИ намного удобнее, чем читать форумы. Он учитывает ваши условия — с детьми или без, бюджет, интересы, время года — и составляет конкретный план, а не общие советы.\n\nНикакого «посетите Кремль и попробуйте местную кухню». ИИ скажет, в какое время лучше прийти, чтобы не было очередей, что посмотреть с детьми, где поесть без туристической наценки.\n\nТо же самое работает для обычного вечера в вашем городе: попросите придумать что-то необычное — и удивитесь, сколько вариантов он предложит.',
-                    chatUser: 'Планируем поездку в Казань на выходные с ребёнком 8 лет. Бюджет средний. Что посмотреть, чтобы не стоять в очередях?',
-                    chatAI: 'На выходные в Казани с ребёнком рекомендую такой маршрут:\n\nСуббота утром — Казанский Кремль в 9:00, до туристических групп. Потом музей Чак-Чака — детям нравится, очередей почти нет.\n\nПосле обеда — Старо-Татарская слобода пешком: красивые домики и местные сладости.\n\nВоскресенье — парк «Черное озеро» утром, затем Национальный музей РТ с интерактивными экспозициями.',
-                    taskTitle: 'Спланируем реальную поездку или вечер',
-                    taskText: 'Выберите одно из двух:\n\nВариант А — Поездка: Вспомните, куда вы хотите съездить (город, страна, даже просто «куда-то в России летом»). Напишите ИИ запрос с вашими реальными условиями: с кем едете, примерный бюджет, что любите / не любите.\n\nВариант Б — Вечер: Напишите: «Придумай нам с мужем/женой/другом вечер пятницы в [ваш город]. Хочется что-то необычное, бюджет до [сумма] рублей на двоих.»\n\nЧто предложил ИИ? Есть ли в плане что-то, что вам реально понравилось?',
-                    taskPlaceholder: 'Напишите, что предложил ИИ и понравился ли вам план',
-                    encouragement: '✈️ Здорово! Теперь вы умеете планировать поездки и досуг с личным ассистентом. Попробуйте это перед следующими выходными — результат вас приятно удивит.',
-                    skill: 'Планировать путешествия и досуг с учётом личных условий с помощью ИИ',
-                    promptTemplate: 'Спланируй поездку в [место] на [срок] для [кол-во и состав]. Бюджет: [сумма]. Интересует: [предпочтения]. Дай конкретный маршрут по дням.',
-                },
-                {
-                    title: 'Как писать точные запросы',
-                    shortTitle: 'Точные запросы',
-                    theory: 'Качество ответа ИИ напрямую зависит от того, как вы спрашиваете. Думайте о нейросети как о новом помощнике: он умный, но не знает ваших привычек и контекста. Чем точнее вы объясняете — тем лучше он помогает.\n\nЕсть простая формула из пяти шагов: Роль + Задача + Контекст + Формат + Образец. Роль — скажите ИИ, кем ему быть («Ты диетолог»). Задача — чётко опишите что нужно сделать. Контекст — объясните вашу ситуацию и, главное, почему вам это нужно: ИИ умеет обобщать из объяснений. Формат — укажите как оформить ответ. Образец — покажите пример желаемого результата: это один из самых мощных приёмов.\n\nЕщё один важный принцип: если хотите подробный и качественный ответ — так и скажите. ИИ не угадывает амбицию. Хотите развёрнутый план — напишите «дай подробный план». Хотите простой язык — напишите «объясни просто».',
-                    chatUser: '❌ Плохой запрос: «Помоги мне с питанием»\n\n✅ Хороший запрос: «Ты диетолог. Составь мне план питания на 5 дней для снижения веса. Мне 52 года, вес 82 кг, не ем рыбу и морепродукты. Оформи в виде таблицы: день | завтрак | обед | ужин. Образец строки: Понедельник | овсянка с ягодами | куриный суп | запечённые овощи.»',
-                    chatAI: 'Вот ваш план питания на 5 дней:\n\nПонедельник | овсянка с ягодами | куриный суп | запечённые овощи с сыром\nВторник | яйца с томатами | гречка с грудкой | творог с зеленью\nСреда | йогурт + фрукты | овощной борщ | тушёная капуста с курицей\nЧетверг | омлет с овощами | гречка с грибами | салат + варёная грудка\nПятница | каша с тыквой | куриный бульон с лапшой | кабачки запечённые\n\nВсе блюда без рыбы, суммарно около 1 600 ккал в день.',
-                    taskTitle: 'Переписываем плохой запрос по формуле',
-                    taskText: 'Вот плохой запрос: «Помоги с работой»\n\nПерепишите его по формуле из 5 шагов:\n— Роль: «Ты опытный [кто]...»\n— Задача: «Помоги мне [что именно сделать]...»\n— Контекст: «[ваша ситуация и почему это важно]...»\n— Формат: «Ответ дай в виде [список / таблица / пошаговая инструкция]...»\n— Образец: «Вот пример нужного результата: [короткий пример]...»\n\nНапишите получившийся запрос ниже. Потом отправьте его в ИИ и сравните с тем, что давал плохой запрос:',
-                    taskPlaceholder: 'Ваш запрос по формуле: Роль + Задача + Контекст + Формат + Образец',
-                    encouragement: '🏆 Превосходно! Вы освоили главный секрет работы с ИИ. Используйте эту формулу каждый раз — и нейросеть будет давать именно то, что нужно. Курс пройден!',
-                    skill: 'Составлять точные запросы по формуле Роль + Задача + Контекст + Формат + Образец',
-                    promptTemplate: 'Ты опытный [роль]. Помоги мне [задача]. Контекст: [ситуация и почему важно]. Оформи в виде [формат]. Образец: [короткий пример результата].',
-                },
-            ],
+  id: 'ai-basics',
+  content: {
+    ru: {
+      title: 'ИИ — твой новый помощник',
+      tagline: 'Практический курс для тех, кто хочет освоить ИИ и использовать его каждый день',
+      durationBadge: '1–2 часа',
+      benefits: [
+        'Никакого программирования — только обычные вопросы своими словами',
+        'Реальные задания: покупки, рецепты, рабочие документы, путешествия',
+        'В финале — PDF-шпаргалка с готовыми запросами под любую задачу',
+        'Все сервисы, которые мы используем — бесплатны',
+      ],
+      lessons: [
+        {
+          title: 'Что такое ИИ и зачем он мне?',
+          shortTitle: 'Что такое ИИ',
+          theory:
+            'ИИ — это очень начитанный помощник, который прочитал весь интернет и готов отвечать на любые вопросы. Он не осуждает, не торопит и всегда доступен. Главное — уметь правильно его спросить.\n\nПредставьте нового сотрудника, который побывал везде, прочитал всё и готов помочь в чём угодно — тихо, терпеливо, в любое время суток. Чем точнее вы объясняете задачу, тем лучше он справляется. Это важно помнить: ИИ не угадывает — он отвечает именно на то, что вы спросили.\n\nЭто не робот из фантастических фильмов. Это инструмент, как калькулятор или навигатор. Только вместо маршрутов он прокладывает дорогу к знаниям и решениям.',
+          chatUser:
+            'Объясни мне простыми словами, что такое искусственный интеллект, как будто я ни разу не сталкивался с технологиями',
+          chatAI:
+            'Представьте энциклопедию, которая умеет отвечать на вопросы разговорным языком. Вы спрашиваете — она отвечает, объясняет, помогает разобраться. Именно так работает ИИ-ассистент. Он обучен на миллиардах текстов и умеет поддерживать диалог, давать советы, объяснять сложное простыми словами — и всё это мгновенно.',
+          taskTitle: 'Попробуем прямо сейчас',
+          taskText:
+            'Откройте любой ИИ-ассистент: ChatGPT (chat.openai.com), Grok (grok.com) или Claude (claude.ai) — все они бесплатны.\n\nНапишите им такой запрос, подставив своё:\n\n«Объясни мне [что-то из вашей жизни], простыми словами, без технических терминов»\n\nНапример: «Объясни мне, как работает рефлекторная дуга» или «Объясни, что такое ипотека с господдержкой».\n\nСкопируйте ответ, который вам дала нейросеть, и вставьте его в поле ниже:',
+          taskPlaceholder: 'Вставьте сюда ответ нейросети...',
+          encouragement:
+            '🌟 Отлично! Вы только что сделали первый шаг в мире ИИ. Видите, как просто? Нейросеть отвечает человеческим языком, без жаргона и осуждения. Именно это делает её таким удобным помощником.',
+          skill: 'Объяснять сложное простыми словами с помощью ИИ',
+          promptTemplate:
+            'Объясни мне [тема] простыми словами, без технических терминов, как будто я это слышу впервые',
         },
-        en: {
-            title: 'AI — Your New Assistant',
-            tagline: 'A practical course for anyone who wants to use AI tools in everyday life',
-            durationBadge: '1–2 hours',
-            benefits: [
-                'No coding required — just ask questions in plain language',
-                'Real tasks: shopping, recipes, work documents, travel planning',
-                'You\'ll finish with a PDF cheat sheet of ready-to-use prompts',
-                'All the tools we use are completely free',
-            ],
-            lessons: [
-                {
-                    title: 'What is AI and why do I need it?',
-                    shortTitle: 'What is AI',
-                    theory: 'AI is a very well-read assistant that has processed an enormous amount of text and is ready to answer almost any question. It doesn\'t judge you, never rushes you, and is always available. The key is knowing how to ask.\n\nThink of it like a new employee who has read everything and can help with anything — patiently, quietly, any time of day. The more clearly you explain what you need, the better the result. AI doesn\'t guess — it responds to exactly what you ask.\n\nThis isn\'t the robot from science fiction films. It\'s a tool, like a calculator or a GPS. Only instead of giving you directions, it points you toward knowledge and solutions.',
-                    chatUser: 'Explain to me in simple terms what artificial intelligence is, as if I\'ve never used any technology before',
-                    chatAI: 'Imagine an encyclopedia that can answer questions in plain conversation. You ask — it answers, explains, helps you understand. That\'s how an AI assistant works. It has learned from billions of texts and can hold a dialogue, give advice, explain complicated things simply — and it does all of this instantly.',
-                    taskTitle: 'Let\'s try it right now',
-                    taskText: 'Open any AI assistant: ChatGPT (chat.openai.com), Grok (grok.com), or Claude (claude.ai) — they\'re all free.\n\nType this request, filling in something from your own life:\n\n"Explain [something from your life] in simple terms, without technical jargon"\n\nFor example: "Explain how a knee replacement surgery works" or "Explain what a variable-rate mortgage is".\n\nCopy the response the AI gives you and paste it in the field below:',
-                    taskPlaceholder: 'Paste the AI\'s response here...',
-                    encouragement: '🌟 Excellent! You just took your first step into the world of AI. See how easy that was? The AI speaks in plain language, without jargon or judgment. That\'s what makes it such a useful assistant.',
-                    skill: 'Using AI to explain complex topics in plain language',
-                    promptTemplate: 'Explain [topic] in simple terms, without technical jargon, as if I\'m hearing about it for the first time',
-                },
-                {
-                    title: 'Choosing products: compare instead of scrolling',
-                    shortTitle: 'Choosing products',
-                    theory: 'One of the most practical ways to use AI is to ask it to compare two specific products. Not just "which is better" — actually paste in the descriptions and ask it to help you decide.\n\nThis works better than reading hundreds of reviews: the AI will pick out what matters most, compare products on the criteria you care about, and give you a clear recommendation.\n\nThe secret to a good answer is specific context: who it\'s for, what features matter, your budget. The more precise your question, the more useful the advice.',
-                    chatUser: 'Here are the descriptions of two kitchen scales I found online. Compare them on accuracy, features, and price. Which one should I get for home use?\n\nScale 1: ...\nScale 2: ...',
-                    chatAI: 'Let\'s look at both options on the key criteria:\n\nScale 1 — accurate to 1g, has a tare function, basic timer, no Bluetooth. Price: $25.\n\nScale 2 — accurate to 0.1g, syncs with a nutrition app, rechargeable battery, waterproof. Price: $55.\n\nIf you just need to weigh ingredients — go with the first one: simpler and reliable. If you want to track nutrition and connect to your phone — the second one is worth the extra cost.',
-                    taskTitle: 'Let\'s pick a product together with AI',
-                    taskText: 'Step 1. Go to Amazon, Target, or any online store and find a product category you\'re actually considering buying (kitchen scales, a coffee maker, headphones, etc.).\n\nStep 2. Pick any two products in a similar price range. Open both pages.\n\nStep 3. Copy the name and key specs/description of both products.\n\nStep 4. Open an AI assistant and write:\n\n"Here are two [product type]. Help me choose which one to buy for home use. My priorities: [list what matters to you].\nOption 1: [name and specs]\nOption 2: [name and specs]"\n\nWhat did the AI recommend? Paste its answer or summarise it in your own words:',
-                    taskPlaceholder: 'Which option did AI recommend and why?',
-                    encouragement: '👏 Brilliant! You\'ve learned one of the most practical skills — using AI as a personal shopping advisor. No more reading hundreds of reviews: just paste the descriptions and get a clear recommendation.',
-                    skill: 'Comparing products and making informed buying decisions with AI',
-                    promptTemplate: 'Compare these two [product type] on [what matters to you]. Option 1: [description]. Option 2: [description]. Which should I choose for [your situation]?',
-                },
-                {
-                    title: 'Work documents and spreadsheets',
-                    shortTitle: 'Docs & Spreadsheets',
-                    theory: 'AI is excellent at office tasks — writing emails, explaining formulas, helping you structure documents. No more hunting through forums for the right function — just describe what you need in plain words.\n\nImagine a colleague who knows Word, Excel and Google Sheets inside out — and is always happy to help without any sighing. That\'s what an AI assistant is for office work.\n\nYou can ask it to write a polite decline email, create a report, explain a formula, or turn a chaotic table into something organised — all in seconds.',
-                    chatUser: 'I have a spreadsheet with my expenses in Excel. How do I write a formula that adds up only the amounts from March?',
-                    chatAI: 'Use the SUMIFS function. If your dates are in column A and amounts are in column B, the formula looks like this:\n\n=SUMIFS(B:B, A:A, ">="&DATE(2024,3,1), A:A, "<="&DATE(2024,3,31))\n\nThis adds up all values from column B where the date in column A falls in March 2024. Swap in the correct year if needed.',
-                    taskTitle: 'Solve a real work task',
-                    taskText: 'Think of any task you\'ve struggled with at work or at home recently:\n— You needed to write an email but didn\'t know how to start\n— You got stuck on a formula in Excel or Google Sheets\n— You needed to make a list, a plan, or a set of instructions\n\nDescribe the task to an AI assistant in your own words, as you\'d explain it to a colleague.\n\nFor example: "Help me write a polite email declining a meeting request because my schedule is already full this week"\n\nType your request and paste the AI\'s response below:',
-                    taskPlaceholder: 'Paste the AI\'s response to your work task...',
-                    encouragement: '💼 Great work! AI can replace hours of searching through help articles and forums. You now know: any office task can simply be described in plain words — and you\'ll get a ready-made solution.',
-                    skill: 'Handling office tasks — emails, formulas, documents — with AI',
-                    promptTemplate: 'Help me [task: write an email / explain a formula / create a document]. Context: [your situation]. Format the response as [list / table / step-by-step instructions].',
-                },
-                {
-                    title: 'Everyday life: cooking, health, home',
-                    shortTitle: 'Daily life',
-                    theory: 'AI is handy for everyday questions — a weekly meal plan, what to cook with leftovers, how to remove a stain, or what a term in your blood test results means. It gives you a personalised answer, not a list of links to browse.\n\nThis is especially useful for health questions: AI will explain an unfamiliar term from your test results in plain language. It won\'t replace your doctor, but it will help you arrive with the right questions.\n\nAnd as a kitchen assistant, it\'s unbeatable: tell it what\'s in your fridge, and you\'ll have a dinner idea in seconds.',
-                    chatUser: 'What can I make with chicken breast, potatoes, onion, and sour cream? I want something simple for dinner for two',
-                    chatAI: 'These ingredients make a great baked chicken with sour cream sauce. Here\'s a simple recipe:\n\n1. Cut the chicken into pieces and slice the potatoes.\n2. Layer in a baking dish: potatoes, sliced onion rings, chicken on top.\n3. Pour over the sauce: sour cream + garlic + salt + pepper.\n4. Bake for 40 minutes at 375°F (190°C).\n\nComes out juicy and satisfying. Enjoy!',
-                    taskTitle: 'Dinner from what\'s in your fridge',
-                    taskText: 'Go to your kitchen (or think about what\'s in your fridge right now).\n\nList 4–6 ingredients you actually have at home right now.\n\nWrite to an AI assistant:\n\n"I have at home: [your ingredients]. Come up with a simple dinner recipe for [number] people. Cooking time — no more than 40 minutes."\n\nPaste the recipe the AI suggests:',
-                    taskPlaceholder: 'What did AI suggest cooking?',
-                    encouragement: '🍽️ Wonderful! You now have a personal chef in your pocket. The same approach works for weekly meal planning, dietary advice, or health questions — just ask.',
-                    skill: 'Planning meals, managing home tasks, and getting health guidance with AI',
-                    promptTemplate: 'I have at home: [ingredients]. Come up with a simple [breakfast/lunch/dinner] recipe for [number] people. Cooking time — no more than [X] minutes.',
-                },
-                {
-                    title: 'Travel and leisure planning',
-                    shortTitle: 'Travel',
-                    theory: 'Planning trips with AI is so much easier than trawling through travel forums. It takes your specific situation into account — travelling with kids or without, budget, interests, time of year — and gives you a concrete plan, not generic advice.\n\nNo more "visit the main square and try the local food". AI will tell you the best time to arrive to avoid queues, what children will enjoy, and where to eat without tourist-trap prices.\n\nThe same works for a regular evening in your town: ask it to suggest something different — and you\'ll be surprised how many ideas it comes up with.',
-                    chatUser: 'We\'re planning a weekend trip to Washington DC with an 8-year-old. Mid-range budget. What should we see without standing in long queues?',
-                    chatAI: 'Here\'s a great weekend itinerary in DC with a child:\n\nSaturday morning — National Zoo (free, arrive at 9am before it gets busy). Then the National Air and Space Museum — kids love it, and queues are short on weekend mornings.\n\nAfter lunch — walk the National Mall and see the Lincoln Memorial, it\'s easy and there are no queues.\n\nSunday — Natural History Museum first thing (the dinosaur hall is a highlight), then the Capitol grounds for photos.',
-                    taskTitle: 'Plan a real trip or a fun evening',
-                    taskText: 'Choose one of these:\n\nOption A — A trip: Think of somewhere you\'d like to go (a city, a country, or even just "somewhere warm this summer"). Write an AI request with your real conditions: who you\'re travelling with, rough budget, what you like and don\'t like.\n\nOption B — An evening: Write: "Come up with a Friday evening plan for me and my partner/friend in [your city]. We want something a bit different, budget around [amount] for two."\n\nWhat did AI suggest? Was there anything in the plan you actually liked?',
-                    taskPlaceholder: 'Write what AI suggested and whether you liked the plan',
-                    encouragement: '✈️ Excellent! You now know how to plan trips and leisure time with your own personal assistant. Try it before your next weekend — the results might surprise you.',
-                    skill: 'Planning travel and leisure activities tailored to your own needs with AI',
-                    promptTemplate: 'Plan a trip to [place] for [duration] for [number and group]. Budget: [amount]. Interested in: [preferences]. Give me a day-by-day itinerary.',
-                },
-                {
-                    title: 'How to write precise prompts',
-                    shortTitle: 'Precise prompts',
-                    theory: 'The quality of an AI\'s answer depends directly on how you ask. Think of AI like a new assistant: they\'re smart, but they don\'t know your habits or context yet. The more clearly you explain — the better they help.\n\nThere\'s a simple five-step formula: Role + Task + Context + Format + Example. Role — tell the AI who to be ("You are a nutritionist"). Task — clearly say what you need. Context — explain your situation and, crucially, why you need it: AI is good at working from explanations. Format — say how you want the answer structured. Example — show a sample of what you\'re looking for: this is one of the most powerful techniques.\n\nAnother key principle: if you want a detailed, high-quality answer — say so. AI doesn\'t assume ambition. Want a thorough plan? Write "give me a detailed plan". Want simple language? Write "explain simply".',
-                    chatUser: '❌ Weak prompt: "Help me with eating"\n\n✅ Strong prompt: "You are a nutritionist. Create a 5-day meal plan for weight loss for me. I\'m 52 years old, 180 lbs, and I don\'t eat fish or seafood. Format it as a table: Day | Breakfast | Lunch | Dinner. Example row: Monday | oatmeal with berries | chicken soup | roasted vegetables."',
-                    chatAI: 'Here\'s your 5-day meal plan:\n\nMonday | Oatmeal with berries | Chicken vegetable soup | Roasted vegetables with cheese\nTuesday | Scrambled eggs with tomatoes | Buckwheat with chicken breast | Cottage cheese with herbs\nWednesday | Yoghurt + fruit | Vegetable soup | Braised cabbage with chicken\nThursday | Omelette with vegetables | Mushroom stir-fry | Salad + boiled chicken\nFriday | Pumpkin porridge | Chicken noodle soup | Courgette bake\n\nAll meals are seafood-free, approximately 1,600 kcal per day.',
-                    taskTitle: 'Rewrite a weak prompt using the formula',
-                    taskText: 'Here\'s a weak prompt: "Help me with work"\n\nRewrite it using all five steps:\n— Role: "You are an experienced [who]..."\n— Task: "Help me [exactly what to do]..."\n— Context: "[your situation and why it matters]..."\n— Format: "Give me the answer as [list / table / step-by-step instructions]..."\n— Example: "Here\'s an example of what I\'m looking for: [short sample]..."\n\nWrite your improved prompt in the field below. Then send it to an AI and compare the result with what the weak prompt would have given you:',
-                    taskPlaceholder: 'Your prompt using the formula: Role + Task + Context + Format + Example',
-                    encouragement: '🏆 Outstanding! You\'ve mastered the main secret of working with AI. Use this formula every time — and the AI will give you exactly what you need. Course complete!',
-                    skill: 'Writing precise prompts using the Role + Task + Context + Format + Example formula',
-                    promptTemplate: 'You are an experienced [role]. Help me [task]. Context: [situation and why it matters]. Format the response as [format]. Example: [short sample of desired output].',
-                },
-            ],
+        {
+          title: 'Выбор товаров: сравниваем вместо гугления',
+          shortTitle: 'Выбор товаров',
+          theory:
+            'Один из самых полезных сценариев — попросить ИИ сравнить два конкретных товара. Не просто «что лучше», а реально скормить ему описания и попросить помочь с выбором.\n\nЭто работает лучше, чем читать сотни отзывов: ИИ выделит главное, сравнит по критериям, которые важны именно вам, и даст конкретную рекомендацию.\n\nСекрет хорошего результата — конкретный контекст: для кого берёте, какие критерии важны, какой бюджет. Чем точнее запрос — тем полезнее совет.',
+          chatUser:
+            'Вот описание двух напольных весов с маркетплейса. Сравни их по точности, функциям и цене. Что выбрать для домашнего использования?\n\nВесы 1: ...\nВесы 2: ...',
+          chatAI:
+            'Разберём оба варианта по ключевым критериям:\n\nПервые весы — точность до 100г, память на 10 пользователей, без анализа жира. Цена: 1 200 ₽.\n\nВторые — точность до 50г, анализ состава тела (жир, вода, мышцы), синхронизация с телефоном. Цена: 2 800 ₽.\n\nЕсли вам важен только вес — берите первые: проще и надёжнее. Если хотите следить за здоровьем в целом — вторые окупятся функциями.',
+          taskTitle: 'Выберем напольные весы вместе с ИИ',
+          taskText:
+            'Шаг 1. Зайдите на Ozon, Яндекс Маркет или Wildberries и найдите раздел «Напольные весы».\n\nШаг 2. Выберите любые два товара в диапазоне 1 000–3 000 рублей. Откройте страницу каждого.\n\nШаг 3. Скопируйте название и характеристики обоих товаров.\n\nШаг 4. Откройте ИИ-ассистент и напишите:\n\n«Вот описание двух напольных весов. Помоги выбрать для домашнего использования. Критерии: точность, удобство, долговечность.\nВесы 1: [название и характеристики]\nВесы 2: [название и характеристики]»\n\nЧто ответила нейросеть? Вставьте вывод или напишите своими словами:',
+          taskPlaceholder: 'Какой вариант порекомендовал ИИ и почему?',
+          encouragement:
+            '👏 Прекрасно! Вы освоили один из самых практичных навыков — использовать ИИ как личного консультанта по покупкам. Больше не нужно читать сотни отзывов: просто скиньте описания и получите чёткий совет.',
+          skill: 'Сравнивать товары и делать осознанный выбор с помощью ИИ',
+          promptTemplate:
+            'Сравни два товара по критериям [что важно]. Товар 1: [описание]. Товар 2: [описание]. Что выбрать для [ваша цель]?',
         },
+        {
+          title: 'Работа с документами и Excel',
+          shortTitle: 'Документы и Excel',
+          theory:
+            'ИИ отлично справляется с офисными задачами — пишет письма, объясняет формулы, помогает структурировать документы. Больше не нужно искать формулу в интернете — просто опишите задачу словами.\n\nПредставьте коллегу, который знает Word, Excel, Google Таблицы вдоль и поперёк — и всегда готов помочь, не закатывая глаза. Именно таким помощником для вас станет ИИ-ассистент.\n\nМожно попросить написать вежливый отказ, составить отчёт, объяснить функцию, перевести таблицу из хаоса в порядок — и всё это за секунды.',
+          chatUser:
+            'В Excel у меня таблица расходов. Как написать формулу, которая считает сумму только за март?',
+          chatAI:
+            'Используйте функцию СУММЕСЛИМН. Если даты в столбце A, суммы в столбце B, формула выглядит так:\n\n=СУММЕСЛИМН(B:B; A:A; ">="&ДАТА(2024;3;1); A:A; "<="&ДАТА(2024;3;31))\n\nЭта формула суммирует все значения из столбца B, где дата в столбце A попадает в март 2024. Замените год при необходимости.',
+          taskTitle: 'Решим реальную рабочую задачу',
+          taskText:
+            'Вспомните любую задачу, с которой вы недавно возились на работе или дома:\n— нужно было написать письмо, но не знали как начать\n— застряли на формуле в Excel или таблице\n— нужно было составить список, план, инструкцию\n\nОпишите эту задачу ИИ-ассистенту своими словами, как объяснили бы коллеге.\n\nНапример: «Помоги мне написать вежливый отказ клиенту, который просит скидку 50%»\n\nНапишите запрос и вставьте ответ ниже:',
+          taskPlaceholder: 'Вставьте ответ нейросети на вашу рабочую задачу...',
+          encouragement:
+            '💼 Отличная работа! ИИ может заменить часы поиска по форумам и справочникам. Теперь вы знаете: любую офисную задачу можно просто описать словами — и получить готовое решение.',
+          skill: 'Решать офисные задачи: письма, формулы, документы с помощью ИИ',
+          promptTemplate:
+            'Помоги мне [задача: написать письмо / объяснить формулу / составить документ]. Контекст: [ваша ситуация]. Оформи в виде [нужный формат].',
+        },
+        {
+          title: 'Быт, здоровье, рецепты',
+          shortTitle: 'Быт и рецепты',
+          theory:
+            'ИИ удобен для повседневных вопросов — меню на неделю, что приготовить из остатков, как вывести пятно, что значит слово в анализе крови. Он даёт персонализированный ответ, а не список ссылок.\n\nЭто особенно ценно в вопросах здоровья: ИИ объяснит непонятный термин в анализах, расскажет о симптомах — на понятном языке, не заменяя врача, но помогая прийти к нему уже с вопросами.\n\nА ещё он отличный кулинарный помощник: скажите, что есть в холодильнике, — и получите рецепт ужина за минуту.',
+          chatUser:
+            'Что можно приготовить из куриной грудки, картошки, лука и сметаны? Хочу что-то несложное, на ужин для двоих',
+          chatAI:
+            'Из этих продуктов отлично получится запечённая курица со сметанным соусом. Простой рецепт:\n\n1. Нарежьте грудку на кусочки, картошку — кружочками.\n2. Выложите в форму слоями: картошка, лук кольцами, курица.\n3. Залейте соусом: сметана + чеснок + соль + перец.\n4. Запекайте 40 минут при 180°C.\n\nПолучается сочно и сытно. Приятного аппетита!',
+          taskTitle: 'Ужин из того, что есть дома',
+          taskText:
+            'Зайдите на кухню (или вспомните, что сейчас есть в холодильнике).\n\nПеречислите 4–6 продуктов, которые у вас есть прямо сейчас.\n\nНапишите ИИ-ассистенту:\n\n«У меня дома есть: [ваши продукты]. Придумай простой рецепт ужина для [количество] человек. Время готовки — не больше 40 минут.»\n\nВставьте рецепт, который предложил ИИ:',
+          taskPlaceholder: 'Что предложил ИИ приготовить?',
+          encouragement:
+            '🍽️ Замечательно! Теперь у вас есть личный шеф-повар в кармане. Этот же приём работает для меню на неделю, диетических рекомендаций или вопросов о здоровье — просто спрашивайте.',
+          skill: 'Планировать еду, быт и разбираться в вопросах здоровья с помощью ИИ',
+          promptTemplate:
+            'У меня дома есть: [продукты]. Придумай простой рецепт [завтрака/обеда/ужина] для [кол-во] человек. Время готовки — не больше [X] минут.',
+        },
+        {
+          title: 'Путешествия и планирование досуга',
+          shortTitle: 'Путешествия',
+          theory:
+            'Планировать поездки с ИИ намного удобнее, чем читать форумы. Он учитывает ваши условия — с детьми или без, бюджет, интересы, время года — и составляет конкретный план, а не общие советы.\n\nНикакого «посетите Кремль и попробуйте местную кухню». ИИ скажет, в какое время лучше прийти, чтобы не было очередей, что посмотреть с детьми, где поесть без туристической наценки.\n\nТо же самое работает для обычного вечера в вашем городе: попросите придумать что-то необычное — и удивитесь, сколько вариантов он предложит.',
+          chatUser:
+            'Планируем поездку в Казань на выходные с ребёнком 8 лет. Бюджет средний. Что посмотреть, чтобы не стоять в очередях?',
+          chatAI:
+            'На выходные в Казани с ребёнком рекомендую такой маршрут:\n\nСуббота утром — Казанский Кремль в 9:00, до туристических групп. Потом музей Чак-Чака — детям нравится, очередей почти нет.\n\nПосле обеда — Старо-Татарская слобода пешком: красивые домики и местные сладости.\n\nВоскресенье — парк «Черное озеро» утром, затем Национальный музей РТ с интерактивными экспозициями.',
+          taskTitle: 'Спланируем реальную поездку или вечер',
+          taskText:
+            'Выберите одно из двух:\n\nВариант А — Поездка: Вспомните, куда вы хотите съездить (город, страна, даже просто «куда-то в России летом»). Напишите ИИ запрос с вашими реальными условиями: с кем едете, примерный бюджет, что любите / не любите.\n\nВариант Б — Вечер: Напишите: «Придумай нам с мужем/женой/другом вечер пятницы в [ваш город]. Хочется что-то необычное, бюджет до [сумма] рублей на двоих.»\n\nЧто предложил ИИ? Есть ли в плане что-то, что вам реально понравилось?',
+          taskPlaceholder: 'Напишите, что предложил ИИ и понравился ли вам план',
+          encouragement:
+            '✈️ Здорово! Теперь вы умеете планировать поездки и досуг с личным ассистентом. Попробуйте это перед следующими выходными — результат вас приятно удивит.',
+          skill: 'Планировать путешествия и досуг с учётом личных условий с помощью ИИ',
+          promptTemplate:
+            'Спланируй поездку в [место] на [срок] для [кол-во и состав]. Бюджет: [сумма]. Интересует: [предпочтения]. Дай конкретный маршрут по дням.',
+        },
+        {
+          title: 'Как писать точные запросы',
+          shortTitle: 'Точные запросы',
+          theory:
+            'Качество ответа ИИ напрямую зависит от того, как вы спрашиваете. Думайте о нейросети как о новом помощнике: он умный, но не знает ваших привычек и контекста. Чем точнее вы объясняете — тем лучше он помогает.\n\nЕсть простая формула из пяти шагов: Роль + Задача + Контекст + Формат + Образец. Роль — скажите ИИ, кем ему быть («Ты диетолог»). Задача — чётко опишите что нужно сделать. Контекст — объясните вашу ситуацию и, главное, почему вам это нужно: ИИ умеет обобщать из объяснений. Формат — укажите как оформить ответ. Образец — покажите пример желаемого результата: это один из самых мощных приёмов.\n\nЕщё один важный принцип: если хотите подробный и качественный ответ — так и скажите. ИИ не угадывает амбицию. Хотите развёрнутый план — напишите «дай подробный план». Хотите простой язык — напишите «объясни просто».',
+          chatUser:
+            '❌ Плохой запрос: «Помоги мне с питанием»\n\n✅ Хороший запрос: «Ты диетолог. Составь мне план питания на 5 дней для снижения веса. Мне 52 года, вес 82 кг, не ем рыбу и морепродукты. Оформи в виде таблицы: день | завтрак | обед | ужин. Образец строки: Понедельник | овсянка с ягодами | куриный суп | запечённые овощи.»',
+          chatAI:
+            'Вот ваш план питания на 5 дней:\n\nПонедельник | овсянка с ягодами | куриный суп | запечённые овощи с сыром\nВторник | яйца с томатами | гречка с грудкой | творог с зеленью\nСреда | йогурт + фрукты | овощной борщ | тушёная капуста с курицей\nЧетверг | омлет с овощами | гречка с грибами | салат + варёная грудка\nПятница | каша с тыквой | куриный бульон с лапшой | кабачки запечённые\n\nВсе блюда без рыбы, суммарно около 1 600 ккал в день.',
+          taskTitle: 'Переписываем плохой запрос по формуле',
+          taskText:
+            'Вот плохой запрос: «Помоги с работой»\n\nПерепишите его по формуле из 5 шагов:\n— Роль: «Ты опытный [кто]...»\n— Задача: «Помоги мне [что именно сделать]...»\n— Контекст: «[ваша ситуация и почему это важно]...»\n— Формат: «Ответ дай в виде [список / таблица / пошаговая инструкция]...»\n— Образец: «Вот пример нужного результата: [короткий пример]...»\n\nНапишите получившийся запрос ниже. Потом отправьте его в ИИ и сравните с тем, что давал плохой запрос:',
+          taskPlaceholder: 'Ваш запрос по формуле: Роль + Задача + Контекст + Формат + Образец',
+          encouragement:
+            '🏆 Превосходно! Вы освоили главный секрет работы с ИИ. Используйте эту формулу каждый раз — и нейросеть будет давать именно то, что нужно. Курс пройден!',
+          skill: 'Составлять точные запросы по формуле Роль + Задача + Контекст + Формат + Образец',
+          promptTemplate:
+            'Ты опытный [роль]. Помоги мне [задача]. Контекст: [ситуация и почему важно]. Оформи в виде [формат]. Образец: [короткий пример результата].',
+        },
+      ],
     },
+    en: {
+      title: 'AI — Your New Assistant',
+      tagline: 'A practical course for anyone who wants to use AI tools in everyday life',
+      durationBadge: '1–2 hours',
+      benefits: [
+        'No coding required — just ask questions in plain language',
+        'Real tasks: shopping, recipes, work documents, travel planning',
+        "You'll finish with a PDF cheat sheet of ready-to-use prompts",
+        'All the tools we use are completely free',
+      ],
+      lessons: [
+        {
+          title: 'What is AI and why do I need it?',
+          shortTitle: 'What is AI',
+          theory:
+            "AI is a very well-read assistant that has processed an enormous amount of text and is ready to answer almost any question. It doesn't judge you, never rushes you, and is always available. The key is knowing how to ask.\n\nThink of it like a new employee who has read everything and can help with anything — patiently, quietly, any time of day. The more clearly you explain what you need, the better the result. AI doesn't guess — it responds to exactly what you ask.\n\nThis isn't the robot from science fiction films. It's a tool, like a calculator or a GPS. Only instead of giving you directions, it points you toward knowledge and solutions.",
+          chatUser:
+            "Explain to me in simple terms what artificial intelligence is, as if I've never used any technology before",
+          chatAI:
+            "Imagine an encyclopedia that can answer questions in plain conversation. You ask — it answers, explains, helps you understand. That's how an AI assistant works. It has learned from billions of texts and can hold a dialogue, give advice, explain complicated things simply — and it does all of this instantly.",
+          taskTitle: "Let's try it right now",
+          taskText:
+            'Open any AI assistant: ChatGPT (chat.openai.com), Grok (grok.com), or Claude (claude.ai) — they\'re all free.\n\nType this request, filling in something from your own life:\n\n"Explain [something from your life] in simple terms, without technical jargon"\n\nFor example: "Explain how a knee replacement surgery works" or "Explain what a variable-rate mortgage is".\n\nCopy the response the AI gives you and paste it in the field below:',
+          taskPlaceholder: "Paste the AI's response here...",
+          encouragement:
+            "🌟 Excellent! You just took your first step into the world of AI. See how easy that was? The AI speaks in plain language, without jargon or judgment. That's what makes it such a useful assistant.",
+          skill: 'Using AI to explain complex topics in plain language',
+          promptTemplate:
+            "Explain [topic] in simple terms, without technical jargon, as if I'm hearing about it for the first time",
+        },
+        {
+          title: 'Choosing products: compare instead of scrolling',
+          shortTitle: 'Choosing products',
+          theory:
+            'One of the most practical ways to use AI is to ask it to compare two specific products. Not just "which is better" — actually paste in the descriptions and ask it to help you decide.\n\nThis works better than reading hundreds of reviews: the AI will pick out what matters most, compare products on the criteria you care about, and give you a clear recommendation.\n\nThe secret to a good answer is specific context: who it\'s for, what features matter, your budget. The more precise your question, the more useful the advice.',
+          chatUser:
+            'Here are the descriptions of two kitchen scales I found online. Compare them on accuracy, features, and price. Which one should I get for home use?\n\nScale 1: ...\nScale 2: ...',
+          chatAI:
+            "Let's look at both options on the key criteria:\n\nScale 1 — accurate to 1g, has a tare function, basic timer, no Bluetooth. Price: $25.\n\nScale 2 — accurate to 0.1g, syncs with a nutrition app, rechargeable battery, waterproof. Price: $55.\n\nIf you just need to weigh ingredients — go with the first one: simpler and reliable. If you want to track nutrition and connect to your phone — the second one is worth the extra cost.",
+          taskTitle: "Let's pick a product together with AI",
+          taskText:
+            'Step 1. Go to Amazon, Target, or any online store and find a product category you\'re actually considering buying (kitchen scales, a coffee maker, headphones, etc.).\n\nStep 2. Pick any two products in a similar price range. Open both pages.\n\nStep 3. Copy the name and key specs/description of both products.\n\nStep 4. Open an AI assistant and write:\n\n"Here are two [product type]. Help me choose which one to buy for home use. My priorities: [list what matters to you].\nOption 1: [name and specs]\nOption 2: [name and specs]"\n\nWhat did the AI recommend? Paste its answer or summarise it in your own words:',
+          taskPlaceholder: 'Which option did AI recommend and why?',
+          encouragement:
+            "👏 Brilliant! You've learned one of the most practical skills — using AI as a personal shopping advisor. No more reading hundreds of reviews: just paste the descriptions and get a clear recommendation.",
+          skill: 'Comparing products and making informed buying decisions with AI',
+          promptTemplate:
+            'Compare these two [product type] on [what matters to you]. Option 1: [description]. Option 2: [description]. Which should I choose for [your situation]?',
+        },
+        {
+          title: 'Work documents and spreadsheets',
+          shortTitle: 'Docs & Spreadsheets',
+          theory:
+            "AI is excellent at office tasks — writing emails, explaining formulas, helping you structure documents. No more hunting through forums for the right function — just describe what you need in plain words.\n\nImagine a colleague who knows Word, Excel and Google Sheets inside out — and is always happy to help without any sighing. That's what an AI assistant is for office work.\n\nYou can ask it to write a polite decline email, create a report, explain a formula, or turn a chaotic table into something organised — all in seconds.",
+          chatUser:
+            'I have a spreadsheet with my expenses in Excel. How do I write a formula that adds up only the amounts from March?',
+          chatAI:
+            'Use the SUMIFS function. If your dates are in column A and amounts are in column B, the formula looks like this:\n\n=SUMIFS(B:B, A:A, ">="&DATE(2024,3,1), A:A, "<="&DATE(2024,3,31))\n\nThis adds up all values from column B where the date in column A falls in March 2024. Swap in the correct year if needed.',
+          taskTitle: 'Solve a real work task',
+          taskText:
+            "Think of any task you've struggled with at work or at home recently:\n— You needed to write an email but didn't know how to start\n— You got stuck on a formula in Excel or Google Sheets\n— You needed to make a list, a plan, or a set of instructions\n\nDescribe the task to an AI assistant in your own words, as you'd explain it to a colleague.\n\nFor example: \"Help me write a polite email declining a meeting request because my schedule is already full this week\"\n\nType your request and paste the AI's response below:",
+          taskPlaceholder: "Paste the AI's response to your work task...",
+          encouragement:
+            "💼 Great work! AI can replace hours of searching through help articles and forums. You now know: any office task can simply be described in plain words — and you'll get a ready-made solution.",
+          skill: 'Handling office tasks — emails, formulas, documents — with AI',
+          promptTemplate:
+            'Help me [task: write an email / explain a formula / create a document]. Context: [your situation]. Format the response as [list / table / step-by-step instructions].',
+        },
+        {
+          title: 'Everyday life: cooking, health, home',
+          shortTitle: 'Daily life',
+          theory:
+            "AI is handy for everyday questions — a weekly meal plan, what to cook with leftovers, how to remove a stain, or what a term in your blood test results means. It gives you a personalised answer, not a list of links to browse.\n\nThis is especially useful for health questions: AI will explain an unfamiliar term from your test results in plain language. It won't replace your doctor, but it will help you arrive with the right questions.\n\nAnd as a kitchen assistant, it's unbeatable: tell it what's in your fridge, and you'll have a dinner idea in seconds.",
+          chatUser:
+            'What can I make with chicken breast, potatoes, onion, and sour cream? I want something simple for dinner for two',
+          chatAI:
+            "These ingredients make a great baked chicken with sour cream sauce. Here's a simple recipe:\n\n1. Cut the chicken into pieces and slice the potatoes.\n2. Layer in a baking dish: potatoes, sliced onion rings, chicken on top.\n3. Pour over the sauce: sour cream + garlic + salt + pepper.\n4. Bake for 40 minutes at 375°F (190°C).\n\nComes out juicy and satisfying. Enjoy!",
+          taskTitle: "Dinner from what's in your fridge",
+          taskText:
+            'Go to your kitchen (or think about what\'s in your fridge right now).\n\nList 4–6 ingredients you actually have at home right now.\n\nWrite to an AI assistant:\n\n"I have at home: [your ingredients]. Come up with a simple dinner recipe for [number] people. Cooking time — no more than 40 minutes."\n\nPaste the recipe the AI suggests:',
+          taskPlaceholder: 'What did AI suggest cooking?',
+          encouragement:
+            '🍽️ Wonderful! You now have a personal chef in your pocket. The same approach works for weekly meal planning, dietary advice, or health questions — just ask.',
+          skill: 'Planning meals, managing home tasks, and getting health guidance with AI',
+          promptTemplate:
+            'I have at home: [ingredients]. Come up with a simple [breakfast/lunch/dinner] recipe for [number] people. Cooking time — no more than [X] minutes.',
+        },
+        {
+          title: 'Travel and leisure planning',
+          shortTitle: 'Travel',
+          theory:
+            'Planning trips with AI is so much easier than trawling through travel forums. It takes your specific situation into account — travelling with kids or without, budget, interests, time of year — and gives you a concrete plan, not generic advice.\n\nNo more "visit the main square and try the local food". AI will tell you the best time to arrive to avoid queues, what children will enjoy, and where to eat without tourist-trap prices.\n\nThe same works for a regular evening in your town: ask it to suggest something different — and you\'ll be surprised how many ideas it comes up with.',
+          chatUser:
+            "We're planning a weekend trip to Washington DC with an 8-year-old. Mid-range budget. What should we see without standing in long queues?",
+          chatAI:
+            "Here's a great weekend itinerary in DC with a child:\n\nSaturday morning — National Zoo (free, arrive at 9am before it gets busy). Then the National Air and Space Museum — kids love it, and queues are short on weekend mornings.\n\nAfter lunch — walk the National Mall and see the Lincoln Memorial, it's easy and there are no queues.\n\nSunday — Natural History Museum first thing (the dinosaur hall is a highlight), then the Capitol grounds for photos.",
+          taskTitle: 'Plan a real trip or a fun evening',
+          taskText:
+            'Choose one of these:\n\nOption A — A trip: Think of somewhere you\'d like to go (a city, a country, or even just "somewhere warm this summer"). Write an AI request with your real conditions: who you\'re travelling with, rough budget, what you like and don\'t like.\n\nOption B — An evening: Write: "Come up with a Friday evening plan for me and my partner/friend in [your city]. We want something a bit different, budget around [amount] for two."\n\nWhat did AI suggest? Was there anything in the plan you actually liked?',
+          taskPlaceholder: 'Write what AI suggested and whether you liked the plan',
+          encouragement:
+            '✈️ Excellent! You now know how to plan trips and leisure time with your own personal assistant. Try it before your next weekend — the results might surprise you.',
+          skill: 'Planning travel and leisure activities tailored to your own needs with AI',
+          promptTemplate:
+            'Plan a trip to [place] for [duration] for [number and group]. Budget: [amount]. Interested in: [preferences]. Give me a day-by-day itinerary.',
+        },
+        {
+          title: 'How to write precise prompts',
+          shortTitle: 'Precise prompts',
+          theory:
+            'The quality of an AI\'s answer depends directly on how you ask. Think of AI like a new assistant: they\'re smart, but they don\'t know your habits or context yet. The more clearly you explain — the better they help.\n\nThere\'s a simple five-step formula: Role + Task + Context + Format + Example. Role — tell the AI who to be ("You are a nutritionist"). Task — clearly say what you need. Context — explain your situation and, crucially, why you need it: AI is good at working from explanations. Format — say how you want the answer structured. Example — show a sample of what you\'re looking for: this is one of the most powerful techniques.\n\nAnother key principle: if you want a detailed, high-quality answer — say so. AI doesn\'t assume ambition. Want a thorough plan? Write "give me a detailed plan". Want simple language? Write "explain simply".',
+          chatUser:
+            '❌ Weak prompt: "Help me with eating"\n\n✅ Strong prompt: "You are a nutritionist. Create a 5-day meal plan for weight loss for me. I\'m 52 years old, 180 lbs, and I don\'t eat fish or seafood. Format it as a table: Day | Breakfast | Lunch | Dinner. Example row: Monday | oatmeal with berries | chicken soup | roasted vegetables."',
+          chatAI:
+            "Here's your 5-day meal plan:\n\nMonday | Oatmeal with berries | Chicken vegetable soup | Roasted vegetables with cheese\nTuesday | Scrambled eggs with tomatoes | Buckwheat with chicken breast | Cottage cheese with herbs\nWednesday | Yoghurt + fruit | Vegetable soup | Braised cabbage with chicken\nThursday | Omelette with vegetables | Mushroom stir-fry | Salad + boiled chicken\nFriday | Pumpkin porridge | Chicken noodle soup | Courgette bake\n\nAll meals are seafood-free, approximately 1,600 kcal per day.",
+          taskTitle: 'Rewrite a weak prompt using the formula',
+          taskText:
+            'Here\'s a weak prompt: "Help me with work"\n\nRewrite it using all five steps:\n— Role: "You are an experienced [who]..."\n— Task: "Help me [exactly what to do]..."\n— Context: "[your situation and why it matters]..."\n— Format: "Give me the answer as [list / table / step-by-step instructions]..."\n— Example: "Here\'s an example of what I\'m looking for: [short sample]..."\n\nWrite your improved prompt in the field below. Then send it to an AI and compare the result with what the weak prompt would have given you:',
+          taskPlaceholder:
+            'Your prompt using the formula: Role + Task + Context + Format + Example',
+          encouragement:
+            "🏆 Outstanding! You've mastered the main secret of working with AI. Use this formula every time — and the AI will give you exactly what you need. Course complete!",
+          skill:
+            'Writing precise prompts using the Role + Task + Context + Format + Example formula',
+          promptTemplate:
+            'You are an experienced [role]. Help me [task]. Context: [situation and why it matters]. Format the response as [format]. Example: [short sample of desired output].',
+        },
+      ],
+    },
+  },
 };

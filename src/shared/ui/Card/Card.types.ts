@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 export interface CardProps {
-    children: ReactNode;
-    href?: string;
-    className?: string;
+  children: ReactNode;
+  href?: string;
+  className?: string;
 }

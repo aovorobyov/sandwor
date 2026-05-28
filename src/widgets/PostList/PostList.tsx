@@ -4,19 +4,19 @@ import type { PostListProps } from './PostList.types';
 import s from './PostList.module.css';
 
 export const PostList: FC<PostListProps> = (props) => {
-    const { posts } = props;
+  const { posts } = props;
 
-    if (posts.length === 0) {
-        return null;
-    }
+  if (posts.length === 0) {
+    return null;
+  }
 
-    return (
-        <ul className={s.grid}>
-            {posts.map((post) => (
-                <li key={post.slug}>
-                    <PostCard post={post} />
-                </li>
-            ))}
-        </ul>
-    );
+  return (
+    <ul className={s.grid}>
+      {posts.map((post) => (
+        <li key={post.slug}>
+          <PostCard post={post} />
+        </li>
+      ))}
+    </ul>
+  );
 };

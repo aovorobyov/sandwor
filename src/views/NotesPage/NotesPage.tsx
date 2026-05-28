@@ -4,15 +4,15 @@ import { MOCK_NOTES } from './mocks';
 import s from './NotesPage.module.css';
 
 export const NotesPage = async () => {
-    const t = await getTranslations();
+  const t = await getTranslations();
 
-    return (
-        <main className={s.root}>
-            <div className={s.container}>
-                <h1 className={s.title}>{t('notes.title')}</h1>
+  return (
+    <main className={s.root}>
+      <div className={s.container}>
+        <h1 className={s.title}>{t('notes.title')}</h1>
 
-                <NoteList notes={MOCK_NOTES} />
-            </div>
-        </main>
-    );
+        <NoteList notes={MOCK_NOTES} />
+      </div>
+    </main>
+  );
 };

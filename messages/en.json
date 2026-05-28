@@ -1,16 +1,16 @@
 {
   "nav": {
-    "home":     "Home",
-    "blog":     "Blog",
+    "home": "Home",
+    "blog": "Blog",
     "projects": "Projects",
-    "notes":    "Notes",
-    "contact":  "Contact",
-    "uikit":    "UI Kit",
-    "course":   "AI Course"
+    "notes": "Notes",
+    "contact": "Contact",
+    "uikit": "UI Kit",
+    "course": "AI Course"
   },
   "home": {
-    "name":         "Alexander Vorobyov",
-    "bio":          "Web developer. I work on frontend and occasionally write about code and tools.",
+    "name": "Alexander Vorobyov",
+    "bio": "Web developer. I work on frontend and occasionally write about code and tools.",
     "course-badge": "New course",
     "course-continue-badge": "Already started",
     "course-cta": "Start course →",
@@ -18,33 +18,33 @@
     "course-results-cta": "See results →",
     "course-progress": "{done} of {total} completed",
     "latest-posts": "Latest articles",
-    "all-posts":    "All articles →",
-    "projects":     "Projects",
+    "all-posts": "All articles →",
+    "projects": "Projects",
     "all-projects": "All projects →"
   },
   "blog": {
-    "title":      "Articles",
+    "title": "Articles",
     "filter-all": "All",
-    "read-more":  "Read →",
-    "min-read":   "{count} min read",
+    "read-more": "Read →",
+    "min-read": "{count} min read",
     "related-posts": "Related posts"
   },
   "projects": {
     "title": "Projects",
-    "open":  "Open →",
-    "view":  "View →",
-    "repo":  "Repository ↗",
-    "site":  "Visit site ↗"
+    "open": "Open →",
+    "view": "View →",
+    "repo": "Repository ↗",
+    "site": "Visit site ↗"
   },
   "notes": {
     "title": "Notes"
   },
   "contact": {
-    "title":   "Contact",
-    "name":    "Name",
-    "email":   "Email",
+    "title": "Contact",
+    "name": "Name",
+    "email": "Email",
     "message": "Message",
-    "submit":  "Send",
+    "submit": "Send",
     "success": "Message sent"
   },
   "footer": {

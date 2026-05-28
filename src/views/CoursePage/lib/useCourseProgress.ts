@@ -9,11 +9,11 @@ import { loadCourseState } from './courseStorage';
  * чтобы UI стартовал в дефолтном состоянии без mismatch.
  */
 export const useCourseProgress = (): CourseState | null => {
-    const [state, setState] = useState<CourseState | null>(null);
+  const [state, setState] = useState<CourseState | null>(null);
 
-    useEffect(() => {
-        setState(loadCourseState());
-    }, []);
+  useEffect(() => {
+    setState(loadCourseState());
+  }, []);
 
-    return state;
+  return state;
 };

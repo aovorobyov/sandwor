@@ -1,90 +1,92 @@
 .inner {
-    max-width: 640px;
-    width: 100%;
-    margin: 0 auto;
-    padding: var(--space-12) var(--container-pad);
-    text-align: center;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-12) var(--container-pad);
+  text-align: center;
 }
 
 .emoji {
-    font-size: 56px;
-    margin-bottom: var(--space-4);
-    line-height: 1;
+  font-size: 56px;
+  margin-bottom: var(--space-4);
+  line-height: 1;
 }
 
 .title {
-    font-size: var(--text-3xl);
-    font-weight: var(--weight-semibold);
-    line-height: var(--leading-tight);
-    margin-bottom: var(--space-4);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-4);
 }
 
 .sub {
-    font-size: var(--text-lg);
-    color: var(--text-muted);
-    line-height: var(--leading-normal);
-    margin-bottom: var(--space-8);
+  font-size: var(--text-lg);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+  margin-bottom: var(--space-8);
 }
 
 .divider {
-    height: 1px;
-    background: var(--border);
-    margin-bottom: var(--space-8);
+  height: 1px;
+  background: var(--border);
+  margin-bottom: var(--space-8);
 }
 
 .skillsHeading {
-    font-size: var(--text-base);
-    font-weight: var(--weight-semibold);
-    text-align: left;
-    margin-bottom: var(--space-4);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  text-align: left;
+  margin-bottom: var(--space-4);
 }
 
 .skillsList {
-    text-align: left;
-    margin-bottom: var(--space-8);
+  text-align: left;
+  margin-bottom: var(--space-8);
 }
 
 .skillItem {
-    display: flex;
-    align-items: flex-start;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+  display: flex;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
 }
 
 .skillItem + .skillItem {
-    margin-top: var(--space-3);
+  margin-top: var(--space-3);
 }
 
 .skillItemVisible {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .skillCheck {
-    font-size: var(--text-lg);
-    color: var(--accent);
-    font-weight: var(--weight-semibold);
-    line-height: 1.3;
-    flex-shrink: 0;
-    margin-right: var(--space-3);
+  font-size: var(--text-lg);
+  color: var(--accent);
+  font-weight: var(--weight-semibold);
+  line-height: 1.3;
+  flex-shrink: 0;
+  margin-right: var(--space-3);
 }
 
 .skillText {
-    font-size: var(--text-base);
-    line-height: var(--leading-normal);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
 }
 
 .actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .actions > * + * {
-    margin-top: var(--space-3);
+  margin-top: var(--space-3);
 }
 
 .actionBtn {
-    min-width: 220px;
+  min-width: 220px;
 }

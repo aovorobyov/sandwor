@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import s from './Header.module.css';
 
 export const LogoLink: FC = () => {

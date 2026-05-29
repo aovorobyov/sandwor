@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { getTranslations } from 'next-intl/server';
 import { ThemeToggle } from '@/features/theme-toggle';
 import { AccentToggle } from '@/features/accent-toggle';

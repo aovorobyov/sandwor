@@ -1,7 +1,7 @@
 'use client';
 
 import type { FC } from 'react';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/shared/lib/cn';
 import { useCourseProgress } from '@/views/CoursePage';

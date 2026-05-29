@@ -2,7 +2,7 @@
 
 import type { FC } from 'react';
 import { useState } from 'react';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { useTranslations } from 'next-intl';
 import { NAV_LINKS } from './config';
 import s from './MobileMenu.module.css';

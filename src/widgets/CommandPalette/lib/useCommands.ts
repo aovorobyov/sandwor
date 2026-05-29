@@ -7,6 +7,7 @@ import { cycleAccent } from '@/features/accent-toggle';
 import { useLocaleSwitch } from '@/features/locale-switch';
 import { locales, type Locale } from '@/i18n-routing';
 import type { PaletteCommand } from '../CommandPalette.types';
+import type { PaletteSearchPost } from './paletteApi';
 
 interface NavLink {
   id: string;
@@ -29,7 +30,7 @@ const LOCALE_LABELS: Record<Locale, string> = {
   en: 'English',
 };
 
-export const useCommands = (): PaletteCommand[] => {
+export const useCommands = (posts: PaletteSearchPost[] = []): PaletteCommand[] => {
   const t = useTranslations();
   const router = useRouter();
   const { setTheme } = useTheme();
@@ -42,6 +43,17 @@ export const useCommands = (): PaletteCommand[] => {
       group: 'navigation',
       icon: '→',
       onSelect: () => router.push(href),
+    };
+  });
+
+  const postCommands: PaletteCommand[] = posts.map((post) => {
+    return {
+      id: `post-${post.slug}`,
+      label: post.title,
+      group: 'post',
+      icon: '✎',
+      keywords: `post статья ${post.tag}`,
+      onSelect: () => router.push(`/blog/${post.slug}`),
     };
   });
 
@@ -96,5 +108,5 @@ export const useCommands = (): PaletteCommand[] => {
     onSelect: () => cycleAccent(),
   };
 
-  return [...navCommands, ...themeCommands, ...localeCommands, accentCommand];
+  return [...navCommands, ...postCommands, ...themeCommands, ...localeCommands, accentCommand];
 };

@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { ThemeToggle } from '@/features/theme-toggle';
 import { AccentToggle } from '@/features/accent-toggle';
 import { LocaleSwitch } from '@/features/locale-switch';
+import { PaletteTrigger } from '@/widgets/CommandPalette';
 import { NAV_LINKS } from './config';
 import { MobileMenu } from './MobileMenu';
 import { LogoLink } from './LogoLink';
@@ -25,6 +26,9 @@ export const Header = async () => {
         </nav>
 
         <div className={s.controls}>
+          <span className={s.controlGap}>
+            <PaletteTrigger />
+          </span>
           <AccentToggle />
           <span className={s.controlGap}>
             <ThemeToggle />

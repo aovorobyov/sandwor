@@ -63,10 +63,13 @@
     "hintClose": "close",
     "group": {
       "navigation": "Navigation",
+      "post": "Articles",
       "theme": "Theme",
       "locale": "Language",
       "accent": "Appearance"
     },
+    "triggerLabel": "Search",
+    "triggerAria": "Open command palette",
     "themeLight": "Light theme",
     "themeDark": "Dark theme",
     "themeSystem": "System theme",

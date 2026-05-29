@@ -11,6 +11,8 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/shared/lib/cn';
 import type { PaletteCommand } from './CommandPalette.types';
 import { useCommands } from './lib/useCommands';
+import { fetchPalettePosts, type PaletteSearchPost } from './lib/paletteApi';
+import { PALETTE_OPEN_EVENT } from './lib/paletteEvents';
 import s from './CommandPalette.module.css';
 
 const COMMAND_KEY = 'k';
@@ -26,7 +28,9 @@ const matchesQuery = (cmd: PaletteCommand, query: string): boolean => {
 
 export const CommandPalette: FC = () => {
   const t = useTranslations('palette');
-  const commands = useCommands();
+  const [posts, setPosts] = useState<PaletteSearchPost[]>([]);
+  const [hasFetchedPosts, setHasFetchedPosts] = useState(false);
+  const commands = useCommands(posts);
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -53,9 +57,17 @@ export const CommandPalette: FC = () => {
       }
     };
 
+    const handleOpenRequest = () => {
+      setIsOpen(true);
+      setQuery('');
+      setSelectedIndex(0);
+    };
+
     document.addEventListener('keydown', handleGlobalKey);
+    document.addEventListener(PALETTE_OPEN_EVENT, handleOpenRequest);
     return () => {
       document.removeEventListener('keydown', handleGlobalKey);
+      document.removeEventListener(PALETTE_OPEN_EVENT, handleOpenRequest);
     };
   }, []);
 
@@ -64,6 +76,15 @@ export const CommandPalette: FC = () => {
       inputRef.current?.focus();
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen || hasFetchedPosts) {
+      return;
+    }
+
+    setHasFetchedPosts(true);
+    fetchPalettePosts().then(setPosts);
+  }, [isOpen, hasFetchedPosts]);
 
   useEffect(() => {
     setSelectedIndex((prev) => {

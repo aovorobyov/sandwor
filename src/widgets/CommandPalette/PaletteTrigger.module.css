@@ -1,0 +1,38 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 6px 8px 6px 10px;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font);
+}
+
+.root:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.icon {
+  margin-right: 8px;
+  font-size: var(--text-sm);
+  line-height: 1;
+}
+
+.label {
+  margin-right: 12px;
+}
+
+.kbd {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1px 6px;
+  font-size: 10px;
+  font-family: var(--font);
+  color: var(--text-muted);
+}

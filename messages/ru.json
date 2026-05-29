@@ -63,10 +63,13 @@
     "hintClose": "закрыть",
     "group": {
       "navigation": "Навигация",
+      "post": "Статьи",
       "theme": "Тема",
       "locale": "Язык",
       "accent": "Оформление"
     },
+    "triggerLabel": "Поиск",
+    "triggerAria": "Открыть командную палитру",
     "themeLight": "Светлая тема",
     "themeDark": "Тёмная тема",
     "themeSystem": "Системная тема",

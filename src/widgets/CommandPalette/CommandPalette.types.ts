@@ -1,4 +1,4 @@
-export type PaletteCommandGroup = 'navigation' | 'theme' | 'locale' | 'accent';
+export type PaletteCommandGroup = 'navigation' | 'post' | 'theme' | 'locale' | 'accent';
 
 export interface PaletteCommand {
   id: string;

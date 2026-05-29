@@ -12,9 +12,16 @@ const config: Config = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^messages/(.*)$': '<rootDir>/messages/$1',
+    // ESM-only пакет — Jest без транспилера падает на его импортах. Подменяем стубом.
+    '^next-view-transitions$': '<rootDir>/src/__mocks__/next-view-transitions.tsx',
   },
   testMatch: ['**/__tests__/**/*.test.{ts,tsx}'],
-  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts', '!src/**/index.ts'],
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/**/index.ts',
+    '!src/__mocks__/**',
+  ],
 };
 
 export default createJestConfig(config);

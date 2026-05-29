@@ -7,11 +7,12 @@ export const NoteItem: FC<NoteItemProps> = (props) => {
   const { note } = props;
   const locale = useLocale();
 
-  const formattedDate = new Date(note.date).toLocaleDateString(locale, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
+  /** Релизные заметки (с version) пишем по месяцам — это changelog, а не дневник. */
+  const dateOptions: Intl.DateTimeFormatOptions = note.version
+    ? { year: 'numeric', month: 'long', timeZone: 'UTC' }
+    : { year: 'numeric', month: 'short', day: 'numeric' };
+
+  const formattedDate = new Date(note.date).toLocaleDateString(locale, dateOptions);
 
   return (
     <article className={s.root}>
@@ -19,9 +20,13 @@ export const NoteItem: FC<NoteItemProps> = (props) => {
 
       <div className={s.separator} />
 
-      <time className={s.date} dateTime={note.date}>
-        {formattedDate}
-      </time>
+      <div className={s.meta}>
+        <time className={s.date} dateTime={note.date}>
+          {formattedDate}
+        </time>
+
+        {note.version && <span className={s.version}>v{note.version}</span>}
+      </div>
     </article>
   );
 };

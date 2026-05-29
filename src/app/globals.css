@@ -160,12 +160,22 @@ ul {
 
 /* ─── View Transitions API ────────────────────────────────── */
 
-/* Мягкий crossfade с лёгким slide-up для нового контента. Браузеры без поддержки
-   (старый Firefox/Safari < 18) просто получат мгновенную смену без анимации. */
+/* Чистый crossfade без translateY — иначе весь root (включая Header/Footer)
+   сдвигается на 8px и читается как «скачок». Header и Footer получают свои
+   view-transition-name, чтобы их снимки обрабатывались независимо: если они
+   между страницами не меняются — анимации не видно вовсе. */
+header {
+  view-transition-name: site-header;
+}
+
+footer {
+  view-transition-name: site-footer;
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 220ms;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-duration: 180ms;
+  animation-timing-function: ease;
 }
 
 ::view-transition-old(root) {
@@ -173,7 +183,7 @@ ul {
 }
 
 ::view-transition-new(root) {
-  animation-name: vt-fade-up;
+  animation-name: vt-fade-in;
 }
 
 @keyframes vt-fade-out {
@@ -182,11 +192,18 @@ ul {
   }
 }
 
-@keyframes vt-fade-up {
+@keyframes vt-fade-in {
   from {
     opacity: 0;
-    transform: translateY(8px);
   }
+}
+
+/* Header/Footer не должны анимироваться — они одинаковы между страницами. */
+::view-transition-old(site-header),
+::view-transition-new(site-header),
+::view-transition-old(site-footer),
+::view-transition-new(site-footer) {
+  animation: none;
 }
 
 /* Уважаем prefers-reduced-motion — никаких анимаций, просто мгновенная смена. */

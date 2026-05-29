@@ -3,7 +3,7 @@
     "home": "Home",
     "blog": "Blog",
     "projects": "Projects",
-    "notes": "Notes",
+    "news": "News",
     "contact": "Contact",
     "uikit": "UI Kit",
     "course": "AI Course"
@@ -36,8 +36,31 @@
     "repo": "Repository ↗",
     "site": "Visit site ↗"
   },
-  "notes": {
-    "title": "Notes"
+  "news": {
+    "title": "News",
+    "subtitle": "Changelog of the site — what was added, fixed and improved across versions.",
+    "entries": {
+      "v1-7-0": "News section replaces Notes. Curated release log with semver versioning. The Note entity gains an optional version field; NoteItem renders a badge next to the date. 301 redirect /notes → /news preserves the SEO weight of the old page. The section is added to the main NAV_LINKS — previously /notes was reachable only via direct URL.",
+      "v1-6-2": "Bundle analyzer and JS budget in CI. @next/bundle-analyzer powers an interactive treemap via `npm run analyze`. A 50-line custom script scripts/check-bundle-size.mjs sums gzipped sizes of all chunks in .next/static/chunks and fails CI above 350 KB. Current usage — 273 KB (78% of budget).",
+      "v1-6-1": "Engineering hygiene. Pre-commit hook via husky + lint-staged: ESLint --fix and Prettier --write on staged files, plus full tsc --noEmit. GitHub Actions CI: lint, typecheck, jest, build on every push to main and every PR. concurrency cancel-in-progress, npm cache, HUSKY=0 for CI. Dead MOCK_POSTS removed from BlogPage/HomePage.",
+      "v1-6-0": "View Transitions API and animated burger. Smooth crossfade with slide-up between pages via next-view-transitions — native browser API, ~2 KB gzip, zero JS overhead. All next/link replaced with the library's patched Link. Mobile burger: 3 bars morph into × over 240ms with cubic-bezier easing; the button itself stands out with bg/border. Respects prefers-reduced-motion.",
+      "v1-5-3": "Palette ⌘K expanded. Article search via a new /api/posts/list endpoint — slim projection (slug, title, tag) with s-maxage=3600 cache. Lazy fetch on first open — zero requests until click, then cached in state. Visible «Search ⌘K» button in the header for discoverability. Decoupled via CustomEvent('palette:open') — any component can open the palette in one line.",
+      "v1-5-2": "Mobile course layout. CourseTopbar docks under the Header (top: 56px) instead of clashing with it. On mobile — two flex rows: course title + Reset on top, progress bar below. Lesson sidebar switched to a column — the previous 2-column grid wrapped «Documents & Excel» across 2 lines. Duplicate «Lesson N of M» removed — kept only in LessonContent.",
+      "v1-5-1": "Sticky reading progress bar. Strip on top of the article appears after 240px scroll: «N min read · date» + 2px progress fill in --accent, scaleX-animated by document scroll. Scroll handler throttled via requestAnimationFrame — react batches, ~60fps without long tasks. 56px tall to align flush under the Header; prefers-reduced-motion disables animation.",
+      "v1-5-0": "Command palette ⌘K. Custom implementation without cmdk (~140 lines): substring filter over label + keywords, ↑↓ Enter navigation, focus management, click-outside, Esc. Commands: 7 navigation items, theme (light/dark/system), locale switch, accent cycle. Along the way extracted shared helpers useLocaleSwitch and cycleAccent — header toggles and the palette now share one source of truth.",
+      "v1-4-5": "Course: reset progress and per-lesson deep-link. «Start over» button in the topbar with window.confirm, clears localStorage and the query parameter. URL `?lesson=N` (1-indexed) opens the specified lesson on landing — bypasses unlock to allow sharing any lesson. «Share lesson» — clipboard copy via navigator.clipboard with a 2-second ✓ highlight.",
+      "v1-4-4": "Related posts under articles. getRelatedPosts(slug, limit) algorithm: same-tag posts first (newest first), then fill from the latest of the rest until reaching limit. Reuses the existing PostList widget with a header divider. Hidden if there's only one post on the blog.",
+      "v1-4-3": "SEO: real sitemap + hreflang. Previously sitemap.xml emitted MOCK_POSTS — Google was crawling non-existent URLs, indexing was broken. Now — real posts via getTelegramPosts, projects from projects.json, courses from COURSES_REGISTRY. Hreflang alternates for ru/en on every entry declare multilingual availability. Proper priority and changeFrequency.",
+      "v1-4-2": "RSS/Atom feed. /feed.xml endpoint emits valid Atom 1.0 — reuses getTelegramPosts, manual XML escaping (no libs). ‹head› on every page carries a ‹link rel=\"alternate\" type=\"application/atom+xml\"› tag for auto-discovery (Feedly, Inoreader, Chrome extensions light up). «RSS» link in the footer. Edge cache s-maxage=3600, stale-while-revalidate=86400.",
+      "v1-4-1": "Course progress in the home banner. Returning users see «Continue (3 of 6) →» instead of «Start course», lesson dots highlighted ✓ for completed ones. localStorage key and loadCourseState extracted to a shared lib; useCourseProgress hook reads them in a client overlay on top of the server banner. SSR renders the default to avoid hydration mismatch.",
+      "v1-4-0": "SEO foundation: OG images and JSON-LD. Edge route /api/og renders 1200×630 PNG via next/og (aka @vercel/og) — dynamic cover with title, tag, and brand. Wired up through generateMetadata in openGraph.images + twitter card summary_large_image. JSON-LD structured data: Person + WebSite on home, BlogPosting on each article, Course on the course — enables rich snippets in Google and context for AI crawlers.",
+      "v1-3-0": "AI course «AI — Your New Assistant». 6 interactive lessons with theory, a chat example, and a hands-on task. Three-screen state machine (landing → course → completion) + localStorage persistence. Name registration for personalised completion. PDF cheat sheet from results — through window.print() with print styles. CourseSidebar with unlocking logic based on completed lessons.",
+      "v1-2-0": "«Projects» section. Cards with localised titles and descriptions (ru/en), tags, optional links to repo and live site. Source — entities/project with JSON data. Dedicated page per project (/projects/[slug]) with a detailed description and cover image.",
+      "v1-1-0": "Blog via Telegram channel. Posts auto-parsed from the public page t.me/s/‹channel› via node-html-parser. Extraction: bold title from ‹b›...‹/b› tags, cover from background-image style on .tgme_widget_message_photo_wrap, tags from hashtags, read time from word count. React.cache() deduplicates fetch within a single render. Next Data Cache (revalidate=3600) + webhook /api/telegram/webhook with revalidateTag on new posts.",
+      "v1-0-2": "Dynamic accent color. Header button cycles the --accent CSS variable across a 10-color palette. Selection logic prevents consecutive repeats via a module-level lastColor memo. After the ⌘K palette landed — extracted as cycleAccent() in features/accent-toggle/lib, reused by both the toggle and the palette command.",
+      "v1-0-1": "UI Kit and design system. /uikit showcase with tokens (colors, typography, spacing, radii) and base components: Button with three variants (primary/secondary/ghost), Input, Textarea, Badge, Card, ProgressBar. Custom SVG icon set with CSS mask for currentColor tinting. Mobile-first media queries, dark/light themes via the data-theme attribute.",
+      "v1-0-0": "sandwor.com launched. Stack: Next.js 14 + App Router, TypeScript strict, Feature-Sliced Design (app → views → widgets → features → entities → shared). i18n on next-intl with cookie-based locale switching (localePrefix: 'never'). Dark/light theme via next-themes. Inter Variable font. Deployed on Vercel."
+    }
   },
   "contact": {
     "title": "Contact",

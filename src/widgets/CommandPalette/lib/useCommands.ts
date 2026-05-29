@@ -19,7 +19,7 @@ const NAV_LINKS: NavLink[] = [
   { id: 'nav-home', href: '/', labelKey: 'nav.home' },
   { id: 'nav-blog', href: '/blog', labelKey: 'nav.blog' },
   { id: 'nav-projects', href: '/projects', labelKey: 'nav.projects' },
-  { id: 'nav-notes', href: '/notes', labelKey: 'nav.notes' },
+  { id: 'nav-news', href: '/news', labelKey: 'nav.news' },
   { id: 'nav-course', href: '/course/ai-basics', labelKey: 'nav.course' },
   { id: 'nav-contact', href: '/contact', labelKey: 'nav.contact' },
   { id: 'nav-uikit', href: '/uikit', labelKey: 'nav.uikit' },

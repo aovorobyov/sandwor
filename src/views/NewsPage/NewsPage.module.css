@@ -11,5 +11,12 @@
 .title {
   font-size: var(--text-3xl);
   font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-3);
+}
+
+.subtitle {
+  font-size: var(--text-base);
+  color: var(--text-muted);
   margin-bottom: var(--space-8);
+  max-width: 540px;
 }

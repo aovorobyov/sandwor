@@ -3,10 +3,10 @@
     "home": "Главная",
     "blog": "Блог",
     "projects": "Проекты",
-    "notes": "Заметки",
+    "news": "Новости",
     "contact": "Контакты",
     "uikit": "UI Kit",
-    "course": "Курс по ИИ"
+    "course": "Курс ИИ"
   },
   "home": {
     "name": "Александр Воробьев",
@@ -36,8 +36,31 @@
     "repo": "Репозиторий ↗",
     "site": "Перейти на сайт ↗"
   },
-  "notes": {
-    "title": "Заметки"
+  "news": {
+    "title": "Новости",
+    "subtitle": "Журнал обновлений сайта: что было добавлено, починено и улучшено по версиям.",
+    "entries": {
+      "v1-7-0": "Раздел News вместо Notes. Журнал релизов с semver-версионированием. Сущность Note расширена опциональным полем version, NoteItem рендерит бейдж справа от даты. 301-редирект /notes → /news сохраняет SEO-вес старой страницы. Раздел добавлен в основную навигацию через NAV_LINKS — раньше /notes был только по прямой ссылке.",
+      "v1-6-2": "Bundle analyzer и бюджет JS в CI. @next/bundle-analyzer даёт интерактивный treemap через `npm run analyze`. Свой 50-строчный скрипт scripts/check-bundle-size.mjs суммирует gzipped-размер всех чанков в .next/static/chunks и фейлит CI при превышении 350 KB. Текущее использование — 273 KB (78% бюджета).",
+      "v1-6-1": "Engineering hygiene. Pre-commit hook через husky + lint-staged: ESLint --fix и Prettier --write на staged-файлах, плюс полный tsc --noEmit. GitHub Actions CI: lint, typecheck, jest, build на каждый push в main и каждый PR. concurrency cancel-in-progress, кеш npm, HUSKY=0 для CI. Удалены мёртвые MOCK_POSTS из BlogPage/HomePage.",
+      "v1-6-0": "View Transitions API и анимированный бургер. Плавный crossfade со slide-up между страницами через next-view-transitions — нативный браузерный API, ~2 KB gzip, ноль JS-overhead. Все next/link заменены на патченый Link библиотеки. Бургер на мобиле: 3 полосы морфят в крест × за 240ms с cubic-bezier easing, сама кнопка обособлена фоном/бордером. prefers-reduced-motion respect.",
+      "v1-5-3": "Палитра ⌘K расширена. Поиск по статьям через новый эндпоинт /api/posts/list — slim-проекция (slug, title, tag) с кешем s-maxage=3600. Lazy fetch на первом открытии — нулевые запросы до клика, потом кешируется в state. Видимая «Поиск ⌘K» кнопка в шапке для discoverability. Декаплинг через CustomEvent('palette:open') — любой компонент может открыть палитру одной строкой.",
+      "v1-5-2": "Мобильная вёрстка курса. CourseTopbar стыкуется под Header'ом (top: 56px), не торчит из-под него. На мобиле — две flex-строки: название курса + Reset сверху, progress bar снизу. Сайдбар уроков переведён в колонку — раньше 2-колоночная сетка ломала «Документы и Excel» переносом на 2 строки. Убран дубль «Урок N из M» — остался только в LessonContent.",
+      "v1-5-1": "Sticky reading progress bar. Полоса сверху статьи появляется после 240px скролла: «N мин чтения · дата» + 2px полоска прогресса в --accent цвете, scaleX-анимация по скроллу документа. Scroll-handler throttled через requestAnimationFrame — батчится react'ом, ~60fps без long tasks. Высота 56px ровно под Header'ом, prefers-reduced-motion отключает анимацию.",
+      "v1-5-0": "Командная палитра ⌘K. Своя реализация без cmdk (~140 строк): substring-фильтр по label + keywords, ↑↓ Enter навигация, фокус-менеджмент, click-outside, Esc. Команды: 7 навигационных пунктов, тема (light/dark/system), смена локали, цикл accent. По пути вынесены общие хелперы useLocaleSwitch и cycleAccent — теперь и тогглы шапки, и палитра используют одну логику.",
+      "v1-4-5": "Курс: reset прогресса и deep-link на урок. Кнопка «Начать заново» в топбаре с подтверждением через window.confirm, чистит localStorage и query-параметр. URL `?lesson=N` (1-индексация) открывает указанный урок при заходе — игнорирует lock, чтобы можно было расшарить любую страницу. «Поделиться уроком» — кнопка копирования URL в буфер через navigator.clipboard, ✓-подсветка на 2 сек.",
+      "v1-4-4": "Похожие посты под статьёй. Алгоритм getRelatedPosts(slug, limit): сначала посты с тем же тегом (новейшие первыми), потом добиваем самыми свежими из остальных, пока не наберём limit. Реюзит существующий PostList виджет с разделителем-заголовком. Скрывается, если на блоге всего один пост.",
+      "v1-4-3": "SEO: реальный sitemap + hreflang. До правки sitemap.xml отдавал MOCK_POSTS — Google ходил на несуществующие URL, индексация ломалась. Теперь — реальные посты через getTelegramPosts, проекты из projects.json, курсы из COURSES_REGISTRY. Hreflang-alternates для ru/en на каждой записи декларируют мультиязычность. Правильные priority и changeFrequency.",
+      "v1-4-2": "RSS/Atom фид. Эндпоинт /feed.xml отдаёт валидный Atom 1.0 — переиспользует getTelegramPosts, XML-эскейп вручную (без либ). В ‹head› каждой страницы — тег ‹link rel=\"alternate\" type=\"application/atom+xml\"› для автодискавери (Feedly, Inoreader, Chrome-расширения подсвечиваются). Ссылка «RSS» в футере. Edge-кеш s-maxage=3600, stale-while-revalidate=86400.",
+      "v1-4-1": "Прогресс курса в баннере на главной. Возвращающийся пользователь видит «Продолжить (3 из 6) →» вместо «Начать курс», точки уроков подсвечены ✓ по выполненным. localStorage-ключ и loadCourseState вынесены в общий lib, хук useCourseProgress читает их в client-overlay поверх server-баннера. SSR рендерит дефолт, чтобы не было hydration mismatch.",
+      "v1-4-0": "SEO-фундамент: OG-картинки и JSON-LD. Edge-роут /api/og рендерит 1200×630 PNG через next/og (он же @vercel/og) — динамическая обложка с заголовком, тегом и брендом. Подключено через generateMetadata в openGraph.images + twitter card summary_large_image. JSON-LD структурированные данные: Person + WebSite на главной, BlogPosting на каждой статье, Course на курсе — даёт rich-сниппеты в Google и контекст для ИИ-краулеров.",
+      "v1-3-0": "AI-курс «ИИ — твой новый помощник». 6 интерактивных уроков с теорией, чат-примером и практическим заданием. State-машина из трёх экранов (landing → course → completion) + персистенция в localStorage. Регистрация по имени для персонализации завершения. PDF-шпаргалка по результатам — через window.print() с print-styles. CourseSidebar с unlocking-логикой по выполненным урокам.",
+      "v1-2-0": "Раздел «Проекты». Карточки с локализованными названиями и описаниями (ru/en), тегами, опциональными ссылками на репозиторий и live-сайт. Источник — entities/project с JSON-данными. Отдельная страница каждого проекта (/projects/[slug]) с подробным описанием и обложкой.",
+      "v1-1-0": "Блог через Telegram-канал. Посты автоматически парсятся с публичной страницы t.me/s/‹channel› через node-html-parser. Извлечение: жирный заголовок из тегов ‹b›...‹/b›, обложка из background-image-стиля .tgme_widget_message_photo_wrap, теги из хештегов, время чтения из количества слов. React.cache() дедуплицирует fetch в рамках одного рендера. Next Data Cache (revalidate=3600) + webhook /api/telegram/webhook с revalidateTag при новом посте.",
+      "v1-0-2": "Динамический акцентный цвет. Кнопка в шапке циклит CSS-переменную --accent по 10-цветной палитре. Логика выбора исключает повтор подряд через module-level lastColor memo. После реализации палитры ⌘K — вынесена как cycleAccent() в features/accent-toggle/lib, переиспользуется и в тоггле, и в команде палитры.",
+      "v1-0-1": "UI Kit и дизайн-система. Витрина /uikit с токенами (цвета, типографика, отступы, радиусы) и базовыми компонентами: Button с тремя вариантами (primary/secondary/ghost), Input, Textarea, Badge, Card, ProgressBar. Кастомный SVG-набор иконок с CSS-mask для перекрашивания через currentColor. Mobile-first медиа-запросы, dark/light темы через data-theme атрибут.",
+      "v1-0-0": "Запуск sandwor.com. Стек: Next.js 14 + App Router, TypeScript strict, Feature-Sliced Design (app → views → widgets → features → entities → shared). i18n на next-intl с переключением локали через куку (localePrefix: 'never'). Тёмная/светлая тема через next-themes. Шрифт Inter Variable. Деплой на Vercel."
+    }
   },
   "contact": {
     "title": "Контакты",

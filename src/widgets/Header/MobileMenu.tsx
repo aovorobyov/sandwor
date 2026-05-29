@@ -4,6 +4,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { Link } from 'next-view-transitions';
 import { useTranslations } from 'next-intl';
+import { cn } from '@/shared/lib/cn';
 import { NAV_LINKS } from './config';
 import s from './MobileMenu.module.css';
 
@@ -22,14 +23,16 @@ export const MobileMenu: FC = () => {
   return (
     <>
       <button
-        className={s.toggle}
+        className={cn(s.toggle, isOpen && s.toggleOpen)}
         onClick={handleToggle}
         aria-expanded={isOpen}
         aria-label="Toggle navigation"
       >
-        <span className={s.bar} />
-        <span className={s.bar} />
-        <span className={s.bar} />
+        <span className={cn(s.bar, s.barTop, isOpen && s.barTopOpen)} />
+
+        <span className={cn(s.bar, s.barMiddle, isOpen && s.barMiddleOpen)} />
+
+        <span className={cn(s.bar, s.barBottom, isOpen && s.barBottomOpen)} />
       </button>
 
       {isOpen && (

@@ -2,7 +2,18 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  max-width: 480px;
+}
+
+/* Honeypot: невидимая ловушка для ботов. Люди поле не видят и не заполняют. */
+.honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .textareaWrapper {
@@ -40,8 +51,26 @@
 }
 
 .success {
-  font-size: var(--text-base);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.successIcon {
   color: var(--accent);
+}
+
+.successText {
+  font-size: var(--text-lg);
   font-weight: var(--weight-medium);
-  padding: var(--space-4) 0;
+  color: var(--text);
+}
+
+.error {
+  font-size: var(--text-sm);
+  color: var(--danger);
 }

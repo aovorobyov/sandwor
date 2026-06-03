@@ -44,9 +44,15 @@ npm run lint
 TELEGRAM_CHANNEL_USERNAME=nafrontebezperemen   # без @
 TELEGRAM_BOT_TOKEN=<токен от @BotFather>
 TELEGRAM_WEBHOOK_SECRET=<случайная строка>
+TELEGRAM_CONTACT_CHAT_ID=<chat_id для формы контактов>
 ```
 
 На Vercel добавь те же переменные в **Settings → Environment Variables**.
+
+`TELEGRAM_CONTACT_CHAT_ID` — куда бот шлёт сообщения из формы на `/contact`.
+Чтобы узнать свой `chat_id`: напиши боту любое сообщение, открой
+`https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/getUpdates` и возьми
+`result[].message.chat.id`. Без этой переменной форма вернёт ошибку (бот молчит).
 
 ---
 

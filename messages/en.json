@@ -40,6 +40,7 @@
     "title": "News",
     "subtitle": "Changelog of the site — what was added, fixed and improved across versions.",
     "entries": {
+      "v1-8-0": "The Contact page got a full redesign. A hero with an accent «Email me» CTA, channel icons (Telegram, GitHub, Instagram, VK) as inline SVGs tinted via currentColor, and a split layout: intro on the left, a form on a fixed-height card panel on the right with a success screen (checkmark + «send another»). The form is now live — messages are delivered to a Telegram bot through a server route /api/contact (Bot API sendMessage, HTML escaping, field validation). No-CAPTCHA anti-spam: a honeypot field, a time-trap against instant submits, and a link cap, every hit is silently dropped. Along the way the middleware matcher was fixed: next-intl was intercepting /api/* and dropping every API route to 404.",
       "v1-7-0": "News section replaces Notes. Curated release log with semver versioning. The Note entity gains an optional version field; NoteItem renders a badge next to the date. 301 redirect /notes → /news preserves the SEO weight of the old page. The section is added to the main NAV_LINKS — previously /notes was reachable only via direct URL.",
       "v1-6-2": "Bundle analyzer and JS budget in CI. @next/bundle-analyzer powers an interactive treemap via `npm run analyze`. A 50-line custom script scripts/check-bundle-size.mjs sums gzipped sizes of all chunks in .next/static/chunks and fails CI above 350 KB. Current usage — 273 KB (78% of budget).",
       "v1-6-1": "Engineering hygiene. Pre-commit hook via husky + lint-staged: ESLint --fix and Prettier --write on staged files, plus full tsc --noEmit. GitHub Actions CI: lint, typecheck, jest, build on every push to main and every PR. concurrency cancel-in-progress, npm cache, HUSKY=0 for CI. Dead MOCK_POSTS removed from BlogPage/HomePage.",
@@ -64,11 +65,16 @@
   },
   "contact": {
     "title": "Contact",
+    "subtitle": "Open to projects, collaboration, and a good conversation. I usually reply within a day.",
+    "cta": "Email me",
     "name": "Name",
     "email": "Email",
     "message": "Message",
     "submit": "Send",
-    "success": "Message sent"
+    "sending": "Sending…",
+    "success": "Message sent",
+    "again": "Send another message",
+    "error": "Couldn't send your message. Please try again later or email me."
   },
   "footer": {
     "rights": "© {year} Alexander Vorobyov"

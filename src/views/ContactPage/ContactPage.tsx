@@ -1,4 +1,8 @@
 import { getTranslations } from 'next-intl/server';
+import { ContactForm } from '@/features/contact-form';
+import { Button } from '@/shared/ui/Button';
+import { SocialIcon } from './SocialIcon';
+import { CONTACT_CHANNELS, PRIMARY_EMAIL } from './contacts';
 import s from './ContactPage.module.css';
 
 export const ContactPage = async () => {
@@ -9,57 +13,38 @@ export const ContactPage = async () => {
       <div className={s.container}>
         <h1 className={s.title}>{t('contact.title')}</h1>
 
-        <ul className={s.linkList}>
-          <li>
-            <a
-              href="https://github.com/aovorobyov"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={s.link}
-            >
-              GitHub
-            </a>
-          </li>
+        <div className={s.layout}>
+          <div className={s.intro}>
+            <p className={s.subtitle}>{t('contact.subtitle')}</p>
 
-          <li>
-            <a
-              href="https://www.instagram.com/sandwor/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={s.link}
-            >
-              Instagram
-            </a>
-          </li>
+            <Button href={PRIMARY_EMAIL} variant="primary" className={s.cta}>
+              <SocialIcon name="mail" />
+              {t('contact.cta')}
+            </Button>
 
-          <li>
-            <a
-              href="https://t.me/sandwor"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={s.link}
-            >
-              Telegram
-            </a>
-          </li>
+            <ul className={s.socials}>
+              {CONTACT_CHANNELS.map(({ id, label, href }) => {
+                return (
+                  <li key={id}>
+                    <a
+                      href={href}
+                      className={s.social}
+                      aria-label={label}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <SocialIcon name={id} />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
 
-          <li>
-            <a href="mailto:aovorobyov@mail.ru" className={s.link}>
-              Mail
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="https://vk.com/sandwor"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={s.link}
-            >
-              VK
-            </a>
-          </li>
-        </ul>
+          <div className={s.formPanel}>
+            <ContactForm />
+          </div>
+        </div>
       </div>
     </main>
   );

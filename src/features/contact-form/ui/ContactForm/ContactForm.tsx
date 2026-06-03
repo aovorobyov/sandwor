@@ -1,49 +1,79 @@
 'use client';
 
-import type { FC, FormEvent } from 'react';
-import { useState } from 'react';
+import type { ChangeEvent, FC, FormEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
-import type { FormState } from './ContactForm.types';
+import { useContactForm } from './useContactForm';
 import s from './ContactForm.module.css';
-
-const sendMessage = async (data: FormState): Promise<void> => {
-  console.warn('sendMessage (stub):', data);
-};
 
 export const ContactForm: FC = () => {
   const t = useTranslations();
-  const [form, setForm] = useState<FormState>({ name: '', email: '', message: '' });
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isPending, setIsPending] = useState(false);
+  const { form, status, change, submit, reset } = useContactForm();
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsPending(true);
-    await sendMessage(form);
-    setIsSubmitted(true);
-    setIsPending(false);
+    const honeypot = new FormData(e.currentTarget).get('company');
+    void submit(typeof honeypot === 'string' ? honeypot : '');
   };
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({ ...prev, name: e.target.value }));
+  const handleReset = () => {
+    reset();
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({ ...prev, email: e.target.value }));
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    change('name', e.target.value);
   };
 
-  const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, message: e.target.value }));
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    change('email', e.target.value);
   };
 
-  if (isSubmitted) {
-    return <p className={s.success}>{t('contact.success')}</p>;
+  const handleMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    change('message', e.target.value);
+  };
+
+  if (status === 'success') {
+    return (
+      <div className={s.success}>
+        <svg
+          className={s.successIcon}
+          width="56"
+          height="56"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="9" />
+          <path d="m8.5 12.5 2.5 2.5 4.5-5" />
+        </svg>
+
+        <p className={s.successText}>{t('contact.success')}</p>
+
+        <Button variant="secondary" onClick={handleReset}>
+          {t('contact.again')}
+        </Button>
+      </div>
+    );
   }
+
+  const isPending = status === 'pending';
 
   return (
     <form className={s.form} onSubmit={handleSubmit} noValidate>
+      <input
+        type="text"
+        name="company"
+        className={s.honeypot}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+      />
+
       <Input
         label={t('contact.name')}
         name="name"
@@ -77,8 +107,10 @@ export const ContactForm: FC = () => {
         />
       </div>
 
+      {status === 'error' && <p className={s.error}>{t('contact.error')}</p>}
+
       <Button type="submit" disabled={isPending}>
-        {t('contact.submit')}
+        {isPending ? t('contact.sending') : t('contact.submit')}
       </Button>
     </form>
   );

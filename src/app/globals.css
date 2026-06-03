@@ -76,6 +76,7 @@ ul {
   --text-muted: #737373;
   --accent: #fe752b;
   --accent-bg: color-mix(in srgb, var(--accent) 12%, white);
+  --danger: #dc2626;
   --primary: #000000;
   --on-primary: #ffffff;
 
@@ -154,6 +155,7 @@ ul {
   --text-muted: #a1a1aa;
   --accent: #fb923c;
   --accent-bg: color-mix(in srgb, var(--accent) 20%, #171717);
+  --danger: #f87171;
   --primary: #fafafa;
   --on-primary: #171717;
 }

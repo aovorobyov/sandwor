@@ -13,6 +13,7 @@
     "test:coverage": "jest --coverage",
     "analyze": "ANALYZE=true next build",
     "size": "node scripts/check-bundle-size.mjs",
+    "embeddings": "node scripts/build-embeddings.mjs",
     "prepare": "husky"
   },
   "lint-staged": {

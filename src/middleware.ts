@@ -34,6 +34,6 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Match all paths except Next.js internals and static files
-  matcher: ['/((?!_next|_vercel|.*\\..*).*)'],
+  // Match all paths except API routes, Next.js internals and static files
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
 };

@@ -8,6 +8,16 @@
     "uikit": "UI Kit",
     "course": "AI Course"
   },
+  "chat": {
+    "title": "Site assistant",
+    "greeting": "Hi! I'm the sandwor.com assistant. Ask me about the site, blog posts or projects.",
+    "placeholder": "Ask anything...",
+    "send": "Send",
+    "launcher": "Open assistant chat",
+    "close": "Close chat",
+    "reset": "Clear conversation",
+    "error": "Couldn't get a response. Make sure the model is running and try again."
+  },
   "home": {
     "name": "Alexander Vorobyov",
     "bio": "Web developer. I work on frontend and occasionally write about code and tools.",

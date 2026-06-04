@@ -9,6 +9,7 @@ import type {
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/shared/lib/cn';
+import { DotIcon } from '@/shared/ui';
 import type { PaletteCommand } from './CommandPalette.types';
 import { useCommands } from './lib/useCommands';
 import { fetchPalettePosts, type PaletteSearchPost } from './lib/paletteApi';
@@ -178,7 +179,11 @@ export const CommandPalette: FC = () => {
                 onClick={createItemClickHandler(cmd)}
                 onMouseEnter={createItemHoverHandler(idx)}
               >
-                {cmd.icon && <span className={s.itemIcon}>{cmd.icon}</span>}
+                {cmd.icon && (
+                  <span className={s.itemIcon}>
+                    <DotIcon name={cmd.icon} />
+                  </span>
+                )}
 
                 <span className={s.itemLabel}>{cmd.label}</span>
 

@@ -15,23 +15,20 @@
   background: var(--bg-subtle);
 }
 
-.icon {
+.iconDark {
   display: inline-block;
-  width: 16px;
-  height: 16px;
-  background-color: var(--accent);
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
+  color: var(--accent);
 }
 
-.skeleton {
+.iconLight {
+  display: none;
+  color: var(--accent);
+}
+
+[data-theme='dark'] .iconDark {
+  display: none;
+}
+
+[data-theme='dark'] .iconLight {
   display: inline-block;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-md);
-  background: var(--bg-subtle);
 }

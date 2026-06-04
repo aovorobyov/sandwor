@@ -64,12 +64,13 @@
 }
 
 .itemIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 22px;
   margin-right: var(--space-3);
   color: var(--accent);
-  text-align: center;
   flex-shrink: 0;
-  font-size: var(--text-base);
 }
 
 .itemLabel {

@@ -13,6 +13,7 @@ import s from './NewsPage.module.css';
  * месяц + год — это changelog, не дневник.
  */
 const RELEASES = [
+  { version: '1.8.1', date: '2026-06-04' },
   { version: '1.8.0', date: '2026-06-04' },
   { version: '1.7.0', date: '2026-05-29' },
   { version: '1.6.2', date: '2026-05-29' },

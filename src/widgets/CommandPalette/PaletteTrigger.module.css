@@ -18,8 +18,9 @@
 }
 
 .icon {
+  display: inline-flex;
+  align-items: center;
   margin-right: 8px;
-  font-size: var(--text-sm);
   line-height: 1;
 }
 

@@ -28,19 +28,6 @@
   opacity: 0.8;
 }
 
-.logoMask {
-  display: inline-block;
-  width: 112px;
-  aspect-ratio: 470 / 60;
-  background-color: var(--accent);
-  -webkit-mask-image: url('/img/logo.svg');
-  mask-image: url('/img/logo.svg');
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-}
-
 .nav {
   display: none;
   align-items: center;

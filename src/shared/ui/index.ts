@@ -15,3 +15,6 @@ export type { CardProps } from './Card';
 
 export { ProgressBar } from './ProgressBar';
 export type { ProgressBarProps } from './ProgressBar';
+
+export { DotIcon } from './DotIcon';
+export type { DotIconName, DotIconProps, DotPoint } from './DotIcon';

@@ -10,16 +10,13 @@
 
 .code {
   display: inline-block;
-  height: var(--text-3xl);
-  aspect-ratio: 170 / 60;
-  background-color: var(--accent);
-  -webkit-mask-image: url('/img/404.svg');
-  mask-image: url('/img/404.svg');
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
+  color: var(--accent);
   margin-bottom: var(--space-4);
+}
+
+.figure {
+  height: var(--text-3xl);
+  width: auto;
 }
 
 .title {

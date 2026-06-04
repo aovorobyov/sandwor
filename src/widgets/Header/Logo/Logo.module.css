@@ -1,0 +1,27 @@
+.root {
+  display: block;
+  color: var(--accent);
+}
+
+.dot {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.dotRebuilding {
+  animation: rebuild 500ms ease-in-out both;
+}
+
+@keyframes rebuild {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  45%,
+  55% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}

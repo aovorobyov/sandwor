@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ProjectPage } from '@/views/ProjectPage';
 import { getProjects, getProject } from '@/entities/project';
+import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 
 interface Props {
   params: { locale: string; slug: string };
@@ -23,6 +24,7 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
   return {
     title: project.title[locale as 'en' | 'ru'] ?? project.title.en,
     description: project.description[locale as 'en' | 'ru'] ?? project.description.en,
+    alternates: buildPageAlternates(`/projects/${project.slug}`),
     openGraph: {
       title: project.title[locale as 'en' | 'ru'] ?? project.title.en,
       description: project.description[locale as 'en' | 'ru'] ?? project.description.en,

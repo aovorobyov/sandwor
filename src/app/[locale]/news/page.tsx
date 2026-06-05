@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { NewsPage } from '@/views/NewsPage';
+import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 
 export async function generateMetadata({
   params: { locale },
@@ -11,7 +12,8 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('subtitle'),
-    openGraph: { title: t('title') },
+    alternates: buildPageAlternates('/news'),
+    openGraph: { title: t('title'), description: t('subtitle') },
   };
 }
 

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { getTelegramPost, getRelatedPosts } from '@/entities/post/api/telegram';
 import { PostList } from '@/widgets/PostList';
-import { JsonLd, buildBlogPosting } from '@/shared/lib/jsonLd';
+import { JsonLd, buildBlogPosting, buildBreadcrumbs } from '@/shared/lib/jsonLd';
 import { ReadingProgress } from './components/ReadingProgress';
 import type { ArticlePageProps } from './ArticlePage.types';
 import s from './ArticlePage.module.css';
@@ -37,9 +37,16 @@ export const ArticlePage = async (props: ArticlePageProps) => {
     image: post.image,
   });
 
+  const breadcrumbsData = buildBreadcrumbs([
+    { name: t('nav.blog'), path: '/blog' },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ]);
+
   return (
     <>
       <JsonLd data={blogPostingData} />
+
+      <JsonLd data={breadcrumbsData} />
 
       <ReadingProgress readTimeLabel={readTimeLabel} formattedDate={formattedDate} />
 

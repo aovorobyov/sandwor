@@ -3,7 +3,7 @@ import { getTelegramPosts } from '@/entities/post/api/telegram';
 import { getProjects } from '@/entities/project';
 import { COURSES_REGISTRY } from '@/views/CoursePage/config/registry';
 
-const BASE_URL = 'https://sandwor.com';
+const BASE_URL = 'https://sandwor.ru';
 
 /**
  * Сайт работает в режиме `localePrefix: 'never'` — обе локали отдаются на одном URL,
@@ -28,6 +28,7 @@ const STATIC_PATHS = [
   { path: '', priority: 1, changeFrequency: 'weekly' as const },
   { path: '/blog', priority: 0.8, changeFrequency: 'daily' as const },
   { path: '/projects', priority: 0.8, changeFrequency: 'monthly' as const },
+  { path: '/timeline', priority: 0.6, changeFrequency: 'daily' as const },
   { path: '/news', priority: 0.7, changeFrequency: 'weekly' as const },
   { path: '/contact', priority: 0.5, changeFrequency: 'yearly' as const },
 ];

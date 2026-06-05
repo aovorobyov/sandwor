@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { CoursePage } from '@/views/CoursePage';
 import { COURSES_REGISTRY } from '@/views/CoursePage/config/registry';
 import { JsonLd, buildCourse } from '@/shared/lib/jsonLd';
+import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 
 interface Props {
   params: { courseId: string; locale: string };
@@ -20,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: content?.title,
     description: content?.tagline,
+    alternates: buildPageAlternates(`/course/${courseId}`),
   };
 }
 

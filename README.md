@@ -1,4 +1,4 @@
-# sandwor.com
+# sandwor.ru
 
 Personal website built with Next.js 14, Feature-Sliced Design, and next-intl.
 
@@ -126,9 +126,9 @@ src/
 │           └── [slug]/        # Страница отдельного поста
 │
 ├── shared/            # Reusable code with no business context
-│   ├── ui/            # Base UI components (Button, Input, Badge, Card)
+│   ├── ui/            # Base UI components (Button, Input, Badge, Card, Select, DotIcon)
 │   ├── config/        # Constants (breakpoints, fonts)
-│   ├── lib/           # Utilities (cn helper)
+│   ├── lib/           # Utilities (cn helper, jsonLd builders, seo alternates)
 │   └── types/         # Common TypeScript types
 │
 ├── entities/          # Business entities
@@ -137,26 +137,32 @@ src/
 │   │   ├── model/     # Post interface
 │   │   └── ui/        # PostCard component
 │   ├── project/       # Project type + ProjectCard component
-│   └── note/          # Note type + NoteItem component
+│   └── note/          # Note type, NoteItem, RELEASES (источник версий changelog)
 │
 ├── features/          # User interactions
 │   ├── theme-toggle/  # Dark/light mode switcher
+│   ├── accent-toggle/ # Accent color cycler
 │   ├── locale-switch/ # Language switcher (RU / EN)
 │   └── contact-form/  # Contact form with submit handler
 │
 ├── widgets/           # Large page blocks composed from entities + features
 │   ├── Header/        # Site header with nav, theme toggle, locale switch
 │   ├── Footer/        # Site footer
+│   ├── CommandPalette/ # ⌘K palette: навигация, поиск по статьям, тема, язык
 │   ├── PostList/      # Grid of PostCard components
 │   ├── ProjectList/   # Grid of ProjectCard components
-│   └── NoteList/      # List of NoteItem components
+│   ├── NoteList/      # List of NoteItem components
+│   └── Timeline/      # Хронологическая лента: статьи + проекты + релизы
 │
 └── views/              # Page-level components (testable, separate from app/)
-    ├── HomePage/       # Hero + 3 последних поста из Telegram
+    ├── HomePage/       # Hero + единая лента активности
     ├── BlogPage/       # Список всех постов с фильтром по тегам
     ├── ArticlePage/    # Страница отдельного поста
     ├── ProjectsPage/
-    ├── NotesPage/
+    ├── TimelinePage/   # Полная лента без квот (/timeline)
+    ├── NewsPage/       # Changelog с semver-версиями (/news)
+    ├── UIKitPage/      # Дизайн-система: интерактивная песочница компонентов
+    ├── CoursePage/
     └── ContactPage/
 ```
 

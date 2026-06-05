@@ -4,6 +4,7 @@
     "blog": "Blog",
     "projects": "Projects",
     "news": "News",
+    "timeline": "Timeline",
     "contact": "Contact",
     "uikit": "UI Kit",
     "course": "AI Course"
@@ -17,13 +18,15 @@
     "course-continue-cta": "Continue course →",
     "course-results-cta": "See results →",
     "course-progress": "{done} of {total} completed",
-    "latest-posts": "Latest articles",
-    "all-posts": "All articles →",
-    "projects": "Projects",
-    "all-projects": "All projects →"
+    "timeline": "Timeline",
+    "timeline-all": "All updates →",
+    "timeline-type-post": "Article",
+    "timeline-type-project": "Project",
+    "timeline-more-releases": "{count, plural, one {and # more release} other {and # more releases}}"
   },
   "blog": {
     "title": "Articles",
+    "subtitle": "Articles on frontend, tooling and development.",
     "filter-all": "All",
     "read-more": "Read →",
     "min-read": "{count} min read",
@@ -31,6 +34,7 @@
   },
   "projects": {
     "title": "Projects",
+    "subtitle": "Side projects and case studies: what was built, how and why.",
     "open": "Open →",
     "view": "View →",
     "repo": "Repository ↗",
@@ -40,6 +44,9 @@
     "title": "News",
     "subtitle": "Changelog of the site — what was added, fixed and improved across versions.",
     "entries": {
+      "v1-10-1": "SEO polish. Canonical and hreflang are now in every page ‹head› — previously locale alternates were only declared in the sitemap; blog and projects got meta descriptions, /uikit received metadata for the first time. JSON-LD expanded: CreativeWork on project pages with repo and live-site links in sameAs, BreadcrumbList on articles and projects, Person on Contacts. Also fixed a bug: BlogPosting and Course built URLs with a locale prefix (/ru/blog/…) that do not exist under localePrefix: never.",
+      "v1-10-0": "Unified activity timeline. Instead of separate article and project blocks, the home page shows a chronological feed: articles, projects and releases in one stream — a vertical dotted rail, typed cards, releases get an accent version badge with the first changelog sentence as the title. New /timeline page is the full feed without quotas; adjacent same-day releases collapse into one entry with a version range (v1.4.0 – v1.5.2) and an “and N more releases” counter. Timeline and UI Kit joined the header and the ⌘K palette; navigation became three-tiered: burger below 880px, full menu without search up to 1160px, then with the “Search ⌘K” box — items never wrap to a second line.",
+      "v1-9-0": "Component playground in UI Kit. The static showcase is replaced with an interactive playground: tabs for six components (Button, Badge, Input, Textarea, ProgressBar, DotIcon), typed prop controls and a live JSX snippet assembled from current values with one-click copy; per-component settings survive tab switching. The design system gained its own Select — a custom dropdown with an accent dot marking the chosen option, closing on Escape and outside click. Card heights are fixed for the tallest control set and grid columns got min-width: 0 — the playground no longer jumps on switching or overflows on mobile.",
       "v1-8-1": "Dot-grid iconography. Every site icon now runs on a single DotIcon system — radius-5 circles on a 10-step grid, inline SVG via currentColor: header search, every command palette item, Contact channels, the 404 banner and the theme/accent toggles. The «sandwor» logo was rebuilt from 92 dots extracted by parsing the original SVG path data and is now animated: a click scatters and reassembles the letters with per-dot random delays (randomness is generated only after hydration, prefers-reduced-motion is respected). Five svg files were removed from public/img — icons no longer load as separate requests, and the theme icon no longer flashes after hydration: both variants render on the server and CSS picks the visible one via data-theme.",
       "v1-8-0": "The Contact page got a full redesign. A hero with an accent «Email me» CTA, channel icons (Telegram, GitHub, Instagram, VK) as inline SVGs tinted via currentColor, and a split layout: intro on the left, a form on a fixed-height card panel on the right with a success screen (checkmark + «send another»). The form is now live — messages are delivered to a Telegram bot through a server route /api/contact (Bot API sendMessage, HTML escaping, field validation). No-CAPTCHA anti-spam: a honeypot field, a time-trap against instant submits, and a link cap, every hit is silently dropped. Along the way the middleware matcher was fixed: next-intl was intercepting /api/* and dropping every API route to 404.",
       "v1-7-0": "News section replaces Notes. Curated release log with semver versioning. The Note entity gains an optional version field; NoteItem renders a badge next to the date. 301 redirect /notes → /news preserves the SEO weight of the old page. The section is added to the main NAV_LINKS — previously /notes was reachable only via direct URL.",
@@ -61,8 +68,12 @@
       "v1-1-0": "Blog via Telegram channel. Posts auto-parsed from the public page t.me/s/‹channel› via node-html-parser. Extraction: bold title from ‹b›...‹/b› tags, cover from background-image style on .tgme_widget_message_photo_wrap, tags from hashtags, read time from word count. React.cache() deduplicates fetch within a single render. Next Data Cache (revalidate=3600) + webhook /api/telegram/webhook with revalidateTag on new posts.",
       "v1-0-2": "Dynamic accent color. Header button cycles the --accent CSS variable across a 10-color palette. Selection logic prevents consecutive repeats via a module-level lastColor memo. After the ⌘K palette landed — extracted as cycleAccent() in features/accent-toggle/lib, reused by both the toggle and the palette command.",
       "v1-0-1": "UI Kit and design system. /uikit showcase with tokens (colors, typography, spacing, radii) and base components: Button with three variants (primary/secondary/ghost), Input, Textarea, Badge, Card, ProgressBar. Custom SVG icon set with CSS mask for currentColor tinting. Mobile-first media queries, dark/light themes via the data-theme attribute.",
-      "v1-0-0": "sandwor.com launched. Stack: Next.js 14 + App Router, TypeScript strict, Feature-Sliced Design (app → views → widgets → features → entities → shared). i18n on next-intl with cookie-based locale switching (localePrefix: 'never'). Dark/light theme via next-themes. Inter Variable font. Deployed on Vercel."
+      "v1-0-0": "sandwor.ru launched. Stack: Next.js 14 + App Router, TypeScript strict, Feature-Sliced Design (app → views → widgets → features → entities → shared). i18n on next-intl with cookie-based locale switching (localePrefix: 'never'). Dark/light theme via next-themes. Inter Variable font. Deployed on Vercel."
     }
+  },
+  "timeline": {
+    "title": "Timeline",
+    "subtitle": "Everything happening on this site in one place: articles, projects and releases in chronological order."
   },
   "contact": {
     "title": "Contact",
@@ -109,30 +120,17 @@
   "uikit": {
     "title": "Design System Kit",
     "description": "A collection of visual tokens and functional components.",
-    "light-mode": "Light Mode",
-    "dark-mode": "Dark Mode",
-    "buttons": "Buttons",
+    "playground": "Playground",
+    "playground-description": "Pick a component and tweak its props — the JSX snippet writes itself.",
+    "playground-props": "Props",
+    "playground-copy": "Copy",
+    "playground-copied": "Copied ✓",
     "btn-primary": "Primary Action",
-    "btn-secondary": "Secondary Action",
-    "btn-ghost": "Ghost",
-    "badges": "Badges",
     "badge-neutral": "Neutral",
-    "badge-accent": "Accent",
-    "cards": "Cards",
-    "card-date": "March 27, 2002",
-    "card-title": "Designing for Focused Utility",
-    "card-description": "How we stripped away the noise to create a platform for meaningful architectural notes.",
-    "project-title": "Project Delta",
-    "project-category": "Architecture / Visualization",
-    "view-case": "View Case Study",
-    "form-elements": "Form Elements",
     "form-label": "Label",
     "form-placeholder": "Enter text...",
     "form-message": "Message",
-    "form-message-placeholder": "Your thoughts...",
-    "note-entry": "Note Entry",
-    "note-quote": "Precision is not just about the numbers; it's about the feeling of alignment between intent and execution.",
-    "note-meta": "Note #429 · Architecture Principles"
+    "form-message-placeholder": "Your thoughts..."
   },
   "course": {
     "lessons": "Lessons",

@@ -72,7 +72,7 @@ export const GET = (request: Request) => {
 
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ height: 6, width: 64, background: ACCENT, marginRight: 16 }} />
-          <div style={{ fontSize: 22, color: MUTED }}>sandwor.com</div>
+          <div style={{ fontSize: 22, color: MUTED }}>sandwor.ru</div>
         </div>
       </div>
     ),

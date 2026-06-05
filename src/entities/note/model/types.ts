@@ -5,3 +5,9 @@ export interface Note {
   /** Опционально: semver-метка для релизных заметок (страница News). */
   version?: string;
 }
+
+/** Запись курируемого списка релизов. */
+export interface Release {
+  version: string;
+  date: string; // ISO
+}

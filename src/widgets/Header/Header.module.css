@@ -39,6 +39,9 @@
   color: var(--text-muted);
   transition: var(--transition);
   margin-right: var(--space-6);
+
+  /* Двухсловные пункты («Курс ИИ», «UI Kit») не должны переноситься на вторую строку */
+  white-space: nowrap;
 }
 
 .navLink:hover {
@@ -61,7 +64,14 @@
   margin-right: var(--space-3);
 }
 
-@media (min-width: 640px) {
+/* Окошко поиска — самый «дорогой» по ширине элемент: показываем его последним,
+   только когда всем семи пунктам навигации точно хватает места */
+.searchSlot {
+  display: none;
+}
+
+/* Полной навигации с семью пунктами тесно раньше ~880px — до этого порога бургер */
+@media (min-width: 880px) {
   .nav {
     display: flex;
   }
@@ -70,5 +80,11 @@
   }
   .mobileControls {
     display: none;
+  }
+}
+
+@media (min-width: 1160px) {
+  .searchSlot {
+    display: inline-flex;
   }
 }

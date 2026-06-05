@@ -24,3 +24,21 @@ export interface CourseInput {
   locale: string;
   authorName: string;
 }
+
+export interface ProjectWorkInput {
+  title: string;
+  description: string;
+  /** ISO месяц-год: '2025-04'. */
+  date: string;
+  slug: string;
+  locale: string;
+  authorName: string;
+  repoUrl?: string | null;
+  siteUrl?: string | null;
+}
+
+export interface BreadcrumbInput {
+  name: string;
+  /** Путь от корня сайта, например '/blog'. */
+  path: string;
+}

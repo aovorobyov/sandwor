@@ -1,5 +1,12 @@
 import { SAME_AS, SITE_URL } from './config';
-import type { BlogPostingInput, CourseInput, PersonInput, WebSiteInput } from './builders.types';
+import type {
+  BlogPostingInput,
+  BreadcrumbInput,
+  CourseInput,
+  PersonInput,
+  ProjectWorkInput,
+  WebSiteInput,
+} from './builders.types';
 
 export const buildPerson = (input: PersonInput) => {
   const { name, bio } = input;
@@ -28,7 +35,8 @@ export const buildWebSite = (input: WebSiteInput) => {
 export const buildBlogPosting = (input: BlogPostingInput) => {
   const { title, description, date, slug, locale, authorName, image } = input;
 
-  const articleUrl = `${SITE_URL}/${locale}/blog/${slug}`;
+  // localePrefix: 'never' — реальные URL без префикса локали
+  const articleUrl = `${SITE_URL}/blog/${slug}`;
   const ogFallback = `${SITE_URL}/api/og?title=${encodeURIComponent(title)}`;
 
   return {
@@ -52,10 +60,54 @@ export const buildBlogPosting = (input: BlogPostingInput) => {
   };
 };
 
+export const buildProjectWork = (input: ProjectWorkInput) => {
+  const { title, description, date, slug, locale, authorName, repoUrl, siteUrl } = input;
+
+  // localePrefix: 'never' — реальные URL без префикса локали
+  const projectUrl = `${SITE_URL}/projects/${slug}`;
+  const externalLinks = [repoUrl, siteUrl].filter(Boolean);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: title,
+    description,
+    dateCreated: date,
+    url: projectUrl,
+    inLanguage: locale,
+    ...(externalLinks.length > 0 ? { sameAs: externalLinks } : {}),
+    author: {
+      '@type': 'Person',
+      name: authorName,
+      url: SITE_URL,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': projectUrl,
+    },
+  };
+};
+
+export const buildBreadcrumbs = (items: BreadcrumbInput[]) => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => {
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        item: `${SITE_URL}${item.path}`,
+      };
+    }),
+  };
+};
+
 export const buildCourse = (input: CourseInput) => {
   const { title, description, courseId, locale, authorName } = input;
 
-  const courseUrl = `${SITE_URL}/${locale}/course/${courseId}`;
+  // localePrefix: 'never' — реальные URL без префикса локали
+  const courseUrl = `${SITE_URL}/course/${courseId}`;
 
   return {
     '@context': 'https://schema.org',

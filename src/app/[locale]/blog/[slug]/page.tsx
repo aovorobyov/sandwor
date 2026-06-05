@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ArticlePage } from '@/views/ArticlePage';
 import { getTelegramPosts, getTelegramPost } from '@/entities/post/api/telegram';
+import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 
 interface Props {
   params: { locale: string; slug: string };
@@ -28,6 +29,7 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: buildPageAlternates(`/blog/${post.slug}`),
     openGraph: {
       title: post.title,
       description: post.excerpt,

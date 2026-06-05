@@ -4,7 +4,7 @@ import { ViewTransitions } from 'next-view-transitions';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sandwor.com'),
+  metadataBase: new URL('https://sandwor.ru'),
   title: {
     template: '%s | sandwor',
     default: 'sandwor',

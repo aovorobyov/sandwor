@@ -4,6 +4,7 @@ import { ThemeToggle } from '@/features/theme-toggle';
 import { AccentToggle } from '@/features/accent-toggle';
 import { LocaleSwitch } from '@/features/locale-switch';
 import { PaletteTrigger } from '@/widgets/CommandPalette';
+import { cn } from '@/shared/lib/cn';
 import { NAV_LINKS } from './config';
 import { MobileMenu } from './MobileMenu';
 import { LogoLink } from './LogoLink';
@@ -26,7 +27,7 @@ export const Header = async () => {
         </nav>
 
         <div className={s.controls}>
-          <span className={s.controlGap}>
+          <span className={cn(s.controlGap, s.searchSlot)}>
             <PaletteTrigger />
           </span>
           <AccentToggle />

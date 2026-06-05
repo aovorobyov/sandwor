@@ -5,6 +5,7 @@ import { getTranslations, getLocale } from 'next-intl/server';
 import { Badge } from '@/shared/ui/Badge';
 import { Button } from '@/shared/ui/Button';
 import { getProject } from '@/entities/project';
+import { JsonLd, buildBreadcrumbs, buildProjectWork } from '@/shared/lib/jsonLd';
 import type { ProjectPageProps } from './ProjectPage.types';
 import s from './ProjectPage.module.css';
 
@@ -22,8 +23,30 @@ export const ProjectPage = async (props: ProjectPageProps) => {
     month: 'long',
   });
 
+  const title = project.title[locale as 'en' | 'ru'] ?? project.title.en;
+
+  const projectWorkData = buildProjectWork({
+    title,
+    description: project.description[locale as 'en' | 'ru'] ?? project.description.en,
+    date: project.date,
+    slug: project.slug,
+    locale,
+    authorName: t('home.name'),
+    repoUrl: project.repoUrl,
+    siteUrl: project.siteUrl,
+  });
+
+  const breadcrumbsData = buildBreadcrumbs([
+    { name: t('nav.projects'), path: '/projects' },
+    { name: title, path: `/projects/${project.slug}` },
+  ]);
+
   return (
     <main className={s.root}>
+      <JsonLd data={projectWorkData} />
+
+      <JsonLd data={breadcrumbsData} />
+
       <div className={s.container}>
         <Link href="/projects" className={s.back}>
           ← {t('nav.projects')}

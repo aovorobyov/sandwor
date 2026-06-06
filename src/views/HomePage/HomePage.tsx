@@ -1,19 +1,13 @@
 import Image from 'next/image';
 import { Link } from 'next-view-transitions';
 import { getTranslations } from 'next-intl/server';
-import { Timeline, buildTimelineItems, groupAdjacentReleases } from '@/widgets/Timeline';
+import { PostList } from '@/widgets/PostList';
+import { ProjectList } from '@/widgets/ProjectList';
 import { getTelegramPosts } from '@/entities/post/api/telegram';
 import { getProjects } from '@/entities/project';
-import { buildReleaseNotes } from '@/entities/note';
 import { JsonLd, buildPerson, buildWebSite } from '@/shared/lib/jsonLd';
 import { CourseBanner } from './components/CourseBanner/CourseBanner';
 import s from './HomePage.module.css';
-
-/** Сколько записей показываем в ленте на главной. */
-const TIMELINE_LIMIT = 8;
-
-/** Релизов берём меньше, чем в полном changelog, — чтобы не вытесняли статьи и проекты. */
-const TIMELINE_RELEASES_LIMIT = 4;
 
 export const HomePage = async () => {
   const [t, posts, projects] = await Promise.all([
@@ -24,18 +18,6 @@ export const HomePage = async () => {
 
   const personData = buildPerson({ name: t('home.name'), bio: t('home.bio') });
   const siteData = buildWebSite({ name: t('home.name') });
-
-  const releaseNotes = buildReleaseNotes((key) => {
-    return t(`news.${key}`);
-  });
-
-  const timelineItems = groupAdjacentReleases(
-    buildTimelineItems({
-      posts,
-      projects,
-      releases: releaseNotes.slice(0, TIMELINE_RELEASES_LIMIT),
-    }),
-  ).slice(0, TIMELINE_LIMIT);
 
   return (
     <>
@@ -86,18 +68,34 @@ export const HomePage = async () => {
           </div>
         </section>
 
-        {timelineItems.length > 0 && (
+        {posts.length > 0 && (
           <section className={s.section}>
             <div className={s.container}>
               <div className={s.sectionHeader}>
-                <h2 className={s.sectionTitle}>{t('home.timeline')}</h2>
+                <h2 className={s.sectionTitle}>{t('home.latest-posts')}</h2>
 
-                <Link href="/timeline" className={s.seeAll}>
-                  {t('home.timeline-all')}
+                <Link href="/blog" className={s.seeAll}>
+                  {t('home.all-posts')}
                 </Link>
               </div>
 
-              <Timeline items={timelineItems} />
+              <PostList posts={posts.slice(0, 3)} />
+            </div>
+          </section>
+        )}
+
+        {projects.length > 0 && (
+          <section className={s.section}>
+            <div className={s.container}>
+              <div className={s.sectionHeader}>
+                <h2 className={s.sectionTitle}>{t('home.projects')}</h2>
+
+                <Link href="/projects" className={s.seeAll}>
+                  {t('home.all-projects')}
+                </Link>
+              </div>
+
+              <ProjectList projects={projects.slice(0, 3)} />
             </div>
           </section>
         )}

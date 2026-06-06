@@ -11,6 +11,7 @@ import { CourseSidebar } from './components/CourseSidebar';
 import { LessonContent } from './components/LessonContent';
 import { CourseCompletion } from './components/CourseCompletion';
 import { clearCourseState, loadCourseState, saveCourseState } from './lib/courseStorage';
+import { logCourseEvent } from './lib/courseLog';
 import s from './CoursePage.module.css';
 
 const LESSON_QUERY_PARAM = 'lesson';
@@ -73,6 +74,7 @@ export const CoursePage: FC<CoursePageProps> = ({ courseId }) => {
   const handleStart = (name: string) => {
     updateState({ name });
     setScreen('course');
+    logCourseEvent('start', name, courseId);
   };
 
   const handleSelectLesson = (index: number) => {
@@ -87,6 +89,15 @@ export const CoursePage: FC<CoursePageProps> = ({ courseId }) => {
       : [...completedLessons, currentLesson];
 
     const isLast = currentLesson + 1 >= lessons.length;
+
+    // Завершение логируем один раз — на переходе «не все уроки → все уроки»,
+    // а не при каждом открытии экрана результатов
+    const isFirstFullCompletion =
+      nextCompleted.length === lessons.length && completedLessons.length < lessons.length;
+
+    if (isFirstFullCompletion) {
+      logCourseEvent('complete', courseState.name, courseId);
+    }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 

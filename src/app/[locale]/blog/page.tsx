@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { OG_DEFAULT_IMAGE } from '@/shared/lib/seo/ogImage';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { BlogPage } from '@/views/BlogPage';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
@@ -13,7 +14,11 @@ export async function generateMetadata({
     title: t('blog.title'),
     description: t('blog.subtitle'),
     alternates: buildPageAlternates('/blog'),
-    openGraph: { title: t('blog.title'), description: t('blog.subtitle') },
+    openGraph: {
+      title: t('blog.title'),
+      description: t('blog.subtitle'),
+      images: [OG_DEFAULT_IMAGE],
+    },
   };
 }
 

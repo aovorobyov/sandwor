@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Link } from 'next-view-transitions';
 import { getTranslations } from 'next-intl/server';
 import { Timeline, buildTimelineItems, groupAdjacentReleases } from '@/widgets/Timeline';
@@ -45,9 +46,37 @@ export const HomePage = async () => {
       <main className={s.root}>
         <section className={s.hero}>
           <div className={s.container}>
-            <h1 className={s.name}>{t('home.name')}</h1>
+            <div className={s.heroLayout}>
+              <div className={s.heroText}>
+                <h1 className={s.name}>{t('home.name')}</h1>
 
-            <p className={s.bio}>{t('home.bio')}</p>
+                <p className={s.bio}>{t('home.bio')}</p>
+              </div>
+
+              {/* Персонаж разрезан на два слоя: тело и ладонь — ладонь машет CSS-анимацией.
+                  PNG как источник: оптимизатор next/image сам отдаст webp/avif по Accept. */}
+              <div className={s.heroImageWrap} aria-hidden>
+                <Image
+                  src="/img/sandwor-body.png"
+                  alt=""
+                  width={853}
+                  height={1280}
+                  priority
+                  sizes="(min-width: 1024px) 280px, (min-width: 640px) 230px, 255px"
+                  className={s.heroBody}
+                />
+
+                <Image
+                  src="/img/sandwor-hand.png"
+                  alt=""
+                  width={853}
+                  height={1280}
+                  priority
+                  sizes="(min-width: 1024px) 280px, (min-width: 640px) 230px, 255px"
+                  className={s.heroHand}
+                />
+              </div>
+            </div>
           </div>
         </section>
 

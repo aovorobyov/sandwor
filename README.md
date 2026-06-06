@@ -127,6 +127,7 @@ src/
 │
 ├── shared/            # Reusable code with no business context
 │   ├── ui/            # Base UI components (Button, Input, Badge, Card, Select, DotIcon)
+│   ├── api/           # Server-only helpers (telegram.ts — отправка в бота)
 │   ├── config/        # Constants (breakpoints, fonts)
 │   ├── lib/           # Utilities (cn helper, jsonLd builders, seo alternates)
 │   └── types/         # Common TypeScript types

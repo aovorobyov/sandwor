@@ -11,6 +11,120 @@
 .hero {
   padding: var(--space-16) 0 var(--space-12);
   border-bottom: 1px solid var(--border);
+
+  /* На мобиле персонаж крупнее секции и обрезается её нижней границей */
+  overflow: hidden;
+}
+
+.heroLayout {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 210px;
+}
+
+.heroText {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+
+  /* На мобиле текст уступает место персонажу — переносится раньше,
+     чтобы не лежать на лице */
+  margin-right: 72px;
+
+  /* Ореол цветом фона: на узких экранах текст ложится на персонажа —
+     без подсветки тёмные буквы тонут в тёмном свитере */
+  text-shadow:
+    0 1px 2px var(--bg),
+    0 0 8px var(--bg),
+    0 0 16px var(--bg);
+}
+
+/* Персонаж «стоит» на нижней границе hero (отрицательный bottom съедает нижний
+   padding секции) и подложен ПОД текст — текст выше по z-index.
+   На мобиле он крупнее видимой области: нижняя часть туловища уходит
+   за границу секции и обрезается overflow'ом */
+.heroImageWrap {
+  position: absolute;
+  right: -16px;
+  bottom: -160px;
+  z-index: 0;
+  width: 255px;
+  line-height: 0;
+}
+
+.heroBody {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Слой ладони лежит точно поверх тела (тот же холст 853×1280);
+   ось вращения — запястье: точка (133, 765) исходника */
+.heroHand {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  transform-origin: 15.6% 59.8%;
+  animation: heroWave 2.8s ease-in-out 1.2s infinite;
+}
+
+@keyframes heroWave {
+  0%,
+  50%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  10% {
+    transform: rotate(10deg);
+  }
+
+  20% {
+    transform: rotate(-8deg);
+  }
+
+  30% {
+    transform: rotate(9deg);
+  }
+
+  40% {
+    transform: rotate(-5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroHand {
+    animation: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .heroLayout {
+    min-height: 300px;
+  }
+
+  .heroText {
+    margin-right: 0;
+  }
+
+  .heroImageWrap {
+    right: 0;
+    bottom: calc(-1 * var(--space-12));
+    width: 230px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroLayout {
+    min-height: 372px;
+  }
+
+  .heroImageWrap {
+    width: 280px;
+  }
 }
 
 .name {

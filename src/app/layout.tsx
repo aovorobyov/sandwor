@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import { ViewTransitions } from 'next-view-transitions';
+import { OG_DEFAULT_IMAGE } from '@/shared/lib/seo/ogImage';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -14,6 +15,15 @@ export const metadata: Metadata = {
     types: {
       'application/atom+xml': '/feed.xml',
     },
+  },
+  openGraph: {
+    siteName: 'sandwor',
+    type: 'website',
+    images: [OG_DEFAULT_IMAGE],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [OG_DEFAULT_IMAGE.url],
   },
 };
 

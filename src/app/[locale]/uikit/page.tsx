@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { OG_DEFAULT_IMAGE } from '@/shared/lib/seo/ogImage';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { UIKitPage } from '@/views/UIKitPage';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
@@ -13,7 +14,7 @@ export async function generateMetadata({
     title: t('title'),
     description: t('description'),
     alternates: buildPageAlternates('/uikit'),
-    openGraph: { title: t('title'), description: t('description') },
+    openGraph: { title: t('title'), description: t('description'), images: [OG_DEFAULT_IMAGE] },
   };
 }
 

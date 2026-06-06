@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { OG_DEFAULT_IMAGE } from '@/shared/lib/seo/ogImage';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ProjectPage } from '@/views/ProjectPage';
 import { getProjects, getProject } from '@/entities/project';
@@ -29,6 +30,7 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
       title: project.title[locale as 'en' | 'ru'] ?? project.title.en,
       description: project.description[locale as 'en' | 'ru'] ?? project.description.en,
       type: 'article',
+      images: [OG_DEFAULT_IMAGE],
     },
   };
 }

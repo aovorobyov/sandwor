@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { escapeHtml, sendTelegramMessage } from '@/shared/api/telegram';
 
 /** Ограничения длины полей — отсекаем мусор и слишком большие запросы. */
 const MAX_NAME = 100;
@@ -57,11 +58,6 @@ const isValid = ({ name, email, message }: ContactPayload): boolean => {
   );
 };
 
-/** Экранирует спецсимволы — Telegram parse_mode='HTML' требует валидной разметки. */
-const escapeHtml = (value: string): string => {
-  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-};
-
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CONTACT_CHAT_ID;
@@ -102,13 +98,9 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
     escapeHtml(message),
   ].join('\n');
 
-  const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' }),
-  });
+  const isDelivered = await sendTelegramMessage(text);
 
-  if (!res.ok) {
+  if (!isDelivered) {
     return NextResponse.json({ error: 'Failed to deliver message' }, { status: 502 });
   }
 

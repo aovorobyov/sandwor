@@ -153,7 +153,9 @@ src/
 │   ├── PostList/      # Grid of PostCard components
 │   ├── ProjectList/   # Grid of ProjectCard components
 │   ├── NoteList/      # List of NoteItem components
-│   └── Timeline/      # Хронологическая лента: статьи + проекты + релизы
+│   ├── Timeline/      # Хронологическая лента: статьи + проекты + релизы
+│   ├── Backdrop/      # Перфорированный фон-полотно со свечением под курсором
+│   └── CustomCursor/  # Кастовый курсор-точка (растёт/сжимается, кольцо над интерактивным)
 │
 └── views/              # Page-level components (testable, separate from app/)
     ├── HomePage/       # Hero + единая лента активности

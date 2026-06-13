@@ -6,6 +6,8 @@ import { locales, type Locale } from '@/i18n-routing';
 import { Header } from '@/widgets/Header';
 import { Footer } from '@/widgets/Footer';
 import { CommandPalette } from '@/widgets/CommandPalette';
+import { Backdrop } from '@/widgets/Backdrop';
+import { CustomCursor } from '@/widgets/CustomCursor';
 
 interface Props {
   children: React.ReactNode;
@@ -34,10 +36,12 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
 
   return (
     <NextIntlClientProvider messages={messages}>
+      <Backdrop />
       <Header />
-      <div style={{ flex: 1 }}>{children}</div>
+      <div style={{ flex: 1, position: 'relative', zIndex: 1 }}>{children}</div>
       <Footer />
       <CommandPalette />
+      <CustomCursor />
     </NextIntlClientProvider>
   );
 }

@@ -80,6 +80,15 @@ ul {
   --primary: #000000;
   --on-primary: #ffffff;
 
+  /* Фон-полотно: цвет «дырок» перфорации и их подсветки под курсором */
+  --hole: rgba(0, 0, 0, 0.05);
+  --hole-glow: color-mix(in srgb, var(--accent) 55%, transparent);
+
+  /* Позиция указателя — пишется хуком useCursor, читается свечением фона.
+     Дефолт за пределами экрана: пока курсор не двигался — свечения нет. */
+  --cursor-x: -200px;
+  --cursor-y: -200px;
+
   /* Typography */
   --font: 'Inter', system-ui, sans-serif;
 
@@ -158,6 +167,19 @@ ul {
   --danger: #f87171;
   --primary: #fafafa;
   --on-primary: #171717;
+
+  /* На тёмном полотне дырки чуть светлее фона */
+  --hole: rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Кастовый курсор ─────────────────────────────────────── */
+
+/* Системный курсор прячем только когда активна кастовая точка.
+   Класс ставит useCursor после проверки pointer:fine + reduced-motion —
+   на тач-устройствах и при reduce класса нет, остаётся нативный курсор. */
+html.cursor-custom,
+html.cursor-custom * {
+  cursor: none;
 }
 
 /* ─── View Transitions API ────────────────────────────────── */
@@ -205,6 +227,15 @@ footer {
 ::view-transition-new(site-header),
 ::view-transition-old(site-footer),
 ::view-transition-new(site-footer) {
+  animation: none;
+}
+
+/* Фон-полотно и кастовый курсор — фиксированные слои, не относятся к контенту
+   страницы. Исключаем их из перехода, иначе мигают при смене маршрута. */
+::view-transition-old(backdrop),
+::view-transition-new(backdrop),
+::view-transition-old(cursor-dot),
+::view-transition-new(cursor-dot) {
   animation: none;
 }
 

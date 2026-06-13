@@ -1,0 +1,42 @@
+.dot {
+  --size: 6px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--size);
+  height: var(--size);
+  /* Центрируем точку на координате указателя; меняется вместе с размером */
+  margin-top: calc(var(--size) / -2);
+  margin-left: calc(var(--size) / -2);
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  /* Тень-ореол: точка не теряется на акцентных фонах (drop-shadow повторяет
+     форму — работает и для заливки, и для кольца над интерактивным) */
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.55));
+  transition:
+    width 150ms ease,
+    height 150ms ease,
+    margin 150ms ease,
+    background 150ms ease,
+    border-color 150ms ease,
+    opacity 150ms ease;
+  view-transition-name: cursor-dot;
+}
+
+/* В движении точка слегка крупнее, на остановке возвращается к минимуму */
+.dot[data-moving='true'] {
+  --size: 10px;
+}
+
+/* Над интерактивным — крупное кольцо (приоритетнее состояния движения) */
+.dot[data-interactive='true'] {
+  --size: 22px;
+
+  background: transparent;
+  border: 1.5px solid var(--accent);
+}

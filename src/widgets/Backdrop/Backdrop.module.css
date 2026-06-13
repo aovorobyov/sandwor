@@ -1,0 +1,38 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Приглушённая перфорация поверх фона страницы */
+  background-image: radial-gradient(circle, var(--hole) 1px, transparent 1.6px);
+  background-size: 22px 22px;
+  view-transition-name: backdrop;
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  /* Тот же узор, но яркий и в цвет акцента — попадает дырка в дырку */
+  background-image: radial-gradient(circle, var(--hole-glow) 1px, transparent 1.6px);
+  background-size: 22px 22px;
+  /* Проявляем яркие дырки только мягким кругом вокруг курсора */
+  -webkit-mask-image: radial-gradient(
+    circle 180px at var(--cursor-x) var(--cursor-y),
+    #000 0%,
+    #000 25%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(
+    circle 180px at var(--cursor-x) var(--cursor-y),
+    #000 0%,
+    #000 25%,
+    transparent 75%
+  );
+}
+
+/* При reduced-motion свечение под курсором не нужно — оставляем тихое полотно */
+@media (prefers-reduced-motion: reduce) {
+  .glow {
+    display: none;
+  }
+}

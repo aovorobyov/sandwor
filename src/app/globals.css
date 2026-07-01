@@ -112,8 +112,14 @@ ul {
 
   /* Layout */
   --container: 1100px;
+  --container-narrow: 900px;
   --container-text: 680px;
   --container-pad: 16px;
+  --header-h: 56px;
+
+  /* Фон полей ввода. Контейнеры на var(--bg-subtle) переопределяют его на var(--bg),
+     чтобы поля не сливались с подложкой. */
+  --field-bg: var(--bg-subtle);
 
   /* Shape */
   --radius-sm: 2px;

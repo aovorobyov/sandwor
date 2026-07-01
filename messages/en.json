@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "Home",
+    "websites": "Websites",
     "blog": "Blog",
     "projects": "Projects",
     "news": "News",
@@ -12,6 +13,24 @@
   "home": {
     "name": "Alexander Vorobyov",
     "bio": "Web developer. I work on frontend and occasionally write about code and tools.",
+    "slogan-prefix": "I build websites for",
+    "slogan-words": [
+      "your business",
+      "your coffee shop",
+      "your agency",
+      "your venue",
+      "your store",
+      "your personal brand",
+      "your restaurant",
+      "your studio",
+      "your school",
+      "your online course",
+      "your community",
+      "your startup"
+    ],
+    "lead": "Landing pages, Tilda stores with a friendly admin panel, custom development — I pick the right tool for your goal and budget.",
+    "order": "Order a website",
+    "more": "Learn more",
     "latest-posts": "Latest articles",
     "all-posts": "All articles →",
     "projects": "Projects",
@@ -46,6 +65,7 @@
     "title": "News",
     "subtitle": "Changelog of the site — what was added, fixed and improved across versions.",
     "entries": {
+      "v1-12-0": "«Website development» showcase and the /websites section. The home page shifts focus from the course to building websites on demand: the hero became a full-screen showcase with the slogan «I build websites for…» and a typewriter cycling through audiences (coffee shop, store, personal brand, etc.), two CTAs — the accent «Order» opens a request modal, the secondary one leads to /websites — and the waving 3D character kept in place; the course banner is shrunk, toned down and moved below the showcase. The new /websites page covers the approach to clients, tool selection (Tilda with an admin panel / landing pages / custom), the process, cases, pricing from RUB 50,000 and an FAQ, with a request form at the bottom anchor; requests go to the same Telegram bot as the contact form. Under the hood: reusable Modal, Typewriter and FormSuccess components plus a shared useFormSubmit hook; form fields switched to a --field-bg variable so they no longer blend into their panels; for search, FAQPage and Service JSON-LD were added along with a keyword-rich title and description.",
       "v1-11-1": "Default OG image. Pages without their own cover now ship a branded 1200×630 card in og:image and twitter:card summary_large_image — links to the site unfurl into a proper preview in social networks and messengers. The image is set in the root layout and duplicated across seven pages with their own openGraph, since in Next a child openGraph fully overrides the parent; blog articles keep their dynamic /api/og covers.",
       "v1-11-0": "Animated character on the home page. The hero now hosts the author 3D avatar: the source image is programmatically split into two layers — body and palm (alpha-channel flood fill bounded at the wrist), and the palm waves via CSS animation around the wrist point, respecting prefers-reduced-motion. The body layer got a painted inner sleeve wall so no gaps show on light backgrounds mid-wave; on mobile the character is larger and cropped by the section border, while the text yields space and is haloed with the background color. Sources are PNG: the next/image optimizer serves webp/avif to modern browsers and png to legacy ones.",
       "v1-10-1": "SEO polish. Canonical and hreflang are now in every page ‹head› — previously locale alternates were only declared in the sitemap; blog and projects got meta descriptions, /uikit received metadata for the first time. JSON-LD expanded: CreativeWork on project pages with repo and live-site links in sameAs, BreadcrumbList on articles and projects, Person on Contacts. Also fixed a bug: BlogPosting and Course built URLs with a locale prefix (/ru/blog/…) that do not exist under localePrefix: never.",
@@ -91,6 +111,107 @@
     "success": "Message sent",
     "again": "Send another message",
     "error": "Couldn't send your message. Please try again later or email me."
+  },
+  "order": {
+    "title": "Order a website",
+    "name": "Name",
+    "phone": "Phone",
+    "telegram": "Telegram (optional)",
+    "task": "What website do you need",
+    "submit": "Send request",
+    "sending": "Sending…",
+    "success": "I'll get back to you shortly!",
+    "again": "Send another request",
+    "error": "Couldn't send your request. Please try again later or message me on Telegram."
+  },
+  "websites": {
+    "title": "Website development",
+    "subtitle": "Landing pages, online stores and custom websites tailored to your business. From RUB 50,000.",
+    "meta-title": "Website development — landing pages & Tilda stores | from RUB 50,000",
+    "meta-description": "Websites for business: landing pages, Tilda online stores with a friendly admin panel, and custom builds. I pick the right tool for the job, launch end to end and support after go-live. Starting price from RUB 50,000.",
+    "hero-lead": "I build websites that work toward a result: clear structure, fast launch and an admin panel where you manage the content yourself.",
+    "order": "Order a website",
+    "cases-cta": "See the work",
+    "scroll-hint": "Scroll down",
+    "approach-title": "How I approach the work",
+    "approach": [
+      "I start with your goal, not a template. We figure out who your customers are, what they should do on the site and what outcome you need — sales, leads or awareness.",
+      "Then I pick the tool for the job and budget: sometimes a landing page is enough, sometimes you need a store with a catalog, and sometimes custom development. You get a tool that brings in leads, not just a pretty picture.",
+      "I stay in touch at every step: I show work-in-progress versions, explain decisions in plain language and leave you a site that's easy to manage without a developer."
+    ],
+    "tools-title": "The right tool for the job",
+    "tools-lead": "I'm not tied to a single technology — I choose what's most beneficial for you.",
+    "tools": [
+      {
+        "title": "Tilda with a strong admin panel",
+        "desc": "A store or catalog where you add products, change prices and texts yourself. A convenient control panel — no need to reach a developer for every little thing."
+      },
+      {
+        "title": "Landing pages for launch",
+        "desc": "Single-page sites for a service, product or event. Fast launch, focus on one target action and conversion."
+      },
+      {
+        "title": "Custom development",
+        "desc": "When you need non-standard functionality or maximum speed: bespoke markup and logic for a specific task."
+      }
+    ],
+    "process-title": "How we'll work together",
+    "process": [
+      {
+        "title": "Brief",
+        "desc": "We discuss the task, goals and references. I record what we're doing and why."
+      },
+      {
+        "title": "Structure and design",
+        "desc": "I build the page structure and visuals. We sign off before development starts."
+      },
+      {
+        "title": "Development",
+        "desc": "I build and fill the site, wire up forms, analytics and the admin panel."
+      },
+      { "title": "Launch", "desc": "We publish on your domain and I test across devices." },
+      {
+        "title": "Support",
+        "desc": "I stay in touch after launch: edits, improvements and consulting."
+      }
+    ],
+    "cases-title": "Selected work",
+    "pricing-title": "Pricing",
+    "price-prefix": "Starting price",
+    "price-from": "from RUB 50,000",
+    "pricing-includes": [
+      "Structure and design for your goal",
+      "Adaptation for phones and tablets",
+      "Lead forms and analytics setup",
+      "Admin panel for self-management",
+      "Launch on your domain",
+      "Post-launch support"
+    ],
+    "faq-title": "Frequently asked questions",
+    "faq": [
+      {
+        "question": "How long does it take?",
+        "answer": "A landing page usually takes 1–2 weeks, a store or multi-page site — from 3 weeks. We lock exact timing after the brief."
+      },
+      {
+        "question": "What's included in the RUB 50,000 starting price?",
+        "answer": "A basic site for your goal: structure, design, responsive layout, lead forms and an admin panel. The final price depends on the number of pages and features."
+      },
+      {
+        "question": "Can I edit the content myself?",
+        "answer": "Yes. I build an admin panel where you add products and change texts and prices yourself — without reaching me for every edit."
+      },
+      {
+        "question": "Do you help after launch?",
+        "answer": "Yes. I stay in touch: I make edits, improve things and advise on growing the site."
+      },
+      {
+        "question": "Do I need my own domain and hosting?",
+        "answer": "I'll help choose and connect a domain. Hosting depends on the tool — I'll suggest the best option for your project."
+      }
+    ],
+    "order-title": "Leave a request",
+    "order-subtitle": "Describe the website you need — I'll get back to you shortly and propose a solution."
   },
   "footer": {
     "rights": "© {year} Alexander Vorobyov"

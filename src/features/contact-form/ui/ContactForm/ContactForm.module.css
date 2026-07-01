@@ -31,14 +31,16 @@
 .textarea {
   width: 100%;
   padding: 12px var(--space-4);
-  background: var(--bg);
+  background: var(--field-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font: inherit;
   font-size: var(--text-base);
   color: var(--text);
   resize: none;
-  transition: border-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
   outline: none;
 }
 
@@ -47,30 +49,16 @@
 }
 
 .textarea:focus {
-  border-color: var(--primary);
-}
-
-.success {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-4);
-  text-align: center;
-}
-
-.successIcon {
-  color: var(--accent);
-}
-
-.successText {
-  font-size: var(--text-lg);
-  font-weight: var(--weight-medium);
-  color: var(--text);
+  background: var(--bg);
+  border-color: var(--accent);
 }
 
 .error {
   font-size: var(--text-sm);
   color: var(--danger);
+}
+
+/* Кнопку отправки отделяем от полей дополнительным отступом */
+.submit {
+  margin-top: var(--space-2);
 }

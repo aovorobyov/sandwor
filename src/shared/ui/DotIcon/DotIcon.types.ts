@@ -20,6 +20,7 @@ export type DotIconName =
   | 'github'
   | 'instagram'
   | 'vk'
+  | 'chevronDown'
   | 'notFound';
 
 export interface DotIconProps {

@@ -129,6 +129,8 @@
 
 /* Задание */
 .taskCard {
+  /* Карточка на серой подложке — textarea внутри делаем белой, чтобы не сливалась */
+  --field-bg: var(--bg);
   background: var(--bg-subtle);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Link } from 'next-view-transitions';
 import { getTranslations } from 'next-intl/server';
 import { PostList } from '@/widgets/PostList';
@@ -7,6 +6,7 @@ import { getTelegramPosts } from '@/entities/post/api/telegram';
 import { getProjects } from '@/entities/project';
 import { JsonLd, buildPerson, buildWebSite } from '@/shared/lib/jsonLd';
 import { CourseBanner } from './components/CourseBanner/CourseBanner';
+import { ServiceShowcase } from './components/ServiceShowcase';
 import s from './HomePage.module.css';
 
 export const HomePage = async () => {
@@ -26,42 +26,9 @@ export const HomePage = async () => {
       <JsonLd data={siteData} />
 
       <main className={s.root}>
-        <section className={s.hero}>
-          <div className={s.container}>
-            <div className={s.heroLayout}>
-              <div className={s.heroText}>
-                <h1 className={s.name}>{t('home.name')}</h1>
+        <ServiceShowcase />
 
-                <p className={s.bio}>{t('home.bio')}</p>
-              </div>
-
-              {/* Персонаж разрезан на два слоя: тело и ладонь — ладонь машет CSS-анимацией.
-                  PNG как источник: оптимизатор next/image сам отдаст webp/avif по Accept. */}
-              <div className={s.heroImageWrap} aria-hidden>
-                <Image
-                  src="/img/sandwor-body.png"
-                  alt=""
-                  width={853}
-                  height={1280}
-                  priority
-                  sizes="(min-width: 1024px) 280px, (min-width: 640px) 230px, 255px"
-                  className={s.heroBody}
-                />
-
-                <Image
-                  src="/img/sandwor-hand.png"
-                  alt=""
-                  width={853}
-                  height={1280}
-                  priority
-                  sizes="(min-width: 1024px) 280px, (min-width: 640px) 230px, 255px"
-                  className={s.heroHand}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
+        {/* Курс — сразу под витриной, в спокойном оформлении: акцент главной на услуге */}
         <section className={s.section}>
           <div className={s.container}>
             <CourseBanner />

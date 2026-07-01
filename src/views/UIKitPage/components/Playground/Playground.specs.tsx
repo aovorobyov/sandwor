@@ -25,6 +25,7 @@ const DOT_ICON_NAMES: readonly DotIconName[] = [
   'github',
   'instagram',
   'vk',
+  'chevronDown',
   'notFound',
 ];
 

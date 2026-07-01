@@ -49,7 +49,8 @@ TELEGRAM_CONTACT_CHAT_ID=<chat_id для формы контактов>
 
 На Vercel добавь те же переменные в **Settings → Environment Variables**.
 
-`TELEGRAM_CONTACT_CHAT_ID` — куда бот шлёт сообщения из формы на `/contact`.
+`TELEGRAM_CONTACT_CHAT_ID` — куда бот шлёт сообщения из формы на `/contact`
+и заявки на сайт с `/websites` и главной.
 Чтобы узнать свой `chat_id`: напиши боту любое сообщение, открой
 `https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/getUpdates` и возьми
 `result[].message.chat.id`. Без этой переменной форма вернёт ошибку (бот молчит).
@@ -144,7 +145,8 @@ src/
 │   ├── theme-toggle/  # Dark/light mode switcher
 │   ├── accent-toggle/ # Accent color cycler
 │   ├── locale-switch/ # Language switcher (RU / EN)
-│   └── contact-form/  # Contact form with submit handler
+│   ├── contact-form/  # Contact form with submit handler
+│   └── order-form/    # Форма заявки на сайт + модалка (OrderModalContainer)
 │
 ├── widgets/           # Large page blocks composed from entities + features
 │   ├── Header/        # Site header with nav, theme toggle, locale switch
@@ -156,7 +158,8 @@ src/
 │   └── Timeline/      # Хронологическая лента: статьи + проекты + релизы
 │
 └── views/              # Page-level components (testable, separate from app/)
-    ├── HomePage/       # Hero + единая лента активности
+    ├── HomePage/       # Витрина услуги (ServiceShowcase) + лента активности
+    ├── WebsitesPage/   # Продающая страница создания сайтов (/websites)
     ├── BlogPage/       # Список всех постов с фильтром по тегам
     ├── ArticlePage/    # Страница отдельного поста
     ├── ProjectsPage/

@@ -4,6 +4,7 @@ import type { ChangeEvent, FC, FormEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
+import { FormSuccess } from '@/shared/ui/FormSuccess';
 import { useContactForm } from './useContactForm';
 import s from './ContactForm.module.css';
 
@@ -35,29 +36,11 @@ export const ContactForm: FC = () => {
 
   if (status === 'success') {
     return (
-      <div className={s.success}>
-        <svg
-          className={s.successIcon}
-          width="56"
-          height="56"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="9" />
-          <path d="m8.5 12.5 2.5 2.5 4.5-5" />
-        </svg>
-
-        <p className={s.successText}>{t('contact.success')}</p>
-
-        <Button variant="secondary" onClick={handleReset}>
-          {t('contact.again')}
-        </Button>
-      </div>
+      <FormSuccess
+        text={t('contact.success')}
+        actionLabel={t('contact.again')}
+        onReset={handleReset}
+      />
     );
   }
 
@@ -109,7 +92,7 @@ export const ContactForm: FC = () => {
 
       {status === 'error' && <p className={s.error}>{t('contact.error')}</p>}
 
-      <Button type="submit" disabled={isPending}>
+      <Button type="submit" className={s.submit} disabled={isPending}>
         {isPending ? t('contact.sending') : t('contact.submit')}
       </Button>
     </form>

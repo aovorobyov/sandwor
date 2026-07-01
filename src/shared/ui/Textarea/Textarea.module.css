@@ -14,13 +14,15 @@
   width: 100%;
   min-height: 120px;
   padding: 12px var(--space-4);
-  background: var(--bg);
+  background: var(--field-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font: inherit;
   font-size: var(--text-base);
   color: var(--text);
-  transition: border-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
   outline: none;
   resize: vertical;
   line-height: var(--leading-normal);
@@ -31,13 +33,13 @@
 }
 
 .textarea:focus {
-  border-color: var(--primary);
+  background: var(--bg);
+  border-color: var(--accent);
 }
 
 .textarea:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  background: var(--bg-subtle);
   resize: none;
 }
 

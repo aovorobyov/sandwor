@@ -37,9 +37,9 @@
   /* Фиксируем высоту, чтобы панель не схлопывалась на экране «отправлено». */
   min-height: 31rem;
   padding: var(--space-6);
-  background: var(--bg-subtle);
+  background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
 }
 
 @media (min-width: 640px) {

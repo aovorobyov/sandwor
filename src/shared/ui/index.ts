@@ -21,3 +21,12 @@ export type { SelectOption, SelectProps } from './Select';
 
 export { DotIcon } from './DotIcon';
 export type { DotIconName, DotIconProps, DotPoint } from './DotIcon';
+
+export { Modal } from './Modal';
+export type { ModalProps } from './Modal';
+
+export { FormSuccess } from './FormSuccess';
+export type { FormSuccessProps } from './FormSuccess';
+
+export { Typewriter } from './Typewriter';
+export type { TypewriterProps } from './Typewriter';

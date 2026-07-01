@@ -19,6 +19,7 @@ interface NavLink {
 
 const NAV_LINKS: NavLink[] = [
   { id: 'nav-home', href: '/', labelKey: 'nav.home', icon: 'home' },
+  { id: 'nav-websites', href: '/websites', labelKey: 'nav.websites', icon: 'projects' },
   { id: 'nav-blog', href: '/blog', labelKey: 'nav.blog', icon: 'blog' },
   { id: 'nav-projects', href: '/projects', labelKey: 'nav.projects', icon: 'projects' },
   { id: 'nav-news', href: '/news', labelKey: 'nav.news', icon: 'news' },

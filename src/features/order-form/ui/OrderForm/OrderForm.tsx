@@ -7,11 +7,13 @@ import { Input } from '@/shared/ui/Input';
 import { Textarea } from '@/shared/ui/Textarea';
 import { FormSuccess } from '@/shared/ui/FormSuccess';
 import { useOrderForm } from './useOrderForm';
+import type { OrderFormProps } from './OrderForm.types';
 import s from './OrderForm.module.css';
 
-export const OrderForm: FC = () => {
+export const OrderForm: FC<OrderFormProps> = (props) => {
+  const { goal } = props;
   const t = useTranslations();
-  const { form, status, change, submit, reset } = useOrderForm();
+  const { form, status, change, submit, reset } = useOrderForm(goal);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

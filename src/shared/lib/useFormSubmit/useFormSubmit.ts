@@ -8,6 +8,7 @@ import type { FormSubmitStatus } from './useFormSubmit.types';
 export const useFormSubmit = <T extends Record<string, string>>(
   endpoint: string,
   initialForm: T,
+  onSuccess?: () => void,
 ) => {
   const [form, setForm] = useState<T>(initialForm);
   const [status, setStatus] = useState<FormSubmitStatus>('idle');
@@ -44,6 +45,7 @@ export const useFormSubmit = <T extends Record<string, string>>(
       }
 
       setStatus('success');
+      onSuccess?.();
     } catch {
       setStatus('error');
     }

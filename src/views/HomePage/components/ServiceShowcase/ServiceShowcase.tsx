@@ -6,6 +6,7 @@ import type { FC } from 'react';
 import { useTranslations } from 'next-intl';
 import { Typewriter } from '@/shared/ui/Typewriter';
 import { OrderModalContainer, OrderButton } from '@/features/order-form';
+import { YM_GOAL } from '@/shared/lib/analytics';
 import s from './ServiceShowcase.module.css';
 
 export const ServiceShowcase: FC = () => {
@@ -14,7 +15,7 @@ export const ServiceShowcase: FC = () => {
   const words = t.raw('home.slogan-words') as string[];
 
   return (
-    <OrderModalContainer>
+    <OrderModalContainer goal={YM_GOAL.orderHome}>
       <section className={s.hero}>
         <div className={s.container}>
           <div className={s.layout}>

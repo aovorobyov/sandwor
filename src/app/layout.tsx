@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import { ViewTransitions } from 'next-view-transitions';
 import { OG_DEFAULT_IMAGE } from '@/shared/lib/seo/ogImage';
+import { YandexMetrika } from '@/shared/lib/analytics';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -11,6 +12,9 @@ export const metadata: Metadata = {
     default: 'sandwor',
   },
   description: 'Personal website',
+  verification: {
+    google: 'u0eIVBtknauZqtkXlaBQ18pLIkExBF5UJifDJ0KeUCo',
+  },
   alternates: {
     types: {
       'application/atom+xml': '/feed.xml',
@@ -35,6 +39,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
             {children}
           </ThemeProvider>
+
+          <YandexMetrika />
         </body>
       </html>
     </ViewTransitions>

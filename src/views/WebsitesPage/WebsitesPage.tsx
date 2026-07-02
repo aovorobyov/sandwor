@@ -6,6 +6,7 @@ import { Typewriter } from '@/shared/ui/Typewriter';
 import { DotIcon } from '@/shared/ui/DotIcon';
 import { Button } from '@/shared/ui/Button';
 import { OrderForm } from '@/features/order-form';
+import { YM_GOAL } from '@/shared/lib/analytics';
 import { JsonLd, buildBreadcrumbs } from '@/shared/lib/jsonLd';
 import { cn } from '@/shared/lib/cn';
 import type { FaqItem, ProcessStep, ToolItem } from './WebsitesPage.types';
@@ -216,7 +217,7 @@ export const WebsitesPage = async () => {
               </div>
 
               <div className={s.orderPanel}>
-                <OrderForm />
+                <OrderForm goal={YM_GOAL.orderWebsites} />
               </div>
             </div>
           </div>

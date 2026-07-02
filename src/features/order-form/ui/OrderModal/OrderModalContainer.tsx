@@ -10,7 +10,7 @@ import type { OrderModalContainerProps } from './OrderModal.types';
 
 /** Провайдер модалки заявки: держит состояние открытия и рендерит Modal один раз на всё поддерево. */
 export const OrderModalContainer: FC<OrderModalContainerProps> = (props) => {
-  const { children } = props;
+  const { children, goal } = props;
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -31,7 +31,7 @@ export const OrderModalContainer: FC<OrderModalContainerProps> = (props) => {
       {children}
 
       <Modal isOpen={isOpen} title={t('order.title')} onClose={handleClose}>
-        <OrderForm />
+        <OrderForm goal={goal} />
       </Modal>
     </OrderModalProvider>
   );

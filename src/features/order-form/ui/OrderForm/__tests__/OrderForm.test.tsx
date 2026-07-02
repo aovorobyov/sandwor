@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const messages = require('messages/ru.json') as Record<string, string>;
 import { OrderForm } from '../OrderForm';
+import { YM_GOAL } from '@/shared/lib/analytics';
 
 function wrapper({ children }: { children: React.ReactNode }) {
   return (
@@ -23,7 +24,7 @@ describe('OrderForm', () => {
   });
 
   it('renders all form fields', () => {
-    render(<OrderForm />, { wrapper });
+    render(<OrderForm goal={YM_GOAL.orderWebsites} />, { wrapper });
     expect(screen.getByLabelText(/Имя/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Телефон/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Telegram/i)).toBeInTheDocument();
@@ -32,7 +33,7 @@ describe('OrderForm', () => {
   });
 
   it('shows success message after submit', async () => {
-    render(<OrderForm />, { wrapper });
+    render(<OrderForm goal={YM_GOAL.orderWebsites} />, { wrapper });
 
     await userEvent.type(screen.getByLabelText(/Имя/i), 'Алиса');
     await userEvent.type(screen.getByLabelText(/Телефон/i), '+7 900 000-00-00');
@@ -45,7 +46,7 @@ describe('OrderForm', () => {
   });
 
   it('returns to the form when "send another" is clicked', async () => {
-    render(<OrderForm />, { wrapper });
+    render(<OrderForm goal={YM_GOAL.orderWebsites} />, { wrapper });
 
     await userEvent.type(screen.getByLabelText(/Имя/i), 'Боб');
     await userEvent.type(screen.getByLabelText(/Телефон/i), '+7 900 111-11-11');
@@ -63,7 +64,7 @@ describe('OrderForm', () => {
 
   it('shows an error message when the request fails', async () => {
     (global.fetch as jest.Mock).mockResolvedValueOnce({ ok: false } as Response);
-    render(<OrderForm />, { wrapper });
+    render(<OrderForm goal={YM_GOAL.orderWebsites} />, { wrapper });
 
     await userEvent.type(screen.getByLabelText(/Имя/i), 'Ева');
     await userEvent.type(screen.getByLabelText(/Телефон/i), '+7 900 222-22-22');

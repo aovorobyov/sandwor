@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { getTelegramPosts } from '@/entities/post/api/telegram';
+import { SITE_URL } from '@/shared/config/site';
 
-const SITE_URL = 'https://sandwor.ru';
 /** Контент тг-канала — на русском, поэтому фид одноязычный, без префикса локали в путях. */
 const FEED_LOCALE = 'ru';
 

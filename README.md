@@ -46,6 +46,7 @@ TELEGRAM_BOT_TOKEN=<токен от @BotFather>
 TELEGRAM_WEBHOOK_SECRET=<случайная строка>
 TELEGRAM_CONTACT_CHAT_ID=<chat_id для формы контактов>
 NEXT_PUBLIC_YM_ID=<номер счётчика Яндекс.Метрики>
+NEXT_PUBLIC_SITE_URL=https://sandwor.online   # канонический адрес сайта
 ```
 
 На Vercel добавь те же переменные в **Settings → Environment Variables**.
@@ -60,6 +61,12 @@ NEXT_PUBLIC_YM_ID=<номер счётчика Яндекс.Метрики>
 [metrika.yandex.ru](https://metrika.yandex.ru)). Инлайнится в клиентский бандл,
 поэтому префикс `NEXT_PUBLIC_`. Без переменной счётчик не рендерится — локальная
 разработка не засоряет статистику. Подробнее — раздел «Аналитика» ниже.
+
+`NEXT_PUBLIC_SITE_URL` — канонический адрес сайта, единый источник правды для
+`canonical`, Open Graph, `sitemap.xml`, `robots.txt`, Atom-фида и JSON-LD
+(константа `SITE_URL` в `src/shared/config/site.ts`). Если переменная не задана,
+код падает на дефолт `https://sandwor.online`. Домен `sandwor.ru` остаётся живым
+для связки с телеграм-ботом, но каноническим не является.
 
 ---
 

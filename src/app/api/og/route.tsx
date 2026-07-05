@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { SITE_HOST } from '@/shared/config/site';
 
 export const runtime = 'edge';
 
@@ -72,7 +73,7 @@ export const GET = (request: Request) => {
 
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ height: 6, width: 64, background: ACCENT, marginRight: 16 }} />
-          <div style={{ fontSize: 22, color: MUTED }}>sandwor.ru</div>
+          <div style={{ fontSize: 22, color: MUTED }}>{SITE_HOST}</div>
         </div>
       </div>
     ),

@@ -2,8 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getTelegramPosts } from '@/entities/post/api/telegram';
 import { getProjects } from '@/entities/project';
 import { COURSES_REGISTRY } from '@/views/CoursePage/config/registry';
-
-const BASE_URL = 'https://sandwor.ru';
+import { SITE_URL as BASE_URL } from '@/shared/config/site';
 
 /**
  * Сайт работает в режиме `localePrefix: 'never'` — обе локали отдаются на одном URL,

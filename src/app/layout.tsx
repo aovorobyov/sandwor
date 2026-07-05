@@ -3,10 +3,11 @@ import { ThemeProvider } from 'next-themes';
 import { ViewTransitions } from 'next-view-transitions';
 import { OG_DEFAULT_IMAGE } from '@/shared/lib/seo/ogImage';
 import { YandexMetrika } from '@/shared/lib/analytics';
+import { SITE_URL } from '@/shared/config/site';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sandwor.ru'),
+  metadataBase: new URL(SITE_URL),
   title: {
     template: '%s | sandwor',
     default: 'sandwor',

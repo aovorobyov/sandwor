@@ -1,1 +1,0 @@
-export { AccentToggle } from './AccentToggle';

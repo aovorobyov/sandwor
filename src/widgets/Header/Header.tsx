@@ -1,7 +1,6 @@
 import { Link } from '@/shared/ui/Link';
 import { getTranslations } from 'next-intl/server';
 import { ThemeToggle } from '@/features/theme-toggle';
-import { AccentToggle } from '@/features/accent-toggle';
 import { LocaleSwitch } from '@/features/locale-switch';
 import { PaletteTrigger } from '@/widgets/CommandPalette';
 import { cn } from '@/shared/lib/cn';
@@ -40,7 +39,6 @@ export const Header = async () => {
           <span className={cn(s.controlGap, s.searchSlot)}>
             <PaletteTrigger />
           </span>
-          <AccentToggle />
           <span className={s.controlGap}>
             <ThemeToggle />
           </span>
@@ -49,7 +47,6 @@ export const Header = async () => {
 
         {/* Бургер только для мобильных, скрыт на десктопе через CSS */}
         <div className={s.mobileControls}>
-          <AccentToggle />
           <span className={s.controlGap}>
             <ThemeToggle />
           </span>

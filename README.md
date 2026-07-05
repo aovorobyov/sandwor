@@ -209,7 +209,7 @@ src/
 │
 ├── features/          # User interactions
 │   ├── theme-toggle/  # Dark/light mode switcher
-│   ├── accent-toggle/ # Accent color cycler
+│   ├── accent-toggle/ # cycleAccent helper — hidden ⌘K easter egg (not in header)
 │   ├── locale-switch/ # Language switcher (RU / EN)
 │   ├── contact-form/  # Contact form with submit handler
 │   └── order-form/    # Форма заявки на сайт + модалка (OrderModalContainer)

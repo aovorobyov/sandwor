@@ -1,9 +1,10 @@
 import { getTranslations } from 'next-intl/server';
 import { ContactForm } from '@/features/contact-form';
 import { Button } from '@/shared/ui/Button';
+import { Link } from '@/shared/ui/Link';
 import { JsonLd, buildPerson } from '@/shared/lib/jsonLd';
 import { SocialIcon } from './SocialIcon';
-import { CONTACT_CHANNELS, PRIMARY_EMAIL } from './contacts';
+import { CONTACT_CHANNELS, PRIMARY_EMAIL, SECONDARY_LINKS } from './contacts';
 import s from './ContactPage.module.css';
 
 export const ContactPage = async () => {
@@ -44,6 +45,27 @@ export const ContactPage = async () => {
                 );
               })}
             </ul>
+
+            <section className={s.about}>
+              <p className={s.aboutName}>{t('home.name')}</p>
+              <p className={s.aboutBio}>{t('home.bio')}</p>
+            </section>
+
+            <nav className={s.more} aria-label={t('contact.more')}>
+              <p className={s.moreTitle}>{t('contact.more')}</p>
+
+              <ul className={s.moreList}>
+                {SECONDARY_LINKS.map(({ href, labelKey }) => {
+                  return (
+                    <li key={href} className={s.moreItem}>
+                      <Link href={href} className={s.moreLink}>
+                        {t(labelKey)}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
           </div>
 
           <div className={s.formPanel}>

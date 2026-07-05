@@ -1,9 +1,9 @@
 {
   "nav": {
     "home": "Home",
-    "websites": "Websites",
+    "websites": "Services",
     "blog": "Blog",
-    "projects": "Projects",
+    "projects": "Works",
     "news": "News",
     "timeline": "Timeline",
     "contact": "Contact",
@@ -65,6 +65,7 @@
     "title": "News",
     "subtitle": "Changelog of the site — what was added, fixed and improved across versions.",
     "entries": {
+      "v1-14-1": "The header is now focused on the client: the main navigation keeps only Services, Works, Blog and Contact instead of the previous eight items. The utility and «for myself» pages — News, Timeline, UI Kit and the AI Course — were dropped from the header and footer but are still reachable: via direct links, the ⌘K command palette, and a new block on the Contact page. The Contact page itself gained an author card with a short bio and a «More on the site» section that gathers all the secondary links in one place.",
       "v1-14-0": "The English version now has its own indexable URLs. RU and EN used to share a single address (localePrefix «never», language picked by a cookie), which left the entire en.json invisible to search and made hreflang point at itself. Now next-intl runs in «as-needed» mode: Russian stays on prefix-free addresses while English moved to /en/…, each language variant carries its own canonical and reciprocal hreflang, and the sitemap lists both versions. Navigation, the language switcher, the command palette and server-side redirects became locale-aware so an English visitor no longer falls through to Russian pages.",
       "v1-13-1": "Single source of truth for the domain and a canonical address on sandwor.online. SEO used to be nailed to sandwor.ru through hardcodes in seven places (metadataBase, sitemap, robots, feed, JSON-LD, OG), so canonical, Open Graph and the sitemap pointed at a domain unreachable from Russia due to Vercel hosting. Now the site address comes from a single SITE_URL constant backed by the NEXT_PUBLIC_SITE_URL variable and defaulting to the live sandwor.online, and every link — canonical, OG, sitemap, robots, feed and JSON-LD — converges on it; sandwor.ru stays live for the Telegram bot binding but is no longer declared as the primary domain.",
       "v1-13-0": "Web analytics: Yandex.Metrica and Google Search Console verification. The site had no analytics at all — now the root layout carries a Yandex.Metrica counter with Webvisor, click map and accurate bounce rate; the script loads via next/script with the afterInteractive strategy, the counter id lives in the NEXT_PUBLIC_YM_ID variable, and without it the counter is not rendered so local development does not pollute the stats. Successful submission of three forms fires JS goals through reachGoal: a request from the home page (order_home), a request from the /websites page (order_websites) and a message from the contact form (contact) — the identifiers are centralized in YM_GOAL. For Google Search Console a google-site-verification meta tag was added to prove domain ownership without DNS access.",
@@ -106,6 +107,7 @@
     "title": "Contact",
     "subtitle": "Open to projects, collaboration, and a good conversation. I usually reply within a day.",
     "cta": "Email me",
+    "more": "More on the site",
     "name": "Name",
     "email": "Email",
     "message": "Message",

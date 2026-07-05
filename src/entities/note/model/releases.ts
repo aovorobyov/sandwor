@@ -10,6 +10,7 @@ import type { Release } from './types';
  * месяц + год — это changelog, не дневник. Новейшие версии — первыми.
  */
 export const RELEASES: readonly Release[] = [
+  { version: '1.14.1', date: '2026-07-05' },
   { version: '1.14.0', date: '2026-07-05' },
   { version: '1.13.1', date: '2026-07-05' },
   { version: '1.13.0', date: '2026-07-03' },

@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: content?.title,
     description: content?.tagline,
-    alternates: buildPageAlternates(`/course/${courseId}`),
+    alternates: buildPageAlternates(locale, `/course/${courseId}`),
   };
 }
 

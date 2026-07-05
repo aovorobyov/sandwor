@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Link } from 'next-view-transitions';
+import { Link } from '@/shared/ui/Link';
 import { Logo } from './Logo/Logo';
 import s from './Header.module.css';
 

@@ -2,7 +2,7 @@
 
 import type { FC } from 'react';
 import { useState } from 'react';
-import { Link } from 'next-view-transitions';
+import { Link } from '@/shared/ui/Link';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/shared/lib/cn';
 import { NAV_LINKS } from './config';

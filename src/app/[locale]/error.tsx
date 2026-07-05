@@ -1,6 +1,6 @@
 'use client';
 
-import { Link } from 'next-view-transitions';
+import { Link } from '@/shared/ui/Link';
 import { useEffect } from 'react';
 import styles from './error.module.css';
 

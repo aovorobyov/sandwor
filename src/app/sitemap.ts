@@ -3,24 +3,47 @@ import { getTelegramPosts } from '@/entities/post/api/telegram';
 import { getProjects } from '@/entities/project';
 import { COURSES_REGISTRY } from '@/views/CoursePage/config/registry';
 import { SITE_URL as BASE_URL } from '@/shared/config/site';
+import { defaultLocale, locales } from '@/i18n-routing';
 
-/**
- * Сайт работает в режиме `localePrefix: 'never'` — обе локали отдаются на одном URL,
- * язык выбирается кукой. В sitemap декларируем страницу как мультиязычную через
- * `xhtml:link` (Next.js собирает их из `alternates.languages`).
- */
-const withLocaleAlternates = (path: string) => {
-  const url = `${BASE_URL}${path}`;
+type EntryMeta = Pick<
+  MetadataRoute.Sitemap[number],
+  'lastModified' | 'changeFrequency' | 'priority'
+>;
+
+/** URL страницы для локали: дефолтная — без префикса, остальные — с /{locale}. */
+const buildLocaleUrl = (locale: string, path: string) => {
+  const prefix = locale === defaultLocale ? '' : `/${locale}`;
+
+  return `${BASE_URL}${prefix}${path}`;
+};
+
+/** Блок hreflang-альтернатив: по ссылке на каждую локаль + x-default на дефолтную. */
+const buildLanguageAlternates = (path: string) => {
+  const languages = Object.fromEntries(
+    locales.map((locale) => [locale, buildLocaleUrl(locale, path)]),
+  );
+
   return {
-    url,
-    alternates: {
-      languages: {
-        ru: url,
-        en: url,
-        'x-default': url,
-      },
+    languages: {
+      ...languages,
+      'x-default': buildLocaleUrl(defaultLocale, path),
     },
   };
+};
+
+/**
+ * Раскрывает один путь в записи sitemap — по одной на локаль.
+ * Режим `localePrefix: 'as-needed'`: у ru URL без префикса, у en — `/en/...`.
+ * Каждая запись несёт полный блок `xhtml:link` (Next.js собирает его из `alternates.languages`).
+ */
+const toLocalizedEntries = (path: string, meta: EntryMeta): MetadataRoute.Sitemap => {
+  const alternates = buildLanguageAlternates(path);
+
+  return locales.map((locale) => ({
+    url: buildLocaleUrl(locale, path),
+    alternates,
+    ...meta,
+  }));
 };
 
 const STATIC_PATHS = [
@@ -36,35 +59,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [posts, projects] = await Promise.all([getTelegramPosts(), Promise.resolve(getProjects())]);
   const now = new Date();
 
-  const staticEntries: MetadataRoute.Sitemap = STATIC_PATHS.map(
-    ({ path, priority, changeFrequency }) => ({
-      ...withLocaleAlternates(path),
+  const staticEntries = STATIC_PATHS.flatMap(({ path, priority, changeFrequency }) =>
+    toLocalizedEntries(path, { lastModified: now, changeFrequency, priority }),
+  );
+
+  const courseEntries = Object.keys(COURSES_REGISTRY).flatMap((courseId) =>
+    toLocalizedEntries(`/course/${courseId}`, {
       lastModified: now,
-      changeFrequency,
-      priority,
+      changeFrequency: 'monthly',
+      priority: 0.9,
     }),
   );
 
-  const courseEntries: MetadataRoute.Sitemap = Object.keys(COURSES_REGISTRY).map((courseId) => ({
-    ...withLocaleAlternates(`/course/${courseId}`),
-    lastModified: now,
-    changeFrequency: 'monthly',
-    priority: 0.9,
-  }));
+  const postEntries = posts.flatMap((post) =>
+    toLocalizedEntries(`/blog/${post.slug}`, {
+      lastModified: new Date(post.date),
+      changeFrequency: 'yearly',
+      priority: 0.7,
+    }),
+  );
 
-  const postEntries: MetadataRoute.Sitemap = posts.map((post) => ({
-    ...withLocaleAlternates(`/blog/${post.slug}`),
-    lastModified: new Date(post.date),
-    changeFrequency: 'yearly',
-    priority: 0.7,
-  }));
-
-  const projectEntries: MetadataRoute.Sitemap = projects.map((project) => ({
-    ...withLocaleAlternates(`/projects/${project.slug}`),
-    lastModified: new Date(project.date),
-    changeFrequency: 'yearly',
-    priority: 0.6,
-  }));
+  const projectEntries = projects.flatMap((project) =>
+    toLocalizedEntries(`/projects/${project.slug}`, {
+      lastModified: new Date(project.date),
+      changeFrequency: 'yearly',
+      priority: 0.6,
+    }),
+  );
 
   return [...staticEntries, ...courseEntries, ...postEntries, ...projectEntries];
 }

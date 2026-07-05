@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Link } from 'next-view-transitions';
+import { Link } from '@/shared/ui/Link';
 import { useLocale, useTranslations } from 'next-intl';
 import { Badge } from '@/shared/ui/Badge';
 import type { TimelineEntryProps, TimelineEntryView } from './TimelineEntry.types';

@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { ProjectList } from '@/widgets/ProjectList';
 import { getProjects } from '@/entities/project';
-import { Link } from 'next-view-transitions';
+import { Link } from '@/shared/ui/Link';
 import { Typewriter } from '@/shared/ui/Typewriter';
 import { DotIcon } from '@/shared/ui/DotIcon';
 import { Button } from '@/shared/ui/Button';

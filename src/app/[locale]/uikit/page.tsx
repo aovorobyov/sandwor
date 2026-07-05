@@ -13,7 +13,7 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
-    alternates: buildPageAlternates('/uikit'),
+    alternates: buildPageAlternates(locale, '/uikit'),
     openGraph: { title: t('title'), description: t('description'), images: [OG_DEFAULT_IMAGE] },
   };
 }

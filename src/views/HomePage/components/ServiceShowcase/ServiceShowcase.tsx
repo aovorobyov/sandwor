@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Link } from 'next-view-transitions';
+import { Link } from '@/shared/ui/Link';
 import type { FC } from 'react';
 import { useTranslations } from 'next-intl';
 import { Typewriter } from '@/shared/ui/Typewriter';

@@ -1,4 +1,4 @@
-import { Link } from 'next-view-transitions';
+import { Link } from '@/shared/ui/Link';
 import { getTranslations } from 'next-intl/server';
 import { PostList } from '@/widgets/PostList';
 import { ProjectList } from '@/widgets/ProjectList';

@@ -13,7 +13,7 @@ export async function generateMetadata({
   return {
     title: t('blog.title'),
     description: t('blog.subtitle'),
-    alternates: buildPageAlternates('/blog'),
+    alternates: buildPageAlternates(locale, '/blog'),
     openGraph: {
       title: t('blog.title'),
       description: t('blog.subtitle'),

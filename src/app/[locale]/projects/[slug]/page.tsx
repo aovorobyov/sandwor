@@ -25,7 +25,7 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
   return {
     title: project.title[locale as 'en' | 'ru'] ?? project.title.en,
     description: project.description[locale as 'en' | 'ru'] ?? project.description.en,
-    alternates: buildPageAlternates(`/projects/${project.slug}`),
+    alternates: buildPageAlternates(locale, `/projects/${project.slug}`),
     openGraph: {
       title: project.title[locale as 'en' | 'ru'] ?? project.title.en,
       description: project.description[locale as 'en' | 'ru'] ?? project.description.en,

@@ -1,11 +1,12 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { cycleAccent } from '@/features/accent-toggle';
 import { useLocaleSwitch } from '@/features/locale-switch';
 import { locales, type Locale } from '@/i18n-routing';
+import { localizeHref } from '@/shared/ui/Link/localizeHref';
 import type { DotIconName } from '@/shared/ui';
 import type { PaletteCommand } from '../CommandPalette.types';
 import type { PaletteSearchPost } from './paletteApi';
@@ -36,6 +37,7 @@ const LOCALE_LABELS: Record<Locale, string> = {
 
 export const useCommands = (posts: PaletteSearchPost[] = []): PaletteCommand[] => {
   const t = useTranslations();
+  const locale = useLocale();
   const router = useRouter();
   const { setTheme } = useTheme();
   const { switchLocale, currentLocale } = useLocaleSwitch();
@@ -46,7 +48,8 @@ export const useCommands = (posts: PaletteSearchPost[] = []): PaletteCommand[] =
       label: t(labelKey),
       group: 'navigation',
       icon,
-      onSelect: () => router.push(href),
+      // localizeHref — иначе на EN палитра увела бы на RU-версию (as-needed).
+      onSelect: () => router.push(localizeHref(href, locale)),
     };
   });
 
@@ -57,7 +60,7 @@ export const useCommands = (posts: PaletteSearchPost[] = []): PaletteCommand[] =
       group: 'post',
       icon: 'post',
       keywords: `post статья ${post.tag}`,
-      onSelect: () => router.push(`/blog/${post.slug}`),
+      onSelect: () => router.push(localizeHref(`/blog/${post.slug}`, locale)),
     };
   });
 

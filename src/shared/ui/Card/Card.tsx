@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Link } from 'next-view-transitions';
+import { Link } from '@/shared/ui/Link';
 import { cn } from '@/shared/lib/cn';
 import type { CardProps } from './Card.types';
 import s from './Card.module.css';

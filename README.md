@@ -188,7 +188,7 @@ src/
 ├── app/               # Next.js App Router — routing only, no business logic
 │   ├── api/
 │   │   └── telegram/webhook/  # Webhook для on-demand revalidation
-│   └── [locale]/      # Locale-based routing (/ru, /en)
+│   └── [locale]/      # RU без префикса, EN на /en (localePrefix: as-needed)
 │       └── blog/
 │           └── [slug]/        # Страница отдельного поста
 │
@@ -279,11 +279,12 @@ Imports must only go **downward**. `shared` must never import from `features`.
 ## Как добавить новый язык (i18n)
 
 1. Создать `messages/[locale].json` с теми же ключами, что в `ru.json`
-2. Добавить локаль в `src/i18n.ts`:
+2. Добавить локаль в `src/i18n-routing.ts` — единый источник (`locales`, `defaultLocale`, `routing`); middleware и навигация подхватят её автоматически:
    ```ts
    export const locales = ['ru', 'en', 'de'] as const;
    ```
-3. Добавить локаль в `src/middleware.ts` в массив `locales`
+
+Режим `localePrefix: 'as-needed'`: дефолтная локаль отдаётся без префикса, остальные — на `/{locale}/…` с собственными canonical/hreflang и записями в sitemap.
 
 ---
 

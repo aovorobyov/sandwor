@@ -1,4 +1,4 @@
-import { Link } from 'next-view-transitions';
+import { Link } from '@/shared/ui/Link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getTranslations, getLocale } from 'next-intl/server';

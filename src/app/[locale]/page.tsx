@@ -11,7 +11,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: '' });
   return {
     description: t('home.bio'),
-    alternates: buildPageAlternates(''),
+    alternates: buildPageAlternates(locale, ''),
   };
 }
 

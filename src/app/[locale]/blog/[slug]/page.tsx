@@ -29,7 +29,7 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
   return {
     title: post.title,
     description: post.excerpt,
-    alternates: buildPageAlternates(`/blog/${post.slug}`),
+    alternates: buildPageAlternates(locale, `/blog/${post.slug}`),
     openGraph: {
       title: post.title,
       description: post.excerpt,

@@ -1,4 +1,4 @@
-import { Link } from 'next-view-transitions';
+import { Link } from '@/shared/ui/Link';
 import { getTranslations } from 'next-intl/server';
 import { NAV_LINKS } from '../Header/config';
 import s from './Footer.module.css';

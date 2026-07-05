@@ -29,7 +29,7 @@
       "your community",
       "your startup"
     ],
-    "lead": "Landing pages, Tilda stores with a friendly admin panel, custom development — I pick the right tool for your goal and budget.",
+    "lead": "Landing pages, Tilda stores you can edit without a developer, custom development — I pick the right tool for your goal and budget.",
     "order": "Order a website",
     "more": "Learn more",
     "latest-posts": "Latest articles",
@@ -68,6 +68,7 @@
     "title": "News",
     "subtitle": "Changelog of the site — what was added, fixed and improved across versions.",
     "entries": {
+      "v1-16-0": "The /websites page turned into a real sales page: plans, reviews and direct contact. Instead of a single vague «from RUB 50,000» there is now a grid of three plans — Landing page (from RUB 50,000), Tilda store (from RUB 100,000) and Custom (on request) — each with its own scope of work plus a shared «included in every plan» block. A reviews section was added on its own data source (empty for now, it switches on automatically once real reviews arrive, and the Review schema is emitted at the same time) alongside a direct-contact block next to the request form — equal-width Telegram and WhatsApp buttons with their brand logos. Along the way the content width was aligned with the home page, the incorrect «my admin panel» wording was removed (content editing goes through Tilda's built-in editor), the FAQ was rewritten around the new plans and contact options, and the meta-description was trimmed to snippet length.",
       "v1-15-0": "Side projects are now separated from commercial cases. The main-nav «Works» item is renamed to «Cases» and shown greyed-out for now — the section is waiting for real client cases with a problem, a solution and an outcome. The existing learning and personal projects (including the café site) moved to a «Projects» section reachable from the Contact page, like the other secondary pages. The «Selected work» block with side projects was removed from the services page and the home page, so a buyer sees only relevant content.",
       "v1-14-1": "The header is now focused on the client: the main navigation keeps only Services, Works, Blog and Contact instead of the previous eight items. The utility and «for myself» pages — News, Timeline, UI Kit and the AI Course — were dropped from the header and footer but are still reachable: via direct links, the ⌘K command palette, and a new block on the Contact page. The Contact page itself gained an author card with a short bio and a «More on the site» section that gathers all the secondary links in one place.",
       "v1-14-0": "The English version now has its own indexable URLs. RU and EN used to share a single address (localePrefix «never», language picked by a cookie), which left the entire en.json invisible to search and made hreflang point at itself. Now next-intl runs in «as-needed» mode: Russian stays on prefix-free addresses while English moved to /en/…, each language variant carries its own canonical and reciprocal hreflang, and the sitemap lists both versions. Navigation, the language switcher, the command palette and server-side redirects became locale-aware so an English visitor no longer falls through to Russian pages.",
@@ -137,8 +138,8 @@
     "title": "Website development",
     "subtitle": "Landing pages, online stores and custom websites tailored to your business. From RUB 50,000.",
     "meta-title": "Website development — landing pages & Tilda stores | from RUB 50,000",
-    "meta-description": "Websites for business: landing pages, Tilda online stores with a friendly admin panel, and custom builds. I pick the right tool for the job, launch end to end and support after go-live. Starting price from RUB 50,000.",
-    "hero-lead": "I build websites that work toward a result: clear structure, fast launch and an admin panel where you manage the content yourself.",
+    "meta-description": "Websites for business: landing pages from RUB 50,000, Tilda stores and custom builds. I pick the right tool for the job, launch end to end and support after go-live.",
+    "hero-lead": "I build websites that work toward a result: clear structure, fast launch and easy content management — on Tilda you edit the site yourself, without a developer.",
     "order": "Order a website",
     "scroll-hint": "Scroll down",
     "approach-title": "How I approach the work",
@@ -151,8 +152,8 @@
     "tools-lead": "I'm not tied to a single technology — I choose what's most beneficial for you.",
     "tools": [
       {
-        "title": "Tilda with a strong admin panel",
-        "desc": "A store or catalog where you add products, change prices and texts yourself. A convenient control panel — no need to reach a developer for every little thing."
+        "title": "Tilda with easy editing",
+        "desc": "A store or catalog where you add products, change prices and texts yourself right in Tilda — no need to reach a developer for every little thing."
       },
       {
         "title": "Landing pages for launch",
@@ -175,7 +176,7 @@
       },
       {
         "title": "Development",
-        "desc": "I build and fill the site, wire up forms, analytics and the admin panel."
+        "desc": "I build and fill the site, wire up forms and analytics; on Tilda I set up easy editing."
       },
       { "title": "Launch", "desc": "We publish on your domain and I test across devices." },
       {
@@ -183,30 +184,71 @@
         "desc": "I stay in touch after launch: edits, improvements and consulting."
       }
     ],
-    "pricing-title": "Pricing",
-    "price-prefix": "Starting price",
-    "price-from": "from RUB 50,000",
+    "pricing-title": "Plans",
+    "pricing-lead": "Three formats for different goals and budgets. I quote the exact price after the brief.",
+    "tariffs": [
+      {
+        "title": "Landing page",
+        "price": "from RUB 50,000",
+        "desc": "A one-page site for a single service, product or launch. Focused on one target action.",
+        "features": [
+          "Structure and selling copy",
+          "Custom design",
+          "Responsive on all devices",
+          "Lead form and analytics",
+          "Launch in 1–2 weeks"
+        ]
+      },
+      {
+        "title": "Tilda store",
+        "price": "from RUB 100,000",
+        "desc": "A catalog with cart and payment. You edit products and prices yourself right in Tilda.",
+        "features": [
+          "Catalog and product cards",
+          "Cart and payment acceptance",
+          "Content editing in Tilda",
+          "Delivery and notifications setup",
+          "Training on the panel"
+        ]
+      },
+      {
+        "title": "Custom",
+        "price": "on request",
+        "desc": "Non-standard features and maximum flexibility: custom markup and logic for your goal — from a small tweak to a full-fledged service.",
+        "features": [
+          "Design tailored to the goal",
+          "Custom markup and logic",
+          "Integrations with external services",
+          "High speed and SEO",
+          "Project growth after launch"
+        ]
+      }
+    ],
+    "pricing-note": "Every plan includes",
     "pricing-includes": [
       "Structure and design for your goal",
       "Adaptation for phones and tablets",
       "Lead forms and analytics setup",
-      "Admin panel for self-management",
+      "Basic SEO setup for search engines",
       "Launch on your domain",
       "Post-launch support"
     ],
+    "reviews-title": "Reviews",
+    "reviews-lead": "What clients I've built sites for say.",
+    "reviews": [],
     "faq-title": "Frequently asked questions",
     "faq": [
       {
         "question": "How long does it take?",
-        "answer": "A landing page usually takes 1–2 weeks, a store or multi-page site — from 3 weeks. We lock exact timing after the brief."
+        "answer": "A landing page usually takes 1–2 weeks, a Tilda store — from 3 weeks, custom development — depending on the scope. We lock exact timing after the brief."
       },
       {
-        "question": "What's included in the RUB 50,000 starting price?",
-        "answer": "A basic site for your goal: structure, design, responsive layout, lead forms and an admin panel. The final price depends on the number of pages and features."
+        "question": "What does the price depend on?",
+        "answer": "A landing page starts from RUB 50,000, a Tilda store from RUB 100,000, custom development is on request. The final amount depends on the number of pages and features — I quote the exact price after the brief."
       },
       {
         "question": "Can I edit the content myself?",
-        "answer": "Yes. I build an admin panel where you add products and change texts and prices yourself — without reaching me for every edit."
+        "answer": "It depends on the tool. On Tilda you change texts, products and prices yourself in the built-in editor — without reaching me. For custom sites we discuss editing options separately, tailored to the task."
       },
       {
         "question": "Do you help after launch?",
@@ -215,10 +257,20 @@
       {
         "question": "Do I need my own domain and hosting?",
         "answer": "I'll help choose and connect a domain. Hosting depends on the tool — I'll suggest the best option for your project."
+      },
+      {
+        "question": "What's the fastest way to reach you?",
+        "answer": "Describe your task in the request form or message me directly on Telegram or WhatsApp — in messengers I usually reply within a day."
       }
     ],
     "order-title": "Leave a request",
-    "order-subtitle": "Describe the website you need — I'll get back to you shortly and propose a solution."
+    "order-subtitle": "Describe the website you need — I'll get back to you shortly and propose a solution.",
+    "order-direct-title": "Or message me directly",
+    "order-direct-note": "I reply faster in messengers — usually within a day.",
+    "order-direct": {
+      "telegram": "Message on Telegram",
+      "whatsapp": "Message on WhatsApp"
+    }
   },
   "footer": {
     "rights": "© {year} Alexander Vorobyov"

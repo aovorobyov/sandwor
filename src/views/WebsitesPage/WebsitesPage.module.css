@@ -2,9 +2,9 @@
   padding-bottom: var(--space-24);
 }
 
-/* Единая ширина колонки для всех секций — цельная композиция страницы */
+/* Единая ширина колонки для всех секций — совпадает с главной для цельной композиции */
 .container {
-  max-width: var(--container-narrow);
+  max-width: var(--container);
   margin: 0 auto;
   padding: 0 var(--container-pad);
 }
@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: var(--container-narrow);
+  max-width: var(--container);
   margin: 0 auto;
   padding: 0 var(--container-pad);
 }
@@ -210,33 +210,77 @@
   line-height: var(--leading-normal);
 }
 
-.pricing {
+.tariffs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.tariff {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: var(--space-8);
-  padding: var(--space-8);
+  flex-direction: column;
+  padding: var(--space-6);
   background: var(--bg-subtle);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
 }
 
-.priceLead {
-  display: flex;
-  flex-direction: column;
-}
-
-.priceLabel {
-  font-size: var(--text-sm);
-  color: var(--text-muted);
+.tariffTitle {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
   margin-bottom: var(--space-1);
 }
 
-.priceValue {
-  font-size: var(--text-3xl);
+.tariffPrice {
+  font-size: var(--text-xl);
   font-weight: var(--weight-semibold);
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+
+.tariffDesc {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+  margin-bottom: var(--space-4);
+}
+
+/* Список фич прижат к низу — цены и заголовки карточек выровнены между собой */
+.tariffFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+
+.tariffFeature {
+  position: relative;
+  padding-left: var(--space-6);
+  font-size: var(--text-sm);
   color: var(--text);
-  white-space: nowrap;
+  line-height: var(--leading-normal);
+}
+
+.tariffFeature::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: var(--weight-semibold);
+}
+
+.pricingNote {
+  padding: var(--space-6);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.pricingNoteTitle {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-4);
 }
 
 .includes {
@@ -325,9 +369,95 @@
   border-radius: var(--radius-sm);
 }
 
+.reviews {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.reviewText {
+  font-size: var(--text-base);
+  color: var(--text);
+  line-height: var(--leading-loose);
+  margin-bottom: var(--space-4);
+}
+
+.reviewAuthor {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
+
+.reviewName {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+}
+
+.reviewRole {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+/* Прямые каналы связи — над формой на мобиле, рядом с интро на десктопе */
+.direct {
+  margin-top: var(--space-6);
+}
+
+.directTitle {
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  margin-bottom: var(--space-3);
+}
+
+.directButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
+}
+
+.directButton {
+  gap: var(--space-2);
+}
+
+.directNote {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+  margin-top: var(--space-3);
+}
+
 @media (min-width: 640px) {
   .cards {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tariffs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .reviews {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .directButtons {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  /* Обе кнопки одинаковой ширины — делят строку поровну */
+  .directButton {
+    flex: 1 1 0;
   }
 }
 

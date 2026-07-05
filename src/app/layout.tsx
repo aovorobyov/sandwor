@@ -13,7 +13,11 @@ export const metadata: Metadata = {
   },
   description: 'Personal website',
   verification: {
-    google: 'u0eIVBtknauZqtkXlaBQ18pLIkExBF5UJifDJ0KeUCo',
+    // По тегу на каждый ресурс Search Console — у доменов свои токены, Google берёт свой.
+    google: [
+      'u0eIVBtknauZqtkXlaBQ18pLIkExBF5UJifDJ0KeUCo', // sandwor.ru
+      'arN6y5jaZLjtoMERFP81bY07HuVvPbBbhVysMeZRFRk', // sandwor.online
+    ],
   },
   alternates: {
     types: {

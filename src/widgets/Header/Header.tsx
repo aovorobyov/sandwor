@@ -19,11 +19,21 @@ export const Header = async () => {
         <LogoLink />
 
         <nav className={s.nav} aria-label="Main navigation">
-          {NAV_LINKS.map(({ href, labelKey }) => (
-            <Link key={href} href={href} className={s.navLink}>
-              {t(labelKey)}
-            </Link>
-          ))}
+          {NAV_LINKS.map(({ href, labelKey, isDisabled }) => {
+            if (isDisabled) {
+              return (
+                <span key={href} className={cn(s.navLink, s.navLinkDisabled)} aria-disabled="true">
+                  {t(labelKey)}
+                </span>
+              );
+            }
+
+            return (
+              <Link key={href} href={href} className={s.navLink}>
+                {t(labelKey)}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className={s.controls}>

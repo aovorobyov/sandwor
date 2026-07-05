@@ -37,11 +37,21 @@ export const MobileMenu: FC = () => {
 
       {isOpen && (
         <nav className={s.menu} aria-label="Mobile navigation">
-          {NAV_LINKS.map(({ href, labelKey }: (typeof NAV_LINKS)[number]) => (
-            <Link key={href} href={href} className={s.link} onClick={handleClose}>
-              {t(labelKey)}
-            </Link>
-          ))}
+          {NAV_LINKS.map(({ href, labelKey, isDisabled }) => {
+            if (isDisabled) {
+              return (
+                <span key={href} className={cn(s.link, s.linkDisabled)} aria-disabled="true">
+                  {t(labelKey)}
+                </span>
+              );
+            }
+
+            return (
+              <Link key={href} href={href} className={s.link} onClick={handleClose}>
+                {t(labelKey)}
+              </Link>
+            );
+          })}
         </nav>
       )}
     </>

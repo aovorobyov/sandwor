@@ -1,20 +1,14 @@
 import { Link } from '@/shared/ui/Link';
 import { getTranslations } from 'next-intl/server';
 import { PostList } from '@/widgets/PostList';
-import { ProjectList } from '@/widgets/ProjectList';
 import { getTelegramPosts } from '@/entities/post/api/telegram';
-import { getProjects } from '@/entities/project';
 import { JsonLd, buildPerson, buildWebSite } from '@/shared/lib/jsonLd';
 import { CourseBanner } from './components/CourseBanner/CourseBanner';
 import { ServiceShowcase } from './components/ServiceShowcase';
 import s from './HomePage.module.css';
 
 export const HomePage = async () => {
-  const [t, posts, projects] = await Promise.all([
-    getTranslations(),
-    getTelegramPosts(),
-    Promise.resolve(getProjects()),
-  ]);
+  const [t, posts] = await Promise.all([getTranslations(), getTelegramPosts()]);
 
   const personData = buildPerson({ name: t('home.name'), bio: t('home.bio') });
   const siteData = buildWebSite({ name: t('home.name') });
@@ -47,22 +41,6 @@ export const HomePage = async () => {
               </div>
 
               <PostList posts={posts.slice(0, 3)} />
-            </div>
-          </section>
-        )}
-
-        {projects.length > 0 && (
-          <section className={s.section}>
-            <div className={s.container}>
-              <div className={s.sectionHeader}>
-                <h2 className={s.sectionTitle}>{t('home.projects')}</h2>
-
-                <Link href="/projects" className={s.seeAll}>
-                  {t('home.all-projects')}
-                </Link>
-              </div>
-
-              <ProjectList projects={projects.slice(0, 3)} />
             </div>
           </section>
         )}

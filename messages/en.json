@@ -3,7 +3,8 @@
     "home": "Home",
     "websites": "Services",
     "blog": "Blog",
-    "projects": "Works",
+    "projects": "Projects",
+    "cases": "Cases",
     "news": "News",
     "timeline": "Timeline",
     "contact": "Contact",
@@ -33,8 +34,6 @@
     "more": "Learn more",
     "latest-posts": "Latest articles",
     "all-posts": "All articles →",
-    "projects": "Projects",
-    "all-projects": "All projects →",
     "course-badge": "New course",
     "course-continue-badge": "Already started",
     "course-cta": "Start course →",
@@ -53,9 +52,13 @@
     "min-read": "{count} min read",
     "related-posts": "Related posts"
   },
+  "cases": {
+    "title": "Cases",
+    "soon": "Coming soon: commercial case studies — real client projects with the problem, the solution and the outcome."
+  },
   "projects": {
     "title": "Projects",
-    "subtitle": "Side projects and case studies: what was built, how and why.",
+    "subtitle": "Side projects: what was built, how and why.",
     "open": "Open →",
     "view": "View →",
     "repo": "Repository ↗",
@@ -65,6 +68,7 @@
     "title": "News",
     "subtitle": "Changelog of the site — what was added, fixed and improved across versions.",
     "entries": {
+      "v1-15-0": "Side projects are now separated from commercial cases. The main-nav «Works» item is renamed to «Cases» and shown greyed-out for now — the section is waiting for real client cases with a problem, a solution and an outcome. The existing learning and personal projects (including the café site) moved to a «Projects» section reachable from the Contact page, like the other secondary pages. The «Selected work» block with side projects was removed from the services page and the home page, so a buyer sees only relevant content.",
       "v1-14-1": "The header is now focused on the client: the main navigation keeps only Services, Works, Blog and Contact instead of the previous eight items. The utility and «for myself» pages — News, Timeline, UI Kit and the AI Course — were dropped from the header and footer but are still reachable: via direct links, the ⌘K command palette, and a new block on the Contact page. The Contact page itself gained an author card with a short bio and a «More on the site» section that gathers all the secondary links in one place.",
       "v1-14-0": "The English version now has its own indexable URLs. RU and EN used to share a single address (localePrefix «never», language picked by a cookie), which left the entire en.json invisible to search and made hreflang point at itself. Now next-intl runs in «as-needed» mode: Russian stays on prefix-free addresses while English moved to /en/…, each language variant carries its own canonical and reciprocal hreflang, and the sitemap lists both versions. Navigation, the language switcher, the command palette and server-side redirects became locale-aware so an English visitor no longer falls through to Russian pages.",
       "v1-13-1": "Single source of truth for the domain and a canonical address on sandwor.online. SEO used to be nailed to sandwor.ru through hardcodes in seven places (metadataBase, sitemap, robots, feed, JSON-LD, OG), so canonical, Open Graph and the sitemap pointed at a domain unreachable from Russia due to Vercel hosting. Now the site address comes from a single SITE_URL constant backed by the NEXT_PUBLIC_SITE_URL variable and defaulting to the live sandwor.online, and every link — canonical, OG, sitemap, robots, feed and JSON-LD — converges on it; sandwor.ru stays live for the Telegram bot binding but is no longer declared as the primary domain.",
@@ -136,7 +140,6 @@
     "meta-description": "Websites for business: landing pages, Tilda online stores with a friendly admin panel, and custom builds. I pick the right tool for the job, launch end to end and support after go-live. Starting price from RUB 50,000.",
     "hero-lead": "I build websites that work toward a result: clear structure, fast launch and an admin panel where you manage the content yourself.",
     "order": "Order a website",
-    "cases-cta": "See the work",
     "scroll-hint": "Scroll down",
     "approach-title": "How I approach the work",
     "approach": [
@@ -180,7 +183,6 @@
         "desc": "I stay in touch after launch: edits, improvements and consulting."
       }
     ],
-    "cases-title": "Selected work",
     "pricing-title": "Pricing",
     "price-prefix": "Starting price",
     "price-from": "from RUB 50,000",

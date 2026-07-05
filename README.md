@@ -228,7 +228,8 @@ src/
     ├── WebsitesPage/   # Продающая страница создания сайтов (/websites)
     ├── BlogPage/       # Список всех постов с фильтром по тегам
     ├── ArticlePage/    # Страница отдельного поста
-    ├── ProjectsPage/
+    ├── ProjectsPage/   # Пет-проекты (/projects, ссылка со страницы Контакты)
+    ├── CasesPage/      # Коммерческие кейсы (/cases) — пока заглушка «скоро»
     ├── TimelinePage/   # Полная лента без квот (/timeline)
     ├── NewsPage/       # Changelog с semver-версиями (/news)
     ├── UIKitPage/      # Дизайн-система: интерактивная песочница компонентов

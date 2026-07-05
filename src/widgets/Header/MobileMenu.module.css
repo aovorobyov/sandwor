@@ -97,6 +97,14 @@
   color: var(--accent);
 }
 
+/* Пункт-заглушка (раздел ещё не наполнен): приглушён и не реагирует на курсор */
+.linkDisabled {
+  color: var(--text-muted);
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bar {
     transition: none;

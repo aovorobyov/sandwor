@@ -120,22 +120,10 @@
   scroll-margin-top: calc(var(--header-h) + var(--space-4));
 }
 
-.sectionHeader {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: var(--space-6);
-}
-
 .sectionTitle {
   font-size: var(--text-xl);
   font-weight: var(--weight-semibold);
   margin-bottom: var(--space-4);
-}
-
-/* Заголовок внутри строки-хедера (title + ссылка) — без нижнего отступа */
-.sectionTitleFlush {
-  margin-bottom: 0;
 }
 
 .sectionLead {
@@ -143,17 +131,6 @@
   color: var(--text-muted);
   line-height: var(--leading-normal);
   margin-bottom: var(--space-6);
-}
-
-.seeAll {
-  font-size: var(--text-sm);
-  color: var(--accent);
-  font-weight: var(--weight-medium);
-  transition: var(--transition);
-}
-
-.seeAll:hover {
-  opacity: 0.8;
 }
 
 .proseText {

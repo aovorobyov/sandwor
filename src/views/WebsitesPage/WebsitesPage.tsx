@@ -1,19 +1,15 @@
 import { getTranslations } from 'next-intl/server';
-import { ProjectList } from '@/widgets/ProjectList';
-import { getProjects } from '@/entities/project';
-import { Link } from '@/shared/ui/Link';
 import { Typewriter } from '@/shared/ui/Typewriter';
 import { DotIcon } from '@/shared/ui/DotIcon';
 import { Button } from '@/shared/ui/Button';
 import { OrderForm } from '@/features/order-form';
 import { YM_GOAL } from '@/shared/lib/analytics';
 import { JsonLd, buildBreadcrumbs } from '@/shared/lib/jsonLd';
-import { cn } from '@/shared/lib/cn';
 import type { FaqItem, ProcessStep, ToolItem } from './WebsitesPage.types';
 import s from './WebsitesPage.module.css';
 
 export const WebsitesPage = async () => {
-  const [t, projects] = await Promise.all([getTranslations(), Promise.resolve(getProjects())]);
+  const t = await getTranslations();
 
   // Сообщения хранят массивы — t.raw отдаёт их as-is
   const words = t.raw('home.slogan-words') as string[];
@@ -75,10 +71,6 @@ export const WebsitesPage = async () => {
               <div className={s.heroCta}>
                 <Button href="#order" variant="primary">
                   {t('websites.order')}
-                </Button>
-
-                <Button href="#cases" variant="secondary">
-                  {t('websites.cases-cta')}
                 </Button>
               </div>
             </div>
@@ -146,24 +138,6 @@ export const WebsitesPage = async () => {
             </ol>
           </div>
         </section>
-
-        {projects.length > 0 && (
-          <section id="cases" className={s.section}>
-            <div className={s.container}>
-              <div className={s.sectionHeader}>
-                <h2 className={cn(s.sectionTitle, s.sectionTitleFlush)}>
-                  {t('websites.cases-title')}
-                </h2>
-
-                <Link href="/projects" className={s.seeAll}>
-                  {t('home.all-projects')}
-                </Link>
-              </div>
-
-              <ProjectList projects={projects.slice(0, 3)} />
-            </div>
-          </section>
-        )}
 
         <section className={s.section}>
           <div className={s.container}>

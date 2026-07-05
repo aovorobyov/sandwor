@@ -48,6 +48,14 @@
   color: var(--text);
 }
 
+/* Пункт-заглушка (раздел ещё не наполнен): приглушён и не реагирует на курсор */
+.navLinkDisabled {
+  color: var(--text-muted);
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
 .controls {
   display: none;
   align-items: center;

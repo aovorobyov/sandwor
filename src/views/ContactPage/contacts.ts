@@ -16,6 +16,7 @@ export const CONTACT_CHANNELS: ContactChannel[] = [
  * Собраны здесь, чтобы не терялись после урезания шапки до 4 пунктов.
  */
 export const SECONDARY_LINKS = [
+  { href: '/projects', labelKey: 'nav.projects' },
   { href: '/news', labelKey: 'nav.news' },
   { href: '/timeline', labelKey: 'nav.timeline' },
   { href: '/course/ai-basics', labelKey: 'nav.course' },

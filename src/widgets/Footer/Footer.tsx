@@ -1,5 +1,6 @@
 import { Link } from '@/shared/ui/Link';
 import { getTranslations } from 'next-intl/server';
+import { cn } from '@/shared/lib/cn';
 import { NAV_LINKS } from '../Header/config';
 import s from './Footer.module.css';
 
@@ -17,11 +18,21 @@ export const Footer = async () => {
     <footer className={s.root}>
       <div className={s.inner}>
         <nav className={s.nav} aria-label="Footer navigation">
-          {NAV_LINKS.map(({ href, labelKey }) => (
-            <Link key={href} href={href} className={s.link}>
-              {t(labelKey)}
-            </Link>
-          ))}
+          {NAV_LINKS.map(({ href, labelKey, isDisabled }) => {
+            if (isDisabled) {
+              return (
+                <span key={href} className={cn(s.link, s.linkDisabled)} aria-disabled="true">
+                  {t(labelKey)}
+                </span>
+              );
+            }
+
+            return (
+              <Link key={href} href={href} className={s.link}>
+                {t(labelKey)}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className={s.social}>

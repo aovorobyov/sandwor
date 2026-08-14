@@ -9,7 +9,9 @@
     "timeline": "Timeline",
     "contact": "Contact",
     "uikit": "UI Kit",
-    "course": "AI Course"
+    "course": "AI Course",
+    "rss": "RSS",
+    "services": "Services"
   },
   "home": {
     "name": "Alexander Vorobyov",
@@ -42,19 +44,277 @@
     "course-progress": "{done} of {total} completed",
     "timeline-type-post": "Article",
     "timeline-type-project": "Project",
-    "timeline-more-releases": "{count, plural, one {and # more release} other {and # more releases}}"
+    "timeline-more-releases": "{count, plural, one {and # more release} other {and # more releases}}",
+    "hero-eyebrow": "Turnkey website development",
+    "hero-title": "I build websites that bring in leads",
+    "hero-lead": "Landing pages, Tilda stores and custom development. I pick the right tool for your task and budget — and leave you a site you can run yourself.",
+    "hero-order": "Order a website",
+    "hero-tariffs": "See pricing",
+    "facts": [
+      {
+        "value": "from 50,000 ₽",
+        "label": "launch cost"
+      },
+      {
+        "value": "1–2 weeks",
+        "label": "to publish"
+      },
+      {
+        "value": "4 projects",
+        "label": "in portfolio"
+      },
+      {
+        "value": "1 day",
+        "label": "reply time"
+      }
+    ],
+    "marquee": [
+      "Landing pages",
+      "Tilda stores",
+      "Custom development",
+      "Speed and SEO",
+      "Analytics and leads"
+    ],
+    "value-title": "What the work includes",
+    "value-props": [
+      {
+        "kicker": "Leads",
+        "title": "Structure around the target action",
+        "desc": "We start from the question «what should a person do on the site». Blocks, copy and buttons are built around that answer."
+      },
+      {
+        "kicker": "Control",
+        "title": "You edit the content yourself",
+        "desc": "On Tilda, products, prices and texts are edited in the built-in editor. No need to message a developer over a single comma."
+      },
+      {
+        "kicker": "After launch",
+        "title": "Support and improvements",
+        "desc": "Edits, improvements and advice on growth. The site lives with your business rather than ending at handover."
+      }
+    ],
+    "tariffs-note": "I name the exact price after a short brief.",
+    "tariffs-discuss": "Discuss",
+    "blog-title": "From the blog",
+    "blog-all": "All articles →",
+    "cta-title": "Tell me about your task",
+    "cta-lead": "No twenty-page brief. A couple of questions in a messenger — and you'll know what it means in terms of time and money.",
+    "cta-order": "Leave a request",
+    "cta-telegram": "Message on Telegram ↗"
   },
   "blog": {
     "title": "Articles",
-    "subtitle": "Articles on frontend, tooling and development.",
+    "subtitle": "Practical articles on building websites: pricing, choosing an approach and what clients should know.",
     "filter-all": "All",
     "read-more": "Read →",
     "min-read": "{count} min read",
-    "related-posts": "Related posts"
+    "related-posts": "Related posts",
+    "read-next": "Read next",
+    "cta-title": "Need an estimate for your task?",
+    "cta-lead": "Describe the project — I'll give a range the same day.",
+    "cta-btn": "Discuss"
   },
   "cases": {
     "title": "Cases",
-    "soon": "Coming soon: commercial case studies — real client projects with the problem, the solution and the outcome."
+    "soon": "Coming soon: commercial case studies — real client projects with the problem, the solution and the outcome.",
+    "breadcrumb": "Cases",
+    "hero-title": "Projects and results",
+    "hero-lead": "The client's task, the chosen solution and the scope of work for each project.",
+    "metrics": [
+      {
+        "value": "4",
+        "label": "projects"
+      },
+      {
+        "value": "2",
+        "label": "on Tilda"
+      },
+      {
+        "value": "3",
+        "label": "work formats"
+      }
+    ],
+    "filter-all": "All",
+    "card-cta": "View case →",
+    "cta-title": "The next case is your project",
+    "cta-lead": "Tell me about your task — I'll propose a solution, timeline and budget.",
+    "cta-btn": "Discuss a project",
+    "other-title": "Other cases",
+    "other-cta": "View →",
+    "facts-label": "In brief",
+    "items": [
+      {
+        "slug": "model-agency",
+        "type": "Tilda store",
+        "title": "Model agency: a site for the adult division",
+        "summary": "A model portfolio, work directions and a casting request. The agency updates the content itself.",
+        "scope": ["Model portfolio catalog", "Casting request form", "Editing in Tilda"]
+      },
+      {
+        "slug": "kids-agency",
+        "type": "Tilda store",
+        "title": "Kids model agency and image school",
+        "summary": "Two directions in one structure: classes for children and an image school program with sign-up.",
+        "scope": ["Two directions on one site", "Image school program", "Class sign-up"]
+      },
+      {
+        "slug": "event-spaces",
+        "type": "Landing page",
+        "title": "Event space rental",
+        "summary": "A single page with venues, capacity and rental terms. A booking request without a phone call.",
+        "scope": ["Venues with capacity", "Rental terms and price", "Booking request"]
+      },
+      {
+        "slug": "tilda-translate",
+        "type": "Custom development",
+        "title": "A site translation script for two languages",
+        "summary": "A ru/en module for Tilda: a language switch, saved choice and content translation without duplicate pages.",
+        "scope": ["ru/en language switch", "Saved locale choice", "No page duplication"]
+      }
+    ],
+    "details": {
+      "model-agency": {
+        "lead": "The agency's adult division: the roster of models, work directions and casting requests. The agency updates content itself in the Tilda editor.",
+        "facts": [
+          {
+            "k": "Client",
+            "v": "Model agency, adult division"
+          },
+          {
+            "k": "Task",
+            "v": "Show models and collect casting requests"
+          },
+          {
+            "k": "Solution",
+            "v": "A Tilda store with a portfolio catalog"
+          },
+          {
+            "k": "Format",
+            "v": "Catalog, work directions, request form"
+          }
+        ],
+        "blocks": [
+          {
+            "title": "The starting point",
+            "p1": "The model portfolio lived in messengers and social networks: selections were sent by hand, and casting requests got lost in chats.",
+            "p2": "They needed a place that shows the agency roster and work directions and where both a client and a prospective model could be sent."
+          },
+          {
+            "title": "What was done",
+            "p1": "The structure was built around two audiences: a client browses the model catalog and directions, an applicant lands on the casting request form.",
+            "p2": "The portfolio catalog was built on Tilda so the agency could add new cards and change photos itself, without a developer."
+          },
+          {
+            "title": "The outcome",
+            "p1": "Requests come through the form, and model selections are shared as a link to the site instead of a messenger archive.",
+            "p2": "Updating the roster is no longer a job for a contractor — cards are edited in the Tilda editor in a couple of minutes."
+          }
+        ]
+      },
+      "kids-agency": {
+        "lead": "A kids model agency and image school in one structure: classes for children and a school program with sign-up.",
+        "facts": [
+          {
+            "k": "Client",
+            "v": "Kids model agency and image school"
+          },
+          {
+            "k": "Task",
+            "v": "Show two directions and collect sign-ups"
+          },
+          {
+            "k": "Solution",
+            "v": "A Tilda store with two sections"
+          },
+          {
+            "k": "Format",
+            "v": "Directions, school program, sign-up"
+          }
+        ],
+        "blocks": [
+          {
+            "title": "The starting point",
+            "p1": "Two different directions — the kids agency and the image school — had to fit into one clear structure without confusing parents.",
+            "p2": "The class program needed to be shown with a simple path to sign up."
+          },
+          {
+            "title": "What was done",
+            "p1": "The directions were split into site sections: the agency and the image school with its own program.",
+            "p2": "The site was built on Tilda with class sign-up and the option to update the program independently."
+          }
+        ]
+      },
+      "event-spaces": {
+        "lead": "A single-page site for space rental: venues, capacity, rental terms and a booking request without a phone call.",
+        "facts": [
+          {
+            "k": "Client",
+            "v": "Event space rental"
+          },
+          {
+            "k": "Task",
+            "v": "Show venues and collect bookings"
+          },
+          {
+            "k": "Solution",
+            "v": "A landing page with a booking form"
+          },
+          {
+            "k": "Format",
+            "v": "Venues, terms, booking form"
+          }
+        ],
+        "blocks": [
+          {
+            "title": "The starting point",
+            "p1": "Information about the venues was scattered, and bookings had to be arranged by phone.",
+            "p2": "They needed one page that immediately shows capacity, terms and rental price."
+          },
+          {
+            "title": "What was done",
+            "p1": "A landing page was built with venues, capacity and rental terms in one scroll.",
+            "p2": "A booking request form was added so a request could be left without a call."
+          }
+        ]
+      },
+      "tilda-translate": {
+        "lead": "A ru/en module for Tilda: a language switch, saved visitor choice and content translation without duplicating pages.",
+        "facts": [
+          {
+            "k": "Client",
+            "v": "A Tilda site with two languages"
+          },
+          {
+            "k": "Task",
+            "v": "Add ru/en without duplicate pages"
+          },
+          {
+            "k": "Solution",
+            "v": "A custom content translation script"
+          },
+          {
+            "k": "Format",
+            "v": "Switch, saved locale, translation"
+          }
+        ],
+        "blocks": [
+          {
+            "title": "The starting point",
+            "p1": "Tilda has no convenient bilingual support out of the box: usually you have to duplicate pages, which complicates maintenance.",
+            "p2": "They needed a language switch that translates content and remembers the visitor's choice."
+          },
+          {
+            "title": "What was done",
+            "p1": "I wrote a script that translates content on the fly and keeps the selected locale across pages.",
+            "p2": "We avoided duplicating pages — the sources and code are open in a GitHub repository."
+          }
+        ]
+      }
+    },
+    "similar-title": "A similar task?",
+    "similar-lead": "I'll estimate the timeline and budget for your project.",
+    "similar-btn": "Discuss",
+    "repo": "Repository"
   },
   "projects": {
     "title": "Projects",
@@ -121,7 +381,14 @@
     "sending": "Sending…",
     "success": "Message sent",
     "again": "Send another message",
-    "error": "Couldn't send your message. Please try again later or email me."
+    "error": "Couldn't send your message. Please try again later or email me.",
+    "hero-title": "Tell me about your task",
+    "status": "Available for work",
+    "geo": "Moscow · Mon–Sun, 24/7",
+    "phone": "+7 985 431-69-70",
+    "channels-title": "Channels",
+    "who-title": "Who replies",
+    "message-title": "Send a message"
   },
   "order": {
     "title": "Order a website",
@@ -179,7 +446,10 @@
         "title": "Development",
         "desc": "I build and fill the site, wire up forms and analytics; on Tilda I set up easy editing."
       },
-      { "title": "Launch", "desc": "We publish on your domain and I test across devices." },
+      {
+        "title": "Launch",
+        "desc": "We publish on your domain and I test across devices."
+      },
       {
         "title": "Support",
         "desc": "I stay in touch after launch: edits, improvements and consulting."
@@ -271,15 +541,26 @@
     "order-direct": {
       "telegram": "Message on Telegram",
       "whatsapp": "Message on WhatsApp"
-    }
+    },
+    "hero-title": "Turnkey website development",
+    "to-tariffs": "To pricing ↓",
+    "tools-kickers": ["Tilda", "Landing", "Code"],
+    "breadcrumb": "Services"
   },
   "footer": {
-    "rights": "© {year} Alexander Vorobyov"
+    "rights": "© {year} Alexander Vorobyov",
+    "description": "Websites for business: landing pages, Tilda stores and custom development.",
+    "sections": "Sections",
+    "more": "More",
+    "contacts": "Contact",
+    "privacy": "Privacy Policy"
   },
   "404": {
     "page-not-found": "Page not found",
     "page-not-found-description": "The page you are looking for does not exist.",
-    "back-home": "← Back home"
+    "back-home": "Home",
+    "to-blog": "To blog",
+    "description-new": "It may have been moved or the link is out of date. The homepage will get you back on track."
   },
   "palette": {
     "placeholder": "Search the site…",
@@ -371,5 +652,110 @@
       "service3Desc": "Anthropic's AI, great for text and analysis",
       "printTitle": "Print / Save as PDF"
     }
+  },
+  "header": {
+    "cta": "Discuss a project",
+    "menu": "Menu",
+    "more": "More on the site"
+  },
+  "legacy": {
+    "notice": "Legacy page",
+    "hint": "design update coming soon"
+  },
+  "cookie": {
+    "aria": "Cookie consent",
+    "text": "We use cookies and Yandex.Metrica for analytics. Learn more —",
+    "policy": "Privacy Policy",
+    "accept": "Accept",
+    "reject": "Decline"
+  },
+  "form": {
+    "consent-pre": "I consent to the processing of my personal data and accept the",
+    "consent-link": "Privacy Policy"
+  },
+  "privacy": {
+    "breadcrumb": "Privacy",
+    "title": "Privacy Policy",
+    "updated": "Updated: 13 August 2026",
+    "intro": "We respect your privacy. Below is what personal data the site collects, why it is needed and how you can manage it.",
+    "sections": [
+      {
+        "heading": "1. General provisions",
+        "paragraphs": [
+          "This Policy governs how personal data of visitors to the sandwor website (the “Site”) is processed and protected, and is prepared in accordance with Russian Federal Law No. 152-FZ of 27 July 2006 “On Personal Data”.",
+          "The data operator is Alexander Olegovich Vorobyov (the “Operator”). Contact for personal-data matters: aovorobyov@mail.ru.",
+          "By using the Site and submitting data through its forms, you confirm your agreement with this Policy."
+        ]
+      },
+      {
+        "heading": "2. What data is processed",
+        "paragraphs": [
+          "When you fill in the forms on the Site, the Operator processes the data you provide voluntarily: name, email address, phone number, Telegram username, and the text of your message or task description.",
+          "When you visit the Site, technical data is processed automatically: IP address, cookies, browser and device information, and on-page activity. It is collected via the Yandex.Metrica web-analytics service."
+        ]
+      },
+      {
+        "heading": "3. Purposes of processing",
+        "paragraphs": [
+          "Personal data is processed in order to: handle requests submitted through the forms; contact you upon your request; and improve the Site and analyse its traffic."
+        ]
+      },
+      {
+        "heading": "4. Legal basis",
+        "paragraphs": [
+          "The basis for processing is the consent of the data subject. You give it by ticking the relevant checkbox when submitting a form or by continuing to use the Site with analytics enabled. Consent may be withdrawn at any time (see the section on rights)."
+        ]
+      },
+      {
+        "heading": "5. Manner and means of processing",
+        "paragraphs": [
+          "Processing is carried out both with and without automation. Data submitted through the forms reaches the Operator as a message in the Telegram messenger and is used solely to contact you.",
+          "The Operator does not sell personal data and does not transfer it to third parties, except as described in this Policy or required by law."
+        ]
+      },
+      {
+        "heading": "6. Cookies and web analytics",
+        "paragraphs": [
+          "The Site uses cookies and the Yandex.Metrica service (Yandex LLC, servers located in the Russian Federation) to analyse traffic. Metrica may collect your IP address, cookies, device data and on-site behaviour.",
+          "Analytics loads only after your consent in the cookie banner; if you decline, the counter is not loaded. You can withdraw consent by clearing site data in your browser or disabling cookies in its settings."
+        ]
+      },
+      {
+        "heading": "7. Retention periods",
+        "paragraphs": [
+          "Personal data is kept no longer than the purposes of processing require, or until consent is withdrawn. Once the purposes are achieved or consent is withdrawn, the data is deleted unless the law provides otherwise."
+        ]
+      },
+      {
+        "heading": "8. Data protection",
+        "paragraphs": [
+          "The Operator takes reasonable organisational and technical measures to protect personal data from unlawful access, alteration, disclosure and destruction."
+        ]
+      },
+      {
+        "heading": "9. Rights of the data subject",
+        "paragraphs": [
+          "You have the right to obtain information about the processing of your data, to request its correction, blocking or deletion, and to withdraw your consent. To exercise these rights, send a request to aovorobyov@mail.ru."
+        ]
+      },
+      {
+        "heading": "10. Withdrawal of consent",
+        "paragraphs": [
+          "You can withdraw consent to the processing of personal data by emailing aovorobyov@mail.ru. After withdrawal, the Operator stops processing and deletes the data unless there is another lawful basis to retain it."
+        ]
+      },
+      {
+        "heading": "11. Changes to this Policy",
+        "paragraphs": [
+          "The Operator may amend this Policy. The current version is always published on this page."
+        ]
+      },
+      {
+        "heading": "12. Contacts",
+        "paragraphs": [
+          "For any questions related to the processing of personal data, contact aovorobyov@mail.ru."
+        ]
+      }
+    ]
   }
 }

@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
-import { ThemeProvider } from 'next-themes';
 import { ViewTransitions } from 'next-view-transitions';
 import { OG_DEFAULT_IMAGE } from '@/shared/lib/seo/ogImage';
-import { YandexMetrika } from '@/shared/lib/analytics';
 import { SITE_URL } from '@/shared/config/site';
 import './globals.css';
 
@@ -39,14 +37,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ViewTransitions>
-      <html suppressHydrationWarning>
-        <body>
-          <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
-            {children}
-          </ThemeProvider>
-
-          <YandexMetrika />
-        </body>
+      <html lang="ru" suppressHydrationWarning>
+        <body>{children}</body>
       </html>
     </ViewTransitions>
   );

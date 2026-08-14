@@ -1,35 +1,33 @@
 .root {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-field);
 }
 
-.item {
-  display: flex;
-  align-items: center;
-  margin-right: var(--space-1);
+.tab {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  border-radius: var(--radius-field);
+  color: var(--dim);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
-.separator {
-  color: var(--border);
-  font-size: var(--text-xs);
-  user-select: none;
-  margin-right: var(--space-1);
+.tab:hover {
+  color: var(--muted);
 }
 
-.active {
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  color: var(--text);
-  cursor: default;
+.tabActive {
+  background: var(--ac-soft);
+  color: var(--ac);
 }
 
-.inactive {
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-  transition: var(--transition);
-  cursor: pointer;
-}
-
-.inactive:hover {
-  color: var(--text);
+.tabActive:hover {
+  color: var(--ac);
 }

@@ -38,11 +38,26 @@ describe('OrderForm', () => {
     await userEvent.type(screen.getByLabelText(/Имя/i), 'Алиса');
     await userEvent.type(screen.getByLabelText(/Телефон/i), '+7 900 000-00-00');
     await userEvent.type(screen.getByLabelText(/Какой сайт нужен/i), 'Лендинг для кофейни');
+    await userEvent.click(screen.getByRole('checkbox'));
     await userEvent.click(screen.getByRole('button', { name: /Отправить заявку/i }));
 
     await waitFor(() => {
       expect(screen.getByText(/Свяжемся с вами/i)).toBeInTheDocument();
     });
+  });
+
+  it('keeps submit disabled until consent is given', async () => {
+    render(<OrderForm goal={YM_GOAL.orderWebsites} />, { wrapper });
+
+    await userEvent.type(screen.getByLabelText(/Имя/i), 'Дан');
+    await userEvent.type(screen.getByLabelText(/Телефон/i), '+7 900 333-33-33');
+    await userEvent.type(screen.getByLabelText(/Какой сайт нужен/i), 'Лендинг');
+
+    expect(screen.getByRole('button', { name: /Отправить заявку/i })).toBeDisabled();
+
+    await userEvent.click(screen.getByRole('checkbox'));
+
+    expect(screen.getByRole('button', { name: /Отправить заявку/i })).toBeEnabled();
   });
 
   it('returns to the form when "send another" is clicked', async () => {
@@ -51,6 +66,7 @@ describe('OrderForm', () => {
     await userEvent.type(screen.getByLabelText(/Имя/i), 'Боб');
     await userEvent.type(screen.getByLabelText(/Телефон/i), '+7 900 111-11-11');
     await userEvent.type(screen.getByLabelText(/Какой сайт нужен/i), 'Магазин');
+    await userEvent.click(screen.getByRole('checkbox'));
     await userEvent.click(screen.getByRole('button', { name: /Отправить заявку/i }));
 
     await waitFor(() => {
@@ -69,6 +85,7 @@ describe('OrderForm', () => {
     await userEvent.type(screen.getByLabelText(/Имя/i), 'Ева');
     await userEvent.type(screen.getByLabelText(/Телефон/i), '+7 900 222-22-22');
     await userEvent.type(screen.getByLabelText(/Какой сайт нужен/i), 'Сайт-визитка');
+    await userEvent.click(screen.getByRole('checkbox'));
     await userEvent.click(screen.getByRole('button', { name: /Отправить заявку/i }));
 
     await waitFor(() => {

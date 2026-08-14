@@ -18,6 +18,8 @@ interface OrderPayload {
   phone: string;
   telegram: string;
   task: string;
+  /** Согласие на обработку ПДн — обязательно, форма без него не отправляется. */
+  consent?: unknown;
   /** Honeypot — у людей всегда пуст. */
   company?: unknown;
   /** Время от загрузки формы до отправки, мс. */
@@ -53,8 +55,9 @@ const isSpam = ({ company, elapsedMs, task }: OrderPayload): boolean => {
   return (task.match(LINK_PATTERN) ?? []).length > MAX_LINKS;
 };
 
-const isValid = ({ name, phone, telegram, task }: OrderPayload): boolean => {
+const isValid = ({ name, phone, telegram, task, consent }: OrderPayload): boolean => {
   return (
+    consent === true &&
     !!name.trim() &&
     !!phone.trim() &&
     !!task.trim() &&
@@ -108,6 +111,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
   }
 
   lines.push('', `<b>Задача:</b> ${escapeHtml(task)}`);
+  lines.push('', '✅ Согласие на обработку ПДн получено');
 
   const isDelivered = await sendTelegramMessage(lines.join('\n'));
 

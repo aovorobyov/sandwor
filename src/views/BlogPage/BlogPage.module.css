@@ -1,15 +1,45 @@
-.root {
-  padding-bottom: var(--space-24);
+.hero {
+  border-bottom: 1px solid var(--line-soft);
 }
 
-.container {
+.heroInner {
+  width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: var(--space-12) var(--container-pad) 0;
+  padding: clamp(18px, 2.6vw, 28px) var(--container-pad) clamp(36px, 4.4vw, 56px);
+}
+
+.breadcrumbs {
+  display: block;
+  padding-bottom: clamp(32px, 4.4vw, 64px);
 }
 
 .title {
-  font-size: var(--text-3xl);
-  font-weight: var(--weight-semibold);
-  margin-bottom: var(--space-8);
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(28px, 4.2vw, 50px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 18px;
+  animation: rise 0.9s var(--ease-out) both;
+}
+
+.lead {
+  max-width: 62ch;
+  font-size: clamp(16px, 1.5vw, 18px);
+  line-height: 1.6;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* ── Локальные keyframes (css-modules скоупит имя вместе со ссылкой) ── */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }

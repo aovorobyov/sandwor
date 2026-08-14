@@ -17,6 +17,8 @@ interface ContactPayload {
   name: string;
   email: string;
   message: string;
+  /** Согласие на обработку ПДн — обязательно, форма без него не отправляется. */
+  consent?: unknown;
   /** Honeypot — у людей всегда пуст. */
   company?: unknown;
   /** Время от загрузки формы до отправки, мс. */
@@ -47,8 +49,9 @@ const isSpam = ({ company, elapsedMs, message }: ContactPayload): boolean => {
   return (message.match(LINK_PATTERN) ?? []).length > MAX_LINKS;
 };
 
-const isValid = ({ name, email, message }: ContactPayload): boolean => {
+const isValid = ({ name, email, message, consent }: ContactPayload): boolean => {
   return (
+    consent === true &&
     !!name.trim() &&
     !!message.trim() &&
     name.length <= MAX_NAME &&
@@ -96,6 +99,8 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
     `<b>Email:</b> ${escapeHtml(email)}`,
     '',
     escapeHtml(message),
+    '',
+    '✅ Согласие на обработку ПДн получено',
   ].join('\n');
 
   const isDelivered = await sendTelegramMessage(text);

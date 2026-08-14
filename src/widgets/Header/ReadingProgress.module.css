@@ -1,0 +1,22 @@
+.track {
+  height: 2px;
+  background: var(--line-soft);
+}
+
+.fill {
+  height: 2px;
+  background: var(--ac);
+  transform-origin: 0 50%;
+  animation: growx linear both;
+  animation-timeline: scroll();
+}
+
+/* ── Локальные keyframes (css-modules скоупит имя вместе со ссылкой) ── */
+@keyframes growx {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

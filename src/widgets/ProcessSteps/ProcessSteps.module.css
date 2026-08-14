@@ -1,0 +1,53 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.step {
+  border-top: 2px solid var(--line);
+  padding-top: 16px;
+  transition: border-color 0.3s ease;
+  animation: rise 0.8s var(--ease-out) both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 24%;
+}
+
+.step:hover {
+  border-top-color: var(--ac);
+}
+
+.num {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--ac);
+  margin-bottom: 12px;
+}
+
+.title {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.desc {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* ── Локальные keyframes (css-modules скоупит имя вместе со ссылкой) ── */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

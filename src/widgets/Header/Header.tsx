@@ -1,11 +1,10 @@
-import { Link } from '@/shared/ui/Link';
 import { getTranslations } from 'next-intl/server';
-import { ThemeToggle } from '@/features/theme-toggle';
+import { Link } from '@/shared/ui/Link';
+import { Button } from '@/shared/ui/Button';
 import { LocaleSwitch } from '@/features/locale-switch';
-import { PaletteTrigger } from '@/widgets/CommandPalette';
-import { cn } from '@/shared/lib/cn';
 import { NAV_LINKS } from './config';
 import { MobileMenu } from './MobileMenu';
+import { ReadingProgress } from './ReadingProgress';
 import { LogoLink } from './LogoLink';
 import s from './Header.module.css';
 
@@ -17,45 +16,32 @@ export const Header = async () => {
       <div className={s.inner}>
         <LogoLink />
 
-        <nav className={s.nav} aria-label="Main navigation">
-          {NAV_LINKS.map(({ href, labelKey, isDisabled }) => {
-            if (isDisabled) {
-              return (
-                <span key={href} className={cn(s.navLink, s.navLinkDisabled)} aria-disabled="true">
-                  {t(labelKey)}
-                </span>
-              );
-            }
-
-            return (
+        <div className={s.desktop}>
+          <nav className={s.nav} aria-label="Main navigation">
+            {NAV_LINKS.map(({ href, labelKey }) => (
               <Link key={href} href={href} className={s.navLink}>
                 {t(labelKey)}
               </Link>
-            );
-          })}
-        </nav>
+            ))}
+          </nav>
 
-        <div className={s.controls}>
-          <span className={cn(s.controlGap, s.searchSlot)}>
-            <PaletteTrigger />
-          </span>
-          <span className={s.controlGap}>
-            <ThemeToggle />
-          </span>
-          <LocaleSwitch />
+          <div className={s.actions}>
+            <LocaleSwitch />
+
+            <Button href="/contact" variant="primary" className={s.cta}>
+              {t('header.cta')}
+            </Button>
+          </div>
         </div>
 
-        {/* Бургер только для мобильных, скрыт на десктопе через CSS */}
-        <div className={s.mobileControls}>
-          <span className={s.controlGap}>
-            <ThemeToggle />
-          </span>
-          <span className={s.controlGap}>
-            <LocaleSwitch />
-          </span>
+        <div className={s.mobile}>
+          <LocaleSwitch />
+
           <MobileMenu />
         </div>
       </div>
+
+      <ReadingProgress />
     </header>
   );
 };

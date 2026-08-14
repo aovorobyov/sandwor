@@ -1,8 +1,8 @@
-import { getTelegramPosts } from '@/entities/post/api/telegram';
+import { getPosts } from '@/entities/post/api/posts';
 
 /** Минимальная проекция поста для поиска в командной палитре — без HTML-тела. */
 export const GET = async () => {
-  const posts = await getTelegramPosts();
+  const posts = await getPosts();
 
   const slim = posts.map((post) => ({
     slug: post.slug,

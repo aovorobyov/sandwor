@@ -11,10 +11,8 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'cases' });
   return {
     title: t('title'),
-    description: t('soon'),
+    description: t('hero-lead'),
     alternates: buildPageAlternates(locale, '/cases'),
-    // Раздел ещё не наполнен — заглушку не индексируем
-    robots: { index: false, follow: true },
   };
 }
 

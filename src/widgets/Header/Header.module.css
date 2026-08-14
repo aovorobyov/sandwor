@@ -1,98 +1,86 @@
 .root {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  transition: var(--transition);
+  z-index: 300;
+  background: rgba(14, 12, 11, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .inner {
+  width: 100%;
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 var(--container-pad);
   height: var(--header-h);
   display: flex;
   align-items: center;
-}
-
-.logo {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  transition: var(--transition);
-  margin-right: var(--space-6);
+  gap: clamp(16px, 3vw, 40px);
 }
 
 .logo:hover {
-  opacity: 0.8;
+  color: var(--text);
+  opacity: 0.85;
+}
+
+/* ── Десктоп-группа (≥900px) ── */
+.desktop {
+  display: none;
+  align-items: center;
+  gap: clamp(16px, 2.4vw, 32px);
+  margin-left: auto;
+  min-width: 0;
 }
 
 .nav {
-  display: none;
+  display: flex;
   align-items: center;
-  flex: 1;
+  gap: clamp(16px, 2.4vw, 30px);
 }
 
 .navLink {
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-  transition: var(--transition);
-  margin-right: var(--space-6);
-
-  /* Двухсловные пункты («Курс ИИ», «UI Kit») не должны переноситься на вторую строку */
+  font-size: 14.5px;
+  font-weight: var(--weight-medium);
+  color: var(--muted);
+  letter-spacing: -0.01em;
+  padding: 5px 0;
+  border-bottom: 1px solid transparent;
   white-space: nowrap;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .navLink:hover {
   color: var(--text);
+  border-bottom-color: var(--ac);
 }
 
-/* Пункт-заглушка (раздел ещё не наполнен): приглушён и не реагирует на курсор */
-.navLinkDisabled {
-  color: var(--text-muted);
-  opacity: 0.5;
-  cursor: default;
-  pointer-events: none;
-}
-
-.controls {
-  display: none;
-  align-items: center;
-  margin-left: auto;
-}
-
-.mobileControls {
+.actions {
   display: flex;
   align-items: center;
+  gap: 14px;
+}
+
+.cta {
+  padding: 10px 18px;
+  font-size: 14px;
+}
+
+/* ── Мобильная группа (<900px) ── */
+.mobile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-left: auto;
 }
 
-.controlGap {
-  margin-right: var(--space-3);
-}
-
-/* Окошко поиска — самый «дорогой» по ширине элемент: показываем его последним,
-   только когда всем семи пунктам навигации точно хватает места */
-.searchSlot {
-  display: none;
-}
-
-/* Полной навигации с семью пунктами тесно раньше ~880px — до этого порога бургер */
-@media (min-width: 880px) {
-  .nav {
+@media (min-width: 900px) {
+  .desktop {
     display: flex;
   }
-  .controls {
-    display: flex;
-  }
-  .mobileControls {
+
+  .mobile {
     display: none;
-  }
-}
-
-@media (min-width: 1160px) {
-  .searchSlot {
-    display: inline-flex;
   }
 }

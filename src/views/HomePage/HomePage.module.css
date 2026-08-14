@@ -1,36 +1,363 @@
-.root {
-  padding-bottom: var(--space-24);
+/* ── Герой ── */
+.hero {
+  position: relative;
+  border-bottom: 1px solid var(--line-soft);
+  overflow: hidden;
 }
 
-.container {
+.heroGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(105% 80% at 82% 8%, rgba(255, 122, 43, 0.15), transparent 58%);
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--container-pad);
+  padding: clamp(52px, 8vw, 104px) var(--container-pad) 0;
 }
 
-.section {
-  padding: var(--space-12) 0 0;
-}
-
-.sectionHeader {
+.heroEyebrow {
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: clamp(22px, 3vw, 32px);
+  animation: fadein 0.8s ease both;
+}
+
+.pulseDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ac);
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.heroTitle {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(29px, 4.4vw, 54px);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  max-width: 18ch;
+  margin-bottom: clamp(20px, 2.4vw, 28px);
+  text-wrap: balance;
+  animation: rise 0.9s var(--ease-out) both;
+}
+
+.heroLead {
+  max-width: 56ch;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: clamp(26px, 3vw, 36px);
+  text-wrap: pretty;
+  animation: rise 0.9s 0.1s var(--ease-out) both;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: clamp(44px, 6vw, 80px);
+  animation: rise 0.9s 0.18s var(--ease-out) both;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  background: var(--line-soft);
+  border-top: 1px solid var(--line-soft);
+  animation: fadein 1s 0.3s ease both;
+}
+
+.fact {
+  flex: 1 1 200px;
+  background: var(--bg);
+  padding: 22px 22px 26px;
+}
+
+.factFirst {
+  padding-left: 0;
+}
+
+.factValue {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(22px, 2.4vw, 28px);
+  letter-spacing: -0.03em;
+}
+
+.factLabel {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 6px;
+}
+
+/* ── Бегущая строка ── */
+.marquee {
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--bg2);
+  overflow: hidden;
+  padding: 13px 0;
+}
+
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  animation: marq 36s linear infinite;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.marqueeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 32px;
+  padding-right: 32px;
+  white-space: nowrap;
+}
+
+.marqueeStar {
+  color: var(--ac);
+}
+
+/* ── Заголовки секций ── */
+.heading {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(23px, 3vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.headingBordered {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(23px, 3vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: clamp(28px, 3.4vw, 44px);
+}
+
+/* Без нижней границы: у шагов процесса свои верхние линии, иначе на мобиле
+   под заголовком видны две полосы подряд. */
+.processHeading {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(23px, 3vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  margin-bottom: clamp(28px, 3.4vw, 44px);
+}
+
+.headingRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: var(--space-6);
+  gap: 18px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: clamp(28px, 3.4vw, 44px);
 }
 
-.sectionTitle {
-  font-size: var(--text-xl);
-  font-weight: var(--weight-semibold);
+.headingNote {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 42ch;
 }
 
-.seeAll {
-  font-size: var(--text-sm);
-  color: var(--accent);
-  font-weight: var(--weight-medium);
-  transition: var(--transition);
+.blogAll {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s ease;
 }
 
-.seeAll:hover {
-  opacity: 0.8;
+.blogAll:hover {
+  color: var(--ac);
+}
+
+.blogList {
+  margin-top: -6px;
+}
+
+/* ── Что входит в работу ── */
+.valueGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--line-soft);
+}
+
+.valueCell {
+  background: var(--bg);
+  padding: clamp(24px, 3vw, 34px) clamp(20px, 2.4vw, 30px) clamp(28px, 3.2vw, 38px);
+  transition: background 0.3s ease;
+  animation: rise 0.8s var(--ease-out) both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 26%;
+}
+
+.valueCell:hover {
+  background: var(--bg2);
+}
+
+.valueKicker {
+  margin-bottom: 18px;
+}
+
+.valueTitle {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(17px, 1.8vw, 21px);
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  text-wrap: pretty;
+}
+
+.valueDesc {
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* ── CTA ── */
+.cta {
+  position: relative;
+  border-top: 1px solid var(--line-soft);
+  overflow: hidden;
+}
+
+.ctaGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(90% 120% at 50% 120%, rgba(255, 122, 43, 0.19), transparent 60%);
+  pointer-events: none;
+}
+
+.ctaInner {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 120px) var(--container-pad);
+  text-align: center;
+}
+
+.ctaTitle {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(26px, 4vw, 46px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 18px;
+  text-wrap: balance;
+}
+
+.ctaLead {
+  color: var(--muted);
+  font-size: clamp(15px, 1.5vw, 18px);
+  max-width: 52ch;
+  margin: 0 auto 30px;
+  text-wrap: pretty;
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.ctaTelegram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-weight: 500;
+  font-size: 15px;
+  padding: 13px 28px;
+  border-radius: var(--radius-field);
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.ctaTelegram:hover {
+  border-color: var(--ac);
+  color: var(--ac);
+}
+
+/* ── Мобилка: парные кнопки в столбик на всю ширину, факты по левому краю ── */
+@media (max-width: 560px) {
+  .heroActions,
+  .ctaActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fact {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* ── Локальные keyframes (css-modules скоупит имя вместе со ссылкой) ── */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes marq {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

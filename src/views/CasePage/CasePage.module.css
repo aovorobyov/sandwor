@@ -1,0 +1,288 @@
+/* ── Шапка кейса ── */
+.hero {
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.heroInner {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(18px, 2.6vw, 28px) var(--container-pad) clamp(36px, 4.4vw, 56px);
+}
+
+.breadcrumbs {
+  display: block;
+  padding-bottom: clamp(32px, 4.4vw, 64px);
+}
+
+.type {
+  margin-bottom: 18px;
+}
+
+.title {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(27px, 4vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  max-width: 18ch;
+  margin-bottom: 20px;
+  text-wrap: balance;
+  animation: rise 0.9s var(--ease-out) both;
+}
+
+.lead {
+  max-width: 62ch;
+  font-size: clamp(16px, 1.6vw, 18.5px);
+  line-height: 1.6;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.repo {
+  display: inline-block;
+  margin-top: 18px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ac);
+  transition: color 0.2s ease;
+}
+
+.repo:hover {
+  color: var(--ac-hi);
+}
+
+/* ── Главный экран ── */
+.coverSection {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+.cover {
+  aspect-ratio: 16 / 8;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  margin-top: clamp(-20px, -2vw, -12px);
+  background: repeating-linear-gradient(
+      135deg,
+      rgba(244, 239, 232, 0.05) 0 2px,
+      transparent 2px 11px
+    ),
+    var(--bg2);
+}
+
+/* ── Тело кейса ── */
+.bodySection {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 88px) var(--container-pad);
+}
+
+.bodyGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(24px, 3.4vw, 56px);
+}
+
+.facts {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.factsTitle {
+  margin-bottom: 14px;
+}
+
+.factsList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fact {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.factKey {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 5px;
+}
+
+.factValue {
+  font-size: 15px;
+  color: var(--text);
+}
+
+.blocks {
+  flex: 2 1 480px;
+  min-width: 0;
+  max-width: 68ch;
+}
+
+.block {
+  margin-bottom: clamp(32px, 4vw, 48px);
+  animation: rise 0.8s var(--ease-out) both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 24%;
+}
+
+.blockTitle {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  margin-bottom: 14px;
+}
+
+.blockText {
+  font-size: clamp(15.5px, 1.5vw, 17.5px);
+  line-height: 1.7;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.blockText + .blockText {
+  margin-top: 14px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.shot {
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--line-soft);
+  background: repeating-linear-gradient(
+      135deg,
+      rgba(244, 239, 232, 0.05) 0 2px,
+      transparent 2px 11px
+    ),
+    var(--bg2);
+}
+
+.similar {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: linear-gradient(150deg, rgba(255, 122, 43, 0.09), transparent 70%);
+  padding: clamp(22px, 2.6vw, 30px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.similarTitle {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(18px, 2vw, 23px);
+  letter-spacing: -0.035em;
+  margin-bottom: 6px;
+}
+
+.similarLead {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.similarButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ac);
+  color: var(--on-ac);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: var(--radius-field);
+  transition: background 0.2s ease;
+}
+
+.similarButton:hover {
+  background: var(--ac-hi);
+}
+
+/* ── Другие кейсы ── */
+.other {
+  border-top: 1px solid var(--line-soft);
+  background: var(--bg2);
+}
+
+.otherInner {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 84px) var(--container-pad);
+}
+
+.otherTitle {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 6px;
+}
+
+.otherList {
+  display: flex;
+  flex-direction: column;
+}
+
+.otherRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line-soft);
+  transition: padding-left 0.35s var(--ease-out);
+}
+
+.otherRow:hover {
+  padding-left: 14px;
+}
+
+.otherType {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ac);
+  min-width: 120px;
+}
+
+.otherName {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(17px, 1.9vw, 22px);
+  letter-spacing: -0.035em;
+  flex: 1 1 240px;
+}
+
+.otherCta {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ac);
+}
+
+/* ── Локальные keyframes (css-modules скоупит имя вместе со ссылкой) ── */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

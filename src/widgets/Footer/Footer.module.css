@@ -1,69 +1,91 @@
 .root {
-  border-top: 1px solid var(--border);
-  padding: var(--space-8) 0;
-  margin-top: var(--space-16);
+  border-top: 1px solid var(--line-soft);
+  background: var(--bg2);
 }
 
 .inner {
+  width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--container-pad);
+  padding: clamp(40px, 4.5vw, 64px) var(--container-pad) clamp(26px, 3vw, 36px);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
+  gap: clamp(26px, 3vw, 44px);
+  padding-bottom: clamp(30px, 3.6vw, 48px);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ac);
+  display: inline-block;
+}
+
+.description {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.6;
+  max-width: 30ch;
+  text-wrap: pretty;
+}
+
+.colTitle {
+  margin-bottom: 16px;
+}
+
+.list {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: var(--space-4);
-}
-
-.social {
-  display: flex;
-  margin-bottom: var(--space-4);
+  gap: 10px;
 }
 
 .link {
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-  transition: var(--transition);
-  margin-right: var(--space-4);
+  font-size: 14.5px;
+  color: var(--muted);
+  transition: color 0.2s ease;
 }
 
 .link:hover {
-  color: var(--text);
+  color: var(--ac);
 }
 
-/* Пункт-заглушка (раздел ещё не наполнен): приглушён и не реагирует на курсор */
-.linkDisabled {
-  opacity: 0.5;
-  cursor: default;
-  pointer-events: none;
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  padding-top: 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
 }
 
-.copy {
-  font-size: var(--text-xs);
-  color: var(--text-muted);
-  margin-top: var(--space-2);
+/* Наследует mono-типографику .bottom — совпадает по размеру с © и доменом */
+.bottomLink {
+  color: inherit;
+  transition: color 0.2s ease;
 }
 
-@media (min-width: 640px) {
-  .inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .nav {
-    margin-bottom: 0;
-  }
-
-  .social {
-    margin-bottom: 0;
-  }
-
-  .copy {
-    margin-top: 0;
-  }
+.bottomLink:hover {
+  color: var(--ac);
 }

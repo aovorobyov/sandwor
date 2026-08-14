@@ -1,27 +1,33 @@
 .root {
-  display: block;
-  color: var(--accent);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  transition: color 0.2s ease;
 }
 
 .dot {
-  transform-box: fill-box;
-  transform-origin: center;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ac);
+  display: inline-block;
+  animation: pulse 2.4s ease-in-out infinite;
 }
 
-.dotRebuilding {
-  animation: rebuild 500ms ease-in-out both;
-}
-
-@keyframes rebuild {
+/* ── Локальные keyframes (css-modules скоупит имя вместе со ссылкой) ── */
+@keyframes pulse {
   0%,
   100% {
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1);
   }
-
-  45%,
-  55% {
-    transform: scale(0);
-    opacity: 0;
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
   }
 }

@@ -1,20 +1,22 @@
-import { Link } from '@/shared/ui/Link';
 import { notFound } from 'next/navigation';
 import { getTranslations, getLocale } from 'next-intl/server';
-import { getTelegramPost, getRelatedPosts } from '@/entities/post/api/telegram';
-import { PostList } from '@/widgets/PostList';
+import { Link } from '@/shared/ui/Link';
+import { Mono } from '@/shared/ui/Mono';
+import { Eyebrow } from '@/shared/ui/Eyebrow';
+import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
+import { getPost, getRelatedPosts } from '@/entities/post/api/posts';
+import { PostRow } from '@/entities/post/ui/PostRow';
 import { JsonLd, buildBlogPosting, buildBreadcrumbs } from '@/shared/lib/jsonLd';
-import { ReadingProgress } from './components/ReadingProgress';
 import type { ArticlePageProps } from './ArticlePage.types';
 import s from './ArticlePage.module.css';
 
 export const ArticlePage = async (props: ArticlePageProps) => {
   const { slug } = props;
-  const [post, relatedPosts, t, locale] = await Promise.all([
-    getTelegramPost(slug),
-    getRelatedPosts(slug, 3),
+  const locale = await getLocale();
+  const [post, relatedPosts, t] = await Promise.all([
+    getPost(slug, locale),
+    getRelatedPosts(slug, locale, 3),
     getTranslations(),
-    getLocale(),
   ]);
 
   if (!post) notFound();
@@ -29,7 +31,7 @@ export const ArticlePage = async (props: ArticlePageProps) => {
 
   const blogPostingData = buildBlogPosting({
     title: post.title,
-    description: post.excerpt,
+    description: post.description || post.excerpt,
     date: post.date,
     slug: post.slug,
     locale,
@@ -48,48 +50,73 @@ export const ArticlePage = async (props: ArticlePageProps) => {
 
       <JsonLd data={breadcrumbsData} />
 
-      <ReadingProgress readTimeLabel={readTimeLabel} formattedDate={formattedDate} />
+      <main>
+        <article>
+          <header className={s.header}>
+            <Breadcrumbs
+              className={s.breadcrumbs}
+              items={[
+                { label: t('nav.home'), href: '/' },
+                { label: t('nav.blog'), href: '/blog' },
+                { label: post.title },
+              ]}
+            />
 
-      <main className={s.root}>
-        <div className={s.container}>
-          <Link href="/blog" className={s.back}>
-            ← {t('nav.blog')}
-          </Link>
-
-          <article>
-            <header className={s.header}>
+            <div className={s.meta}>
               <span className={s.tag}>{post.tag}</span>
 
-              <h1 className={s.title}>{post.title}</h1>
+              <time dateTime={post.date}>{formattedDate}</time>
 
-              <div className={s.meta}>
-                <time className={s.metaDate} dateTime={post.date}>
-                  {formattedDate}
-                </time>
+              <span>{readTimeLabel}</span>
+            </div>
 
-                <span>{readTimeLabel}</span>
-              </div>
-            </header>
+            <h1 className={s.title}>{post.title}</h1>
+          </header>
 
-            {post.image && (
+          <div className={s.coverWrap}>
+            {post.image ? (
+              // Доверенный источник обложек; next/image не нужен для одной картинки статьи
               // eslint-disable-next-line @next/next/no-img-element
               <img src={post.image} alt={post.title} className={s.cover} />
+            ) : (
+              <div className={s.coverPlaceholder} aria-hidden />
             )}
+          </div>
 
+          <div className={s.bodyWrap}>
             {/* Доверенный HTML только из своей CMS */}
             <div className={s.body} dangerouslySetInnerHTML={{ __html: post.body }} />
-          </article>
+
+            <div className={s.cta}>
+              <div>
+                <div className={s.ctaTitle}>{t('blog.cta-title')}</div>
+
+                <div className={s.ctaLead}>{t('blog.cta-lead')}</div>
+              </div>
+
+              <Link href="/contact" className={s.ctaButton}>
+                {t('blog.cta-btn')}
+                <Mono>→</Mono>
+              </Link>
+            </div>
+          </div>
 
           {relatedPosts.length > 0 && (
-            <section className={s.related} aria-labelledby="related-title">
-              <h2 id="related-title" className={s.relatedTitle}>
-                {t('blog.related-posts')}
-              </h2>
+            <section className={s.related}>
+              <div className={s.relatedInner}>
+                <Eyebrow className={s.relatedTitle} as="h2">
+                  {t('blog.read-next')}
+                </Eyebrow>
 
-              <PostList posts={relatedPosts} />
+                <div className={s.relatedList}>
+                  {relatedPosts.map((related) => (
+                    <PostRow key={related.slug} post={related} />
+                  ))}
+                </div>
+              </div>
             </section>
           )}
-        </div>
+        </article>
       </main>
     </>
   );

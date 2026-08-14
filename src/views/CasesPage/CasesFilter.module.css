@@ -1,0 +1,14 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: clamp(20px, 2.4vw, 30px);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: clamp(22px, 2.6vw, 32px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(14px, 1.8vw, 22px);
+}

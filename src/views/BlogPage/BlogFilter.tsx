@@ -3,41 +3,47 @@
 import type { FC } from 'react';
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { PostList } from '@/widgets/PostList';
+import { Chip } from '@/shared/ui/Chip';
+import { PostRow } from '@/entities/post/ui/PostRow';
 import type { BlogFilterProps } from './BlogFilter.types';
 import s from './BlogFilter.module.css';
+
+const ALL = 'all';
 
 export const BlogFilter: FC<BlogFilterProps> = (props) => {
   const { posts } = props;
   const t = useTranslations();
-  const tags = useMemo(() => ['all', ...Array.from(new Set(posts.map((p) => p.tag)))], [posts]);
-  const [active, setActive] = useState('all');
+  const tags = useMemo(() => [ALL, ...Array.from(new Set(posts.map((p) => p.tag)))], [posts]);
+  const [active, setActive] = useState(ALL);
 
   const filtered = useMemo(
-    () => (active === 'all' ? posts : posts.filter((p) => p.tag === active)),
+    () => (active === ALL ? posts : posts.filter((p) => p.tag === active)),
     [active, posts],
   );
 
-  const createTagHandler = (tag: string) => {
-    return () => setActive(tag);
+  const handleSelect = (value: string) => {
+    setActive(value);
   };
 
   return (
     <div>
-      <nav className={s.filters} aria-label="Filter by tag">
+      <div className={s.filters} role="group" aria-label="Filter by tag">
         {tags.map((tag) => (
-          <button
+          <Chip
             key={tag}
-            className={tag === active ? s.tagActive : s.tag}
-            onClick={createTagHandler(tag)}
-            aria-pressed={tag === active}
-          >
-            {tag === 'all' ? t('blog.filter-all') : tag}
-          </button>
+            value={tag}
+            label={tag === ALL ? t('blog.filter-all') : tag}
+            isActive={tag === active}
+            onSelect={handleSelect}
+          />
         ))}
-      </nav>
+      </div>
 
-      <PostList posts={filtered} />
+      <div className={s.list}>
+        {filtered.map((post) => (
+          <PostRow key={post.slug} post={post} isLarge hasExcerpt hasReadLink />
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,23 +1,26 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 7px;
 }
 
 .label {
-  font-size: 14px;
-  font-weight: var(--weight-medium);
-  color: var(--text);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
 }
 
 .input {
   width: 100%;
-  padding: 12px var(--space-4);
+  padding: 12px 15px;
   background: var(--field-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font: inherit;
-  font-size: var(--text-base);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-field);
+  font-family: var(--ui);
+  font-size: 15px;
   color: var(--text);
   transition:
     border-color 0.2s ease,
@@ -26,19 +29,19 @@
 }
 
 .input::placeholder {
-  color: var(--text-muted);
+  color: var(--dim);
 }
 
 .input:focus {
-  background: var(--bg);
-  border-color: var(--accent);
+  background: var(--bg3);
+  border-color: var(--ac);
 }
 
 .inputError {
-  border-color: #ef4444;
+  border-color: var(--danger);
 }
 
 .error {
-  font-size: var(--text-xs);
-  color: #ef4444;
+  font-size: 12.5px;
+  color: var(--danger);
 }

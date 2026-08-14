@@ -1,14 +1,15 @@
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, getLocale } from 'next-intl/server';
 import { Timeline, buildTimelineItems, groupAdjacentReleases } from '@/widgets/Timeline';
-import { getTelegramPosts } from '@/entities/post/api/telegram';
+import { getPosts } from '@/entities/post/api/posts';
 import { getProjects } from '@/entities/project';
 import { buildReleaseNotes } from '@/entities/note';
 import s from './TimelinePage.module.css';
 
 export const TimelinePage = async () => {
+  const locale = await getLocale();
   const [t, posts, projects] = await Promise.all([
     getTranslations(),
-    getTelegramPosts(),
+    getPosts(locale),
     Promise.resolve(getProjects()),
   ]);
 

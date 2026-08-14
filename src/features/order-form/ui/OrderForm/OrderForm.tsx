@@ -1,10 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import type { ChangeEvent, FC, FormEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
 import { Textarea } from '@/shared/ui/Textarea';
+import { Checkbox } from '@/shared/ui/Checkbox';
+import { Link } from '@/shared/ui/Link';
 import { FormSuccess } from '@/shared/ui/FormSuccess';
 import { useOrderForm } from './useOrderForm';
 import type { OrderFormProps } from './OrderForm.types';
@@ -14,15 +17,21 @@ export const OrderForm: FC<OrderFormProps> = (props) => {
   const { goal } = props;
   const t = useTranslations();
   const { form, status, change, submit, reset } = useOrderForm(goal);
+  const [hasConsent, setHasConsent] = useState(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const honeypot = new FormData(e.currentTarget).get('company');
-    void submit(typeof honeypot === 'string' ? honeypot : '');
+    void submit(typeof honeypot === 'string' ? honeypot : '', { consent: hasConsent });
   };
 
   const handleReset = () => {
     reset();
+    setHasConsent(false);
+  };
+
+  const handleConsentChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setHasConsent(e.target.checked);
   };
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -96,9 +105,16 @@ export const OrderForm: FC<OrderFormProps> = (props) => {
         required
       />
 
+      <Checkbox name="consent" checked={hasConsent} onChange={handleConsentChange} required>
+        {t('form.consent-pre')}{' '}
+        <Link href="/privacy" className={s.consentLink}>
+          {t('form.consent-link')}
+        </Link>
+      </Checkbox>
+
       {status === 'error' && <p className={s.error}>{t('order.error')}</p>}
 
-      <Button type="submit" className={s.submit} disabled={isPending}>
+      <Button type="submit" className={s.submit} disabled={isPending || !hasConsent}>
         {isPending ? t('order.sending') : t('order.submit')}
       </Button>
     </form>

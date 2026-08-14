@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { getTelegramPosts } from '@/entities/post/api/telegram';
+import { getPosts } from '@/entities/post/api/posts';
 import { getProjects } from '@/entities/project';
 import { COURSES_REGISTRY } from '@/views/CoursePage/config/registry';
 import { SITE_URL as BASE_URL } from '@/shared/config/site';
@@ -56,7 +56,7 @@ const STATIC_PATHS = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, projects] = await Promise.all([getTelegramPosts(), Promise.resolve(getProjects())]);
+  const [posts, projects] = await Promise.all([getPosts(), Promise.resolve(getProjects())]);
   const now = new Date();
 
   const staticEntries = STATIC_PATHS.flatMap(({ path, priority, changeFrequency }) =>

@@ -26,7 +26,7 @@ export const useFormSubmit = <T extends Record<string, string>>(
     mountedAt.current = Date.now();
   };
 
-  const submit = async (honeypot: string) => {
+  const submit = async (honeypot: string, extra?: Record<string, unknown>) => {
     setStatus('pending');
 
     try {
@@ -35,6 +35,7 @@ export const useFormSubmit = <T extends Record<string, string>>(
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...form,
+          ...extra,
           company: honeypot,
           elapsedMs: Date.now() - mountedAt.current,
         }),

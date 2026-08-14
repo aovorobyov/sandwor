@@ -1,0 +1,4 @@
+.root {
+  font-family: var(--mono);
+  flex-shrink: 0;
+}

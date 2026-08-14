@@ -63,13 +63,12 @@
   background: var(--bg-subtle);
 }
 
-.itemIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
+.itemDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ac);
   margin-right: var(--space-3);
-  color: var(--accent);
   flex-shrink: 0;
 }
 

@@ -1,10 +1,12 @@
 'use client';
 
 import type { FC } from 'react';
+import { cn } from '@/shared/lib/cn';
 import { locales, type Locale } from '@/i18n-routing';
 import { useLocaleSwitch } from '../../lib/useLocaleSwitch';
 import s from './LocaleSwitch.module.css';
 
+/** Сегментированный переключатель локали RU / EN. */
 export const LocaleSwitch: FC = () => {
   const { currentLocale, switchLocale } = useLocaleSwitch();
 
@@ -15,20 +17,21 @@ export const LocaleSwitch: FC = () => {
   };
 
   return (
-    <nav className={s.root} aria-label="Language switcher">
-      {locales.map((locale, idx) => (
-        <span key={locale} className={s.item}>
-          {idx > 0 && <span className={s.separator}>|</span>}
+    <div className={s.root} role="group" aria-label="Language switcher">
+      {locales.map((locale) => {
+        const isActive = locale === currentLocale;
 
+        return (
           <button
-            className={locale === currentLocale ? s.active : s.inactive}
+            key={locale}
+            className={cn(s.tab, isActive && s.tabActive)}
             onClick={createLocaleHandler(locale)}
-            aria-current={locale === currentLocale ? 'true' : undefined}
+            aria-current={isActive ? 'true' : undefined}
           >
             {locale.toUpperCase()}
           </button>
-        </span>
-      ))}
-    </nav>
+        );
+      })}
+    </div>
   );
 };

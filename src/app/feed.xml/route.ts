@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { getTelegramPosts } from '@/entities/post/api/telegram';
+import { getPosts } from '@/entities/post/api/posts';
 import { SITE_URL } from '@/shared/config/site';
 
 /** Контент тг-канала — на русском, поэтому фид одноязычный, без префикса локали в путях. */
@@ -21,7 +21,7 @@ const toIsoDateTime = (date: string) => {
 
 export const GET = async () => {
   const [posts, t] = await Promise.all([
-    getTelegramPosts(),
+    getPosts(),
     getTranslations({ locale: FEED_LOCALE, namespace: '' }),
   ]);
 

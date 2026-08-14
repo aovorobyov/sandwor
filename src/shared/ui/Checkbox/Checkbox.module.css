@@ -1,0 +1,21 @@
+.root {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.input {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  accent-color: var(--ac);
+  cursor: pointer;
+}
+
+.label {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--muted);
+}

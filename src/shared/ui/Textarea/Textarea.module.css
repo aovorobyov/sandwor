@@ -1,40 +1,43 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  gap: 7px;
 }
 
 .label {
-  font-size: 14px;
-  font-weight: var(--weight-medium);
-  color: var(--text);
-  margin-bottom: var(--space-2);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
 }
 
 .textarea {
   width: 100%;
-  min-height: 120px;
-  padding: 12px var(--space-4);
+  min-height: 118px;
+  padding: 12px 15px;
   background: var(--field-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font: inherit;
-  font-size: var(--text-base);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-field);
+  font-family: var(--ui);
+  font-size: 15px;
   color: var(--text);
+  line-height: 1.6;
   transition:
     border-color 0.2s ease,
     background 0.2s ease;
   outline: none;
   resize: vertical;
-  line-height: var(--leading-normal);
 }
 
 .textarea::placeholder {
-  color: var(--text-muted);
+  color: var(--dim);
 }
 
 .textarea:focus {
-  background: var(--bg);
-  border-color: var(--accent);
+  background: var(--bg3);
+  border-color: var(--ac);
 }
 
 .textarea:disabled {
@@ -44,11 +47,10 @@
 }
 
 .textareaError {
-  border-color: #ef4444;
+  border-color: var(--danger);
 }
 
 .error {
-  font-size: var(--text-xs);
-  color: #ef4444;
-  margin-top: var(--space-1);
+  font-size: 12.5px;
+  color: var(--danger);
 }

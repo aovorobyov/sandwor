@@ -2,8 +2,6 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useTheme } from 'next-themes';
-import { cycleAccent } from '@/features/accent-toggle';
 import { useLocaleSwitch } from '@/features/locale-switch';
 import { locales, type Locale } from '@/i18n-routing';
 import { localizeHref } from '@/shared/ui/Link/localizeHref';
@@ -39,7 +37,6 @@ export const useCommands = (posts: PaletteSearchPost[] = []): PaletteCommand[] =
   const t = useTranslations();
   const locale = useLocale();
   const router = useRouter();
-  const { setTheme } = useTheme();
   const { switchLocale, currentLocale } = useLocaleSwitch();
 
   const navCommands: PaletteCommand[] = NAV_LINKS.map(({ id, href, labelKey, icon }) => {
@@ -64,33 +61,6 @@ export const useCommands = (posts: PaletteSearchPost[] = []): PaletteCommand[] =
     };
   });
 
-  const themeCommands: PaletteCommand[] = [
-    {
-      id: 'theme-light',
-      label: t('palette.themeLight'),
-      group: 'theme',
-      icon: 'light',
-      keywords: 'light светлая day',
-      onSelect: () => setTheme('light'),
-    },
-    {
-      id: 'theme-dark',
-      label: t('palette.themeDark'),
-      group: 'theme',
-      icon: 'dark',
-      keywords: 'dark тёмная темная night',
-      onSelect: () => setTheme('dark'),
-    },
-    {
-      id: 'theme-system',
-      label: t('palette.themeSystem'),
-      group: 'theme',
-      icon: 'system',
-      keywords: 'system auto системная',
-      onSelect: () => setTheme('system'),
-    },
-  ];
-
   const localeCommands: PaletteCommand[] = locales
     .filter((locale) => {
       return locale !== currentLocale;
@@ -106,14 +76,5 @@ export const useCommands = (posts: PaletteSearchPost[] = []): PaletteCommand[] =
       };
     });
 
-  const accentCommand: PaletteCommand = {
-    id: 'accent-cycle',
-    label: t('palette.accentChange'),
-    group: 'accent',
-    icon: 'drop',
-    keywords: 'color цвет акцент палитра',
-    onSelect: () => cycleAccent(),
-  };
-
-  return [...navCommands, ...postCommands, ...themeCommands, ...localeCommands, accentCommand];
+  return [...navCommands, ...postCommands, ...localeCommands];
 };

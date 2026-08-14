@@ -16,12 +16,19 @@
   white-space: nowrap;
 }
 
+.consentLink {
+  color: var(--ac);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .error {
   font-size: var(--text-sm);
   color: var(--danger);
 }
 
-/* Кнопку отправки отделяем от полей дополнительным отступом */
+/* Кнопку отправки отделяем от полей дополнительным отступом; во всю ширину */
 .submit {
+  width: 100%;
   margin-top: var(--space-2);
 }

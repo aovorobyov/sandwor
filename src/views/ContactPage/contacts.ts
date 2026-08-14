@@ -3,12 +3,22 @@ import type { ContactChannel } from './ContactPage.types';
 /** Основной канал — выносится в primary-CTA, поэтому не дублируется в ряду соцсетей. */
 export const PRIMARY_EMAIL = 'mailto:aovorobyov@mail.ru';
 
+/** Прямой email и телефон для блока статуса в герое. */
+export const CONTACT_EMAIL = 'aovorobyov@mail.ru';
+export const CONTACT_PHONE_HREF = 'tel:+79854316970';
+
+/** Развёрнутый список каналов связи: подпись + «ручка» со стрелкой. */
+export const CONTACT_LINKS = [
+  { label: 'Telegram', handle: '@aovorobyov', href: 'https://t.me/aovorobyov' },
+  { label: 'WhatsApp', handle: '+7 985 431-69-70', href: 'https://wa.me/79854316970' },
+  { label: 'Почта', handle: 'aovorobyov@mail.ru', href: 'mailto:aovorobyov@mail.ru' },
+  { label: 'GitHub', handle: 'github.com/aovorobyov', href: 'https://github.com/aovorobyov' },
+] as const;
+
 /** Соцсети для иконного ряда (без почты — она вынесена в CTA). */
 export const CONTACT_CHANNELS: ContactChannel[] = [
-  { id: 'telegram', label: 'Telegram', href: 'https://t.me/sandwor' },
+  { id: 'telegram', label: 'Telegram', href: 'https://t.me/aovorobyov' },
   { id: 'github', label: 'GitHub', href: 'https://github.com/aovorobyov' },
-  { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/sandwor/' },
-  { id: 'vk', label: 'VK', href: 'https://vk.com/sandwor' },
 ];
 
 /**

@@ -1,13 +1,21 @@
-import { Link } from '@/shared/ui/Link';
 import { getTranslations } from 'next-intl/server';
-import { cn } from '@/shared/lib/cn';
+import { Link } from '@/shared/ui/Link';
+import { Eyebrow } from '@/shared/ui/Eyebrow';
 import { NAV_LINKS } from '../Header/config';
 import s from './Footer.module.css';
 
-const SOCIAL_LINKS = [
-  { href: 'https://github.com/aovorobyov', label: 'GitHub' },
-  { href: 'https://t.me/sandwor', label: 'Telegram' },
-  { href: '/feed.xml', label: 'RSS' },
+const SITE_DOMAIN = 'sandwor.ru';
+
+const MORE_LINKS = [
+  { href: '/projects', labelKey: 'nav.projects' },
+  { href: '/timeline', labelKey: 'nav.timeline' },
+  { href: '/news', labelKey: 'nav.news' },
+] as const;
+
+const CONTACT_LINKS = [
+  { href: 'https://t.me/aovorobyov', label: 'Telegram ↗' },
+  { href: 'https://github.com/aovorobyov', label: 'GitHub ↗' },
+  { href: 'mailto:aovorobyov@mail.ru', label: 'aovorobyov@mail.ru' },
 ] as const;
 
 export const Footer = async () => {
@@ -17,33 +25,72 @@ export const Footer = async () => {
   return (
     <footer className={s.root}>
       <div className={s.inner}>
-        <nav className={s.nav} aria-label="Footer navigation">
-          {NAV_LINKS.map(({ href, labelKey, isDisabled }) => {
-            if (isDisabled) {
-              return (
-                <span key={href} className={cn(s.link, s.linkDisabled)} aria-disabled="true">
+        <div className={s.columns}>
+          <div>
+            <div className={s.logo}>
+              sandwor
+              <span className={s.dot} aria-hidden />
+            </div>
+
+            <p className={s.description}>{t('footer.description')}</p>
+          </div>
+
+          <div>
+            <Eyebrow className={s.colTitle}>{t('footer.sections')}</Eyebrow>
+
+            <div className={s.list}>
+              {NAV_LINKS.map(({ href, labelKey }) => (
+                <Link key={href} href={href} className={s.link}>
                   {t(labelKey)}
-                </span>
-              );
-            }
+                </Link>
+              ))}
+            </div>
+          </div>
 
-            return (
-              <Link key={href} href={href} className={s.link}>
-                {t(labelKey)}
-              </Link>
-            );
-          })}
-        </nav>
+          <div>
+            <Eyebrow className={s.colTitle}>{t('footer.more')}</Eyebrow>
 
-        <div className={s.social}>
-          {SOCIAL_LINKS.map(({ href, label }) => (
-            <a key={label} href={href} target="_blank" rel="noopener noreferrer" className={s.link}>
-              {label}
-            </a>
-          ))}
+            <div className={s.list}>
+              {MORE_LINKS.map(({ href, labelKey }) => (
+                <Link key={href} href={href} className={s.link}>
+                  {t(labelKey)}
+                </Link>
+              ))}
+
+              <a href="/feed.xml" className={s.link}>
+                {t('nav.rss')}
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <Eyebrow className={s.colTitle}>{t('footer.contacts')}</Eyebrow>
+
+            <div className={s.list}>
+              {CONTACT_LINKS.map(({ href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={s.link}
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <p className={s.copy}>{t('footer.rights', { year })}</p>
+        <div className={s.bottom}>
+          <span>{t('footer.rights', { year })}</span>
+
+          <Link href="/privacy" className={s.bottomLink}>
+            {t('footer.privacy')}
+          </Link>
+
+          <span>{SITE_DOMAIN}</span>
+        </div>
       </div>
     </footer>
   );

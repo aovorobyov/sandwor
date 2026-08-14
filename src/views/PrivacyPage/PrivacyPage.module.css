@@ -1,0 +1,61 @@
+.root {
+  width: 100%;
+  max-width: var(--container-text);
+  margin: 0 auto;
+  padding: clamp(24px, 3vw, 40px) var(--container-pad) clamp(56px, 7vw, 100px);
+}
+
+.breadcrumbs {
+  display: block;
+  padding-bottom: clamp(24px, 3.4vw, 44px);
+}
+
+.title {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.14;
+  letter-spacing: -0.04em;
+}
+
+.updated {
+  margin-top: var(--space-3);
+  font-family: var(--mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.intro {
+  margin-top: var(--space-6);
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 3.4vw, 44px);
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.heading {
+  margin-bottom: var(--space-3);
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: var(--text-xl);
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.paragraph {
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.paragraph + .paragraph {
+  margin-top: var(--space-3);
+}

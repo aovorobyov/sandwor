@@ -1,0 +1,1 @@
+export { LegacyNotice } from './LegacyNotice';

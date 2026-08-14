@@ -43,11 +43,26 @@ describe('ContactForm', () => {
     await userEvent.type(screen.getByLabelText(/Имя/i), 'Alice');
     await userEvent.type(screen.getByLabelText(/Email/i), 'alice@example.com');
     await userEvent.type(screen.getByLabelText(/Сообщение/i), 'Hello!');
+    await userEvent.click(screen.getByRole('checkbox'));
     await userEvent.click(screen.getByRole('button', { name: /Отправить/i }));
 
     await waitFor(() => {
       expect(screen.getByText(/Сообщение отправлено/i)).toBeInTheDocument();
     });
+  });
+
+  it('keeps submit disabled until consent is given', async () => {
+    render(<ContactForm />, { wrapper });
+
+    await userEvent.type(screen.getByLabelText(/Имя/i), 'Dan');
+    await userEvent.type(screen.getByLabelText(/Email/i), 'dan@example.com');
+    await userEvent.type(screen.getByLabelText(/Сообщение/i), 'Hi');
+
+    expect(screen.getByRole('button', { name: /^Отправить$/i })).toBeDisabled();
+
+    await userEvent.click(screen.getByRole('checkbox'));
+
+    expect(screen.getByRole('button', { name: /^Отправить$/i })).toBeEnabled();
   });
 
   it('hides the form after successful submit', async () => {
@@ -56,6 +71,7 @@ describe('ContactForm', () => {
     await userEvent.type(screen.getByLabelText(/Имя/i), 'Bob');
     await userEvent.type(screen.getByLabelText(/Email/i), 'bob@example.com');
     await userEvent.type(screen.getByLabelText(/Сообщение/i), 'Hi!');
+    await userEvent.click(screen.getByRole('checkbox'));
     await userEvent.click(screen.getByRole('button', { name: /Отправить/i }));
 
     await waitFor(() => {
@@ -69,6 +85,7 @@ describe('ContactForm', () => {
     await userEvent.type(screen.getByLabelText(/Имя/i), 'Ann');
     await userEvent.type(screen.getByLabelText(/Email/i), 'ann@example.com');
     await userEvent.type(screen.getByLabelText(/Сообщение/i), 'Hey!');
+    await userEvent.click(screen.getByRole('checkbox'));
     await userEvent.click(screen.getByRole('button', { name: /^Отправить$/i }));
 
     await waitFor(() => {
@@ -88,6 +105,7 @@ describe('ContactForm', () => {
     await userEvent.type(screen.getByLabelText(/Имя/i), 'Eve');
     await userEvent.type(screen.getByLabelText(/Email/i), 'eve@example.com');
     await userEvent.type(screen.getByLabelText(/Сообщение/i), 'Oops');
+    await userEvent.click(screen.getByRole('checkbox'));
     await userEvent.click(screen.getByRole('button', { name: /Отправить/i }));
 
     await waitFor(() => {

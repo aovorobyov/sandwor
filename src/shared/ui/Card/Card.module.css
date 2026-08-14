@@ -1,10 +1,13 @@
 .root {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: var(--space-6);
-  transition: border-color 0.2s ease;
+  background: var(--bg2);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-card);
+  padding: clamp(20px, 2.4vw, 28px);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease;
   height: 100%;
+  overflow: hidden;
 }
 
 .clickable {
@@ -20,5 +23,6 @@
 }
 
 .clickable:hover {
-  border-color: var(--primary);
+  border-color: var(--ac);
+  background: var(--bg3);
 }

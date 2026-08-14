@@ -1,0 +1,20 @@
+.root {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.dim {
+  color: var(--dim);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.accent {
+  color: var(--ac);
+}

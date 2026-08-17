@@ -1,4 +1,4 @@
-import type { ContactChannelId } from '../ContactPage.types';
+import type { ContactChannelId } from '@/shared/config/contacts.types';
 
 export interface SocialIconProps {
   name: ContactChannelId;

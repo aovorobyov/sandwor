@@ -3,8 +3,9 @@ import { ContactForm } from '@/features/contact-form';
 import { Button } from '@/shared/ui/Button';
 import { Link } from '@/shared/ui/Link';
 import { JsonLd, buildPerson } from '@/shared/lib/jsonLd';
-import { SocialIcon } from './SocialIcon';
-import { CONTACT_CHANNELS, PRIMARY_EMAIL, SECONDARY_LINKS } from './contacts';
+import { SocialIcon } from '@/shared/ui/SocialIcon';
+import { CONTACT_CHANNELS, PRIMARY_EMAIL } from '@/shared/config/contacts';
+import { SECONDARY_LINKS } from './secondaryLinks';
 import s from './ContactPage.module.css';
 
 export const ContactPage = async () => {

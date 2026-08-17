@@ -30,3 +30,6 @@ export type { FormSuccessProps } from './FormSuccess';
 
 export { Typewriter } from './Typewriter';
 export type { TypewriterProps } from './Typewriter';
+
+export { SocialIcon } from './SocialIcon';
+export type { SocialIconProps } from './SocialIcon';

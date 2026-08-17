@@ -1,4 +1,4 @@
-import type { ContactChannel } from './ContactPage.types';
+import type { ContactChannel } from './contacts.types';
 
 /** Основной канал — выносится в primary-CTA, поэтому не дублируется в ряду соцсетей. */
 export const PRIMARY_EMAIL = 'mailto:aovorobyov@mail.ru';
@@ -10,15 +10,3 @@ export const CONTACT_CHANNELS: ContactChannel[] = [
   { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/sandwor/' },
   { id: 'vk', label: 'VK', href: 'https://vk.com/sandwor' },
 ];
-
-/**
- * Страницы, убранные из основной навигации, но доступные по прямой ссылке.
- * Собраны здесь, чтобы не терялись после урезания шапки до 4 пунктов.
- */
-export const SECONDARY_LINKS = [
-  { href: '/projects', labelKey: 'nav.projects' },
-  { href: '/news', labelKey: 'nav.news' },
-  { href: '/timeline', labelKey: 'nav.timeline' },
-  { href: '/course/ai-basics', labelKey: 'nav.course' },
-  { href: '/uikit', labelKey: 'nav.uikit' },
-] as const;

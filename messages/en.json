@@ -371,5 +371,42 @@
       "service3Desc": "Anthropic's AI, great for text and analysis",
       "printTitle": "Print / Save as PDF"
     }
+  },
+  "soon": {
+    "eyebrow": "sandwor v2 · coming soon",
+    "title": "Building the new version of the site",
+    "lead": "A dark redesign, a dedicated case studies section and transparent pricing. The old sections are closed while the rebuild is under way — but I'm still reachable and taking on projects.",
+    "contacts": "Reach me directly",
+    "cta": "Send an email",
+    "peek-title": "What changes",
+    "changes": [
+      {
+        "kicker": "Design",
+        "title": "A new visual language",
+        "desc": "Dark theme, a display typeface for headings and monospaced labels instead of Inter everywhere."
+      },
+      {
+        "kicker": "Cases",
+        "title": "Client work on its own",
+        "desc": "Pet projects and client sites split into separate sections: cases get a brief, a solution and an outcome."
+      },
+      {
+        "kicker": "Pricing",
+        "title": "Prices and timelines up front",
+        "desc": "A package grid instead of “let's discuss it” — you see what a launch costs and how long it takes."
+      }
+    ],
+    "type-title": "Typography",
+    "type-display": "Headings",
+    "type-ui": "Body text",
+    "type-mono": "Labels",
+    "palette-title": "Palette",
+    "marquee": [
+      "Landing pages",
+      "Tilda stores",
+      "Custom development",
+      "Speed and SEO",
+      "Analytics and leads"
+    ]
   }
 }

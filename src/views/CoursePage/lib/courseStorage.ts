@@ -1,6 +1,6 @@
 import type { CourseState } from '../types';
 
-export const COURSE_STORAGE_KEY = 'ai-course-v1';
+const COURSE_STORAGE_KEY = 'ai-course-v1';
 
 /** Type-guard, защищающий от мусора в localStorage между версиями схемы. */
 const isCourseStateShape = (value: unknown): value is CourseState => {

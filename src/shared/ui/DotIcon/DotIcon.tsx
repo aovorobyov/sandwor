@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { ICON_DOTS, ICON_WIDTHS } from './DotIcon.dots';
+import { ICON_DOTS } from './DotIcon.dots';
 import type { DotIconProps } from './DotIcon.types';
 
 const VIEW_BOX_SIZE = 60;
@@ -10,13 +10,11 @@ const DEFAULT_SIZE = 16;
 export const DotIcon: FC<DotIconProps> = (props) => {
   const { name, size = DEFAULT_SIZE, className } = props;
 
-  const viewBoxWidth = ICON_WIDTHS[name] || VIEW_BOX_SIZE;
-
   return (
     <svg
-      width={(size * viewBoxWidth) / VIEW_BOX_SIZE}
+      width={size}
       height={size}
-      viewBox={`0 0 ${viewBoxWidth} ${VIEW_BOX_SIZE}`}
+      viewBox={`0 0 ${VIEW_BOX_SIZE} ${VIEW_BOX_SIZE}`}
       fill="none"
       aria-hidden
       focusable={false}

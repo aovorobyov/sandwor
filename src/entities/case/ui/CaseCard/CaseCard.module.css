@@ -30,14 +30,6 @@
   padding: 16px;
 }
 
-.previewLabel {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
-
 .body {
   display: flex;
   flex: 1;

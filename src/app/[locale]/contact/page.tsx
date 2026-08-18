@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import { OG_DEFAULT_IMAGE } from '@/shared/lib/seo/ogImage';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ContactPage } from '@/views/ContactPage';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
+import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
+import { buildPageOgImage } from '@/shared/lib/seo/ogImage';
 
 export async function generateMetadata({
   params: { locale },
@@ -14,11 +15,16 @@ export async function generateMetadata({
     title: t('contact.title'),
     description: t('contact.subtitle'),
     alternates: buildPageAlternates(locale, '/contact'),
-    openGraph: {
+    ...buildSocialMeta({
       title: t('contact.title'),
       description: t('contact.subtitle'),
-      images: [OG_DEFAULT_IMAGE],
-    },
+      image: buildPageOgImage({
+        locale,
+        tag: t('contact.title'),
+        title: t('contact.hero-title'),
+        lead: t('contact.subtitle'),
+      }),
+    }),
   };
 }
 

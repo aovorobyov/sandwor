@@ -6,7 +6,6 @@ import { locales, type Locale } from '@/i18n-routing';
 import { Header } from '@/widgets/Header';
 import { Footer } from '@/widgets/Footer';
 import { CommandPalette } from '@/widgets/CommandPalette';
-import { LegacyNotice } from '@/widgets/LegacyNotice';
 import { ScrollReset } from '@/widgets/ScrollReset';
 import { CookieConsent } from '@/features/cookie-consent';
 
@@ -39,7 +38,6 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
     <NextIntlClientProvider messages={messages}>
       <ScrollReset />
       <Header />
-      <LegacyNotice />
       <div style={{ flex: 1 }}>{children}</div>
       <Footer />
       <CommandPalette />

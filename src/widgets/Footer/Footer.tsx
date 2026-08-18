@@ -6,11 +6,7 @@ import s from './Footer.module.css';
 
 const SITE_DOMAIN = 'sandwor.ru';
 
-const MORE_LINKS = [
-  { href: '/projects', labelKey: 'nav.projects' },
-  { href: '/timeline', labelKey: 'nav.timeline' },
-  { href: '/news', labelKey: 'nav.news' },
-] as const;
+const MORE_LINKS = [{ href: '/course', labelKey: 'nav.course' }] as const;
 
 const CONTACT_LINKS = [
   { href: 'https://t.me/aovorobyov', label: 'Telegram ↗' },

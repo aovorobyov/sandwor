@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next';
 import { getPosts } from '@/entities/post/api/posts';
-import { getProjects } from '@/entities/project';
 import { COURSES_REGISTRY } from '@/views/CoursePage/config/registry';
 import { SITE_URL as BASE_URL } from '@/shared/config/site';
 import { defaultLocale, locales } from '@/i18n-routing';
@@ -49,14 +48,13 @@ const toLocalizedEntries = (path: string, meta: EntryMeta): MetadataRoute.Sitema
 const STATIC_PATHS = [
   { path: '', priority: 1, changeFrequency: 'weekly' as const },
   { path: '/blog', priority: 0.8, changeFrequency: 'daily' as const },
-  { path: '/projects', priority: 0.8, changeFrequency: 'monthly' as const },
-  { path: '/timeline', priority: 0.6, changeFrequency: 'daily' as const },
-  { path: '/news', priority: 0.7, changeFrequency: 'weekly' as const },
+  { path: '/websites', priority: 0.9, changeFrequency: 'monthly' as const },
+  { path: '/cases', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/contact', priority: 0.5, changeFrequency: 'yearly' as const },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, projects] = await Promise.all([getPosts(), Promise.resolve(getProjects())]);
+  const posts = await getPosts();
   const now = new Date();
 
   const staticEntries = STATIC_PATHS.flatMap(({ path, priority, changeFrequency }) =>
@@ -79,13 +77,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }),
   );
 
-  const projectEntries = projects.flatMap((project) =>
-    toLocalizedEntries(`/projects/${project.slug}`, {
-      lastModified: new Date(project.date),
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    }),
-  );
-
-  return [...staticEntries, ...courseEntries, ...postEntries, ...projectEntries];
+  return [...staticEntries, ...courseEntries, ...postEntries];
 }

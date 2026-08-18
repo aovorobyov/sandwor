@@ -174,67 +174,51 @@ curl "https://api.telegram.org/bot<TOKEN>/setWebhook\
 
 ```
 src/
-├── entities/post/api/telegram.ts          # Fetch + парсинг + маппинг
-├── app/api/telegram/webhook/route.ts      # Webhook endpoint (revalidateTag)
-└── entities/post/model/types.ts           # Post interface (включает image?)
-```
-
----
-
-## Project Structure
-
-```
-src/
 ├── app/               # Next.js App Router — routing only, no business logic
-│   ├── api/
-│   │   └── telegram/webhook/  # Webhook для on-demand revalidation
+│   ├── api/           # contact, order, course/log, posts/list, og, telegram/webhook
+│   ├── feed.xml/      # Atom-фид блога
 │   └── [locale]/      # RU без префикса, EN на /en (localePrefix: as-needed)
-│       └── blog/
-│           └── [slug]/        # Страница отдельного поста
+│       ├── blog/[slug]/     # Страница отдельного поста
+│       ├── cases/[slug]/    # Страница отдельного кейса
+│       └── course/[courseId]/  # Урок курса
 │
 ├── shared/            # Reusable code with no business context
-│   ├── ui/            # Base UI components (Button, Input, Badge, Card, Select, DotIcon)
+│   ├── ui/            # Base UI components (Button, Input, Badge, Chip, DotIcon, …)
 │   ├── api/           # Server-only helpers (telegram.ts — отправка в бота)
-│   ├── config/        # Constants (breakpoints, fonts)
-│   ├── lib/           # Utilities (cn helper, jsonLd builders, seo alternates)
-│   └── types/         # Common TypeScript types
+│   ├── config/        # Constants (site.ts — домен и канонический URL)
+│   └── lib/           # cn, jsonLd builders, seo (og + alternates), analytics
 │
 ├── entities/          # Business entities
 │   ├── post/
-│   │   ├── api/       # telegram.ts — источник данных
-│   │   ├── model/     # Post interface
-│   │   └── ui/        # PostCard component
-│   ├── project/       # Project type + ProjectCard component
-│   └── note/          # Note type, NoteItem, RELEASES (источник версий changelog)
+│   │   ├── api/       # articles.ts — активный источник; telegram.ts — отключён
+│   │   ├── model/     # Post interface + тексты статей
+│   │   └── ui/        # PostRow
+│   └── case/          # Case type + CaseCard
 │
 ├── features/          # User interactions
-│   ├── theme-toggle/  # Dark/light mode switcher
-│   ├── accent-toggle/ # cycleAccent helper — hidden ⌘K easter egg (not in header)
 │   ├── locale-switch/ # Language switcher (RU / EN)
 │   ├── contact-form/  # Contact form with submit handler
-│   └── order-form/    # Форма заявки на сайт + модалка (OrderModalContainer)
+│   ├── order-form/    # Форма заявки на сайт
+│   └── cookie-consent/ # Баннер согласия на cookie (152-ФЗ)
 │
 ├── widgets/           # Large page blocks composed from entities + features
-│   ├── Header/        # Site header with nav, theme toggle, locale switch
+│   ├── Header/        # Шапка: навигация, ⌘K-триггер, locale switch
 │   ├── Footer/        # Site footer
-│   ├── CommandPalette/ # ⌘K palette: навигация, поиск по статьям, тема, язык
-│   ├── PostList/      # Grid of PostCard components
-│   ├── ProjectList/   # Grid of ProjectCard components
-│   ├── NoteList/      # List of NoteItem components
-│   └── Timeline/      # Хронологическая лента: статьи + проекты + релизы
+│   ├── CommandPalette/ # ⌘K palette: навигация, поиск по статьям, язык
+│   ├── Tariffs/       # Сетка тарифов (данные — websites.tariffs)
+│   ├── ProcessSteps/  # Пять шагов работы (данные — websites.process)
+│   └── ScrollReset/   # Сброс скролла при смене маршрута
 │
 └── views/              # Page-level components (testable, separate from app/)
-    ├── HomePage/       # Витрина услуги (ServiceShowcase) + лента активности
+    ├── HomePage/       # Главная: оффер, тарифы, процесс, свежие статьи
     ├── WebsitesPage/   # Продающая страница создания сайтов (/websites)
     ├── BlogPage/       # Список всех постов с фильтром по тегам
     ├── ArticlePage/    # Страница отдельного поста
-    ├── ProjectsPage/   # Пет-проекты (/projects, ссылка со страницы Контакты)
-    ├── CasesPage/      # Коммерческие кейсы (/cases) — пока заглушка «скоро»
-    ├── TimelinePage/   # Полная лента без квот (/timeline)
-    ├── NewsPage/       # Changelog с semver-версиями (/news)
-    ├── UIKitPage/      # Дизайн-система: интерактивная песочница компонентов
-    ├── CoursePage/
-    └── ContactPage/
+    ├── CasesPage/      # Коммерческие кейсы (/cases)
+    ├── CasePage/       # Страница отдельного кейса
+    ├── CoursePage/     # Курс: лендинг, уроки, финал (шаблон под новые курсы)
+    ├── PrivacyPage/    # Политика обработки персональных данных
+    └── ContactPage/    # Контакты + форма связи
 ```
 
 **Layer import rules (FSD):**

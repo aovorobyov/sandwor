@@ -23,7 +23,7 @@ export default async function NotFound() {
 
         <h1 className={styles.title}>{t('404.page-not-found')}</h1>
 
-        <p className={styles.text}>{t('404.description-new')}</p>
+        <p className={styles.text}>{t('404.description')}</p>
 
         <div className={styles.actions}>
           <Link href={homeHref} className={styles.primary}>

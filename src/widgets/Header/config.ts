@@ -22,10 +22,6 @@ interface SecondaryLink {
 
 /** Второстепенные разделы — чипы в мобильном меню и колонка «Ещё» в футере. */
 export const SECONDARY_LINKS: readonly SecondaryLink[] = [
-  { href: '/projects', labelKey: 'nav.projects' },
-  { href: '/timeline', labelKey: 'nav.timeline' },
-  { href: '/news', labelKey: 'nav.news' },
-  { href: '/uikit', labelKey: 'nav.uikit' },
   { href: '/course', labelKey: 'nav.course' },
   { href: '/feed.xml', labelKey: 'nav.rss', isExternal: true },
 ];

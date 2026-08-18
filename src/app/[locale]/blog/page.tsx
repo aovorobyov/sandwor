@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import { OG_DEFAULT_IMAGE } from '@/shared/lib/seo/ogImage';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { BlogPage } from '@/views/BlogPage';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
+import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
+import { buildPageOgImage } from '@/shared/lib/seo/ogImage';
 
 export async function generateMetadata({
   params: { locale },
@@ -14,11 +15,16 @@ export async function generateMetadata({
     title: t('blog.title'),
     description: t('blog.subtitle'),
     alternates: buildPageAlternates(locale, '/blog'),
-    openGraph: {
+    ...buildSocialMeta({
       title: t('blog.title'),
       description: t('blog.subtitle'),
-      images: [OG_DEFAULT_IMAGE],
-    },
+      image: buildPageOgImage({
+        locale,
+        tag: t('nav.blog'),
+        title: t('blog.title'),
+        lead: t('blog.subtitle'),
+      }),
+    }),
   };
 }
 

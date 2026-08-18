@@ -3,6 +3,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ArticlePage } from '@/views/ArticlePage';
 import { getPosts, getPost } from '@/entities/post/api/posts';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
+import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
+import { buildContentOgImage } from '@/shared/lib/seo/ogImage';
 
 interface Props {
   params: { locale: string; slug: string };
@@ -22,29 +24,24 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
     return { title: t('blog.title') };
   }
 
-  const ogImage = `/api/og?title=${encodeURIComponent(post.title)}${
-    post.tag ? `&tag=${encodeURIComponent(post.tag)}` : ''
-  }`;
-
   const description = post.description || post.excerpt;
 
   return {
     title: post.title,
     description,
     alternates: buildPageAlternates(locale, `/blog/${post.slug}`),
-    openGraph: {
+    ...buildSocialMeta({
       title: post.title,
       description,
       type: 'article',
       publishedTime: post.date,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description,
-      images: [ogImage],
-    },
+      image: buildContentOgImage({
+        locale,
+        tag: post.tag,
+        title: post.title,
+        meta: t('blog.min-read', { count: post.readTime }),
+      }),
+    }),
   };
 }
 

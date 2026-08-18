@@ -167,8 +167,8 @@ summary::-webkit-details-marker {
   /* Тайминги */
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
 
-  /* ── Legacy-алиасы: чтобы ещё не мигрированные модули не ломались.
-        Удаляются по мере переноса страниц на новые токены. ── */
+  /* ── Legacy-алиасы: старые имена токенов, на которых ещё держатся курс,
+        privacy, error, формы и часть shared/ui. Удаляются по мере миграции. ── */
   --bg-subtle: var(--bg2);
   --border: var(--line);
   --text-muted: var(--muted);
@@ -187,7 +187,6 @@ summary::-webkit-details-marker {
   --text-2xl: 26px;
   --text-3xl: clamp(28px, 4.2vw, 50px);
 
-  --weight-normal: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
 
@@ -203,7 +202,6 @@ summary::-webkit-details-marker {
   --space-8: 32px;
   --space-12: 48px;
   --space-16: 64px;
-  --space-24: 96px;
 
   --container-narrow: 900px;
 

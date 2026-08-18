@@ -6,22 +6,10 @@ export type DotIconName =
   | 'home'
   | 'blog'
   | 'projects'
-  | 'news'
   | 'course'
-  | 'uikit'
   | 'post'
-  | 'light'
-  | 'dark'
-  | 'system'
   | 'locale'
-  | 'drop'
-  | 'mail'
-  | 'telegram'
-  | 'github'
-  | 'instagram'
-  | 'vk'
-  | 'chevronDown'
-  | 'notFound';
+  | 'mail';
 
 export interface DotIconProps {
   name: DotIconName;

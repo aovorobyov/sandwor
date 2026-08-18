@@ -19,13 +19,6 @@ const nextConfig = {
       { protocol: 'https', hostname: '*.telesco.pe' },
     ],
   },
-  redirects: async () => {
-    return [
-      // Старый /notes сохранял индексацию в Google (был в sitemap) — перенаправляем
-      // на новый /news, чтобы не плодить 404 и сохранить SEO-вес.
-      { source: '/notes', destination: '/news', permanent: true },
-    ];
-  },
 };
 
 export default withAnalyzer(withNextIntl(nextConfig));

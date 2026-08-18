@@ -5,6 +5,5 @@ export {
   buildBreadcrumbs,
   buildCourse,
   buildPerson,
-  buildProjectWork,
   buildWebSite,
 } from './builders';

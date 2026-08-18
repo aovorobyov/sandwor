@@ -1,7 +1,6 @@
 /** Идентификаторы JS-целей Яндекс.Метрики. Значения совпадают с настройкой целей в интерфейсе счётчика. */
 export const YM_GOAL = {
   orderWebsites: 'order_websites',
-  orderHome: 'order_home',
   contact: 'contact',
 } as const;
 

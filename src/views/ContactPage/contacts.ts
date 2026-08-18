@@ -1,5 +1,3 @@
-import type { ContactChannel } from './ContactPage.types';
-
 /** Основной канал — выносится в primary-CTA, поэтому не дублируется в ряду соцсетей. */
 export const PRIMARY_EMAIL = 'mailto:aovorobyov@mail.ru';
 
@@ -15,20 +13,8 @@ export const CONTACT_LINKS = [
   { label: 'GitHub', handle: 'github.com/aovorobyov', href: 'https://github.com/aovorobyov' },
 ] as const;
 
-/** Соцсети для иконного ряда (без почты — она вынесена в CTA). */
-export const CONTACT_CHANNELS: ContactChannel[] = [
-  { id: 'telegram', label: 'Telegram', href: 'https://t.me/aovorobyov' },
-  { id: 'github', label: 'GitHub', href: 'https://github.com/aovorobyov' },
-];
-
 /**
  * Страницы, убранные из основной навигации, но доступные по прямой ссылке.
  * Собраны здесь, чтобы не терялись после урезания шапки до 4 пунктов.
  */
-export const SECONDARY_LINKS = [
-  { href: '/projects', labelKey: 'nav.projects' },
-  { href: '/news', labelKey: 'nav.news' },
-  { href: '/timeline', labelKey: 'nav.timeline' },
-  { href: '/course/ai-basics', labelKey: 'nav.course' },
-  { href: '/uikit', labelKey: 'nav.uikit' },
-] as const;
+export const SECONDARY_LINKS = [{ href: '/course', labelKey: 'nav.course' }] as const;

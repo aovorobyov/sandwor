@@ -4,10 +4,15 @@ import { CasePage } from '@/views/CasePage';
 import { CASE_SLUGS } from '@/entities/case';
 import type { CaseDetail, CaseItem } from '@/entities/case/model/types';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
+import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
+import { buildContentOgImage } from '@/shared/lib/seo/ogImage';
 
 interface Props {
   params: { locale: string; slug: string };
 }
+
+/** Сколько пунктов состава работ уходит в моно-строку обложки. */
+const OG_SCOPE_LIMIT = 2;
 
 export function generateStaticParams() {
   return CASE_SLUGS.map((slug) => ({ slug }));
@@ -29,11 +34,17 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
     title: item.title,
     description: detail.lead,
     alternates: buildPageAlternates(locale, `/cases/${slug}`),
-    openGraph: {
+    ...buildSocialMeta({
       title: item.title,
       description: detail.lead,
       type: 'article',
-    },
+      image: buildContentOgImage({
+        locale,
+        tag: item.type,
+        title: item.title,
+        meta: item.scope.slice(0, OG_SCOPE_LIMIT).join(' · '),
+      }),
+    }),
   };
 }
 

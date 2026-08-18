@@ -1,6 +1,6 @@
 import type { DotIconName } from '@/shared/ui';
 
-export type PaletteCommandGroup = 'navigation' | 'post' | 'theme' | 'locale' | 'accent';
+export type PaletteCommandGroup = 'navigation' | 'post' | 'locale';
 
 export interface PaletteCommand {
   id: string;

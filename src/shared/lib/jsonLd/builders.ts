@@ -4,7 +4,6 @@ import type {
   BreadcrumbInput,
   CourseInput,
   PersonInput,
-  ProjectWorkInput,
   WebSiteInput,
 } from './builders.types';
 
@@ -56,34 +55,6 @@ export const buildBlogPosting = (input: BlogPostingInput) => {
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': articleUrl,
-    },
-  };
-};
-
-export const buildProjectWork = (input: ProjectWorkInput) => {
-  const { title, description, date, slug, locale, authorName, repoUrl, siteUrl } = input;
-
-  // localePrefix: 'never' — реальные URL без префикса локали
-  const projectUrl = `${SITE_URL}/projects/${slug}`;
-  const externalLinks = [repoUrl, siteUrl].filter(Boolean);
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
-    name: title,
-    description,
-    dateCreated: date,
-    url: projectUrl,
-    inLanguage: locale,
-    ...(externalLinks.length > 0 ? { sameAs: externalLinks } : {}),
-    author: {
-      '@type': 'Person',
-      name: authorName,
-      url: SITE_URL,
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': projectUrl,
     },
   };
 };

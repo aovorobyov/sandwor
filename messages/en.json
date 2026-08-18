@@ -3,12 +3,8 @@
     "home": "Home",
     "websites": "Services",
     "blog": "Blog",
-    "projects": "Projects",
     "cases": "Cases",
-    "news": "News",
-    "timeline": "Timeline",
     "contact": "Contact",
-    "uikit": "UI Kit",
     "course": "AI Course",
     "rss": "RSS",
     "services": "Services"
@@ -16,35 +12,7 @@
   "home": {
     "name": "Alexander Vorobyov",
     "bio": "Web developer. I work on frontend and occasionally write about code and tools.",
-    "slogan-prefix": "I build websites for",
-    "slogan-words": [
-      "your business",
-      "your coffee shop",
-      "your agency",
-      "your venue",
-      "your store",
-      "your personal brand",
-      "your restaurant",
-      "your studio",
-      "your school",
-      "your online course",
-      "your community",
-      "your startup"
-    ],
     "lead": "Landing pages, Tilda stores you can edit without a developer, custom development — I pick the right tool for your goal and budget.",
-    "order": "Order a website",
-    "more": "Learn more",
-    "latest-posts": "Latest articles",
-    "all-posts": "All articles →",
-    "course-badge": "New course",
-    "course-continue-badge": "Already started",
-    "course-cta": "Start course →",
-    "course-continue-cta": "Continue course →",
-    "course-results-cta": "See results →",
-    "course-progress": "{done} of {total} completed",
-    "timeline-type-post": "Article",
-    "timeline-type-project": "Project",
-    "timeline-more-releases": "{count, plural, one {and # more release} other {and # more releases}}",
     "hero-eyebrow": "Turnkey website development",
     "hero-title": "I build websites that bring in leads",
     "hero-lead": "Landing pages, Tilda stores and custom development. I pick the right tool for your task and budget — and leave you a site you can run yourself.",
@@ -108,7 +76,6 @@
     "filter-all": "All",
     "read-more": "Read →",
     "min-read": "{count} min read",
-    "related-posts": "Related posts",
     "read-next": "Read next",
     "cta-title": "Need an estimate for your task?",
     "cta-lead": "Describe the project — I'll give a range the same day.",
@@ -116,7 +83,6 @@
   },
   "cases": {
     "title": "Cases",
-    "soon": "Coming soon: commercial case studies — real client projects with the problem, the solution and the outcome.",
     "breadcrumb": "Cases",
     "hero-title": "Projects and results",
     "hero-lead": "The client's task, the chosen solution and the scope of work for each project.",
@@ -316,63 +282,9 @@
     "similar-btn": "Discuss",
     "repo": "Repository"
   },
-  "projects": {
-    "title": "Projects",
-    "subtitle": "Side projects: what was built, how and why.",
-    "open": "Open →",
-    "view": "View →",
-    "repo": "Repository ↗",
-    "site": "Visit site ↗"
-  },
-  "news": {
-    "title": "News",
-    "subtitle": "Changelog of the site — what was added, fixed and improved across versions.",
-    "entries": {
-      "v1-16-1": "One consistent brand accent instead of a random cycle. The header button that cycled the --accent CSS variable across 10 random colors is gone from the public interface — the first impression now always shows the brand's fixed orange (--accent lives in globals.css as the single source of truth for the light and dark themes). The cycler itself survives as a hidden easter egg: the command exists only in the ⌘K palette, runs on demand and resets to the brand color on reload. The dead AccentToggle UI component was cleaned up along the way — the feature now exports just the reusable cycleAccent helper.",
-      "v1-16-0": "The /websites page turned into a real sales page: plans, reviews and direct contact. Instead of a single vague «from RUB 50,000» there is now a grid of three plans — Landing page (from RUB 50,000), Tilda store (from RUB 100,000) and Custom (on request) — each with its own scope of work plus a shared «included in every plan» block. A reviews section was added on its own data source (empty for now, it switches on automatically once real reviews arrive, and the Review schema is emitted at the same time) alongside a direct-contact block next to the request form — equal-width Telegram and WhatsApp buttons with their brand logos. Along the way the content width was aligned with the home page, the incorrect «my admin panel» wording was removed (content editing goes through Tilda's built-in editor), the FAQ was rewritten around the new plans and contact options, and the meta-description was trimmed to snippet length.",
-      "v1-15-0": "Side projects are now separated from commercial cases. The main-nav «Works» item is renamed to «Cases» and shown greyed-out for now — the section is waiting for real client cases with a problem, a solution and an outcome. The existing learning and personal projects (including the café site) moved to a «Projects» section reachable from the Contact page, like the other secondary pages. The «Selected work» block with side projects was removed from the services page and the home page, so a buyer sees only relevant content.",
-      "v1-14-1": "The header is now focused on the client: the main navigation keeps only Services, Works, Blog and Contact instead of the previous eight items. The utility and «for myself» pages — News, Timeline, UI Kit and the AI Course — were dropped from the header and footer but are still reachable: via direct links, the ⌘K command palette, and a new block on the Contact page. The Contact page itself gained an author card with a short bio and a «More on the site» section that gathers all the secondary links in one place.",
-      "v1-14-0": "The English version now has its own indexable URLs. RU and EN used to share a single address (localePrefix «never», language picked by a cookie), which left the entire en.json invisible to search and made hreflang point at itself. Now next-intl runs in «as-needed» mode: Russian stays on prefix-free addresses while English moved to /en/…, each language variant carries its own canonical and reciprocal hreflang, and the sitemap lists both versions. Navigation, the language switcher, the command palette and server-side redirects became locale-aware so an English visitor no longer falls through to Russian pages.",
-      "v1-13-1": "Single source of truth for the domain and a canonical address on sandwor.online. SEO used to be nailed to sandwor.ru through hardcodes in seven places (metadataBase, sitemap, robots, feed, JSON-LD, OG), so canonical, Open Graph and the sitemap pointed at a domain unreachable from Russia due to Vercel hosting. Now the site address comes from a single SITE_URL constant backed by the NEXT_PUBLIC_SITE_URL variable and defaulting to the live sandwor.online, and every link — canonical, OG, sitemap, robots, feed and JSON-LD — converges on it; sandwor.ru stays live for the Telegram bot binding but is no longer declared as the primary domain.",
-      "v1-13-0": "Web analytics: Yandex.Metrica and Google Search Console verification. The site had no analytics at all — now the root layout carries a Yandex.Metrica counter with Webvisor, click map and accurate bounce rate; the script loads via next/script with the afterInteractive strategy, the counter id lives in the NEXT_PUBLIC_YM_ID variable, and without it the counter is not rendered so local development does not pollute the stats. Successful submission of three forms fires JS goals through reachGoal: a request from the home page (order_home), a request from the /websites page (order_websites) and a message from the contact form (contact) — the identifiers are centralized in YM_GOAL. For Google Search Console a google-site-verification meta tag was added to prove domain ownership without DNS access.",
-      "v1-12-0": "«Website development» showcase and the /websites section. The home page shifts focus from the course to building websites on demand: the hero became a full-screen showcase with the slogan «I build websites for…» and a typewriter cycling through audiences (coffee shop, store, personal brand, etc.), two CTAs — the accent «Order» opens a request modal, the secondary one leads to /websites — and the waving 3D character kept in place; the course banner is shrunk, toned down and moved below the showcase. The new /websites page covers the approach to clients, tool selection (Tilda with an admin panel / landing pages / custom), the process, cases, pricing from RUB 50,000 and an FAQ, with a request form at the bottom anchor; requests go to the same Telegram bot as the contact form. Under the hood: reusable Modal, Typewriter and FormSuccess components plus a shared useFormSubmit hook; form fields switched to a --field-bg variable so they no longer blend into their panels; for search, FAQPage and Service JSON-LD were added along with a keyword-rich title and description.",
-      "v1-11-1": "Default OG image. Pages without their own cover now ship a branded 1200×630 card in og:image and twitter:card summary_large_image — links to the site unfurl into a proper preview in social networks and messengers. The image is set in the root layout and duplicated across seven pages with their own openGraph, since in Next a child openGraph fully overrides the parent; blog articles keep their dynamic /api/og covers.",
-      "v1-11-0": "Animated character on the home page. The hero now hosts the author 3D avatar: the source image is programmatically split into two layers — body and palm (alpha-channel flood fill bounded at the wrist), and the palm waves via CSS animation around the wrist point, respecting prefers-reduced-motion. The body layer got a painted inner sleeve wall so no gaps show on light backgrounds mid-wave; on mobile the character is larger and cropped by the section border, while the text yields space and is haloed with the background color. Sources are PNG: the next/image optimizer serves webp/avif to modern browsers and png to legacy ones.",
-      "v1-10-1": "SEO polish. Canonical and hreflang are now in every page ‹head› — previously locale alternates were only declared in the sitemap; blog and projects got meta descriptions, /uikit received metadata for the first time. JSON-LD expanded: CreativeWork on project pages with repo and live-site links in sameAs, BreadcrumbList on articles and projects, Person on Contacts. Also fixed a bug: BlogPosting and Course built URLs with a locale prefix (/ru/blog/…) that do not exist under localePrefix: never.",
-      "v1-10-0": "Activity timeline at /timeline. The new page merges articles, projects and releases into one chronology: a vertical dotted rail, typed cards, releases get an accent version badge with the first changelog sentence as the title. Adjacent same-day releases collapse into one entry with a version range (v1.4.0 – v1.5.2) and an “and N more releases” counter. Timeline and UI Kit joined the header and the ⌘K palette; navigation became three-tiered: burger below 880px, full menu without search up to 1160px, then with the “Search ⌘K” box — items never wrap to a second line.",
-      "v1-9-0": "Component playground in UI Kit. The static showcase is replaced with an interactive playground: tabs for six components (Button, Badge, Input, Textarea, ProgressBar, DotIcon), typed prop controls and a live JSX snippet assembled from current values with one-click copy; per-component settings survive tab switching. The design system gained its own Select — a custom dropdown with an accent dot marking the chosen option, closing on Escape and outside click. Card heights are fixed for the tallest control set and grid columns got min-width: 0 — the playground no longer jumps on switching or overflows on mobile.",
-      "v1-8-1": "Dot-grid iconography. Every site icon now runs on a single DotIcon system — radius-5 circles on a 10-step grid, inline SVG via currentColor: header search, every command palette item, Contact channels, the 404 banner and the theme/accent toggles. The «sandwor» logo was rebuilt from 92 dots extracted by parsing the original SVG path data and is now animated: a click scatters and reassembles the letters with per-dot random delays (randomness is generated only after hydration, prefers-reduced-motion is respected). Five svg files were removed from public/img — icons no longer load as separate requests, and the theme icon no longer flashes after hydration: both variants render on the server and CSS picks the visible one via data-theme.",
-      "v1-8-0": "The Contact page got a full redesign. A hero with an accent «Email me» CTA, channel icons (Telegram, GitHub, Instagram, VK) as inline SVGs tinted via currentColor, and a split layout: intro on the left, a form on a fixed-height card panel on the right with a success screen (checkmark + «send another»). The form is now live — messages are delivered to a Telegram bot through a server route /api/contact (Bot API sendMessage, HTML escaping, field validation). No-CAPTCHA anti-spam: a honeypot field, a time-trap against instant submits, and a link cap, every hit is silently dropped. Along the way the middleware matcher was fixed: next-intl was intercepting /api/* and dropping every API route to 404.",
-      "v1-7-0": "News section replaces Notes. Curated release log with semver versioning. The Note entity gains an optional version field; NoteItem renders a badge next to the date. 301 redirect /notes → /news preserves the SEO weight of the old page. The section is added to the main NAV_LINKS — previously /notes was reachable only via direct URL.",
-      "v1-6-2": "Bundle analyzer and JS budget in CI. @next/bundle-analyzer powers an interactive treemap via `npm run analyze`. A 50-line custom script scripts/check-bundle-size.mjs sums gzipped sizes of all chunks in .next/static/chunks and fails CI above 350 KB. Current usage — 273 KB (78% of budget).",
-      "v1-6-1": "Engineering hygiene. Pre-commit hook via husky + lint-staged: ESLint --fix and Prettier --write on staged files, plus full tsc --noEmit. GitHub Actions CI: lint, typecheck, jest, build on every push to main and every PR. concurrency cancel-in-progress, npm cache, HUSKY=0 for CI. Dead MOCK_POSTS removed from BlogPage/HomePage.",
-      "v1-6-0": "View Transitions API and animated burger. Smooth crossfade with slide-up between pages via next-view-transitions — native browser API, ~2 KB gzip, zero JS overhead. All next/link replaced with the library's patched Link. Mobile burger: 3 bars morph into × over 240ms with cubic-bezier easing; the button itself stands out with bg/border. Respects prefers-reduced-motion.",
-      "v1-5-3": "Palette ⌘K expanded. Article search via a new /api/posts/list endpoint — slim projection (slug, title, tag) with s-maxage=3600 cache. Lazy fetch on first open — zero requests until click, then cached in state. Visible «Search ⌘K» button in the header for discoverability. Decoupled via CustomEvent('palette:open') — any component can open the palette in one line.",
-      "v1-5-2": "Mobile course layout. CourseTopbar docks under the Header (top: 56px) instead of clashing with it. On mobile — two flex rows: course title + Reset on top, progress bar below. Lesson sidebar switched to a column — the previous 2-column grid wrapped «Documents & Excel» across 2 lines. Duplicate «Lesson N of M» removed — kept only in LessonContent.",
-      "v1-5-1": "Sticky reading progress bar. Strip on top of the article appears after 240px scroll: «N min read · date» + 2px progress fill in --accent, scaleX-animated by document scroll. Scroll handler throttled via requestAnimationFrame — react batches, ~60fps without long tasks. 56px tall to align flush under the Header; prefers-reduced-motion disables animation.",
-      "v1-5-0": "Command palette ⌘K. Custom implementation without cmdk (~140 lines): substring filter over label + keywords, ↑↓ Enter navigation, focus management, click-outside, Esc. Commands: 7 navigation items, theme (light/dark/system), locale switch, accent cycle. Along the way extracted shared helpers useLocaleSwitch and cycleAccent — header toggles and the palette now share one source of truth.",
-      "v1-4-5": "Course: reset progress and per-lesson deep-link. «Start over» button in the topbar with window.confirm, clears localStorage and the query parameter. URL `?lesson=N` (1-indexed) opens the specified lesson on landing — bypasses unlock to allow sharing any lesson. «Share lesson» — clipboard copy via navigator.clipboard with a 2-second ✓ highlight.",
-      "v1-4-4": "Related posts under articles. getRelatedPosts(slug, limit) algorithm: same-tag posts first (newest first), then fill from the latest of the rest until reaching limit. Reuses the existing PostList widget with a header divider. Hidden if there's only one post on the blog.",
-      "v1-4-3": "SEO: real sitemap + hreflang. Previously sitemap.xml emitted MOCK_POSTS — Google was crawling non-existent URLs, indexing was broken. Now — real posts via getTelegramPosts, projects from projects.json, courses from COURSES_REGISTRY. Hreflang alternates for ru/en on every entry declare multilingual availability. Proper priority and changeFrequency.",
-      "v1-4-2": "RSS/Atom feed. /feed.xml endpoint emits valid Atom 1.0 — reuses getTelegramPosts, manual XML escaping (no libs). ‹head› on every page carries a ‹link rel=\"alternate\" type=\"application/atom+xml\"› tag for auto-discovery (Feedly, Inoreader, Chrome extensions light up). «RSS» link in the footer. Edge cache s-maxage=3600, stale-while-revalidate=86400.",
-      "v1-4-1": "Course progress in the home banner. Returning users see «Continue (3 of 6) →» instead of «Start course», lesson dots highlighted ✓ for completed ones. localStorage key and loadCourseState extracted to a shared lib; useCourseProgress hook reads them in a client overlay on top of the server banner. SSR renders the default to avoid hydration mismatch.",
-      "v1-4-0": "SEO foundation: OG images and JSON-LD. Edge route /api/og renders 1200×630 PNG via next/og (aka @vercel/og) — dynamic cover with title, tag, and brand. Wired up through generateMetadata in openGraph.images + twitter card summary_large_image. JSON-LD structured data: Person + WebSite on home, BlogPosting on each article, Course on the course — enables rich snippets in Google and context for AI crawlers.",
-      "v1-3-0": "AI course «AI — Your New Assistant». 6 interactive lessons with theory, a chat example, and a hands-on task. Three-screen state machine (landing → course → completion) + localStorage persistence. Name registration for personalised completion. PDF cheat sheet from results — through window.print() with print styles. CourseSidebar with unlocking logic based on completed lessons.",
-      "v1-2-0": "«Projects» section. Cards with localised titles and descriptions (ru/en), tags, optional links to repo and live site. Source — entities/project with JSON data. Dedicated page per project (/projects/[slug]) with a detailed description and cover image.",
-      "v1-1-0": "Blog via Telegram channel. Posts auto-parsed from the public page t.me/s/‹channel› via node-html-parser. Extraction: bold title from ‹b›...‹/b› tags, cover from background-image style on .tgme_widget_message_photo_wrap, tags from hashtags, read time from word count. React.cache() deduplicates fetch within a single render. Next Data Cache (revalidate=3600) + webhook /api/telegram/webhook with revalidateTag on new posts.",
-      "v1-0-2": "Dynamic accent color. Header button cycles the --accent CSS variable across a 10-color palette. Selection logic prevents consecutive repeats via a module-level lastColor memo. After the ⌘K palette landed — extracted as cycleAccent() in features/accent-toggle/lib, reused by both the toggle and the palette command.",
-      "v1-0-1": "UI Kit and design system. /uikit showcase with tokens (colors, typography, spacing, radii) and base components: Button with three variants (primary/secondary/ghost), Input, Textarea, Badge, Card, ProgressBar. Custom SVG icon set with CSS mask for currentColor tinting. Mobile-first media queries, dark/light themes via the data-theme attribute.",
-      "v1-0-0": "sandwor.ru launched. Stack: Next.js 14 + App Router, TypeScript strict, Feature-Sliced Design (app → views → widgets → features → entities → shared). i18n on next-intl with cookie-based locale switching (localePrefix: 'never'). Dark/light theme via next-themes. Inter Variable font. Deployed on Vercel."
-    }
-  },
-  "timeline": {
-    "title": "Timeline",
-    "subtitle": "Everything happening on this site in one place: articles, projects and releases in chronological order."
-  },
   "contact": {
     "title": "Contact",
     "subtitle": "Open to projects, collaboration, and a good conversation. I usually reply within a day.",
-    "cta": "Email me",
     "more": "More on the site",
     "name": "Name",
     "email": "Email",
@@ -409,7 +321,6 @@
     "meta-description": "Websites for business: landing pages from RUB 50,000, Tilda stores and custom builds. I pick the right tool for the job, launch end to end and support after go-live.",
     "hero-lead": "I build websites that work toward a result: clear structure, fast launch and easy content management — on Tilda you edit the site yourself, without a developer.",
     "order": "Order a website",
-    "scroll-hint": "Scroll down",
     "approach-title": "How I approach the work",
     "approach": [
       "I start with your goal, not a template. We figure out who your customers are, what they should do on the site and what outcome you need — sales, leads or awareness.",
@@ -504,9 +415,6 @@
       "Launch on your domain",
       "Post-launch support"
     ],
-    "reviews-title": "Reviews",
-    "reviews-lead": "What clients I've built sites for say.",
-    "reviews": [],
     "faq-title": "Frequently asked questions",
     "faq": [
       {
@@ -557,10 +465,9 @@
   },
   "404": {
     "page-not-found": "Page not found",
-    "page-not-found-description": "The page you are looking for does not exist.",
     "back-home": "Home",
     "to-blog": "To blog",
-    "description-new": "It may have been moved or the link is out of date. The homepage will get you back on track."
+    "description": "It may have been moved or the link is out of date. The homepage will get you back on track."
   },
   "palette": {
     "placeholder": "Search the site…",
@@ -571,32 +478,11 @@
     "group": {
       "navigation": "Navigation",
       "post": "Articles",
-      "theme": "Theme",
-      "locale": "Language",
-      "accent": "Appearance"
+      "locale": "Language"
     },
     "triggerLabel": "Search",
     "triggerAria": "Open command palette",
-    "themeLight": "Light theme",
-    "themeDark": "Dark theme",
-    "themeSystem": "System theme",
-    "switchLocale": "Switch language: {locale}",
-    "accentChange": "Change accent color"
-  },
-  "uikit": {
-    "title": "Design System Kit",
-    "description": "A collection of visual tokens and functional components.",
-    "playground": "Playground",
-    "playground-description": "Pick a component and tweak its props — the JSX snippet writes itself.",
-    "playground-props": "Props",
-    "playground-copy": "Copy",
-    "playground-copied": "Copied ✓",
-    "btn-primary": "Primary Action",
-    "badge-neutral": "Neutral",
-    "form-label": "Label",
-    "form-placeholder": "Enter text...",
-    "form-message": "Message",
-    "form-message-placeholder": "Your thoughts..."
+    "switchLocale": "Switch language: {locale}"
   },
   "course": {
     "lessons": "Lessons",
@@ -649,18 +535,12 @@
       "service2Desc": "AI from Elon Musk's team",
       "service3Title": "Claude",
       "service3Url": "claude.ai",
-      "service3Desc": "Anthropic's AI, great for text and analysis",
-      "printTitle": "Print / Save as PDF"
+      "service3Desc": "Anthropic's AI, great for text and analysis"
     }
   },
   "header": {
     "cta": "Discuss a project",
-    "menu": "Menu",
-    "more": "More on the site"
-  },
-  "legacy": {
-    "notice": "Legacy page",
-    "hint": "design update coming soon"
+    "menu": "Menu"
   },
   "cookie": {
     "aria": "Cookie consent",

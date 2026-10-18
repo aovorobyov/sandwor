@@ -1,5 +1,8 @@
 export {
   SERVICE_IDS,
+  SERVICE_STATUS,
+  ACTIVE_SERVICE_IDS,
+  isServiceActive,
   SERVICE_PRICES,
   MONTHLY_SERVICES,
   CALCULATOR_PRICES,
@@ -10,4 +13,4 @@ export {
   isServiceId,
   getServiceHref,
 } from './model/services';
-export type { ServiceId } from './model/services';
+export type { ServiceId, ServiceStatus } from './model/services';

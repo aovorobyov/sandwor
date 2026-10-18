@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ServicePage } from '@/views/ServicePage';
-import { SERVICE_IDS, isServiceId } from '@/entities/service';
+import { ServiceSoonPage } from '@/views/ServiceSoonPage';
+import { SERVICE_IDS, isServiceActive, isServiceId } from '@/entities/service';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
 import { buildPageOgImage } from '@/shared/lib/seo/ogImage';
@@ -23,6 +24,17 @@ export async function generateMetadata({ params: { locale, service } }: Props): 
   }
 
   const t = await getTranslations({ locale, namespace: `services.items.${service}` });
+
+  // «Скоро»: страница есть, но в поиск не отдаём — направление ещё не работает.
+  if (!isServiceActive(service)) {
+    const tServices = await getTranslations({ locale, namespace: 'services' });
+
+    return {
+      title: tServices('soon-page-title', { title: t('title') }),
+      description: tServices('soon-lead'),
+      robots: { index: false, follow: true },
+    };
+  }
 
   return {
     title: t('meta-title'),
@@ -47,5 +59,10 @@ export default function Page({ params: { locale, service } }: Props) {
   }
 
   setRequestLocale(locale);
+
+  if (!isServiceActive(service)) {
+    return <ServiceSoonPage service={service} />;
+  }
+
   return <ServicePage service={service} />;
 }

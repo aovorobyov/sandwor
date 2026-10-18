@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ServicesPage } from '@/views/ServicesPage';
+import { byPositioning } from '@/shared/config/positioning';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
 import { buildPageOgImage } from '@/shared/lib/seo/ogImage';
@@ -13,12 +14,14 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'services' });
 
   return {
-    title: t('meta-title'),
-    description: t('meta-description'),
+    title: t(byPositioning({ sites: 'meta-title', studio: 'meta-title-studio' })),
+    description: t(byPositioning({ sites: 'meta-description', studio: 'meta-description-studio' })),
     alternates: buildPageAlternates(locale, '/services'),
     ...buildSocialMeta({
-      title: t('meta-title'),
-      description: t('meta-description'),
+      title: t(byPositioning({ sites: 'meta-title', studio: 'meta-title-studio' })),
+      description: t(
+        byPositioning({ sites: 'meta-description', studio: 'meta-description-studio' }),
+      ),
       image: buildPageOgImage({
         locale,
         tag: t('title'),

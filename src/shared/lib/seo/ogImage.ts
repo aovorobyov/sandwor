@@ -1,4 +1,5 @@
 import { defaultLocale } from '@/i18n-routing';
+import { byPositioning } from '@/shared/config/positioning';
 import type { ContentOgImageOptions, OgImage, PageOgImageOptions } from './ogImage.types';
 
 const OG_WIDTH = 1200;
@@ -21,10 +22,11 @@ const buildOgImage = (params: Record<string, string>, alt: string): OgImage => {
  * сроки. Текст локализован по `locale` внутри роута.
  */
 export const buildOfferOgImage = (locale: string): OgImage => {
-  const alt =
-    locale === 'en'
-      ? 'We bring order to your sales — sandwor'
-      : 'Наводим порядок в продажах — sandwor';
+  const titles = byPositioning({
+    sites: { ru: 'Делаем сайты, которые приносят заявки', en: 'Websites that bring you leads' },
+    studio: { ru: 'Наводим порядок в продажах', en: 'We bring order to your sales' },
+  });
+  const alt = `${locale === 'en' ? titles.en : titles.ru} — sandwor`;
 
   return buildOgImage({ variant: 'offer', locale }, alt);
 };

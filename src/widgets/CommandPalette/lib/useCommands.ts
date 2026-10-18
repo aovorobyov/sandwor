@@ -41,14 +41,16 @@ export const useCommands = (posts: PaletteSearchPost[] = []): PaletteCommand[] =
     }),
   );
 
-  const serviceCommands: PaletteCommand[] = SERVICE_NAV.map((item) => ({
-    id: `service-${item.id}`,
-    label: t(`services.items.${item.id}.title`),
-    group: 'service',
-    icon: SERVICE_ICONS[item.id],
-    keywords: `${item.id} ${t(`service-labels.${item.id}`)}`,
-    onSelect: () => router.push(href(item.href)),
-  }));
+  const serviceCommands: PaletteCommand[] = SERVICE_NAV.filter((item) => item.isActive).map(
+    (item) => ({
+      id: `service-${item.id}`,
+      label: t(`services.items.${item.id}.title`),
+      group: 'service',
+      icon: SERVICE_ICONS[item.id],
+      keywords: `${item.id} ${t(`service-labels.${item.id}`)}`,
+      onSelect: () => router.push(href(item.href)),
+    }),
+  );
 
   const postCommands: PaletteCommand[] = posts.map((post) => ({
     id: `post-${post.slug}`,

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getPosts } from '@/entities/post/api/posts';
-import { SERVICE_IDS, getServiceHref } from '@/entities/service';
+import { ACTIVE_SERVICE_IDS, getServiceHref } from '@/entities/service';
 import { PUBLISHED_CASE_SLUGS } from '@/entities/case';
 import { buildLocaleUrl } from '@/shared/lib/seo/buildLocaleUrl';
 import { defaultLocale, locales } from '@/i18n-routing';
@@ -56,7 +56,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     toLocalizedEntries(path, { lastModified: now, changeFrequency, priority }),
   );
 
-  const serviceEntries = SERVICE_IDS.flatMap((id) =>
+  // Направления «Скоро» закрыты от индексации — в sitemap их нет.
+  const serviceEntries = ACTIVE_SERVICE_IDS.flatMap((id) =>
     toLocalizedEntries(getServiceHref(id), {
       lastModified: now,
       changeFrequency: 'monthly',

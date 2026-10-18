@@ -11,6 +11,7 @@ import { BriefProvider } from '@/features/brief';
 import { CookieConsent } from '@/features/cookie-consent';
 import { AmoCrmButton } from '@/shared/lib/crm';
 import { LinkInterceptor } from '@/shared/lib/navigation';
+import { byPositioning } from '@/shared/config/positioning';
 
 interface Props {
   children: React.ReactNode;
@@ -25,8 +26,11 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
   const t = await getTranslations({ locale, namespace: 'meta' });
 
   return {
-    title: { template: '%s | sandwor', absolute: t('title') },
-    description: t('description'),
+    title: {
+      template: '%s | sandwor',
+      absolute: t(byPositioning({ sites: 'title', studio: 'title-studio' })),
+    },
+    description: t(byPositioning({ sites: 'description', studio: 'description-studio' })),
   };
 }
 

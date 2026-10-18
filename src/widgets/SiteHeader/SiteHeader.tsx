@@ -60,8 +60,11 @@ export const SiteHeader: FC = () => {
         servicesTitle: t('header.services-title'),
         services: SERVICE_NAV.map((item) => ({
           id: item.id,
-          label: t(`services.items.${item.id}.title`),
-          href: href(item.href),
+          label: item.isActive
+            ? t(`services.items.${item.id}.title`)
+            : `${t(`services.items.${item.id}.title`)} · ${t('common.soon')}`,
+          // Без href строка меню не кликается — так и нужно для «Скоро».
+          href: item.isActive ? href(item.href) : undefined,
         })),
         contacts: CONTACT_CHANNELS.filter((channel) =>
           PRIMARY_CONTACT_IDS.includes(channel.id),

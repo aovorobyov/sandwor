@@ -489,6 +489,8 @@ a.sw-logo:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; 
 @container sw-header (max-width: 760px) {
   .sw-header__inner { height: 56px; gap: var(--space-4); padding: 0 var(--space-4); }
   .sw-header__secondary { display: none; }
+  /* [sandwor.ru] на телефоне CTA наезжал на логотип; он остаётся внизу MobileMenu */
+  .sw-header__cta { display: none; }
 }
 
 /* ── MobileMenu ───────────────────────────────────────────────── */
@@ -1521,6 +1523,7 @@ button.sw-brief__step-btn:hover .sw-brief__bar { background: var(--line-control-
 
 /* top: icon tile + service label */
 .sw-service-card__top { display: flex; align-items: center; gap: var(--space-3); min-height: 40px; }
+.sw-service-card__badge { margin-left: auto; display: inline-flex; } /* [sandwor.ru] */
 .sw-service-card__tile {
   display: inline-flex; align-items: center; justify-content: center; flex: none;
   width: 40px; height: 40px;

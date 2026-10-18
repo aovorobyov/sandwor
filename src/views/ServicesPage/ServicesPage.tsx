@@ -1,11 +1,12 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Button } from '@sw/components/Button';
 import { BriefButton } from '@/features/brief';
-import { FaqSection, type FaqItem } from '@/widgets/FaqSection';
+import { FaqSection, GENERAL_FAQ_KEY, type FaqItem } from '@/widgets/FaqSection';
 import { PriceCalculator } from '@/widgets/PriceCalculator';
 import { ProcessSection } from '@/widgets/ProcessSection';
 import { ServicesGrid } from '@/widgets/ServicesGrid';
 import { JsonLd, buildBreadcrumbs } from '@/shared/lib/jsonLd';
+import { FEATURES, byPositioning } from '@/shared/config/positioning';
 import { localizeHref } from '@/shared/ui/Link';
 import { PageHero } from '@/shared/ui/PageHero';
 import { Section } from '@/shared/ui/Section';
@@ -31,14 +32,26 @@ export const ServicesPage = async () => {
         ]}
         meta={t('services.hero-meta')}
         title={t('services.hero-title')}
-        lead={t('services.hero-lead')}
+        lead={t(
+          byPositioning({ sites: 'services.hero-lead', studio: 'services.hero-lead-studio' }),
+        )}
         actions={
           <>
             <BriefButton size="l">{t('services.cta')}</BriefButton>
 
-            <Button variant="secondary" size="l" href="#calculator">
-              {t('services.calc-link')}
-            </Button>
+            {FEATURES.calculator ? (
+              <Button variant="secondary" size="l" href="#calculator">
+                {t('services.calc-link')}
+              </Button>
+            ) : (
+              <Button
+                variant="secondary"
+                size="l"
+                href={localizeHref('/services/sites#plans', locale)}
+              >
+                {t('services.plans-link')}
+              </Button>
+            )}
           </>
         }
       />
@@ -49,18 +62,20 @@ export const ServicesPage = async () => {
 
       <ProcessSection />
 
-      <Section tone="sunken" id="calculator" aria-labelledby="calc-title">
-        <SectionIntro
-          meta={t('home.calc-meta')}
-          title={t('services.calc-title')}
-          titleId="calc-title"
-          lead={t('services.calc-lead')}
-        />
+      {FEATURES.calculator && (
+        <Section tone="sunken" id="calculator" aria-labelledby="calc-title">
+          <SectionIntro
+            meta={t('home.calc-meta')}
+            title={t('services.calc-title')}
+            titleId="calc-title"
+            lead={t('services.calc-lead')}
+          />
 
-        <PriceCalculator />
-      </Section>
+          <PriceCalculator />
+        </Section>
+      )}
 
-      <FaqSection items={t.raw('faq.items') as FaqItem[]} />
+      <FaqSection items={t.raw(GENERAL_FAQ_KEY) as FaqItem[]} />
     </>
   );
 };

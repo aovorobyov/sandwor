@@ -58,8 +58,10 @@ src/
 - **Дизайн-система** — `shared/sandwor/`: копия архива ДС (токены, шрифты, компоненты,
   типы). Компоненты импортируются поштучно: `import { Button } from '@sw/components/Button'`.
   Локальные правки ДС — в `shared/sandwor/CHANGES.md`.
-- **Направления и цены** — `entities/service/model/services.ts` (цены «от», калькулятор,
-  тарифы сайтов); тексты — `services.items.<id>` в переводах.
+- **Направления и цены** — `entities/service/model/services.ts` (статусы `active`/`soon`,
+  цены «от», калькулятор, тарифы сайтов); тексты — `services.items.<id>` в переводах.
+  Сейчас работают только сайты, остальное — «Скоро»; как вернуть — в [CLAUDE.md](CLAUDE.md).
+- **Позиционирование** — `shared/config/positioning.ts`: `sites` или `studio`.
 - **Отзывы и логотипы клиентов** — `entities/testimonial`. Пока массивы пустые, секции
   на сайте не выводятся.
 

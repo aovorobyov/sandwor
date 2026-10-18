@@ -14,6 +14,7 @@ import { ServicesGrid } from '@/widgets/ServicesGrid';
 import { SitePlans } from '@/widgets/SitePlans';
 import { formatPrice } from '@/shared/lib/format';
 import { JsonLd, buildBreadcrumbs, buildService } from '@/shared/lib/jsonLd';
+import { FEATURES } from '@/shared/config/positioning';
 import { localizeHref } from '@/shared/ui/Link';
 import { PageHero } from '@/shared/ui/PageHero';
 import { Section } from '@/shared/ui/Section';
@@ -71,9 +72,17 @@ export const ServicePage = async ({ service }: ServicePageProps) => {
               {t('services.cta')}
             </BriefButton>
 
-            <Button variant="secondary" size="l" href="#calculator">
-              {t('services.calc-link')}
-            </Button>
+            {service === 'sites' ? (
+              <Button variant="secondary" size="l" href="#plans">
+                {t('services.plans-link')}
+              </Button>
+            ) : (
+              FEATURES.calculator && (
+                <Button variant="secondary" size="l" href="#calculator">
+                  {t('services.calc-link')}
+                </Button>
+              )
+            )}
           </>
         }
       >
@@ -103,7 +112,7 @@ export const ServicePage = async ({ service }: ServicePageProps) => {
       </Section>
 
       {service === 'sites' && (
-        <Section aria-labelledby="plans-title">
+        <Section id="plans" aria-labelledby="plans-title">
           <SectionIntro
             meta={t('services.plans-meta')}
             title={t('services.plans-title')}
@@ -135,16 +144,18 @@ export const ServicePage = async ({ service }: ServicePageProps) => {
 
       <ProcessSection />
 
-      <Section tone="sunken" id="calculator" aria-labelledby="calc-title">
-        <SectionIntro
-          meta={t('home.calc-meta')}
-          title={t('services.calc-title')}
-          titleId="calc-title"
-          lead={t('services.calc-lead')}
-        />
+      {FEATURES.calculator && (
+        <Section tone="sunken" id="calculator" aria-labelledby="calc-title">
+          <SectionIntro
+            meta={t('home.calc-meta')}
+            title={t('services.calc-title')}
+            titleId="calc-title"
+            lead={t('services.calc-lead')}
+          />
 
-        <PriceCalculator services={[service]} />
-      </Section>
+          <PriceCalculator services={[service]} />
+        </Section>
+      )}
 
       <FaqSection items={faq} title={t('services.faq-title')} />
 

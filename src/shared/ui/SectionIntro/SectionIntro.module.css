@@ -24,6 +24,7 @@
 }
 
 .title {
+  overflow-wrap: break-word;
   font: 600 24px/29px var(--font-display);
   letter-spacing: -0.01em;
   color: var(--text);
@@ -42,6 +43,12 @@
   gap: var(--space-2);
 }
 
+/* В строке справа стоит ghost-кнопка («Все кейсы →»): её поле 10px + рамка 1px
+   выносим за край, чтобы текст стоял ровно по краю контейнера — как в ServiceCard ДС. */
+.row .actions {
+  margin-right: -11px;
+}
+
 @media (max-width: 760px) {
   .root {
     margin-bottom: var(--space-6);
@@ -51,6 +58,11 @@
     grid-template-columns: minmax(0, 1fr);
     align-items: start;
     gap: var(--space-4);
+  }
+
+  .row .actions {
+    margin-right: 0;
+    margin-left: -11px;
   }
 
   .title {

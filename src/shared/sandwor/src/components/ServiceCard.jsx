@@ -12,6 +12,7 @@ import { cx, SERVICES, formatRub } from '../utils.js';
 export function ServiceCard({
   service,
   label,
+  badge,
   title,
   text,
   includes,
@@ -54,6 +55,7 @@ export function ServiceCard({
           </span>
         )}
         {svc && <span className="sw-service-card__service">{label || svc.label}</span>}
+        {badge && <span className="sw-service-card__badge">{badge}</span>}
       </div>
 
       <Heading className="sw-service-card__title">

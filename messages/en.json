@@ -1,11 +1,14 @@
 {
   "brand": {
     "name": "sandwor",
-    "tagline": "CRM, websites, social media and AI automation for small and mid-sized businesses. One team owns the whole customer journey."
+    "tagline": "Turnkey websites for business: Tilda landing pages and stores, custom development. CRM setup, SMM and AI automation are coming soon.",
+    "tagline-studio": "CRM, websites, social media and AI automation for small and mid-sized businesses. One team owns the whole customer journey."
   },
   "meta": {
-    "title": "sandwor — CRM, websites, social media and AI automation",
-    "description": "We bring order to sales: amoCRM and Bitrix24 setup, websites that send leads straight to your CRM, social media and AI bots."
+    "title": "sandwor — turnkey websites for business",
+    "description": "We build websites that bring leads: Tilda landing pages from 50,000 ₽, Tilda stores from 100,000 ₽ and custom development. CRM setup, SMM and AI automation are coming soon.",
+    "title-studio": "sandwor — CRM, websites, social media and AI automation",
+    "description-studio": "We bring order to sales: amoCRM setup, websites that send leads straight to your CRM, social media and AI bots."
   },
   "nav": {
     "home": "Home",
@@ -53,7 +56,8 @@
     "read-case": "Read the case",
     "task": "Task",
     "solution": "Solution",
-    "close": "Close"
+    "close": "Close",
+    "soon": "soon"
   },
   "service-labels": {
     "crm": "CRM",
@@ -62,26 +66,8 @@
     "ai": "AI"
   },
   "home": {
-    "hero-meta": "CRM · websites · SMM · AI automation",
-    "hero-title": "We bring order to your sales",
-    "hero-lead": "We set up CRM, build websites and connect AI bots so every lead lands in one system instead of getting lost between email and messengers.",
     "hero-cta": "Discuss a project",
-    "hero-secondary": "Estimate the cost",
     "stats-label": "Our work in brief",
-    "stats": [
-      {
-        "value": "4",
-        "label": "services in one team"
-      },
-      {
-        "value": "1 day",
-        "label": "to reply to a request"
-      },
-      {
-        "value": "5+ days",
-        "label": "to the first launch"
-      }
-    ],
     "flow": {
       "title": "A lead's journey",
       "status": "Scheme",
@@ -108,7 +94,6 @@
     },
     "services-meta": "4 services",
     "services-title": "What we do",
-    "services-lead": "Start with one service and add the rest as you grow. Everything we launch is connected to your CRM.",
     "services-all": "All services",
     "cases-meta": "Cases",
     "cases-title": "What we've built",
@@ -123,16 +108,57 @@
     "blog-all": "All articles",
     "testimonials-meta": "Testimonials",
     "testimonials-title": "What clients say",
-    "clients-caption": "Trusted by"
+    "clients-caption": "Trusted by",
+    "hero-studio": {
+      "meta": "CRM · websites · SMM · AI automation",
+      "title": "We bring order to your sales",
+      "lead": "We set up CRM, build websites and connect AI bots so every lead lands in one system instead of getting lost between email and messengers."
+    },
+    "hero-sites": {
+      "meta": "Turnkey websites",
+      "title": "Websites that bring you leads",
+      "lead": "Tilda landing pages and stores and custom development. We pick the tool for your goal and budget — and leave you a site you manage yourself."
+    },
+    "hero-secondary-studio": "Estimate the cost",
+    "hero-secondary-sites": "See pricing",
+    "stats-studio": [
+      {
+        "value": "4",
+        "label": "services in one team"
+      },
+      {
+        "value": "1 day",
+        "label": "to reply to a request"
+      },
+      {
+        "value": "5+ days",
+        "label": "to the first launch"
+      }
+    ],
+    "stats-sites": [
+      {
+        "value": "from 50,000 ₽",
+        "label": "launch price"
+      },
+      {
+        "value": "1–2 weeks",
+        "label": "to go live"
+      },
+      {
+        "value": "1 day",
+        "label": "reply time"
+      }
+    ],
+    "services-lead-studio": "Start with one service and add the rest as you grow. Everything we launch is connected to your CRM.",
+    "services-lead-sites": "Right now we take website projects. CRM setup, SMM and AI automation are being prepared for launch."
   },
   "process": {
     "meta": "5 stages · you always know what's happening",
     "title": "How we work",
-    "lead": "One team runs the project from brief to support. We agree on the scope and timeline before we start.",
     "list-label": "Work stages",
     "done": "done",
     "current": "in progress",
-    "steps": [
+    "steps-studio": [
       {
         "title": "Brief and audit",
         "text": "We see how leads come in today and where they get lost",
@@ -158,7 +184,31 @@
         "text": "We watch the numbers and fine-tune the funnel",
         "duration": "1+ month"
       }
-    ]
+    ],
+    "steps-sites": [
+      {
+        "title": "Brief",
+        "text": "We discuss the task, goals and references and fix what we build and why"
+      },
+      {
+        "title": "Structure and design",
+        "text": "We build the page structure and visuals and agree on them before development"
+      },
+      {
+        "title": "Development",
+        "text": "We build and fill the site and connect forms and analytics"
+      },
+      {
+        "title": "Launch",
+        "text": "We publish on your domain and test on different devices"
+      },
+      {
+        "title": "Support",
+        "text": "We stay in touch: changes, improvements and advice"
+      }
+    ],
+    "lead-studio": "One team runs the project from brief to support. We agree on the scope and timeline before we start.",
+    "lead-sites": "We run the project from brief to post-launch support. We agree on the scope and timeline before we start."
   },
   "calculator": {
     "services": "What you need",
@@ -211,7 +261,7 @@
     "company-placeholder": "Name or website",
     "team-size": "People in sales",
     "task": "Your task in brief",
-    "task-placeholder": "For example: leads from the website and messengers get lost, we want everything in one CRM",
+    "task-placeholder": "For example: we need a landing page for a new service with a lead form",
     "budget": "Budget",
     "name": "Your name",
     "name-placeholder": "Name",
@@ -247,7 +297,8 @@
         "gt300": "300k ₽ and more",
         "unknown": "Not sure yet"
       }
-    }
+    },
+    "task-placeholder-studio": "For example: leads from the website and messengers get lost, we want everything in one CRM"
   },
   "founder": {
     "meta": "Who owns your project",
@@ -255,22 +306,23 @@
     "name": "Alexander Vorobyov",
     "role": "Founder, developer",
     "quote": "I start with your task, not a template: we figure out who your clients are and where leads get lost, and only then pick the tool. I show work in progress and explain decisions in plain words.",
-    "meta-line": "Websites · CRM · automation",
-    "contact": "Message Alexander"
+    "meta-line": "Websites · Tilda · custom development",
+    "contact": "Message Alexander",
+    "meta-line-studio": "Websites · CRM · automation"
   },
   "faq": {
     "meta": "FAQ",
     "title": "Frequently asked questions",
     "lead": "Didn't find an answer? Message us — we reply within one business day.",
     "telegram": "Message on Telegram",
-    "items": [
+    "items-studio": [
       {
         "q": "How does the work start?",
         "a": "With a short brief and audit: we look at how leads come in and where they get lost. Then we name the scope, timeline and exact price."
       },
       {
         "q": "Do you work with a CRM we already have?",
-        "a": "Yes. We often bring order to an amoCRM or Bitrix24 account that exists but nobody uses."
+        "a": "Yes. We often bring order to an amoCRM account that exists but nobody uses."
       },
       {
         "q": "Can we start with just one thing?",
@@ -284,15 +336,37 @@
         "q": "How fast will we see results?",
         "a": "The first launch takes 5+ days depending on the service. We agree on the timeline for each stage before we start."
       }
+    ],
+    "items-sites": [
+      {
+        "q": "How does the work start?",
+        "a": "With a short brief: we discuss the task, goals and references. Then we name the scope, timeline and exact price."
+      },
+      {
+        "q": "How much does a website cost?",
+        "a": "A Tilda landing page starts at 50,000 ₽, a Tilda store at 100,000 ₽, custom development is quoted on request. The total depends on the number of pages and features."
+      },
+      {
+        "q": "How long does it take?",
+        "a": "A landing page usually takes 1–2 weeks, a Tilda store 3+ weeks, custom development depends on the scope. We fix exact dates after the brief."
+      },
+      {
+        "q": "Can I edit the content myself?",
+        "a": "On Tilda you change texts, products and prices in the built-in editor. For custom sites we discuss editing separately."
+      },
+      {
+        "q": "Do you help after launch?",
+        "a": "Yes: we stay in touch, make changes and improve the site as your business grows."
+      }
     ]
   },
   "services": {
     "title": "Services",
-    "meta-title": "Services — CRM, websites, SMM and AI automation",
-    "meta-description": "amoCRM and Bitrix24 setup, website development, social media and AI bots for small and mid-sized businesses. Prices from 30,000 ₽ and a cost calculator.",
+    "meta-title": "Turnkey websites — Tilda landing pages and stores",
+    "meta-description": "Tilda landing pages from 50,000 ₽, Tilda stores from 100,000 ₽, custom development on request. CRM setup, SMM and AI automation are coming soon.",
     "hero-meta": "4 services",
     "hero-title": "Services",
-    "hero-lead": "Four services working toward one goal — so leads don't get lost and turn into deals.",
+    "hero-lead": "Right now we take website projects. CRM setup, SMM and AI automation are being prepared for launch — they'll appear here.",
     "features-meta": "What's included",
     "plans-meta": "Plans",
     "plans-title": "Plans",
@@ -312,7 +386,7 @@
     "items": {
       "crm": {
         "title": "CRM setup",
-        "text": "We set up amoCRM and Bitrix24 for your sales team: pipelines, fields, roles, website and telephony integrations.",
+        "text": "We set up amoCRM for your sales team: pipelines, fields, roles, website and telephony integrations.",
         "includes": [
           "Sales audit",
           "Pipeline and fields for your process",
@@ -320,8 +394,8 @@
           "Team training"
         ],
         "term": "7+ days",
-        "meta-title": "amoCRM and Bitrix24 setup — from 45,000 ₽",
-        "meta-description": "We set up amoCRM and Bitrix24 for your sales team: pipelines, fields, roles, website and telephony integrations and team training.",
+        "meta-title": "amoCRM setup — from 45,000 ₽",
+        "meta-description": "We set up amoCRM for your sales team: pipelines, fields, roles, website and telephony integrations and team training.",
         "hero-title": "CRM setup",
         "hero-lead": "We collect every lead in one system and tailor it to how your team actually sells — not to an out-of-the-box template.",
         "features-title": "What the setup includes",
@@ -349,8 +423,8 @@
         ],
         "faq": [
           {
-            "q": "Which CRM should we choose — amoCRM or Bitrix24?",
-            "a": "amoCRM is simpler and faster for a sales team; Bitrix24 fits when you need tasks, documents and inventory in one system. We'll advise after the audit."
+            "q": "Which CRM do you work with?",
+            "a": "amoCRM: it's quick to tailor to a sales team and easy to connect to your website, messengers and telephony."
           },
           {
             "q": "We already have a CRM but nobody uses it. Can you help?",
@@ -396,13 +470,13 @@
           {
             "icon": "layout-kanban",
             "title": "Leads straight to CRM",
-            "text": "Forms and quizzes send leads to amoCRM or Bitrix24 — managers see them in the same pipeline."
+            "text": "Forms and quizzes send leads to your CRM — managers see them in one pipeline."
           }
         ],
         "plans": [
           {
             "id": "landing",
-            "name": "Landing page",
+            "name": "Tilda landing page",
             "subtitle": "One service, product or launch",
             "term": "1–2 weeks",
             "features": [
@@ -410,7 +484,8 @@
               "Custom design",
               "Works on every device",
               "Lead form and analytics"
-            ]
+            ],
+            "short": "Landing"
           },
           {
             "id": "store",
@@ -422,11 +497,12 @@
               "Cart and online payments",
               "Content editing in Tilda",
               "Admin panel training"
-            ]
+            ],
+            "short": "Store"
           },
           {
             "id": "custom",
-            "name": "Custom",
+            "name": "Custom development",
             "subtitle": "Non-standard features",
             "price": "on request",
             "term": "depends on scope",
@@ -435,7 +511,8 @@
               "Our own markup and logic",
               "Third-party integrations",
               "High speed and SEO"
-            ]
+            ],
+            "short": "Custom"
           }
         ],
         "compare": [
@@ -605,7 +682,17 @@
     "term-label": "to launch",
     "calc-link": "Estimate the cost",
     "cta": "Discuss a project",
-    "stats-label": "Price and timeline"
+    "stats-label": "Price and timeline",
+    "meta-title-studio": "Services — CRM, websites, SMM and AI automation",
+    "meta-description-studio": "amoCRM setup, website development, social media and AI bots for small and mid-sized businesses. Prices from 30,000 ₽ and a cost calculator.",
+    "hero-lead-studio": "Four services working toward one goal — so leads don't get lost and turn into deals.",
+    "soon": "Coming soon",
+    "soon-meta": "Coming soon",
+    "soon-lead": "We're preparing this service for launch. Right now we take website projects — if your task is urgent, message us and we'll talk.",
+    "soon-sites": "Website development",
+    "soon-telegram": "Message on Telegram",
+    "plans-link": "See pricing",
+    "soon-page-title": "{title} — coming soon"
   },
   "cases-page": {
     "meta": "Cases",

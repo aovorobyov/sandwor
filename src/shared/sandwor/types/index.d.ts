@@ -1045,6 +1045,8 @@ export interface ServiceCardProps extends React.HTMLAttributes<HTMLElement> {
   service: 'crm' | 'sites' | 'smm' | 'ai';
   /** Моно-метка услуги вместо метки из SERVICES (другой язык). [sandwor.ru] */
   label?: string;
+  /** Метка справа в шапке карточки — например, Badge «Скоро». [sandwor.ru] */
+  badge?: React.ReactNode;
   /** Заголовок карточки: «Внедрение CRM». */
   title: React.ReactNode;
   /** Одно-два предложения о пользе: «Настраиваем amoCRM и Битрикс24 под ваш отдел продаж…». */

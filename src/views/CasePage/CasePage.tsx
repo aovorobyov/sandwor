@@ -141,7 +141,7 @@ export const CasePage = async ({ slug }: CasePageProps) => {
         <Section tone="sunken" aria-labelledby="other-cases-title">
           <SectionIntro title={t('cases-page.other-title')} titleId="other-cases-title" />
 
-          <CaseCards slugs={others} layout="split" />
+          <CaseCards slugs={others} layout="stacked" />
         </Section>
       )}
     </>

@@ -35,6 +35,7 @@
 }
 
 .title {
+  overflow-wrap: break-word;
   font-family: var(--font-display);
   font-weight: 600;
   color: var(--text);

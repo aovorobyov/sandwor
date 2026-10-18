@@ -16,7 +16,7 @@ interface BriefModalProps {
 /** Бриф в модальном окне; на мобильном Modal сам становится нижним листом. */
 export const BriefModal: FC<BriefModalProps> = ({ open, onClose, services }) => {
   const t = useTranslations();
-  const formProps = useBriefFormProps();
+  const formProps = useBriefFormProps(services);
 
   return (
     <Modal
@@ -28,13 +28,7 @@ export const BriefModal: FC<BriefModalProps> = ({ open, onClose, services }) => 
       closeOnScrim={false}
       closeLabel={t('common.close')}
     >
-      <BriefForm
-        {...formProps}
-        container="bare"
-        headingLevel={3}
-        initialValues={services ? { services } : undefined}
-        onReturn={onClose}
-      />
+      <BriefForm {...formProps} container="bare" headingLevel={3} onReturn={onClose} />
     </Modal>
   );
 };

@@ -7,10 +7,13 @@
 
 | Компонент   | Что добавлено                                                                                     |
 | ----------- | ------------------------------------------------------------------------------------------------- |
-| ServiceCard | `label` — моно-метка услуги вместо `SERVICES[service].label`                                      |
+| ServiceCard | `label` — моно-метка услуги вместо `SERVICES[service].label`; `badge` — метка справа в шапке (+ `.sw-service-card__badge` в CSS) |
 | CaseCard    | `labels` — `{ task, solution, services }`: подписи строк и бейджей услуг                          |
 | SiteHeader  | `menu.closeLabel`, `menu.navLabel`, `menu.label` — подписи MobileMenu для скринридера                |
 | Calculator  | `copy.serviceLabels`, `copy.managersText`, `copy.monthsText`, `copy.managersHint`, `copy.perMonth` |
+
+SiteHeader: уже 760px ширины шапки primary-кнопка скрыта (`.sw-header__cta`) — на телефоне
+она наезжала на логотип; то же действие есть внизу MobileMenu.
 
 Исправлено: PricingCard дописывал «₽» и к строковой цене («по запросу ₽») — по описанию
 пропа строка выводится как есть, теперь знак рубля только у числа.

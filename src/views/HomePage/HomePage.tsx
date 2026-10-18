@@ -7,7 +7,7 @@ import type { StatsItem } from '@sw/components/Stats';
 import { getPosts } from '@/entities/post/api/posts';
 import { BriefButton } from '@/features/brief';
 import { CaseCards } from '@/widgets/CaseCards';
-import { FaqSection, type FaqItem } from '@/widgets/FaqSection';
+import { FaqSection, GENERAL_FAQ_KEY, type FaqItem } from '@/widgets/FaqSection';
 import { FounderSection } from '@/widgets/FounderSection';
 import { PostsGrid } from '@/widgets/PostsGrid';
 import { PriceCalculator } from '@/widgets/PriceCalculator';
@@ -15,6 +15,7 @@ import { ProcessSection } from '@/widgets/ProcessSection';
 import { ServicesGrid } from '@/widgets/ServicesGrid';
 import { SocialProof } from '@/widgets/SocialProof';
 import { JsonLd, buildOrganization, buildWebSite } from '@/shared/lib/jsonLd';
+import { FEATURES, POSITIONING, byPositioning } from '@/shared/config/positioning';
 import { localizeHref } from '@/shared/ui/Link';
 import { PageHero } from '@/shared/ui/PageHero';
 import { Section } from '@/shared/ui/Section';
@@ -31,7 +32,12 @@ export const HomePage = async () => {
   const [t, posts] = await Promise.all([getTranslations(), getPosts(locale)]);
   const href = (path: string) => localizeHref(path, locale);
 
-  const stats = t.raw('home.stats') as StatsItem[];
+  const hero = `home.hero-${POSITIONING}`;
+  const stats = (t.raw(`home.stats-${POSITIONING}`) as StatsItem[]).map((item, index) => ({
+    ...item,
+    // Главная цифра блока — цена старта у сайтов.
+    accent: POSITIONING === 'sites' && index === 0,
+  }));
   const flowNodes = (t.raw('home.flow.nodes') as FlowDiagramNode[]).map((node, index, all) => ({
     ...node,
     icon: FLOW_ICONS[index],
@@ -40,37 +46,49 @@ export const HomePage = async () => {
 
   return (
     <>
-      <JsonLd data={buildOrganization({ description: t('meta.description') })} />
+      <JsonLd
+        data={buildOrganization({
+          description: t(
+            byPositioning({ sites: 'meta.description', studio: 'meta.description-studio' }),
+          ),
+        })}
+      />
 
       <JsonLd data={buildWebSite({ name: t('brand.name') })} />
 
       <PageHero
         size="l"
-        meta={t('home.hero-meta')}
-        title={t('home.hero-title')}
-        lead={t('home.hero-lead')}
+        meta={t(`${hero}.meta`)}
+        title={t(`${hero}.title`)}
+        lead={t(`${hero}.lead`)}
         actions={
           <>
             <BriefButton size="l" iconEnd="arrow-right">
               {t('home.hero-cta')}
             </BriefButton>
 
-            <Button variant="secondary" size="l" href="#calculator">
-              {t('home.hero-secondary')}
+            <Button
+              variant="secondary"
+              size="l"
+              href={FEATURES.calculator ? '#calculator' : href('/services/sites#plans')}
+            >
+              {t(`home.hero-secondary-${POSITIONING}`)}
             </Button>
           </>
         }
       />
 
       <div className={`sw-container ${s.flow}`}>
-        <FlowDiagram
-          size="hero"
-          title={t('home.flow.title')}
-          nodes={flowNodes}
-          edges={['', '', '']}
-          branch={{ afterIndex: 1, icon: 'git-branch', label: t('home.flow.branch') }}
-          listLabel={t('home.flow.list-label')}
-        />
+        {FEATURES.leadFlow && (
+          <FlowDiagram
+            size="hero"
+            title={t('home.flow.title')}
+            nodes={flowNodes}
+            edges={['', '', '']}
+            branch={{ afterIndex: 1, icon: 'git-branch', label: t('home.flow.branch') }}
+            listLabel={t('home.flow.list-label')}
+          />
+        )}
 
         <Stats items={stats} label={t('home.stats-label')} className={s.stats} />
       </div>
@@ -81,7 +99,7 @@ export const HomePage = async () => {
           meta={t('home.services-meta')}
           title={t('home.services-title')}
           titleId="services-title"
-          lead={t('home.services-lead')}
+          lead={t(`home.services-lead-${POSITIONING}`)}
           actions={
             <Button variant="ghost" iconEnd="arrow-right" href={href('/services')}>
               {t('home.services-all')}
@@ -108,19 +126,21 @@ export const HomePage = async () => {
           }
         />
 
-        <CaseCards layout="split" />
+        <CaseCards layout="stacked" />
       </Section>
 
-      <Section tone="sunken" id="calculator" aria-labelledby="calc-title">
-        <SectionIntro
-          meta={t('home.calc-meta')}
-          title={t('home.calc-title')}
-          titleId="calc-title"
-          lead={t('home.calc-lead')}
-        />
+      {FEATURES.calculator && (
+        <Section tone="sunken" id="calculator" aria-labelledby="calc-title">
+          <SectionIntro
+            meta={t('home.calc-meta')}
+            title={t('home.calc-title')}
+            titleId="calc-title"
+            lead={t('home.calc-lead')}
+          />
 
-        <PriceCalculator />
-      </Section>
+          <PriceCalculator />
+        </Section>
+      )}
 
       <SocialProof />
 
@@ -145,7 +165,7 @@ export const HomePage = async () => {
         </Section>
       )}
 
-      <FaqSection items={t.raw('faq.items') as FaqItem[]} />
+      <FaqSection items={t.raw(GENERAL_FAQ_KEY) as FaqItem[]} />
     </>
   );
 };

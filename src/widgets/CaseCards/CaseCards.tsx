@@ -17,7 +17,10 @@ import s from './CaseCards.module.css';
 interface CaseCardsProps {
   /** Какие кейсы показать; по умолчанию — все опубликованные. */
   slugs?: readonly CaseSlug[];
-  /** split — по одному в ряд (главная); stacked — сетка 2 в ряд. */
+  /**
+   * stacked (по умолчанию) — обложка сверху, сетка 2 в ряд; split — обложка слева.
+   * split на планшете сжимает текст в узкую колонку, поэтому на страницах — stacked.
+   */
   layout?: 'split' | 'stacked';
   headingLevel?: 2 | 3;
 }
@@ -32,7 +35,11 @@ const findFact = (detail: CaseDetail | undefined, index: number): string | undef
  * (SiteCover), задача и решение — из фактов кейса. Цифр-результатов нет:
  * клиенты их не раскрывают, а выдумывать метрики мы не будем.
  */
-export const CaseCards = async ({ slugs, layout = 'split', headingLevel = 3 }: CaseCardsProps) => {
+export const CaseCards = async ({
+  slugs,
+  layout = 'stacked',
+  headingLevel = 3,
+}: CaseCardsProps) => {
   const locale = await getLocale();
   const t = await getTranslations();
   const items = t.raw('cases.items') as CaseItem[];
@@ -47,7 +54,7 @@ export const CaseCards = async ({ slugs, layout = 'split', headingLevel = 3 }: C
   );
 
   return (
-    <div className={cx(s.grid, s[layout])}>
+    <div className={cx(s.grid, s[layout], list.length === 1 && s.single)}>
       {list.map((item) => {
         const slug = item.slug as CaseSlug;
         const detail = details[slug];

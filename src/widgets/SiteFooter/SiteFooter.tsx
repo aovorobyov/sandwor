@@ -7,6 +7,7 @@ import { useBrief } from '@/features/brief';
 import { buildLocalePath } from '@/features/locale-switch';
 import { defaultLocale, locales, type Locale } from '@/i18n-routing';
 import { CONTACT_CHANNELS, PRIMARY_CONTACT_IDS } from '@/shared/config/contacts';
+import { byPositioning } from '@/shared/config/positioning';
 import { useLocalePaths } from '@/shared/lib/i18n';
 import { SERVICE_NAV, SITE_NAV } from '../lib/siteNav';
 
@@ -28,7 +29,7 @@ export const SiteFooter: FC = () => {
   return (
     <Footer
       logoHref={href('/')}
-      tagline={t('brand.tagline')}
+      tagline={t(byPositioning({ sites: 'brand.tagline', studio: 'brand.tagline-studio' }))}
       cta={{
         title: t('footer.cta-title'),
         text: t('footer.cta-text'),
@@ -37,10 +38,11 @@ export const SiteFooter: FC = () => {
       columns={[
         {
           title: t('footer.services'),
-          links: SERVICE_NAV.map((item) => ({
-            label: t(`services.items.${item.id}.title`),
-            href: href(item.href),
-          })),
+          links: SERVICE_NAV.map((item) =>
+            item.isActive
+              ? { label: t(`services.items.${item.id}.title`), href: href(item.href) }
+              : { label: `${t(`services.items.${item.id}.title`)} · ${t('common.soon')}` },
+          ),
         },
         {
           title: t('footer.company'),

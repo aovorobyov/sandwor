@@ -12,6 +12,8 @@ import s from './SitePlans.module.css';
 interface SitePlan {
   id: string;
   name: string;
+  /** Короткое имя для таблицы сравнения: на телефоне оно в переключателе тарифов. */
+  short: string;
   subtitle: string;
   term: string;
   features: string[];
@@ -72,7 +74,7 @@ export const SitePlans: FC = () => {
 
           return {
             id: plan.id,
-            name: plan.name,
+            name: plan.short,
             price: typeof price === 'number' ? `${from} ${formatRub(price)}` : price,
             term: plan.term,
             featured: plan.id === FEATURED_SITE_PLAN,

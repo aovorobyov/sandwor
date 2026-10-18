@@ -13,6 +13,9 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* Скрытые пузыри Tooltip ДС у правого края позиционируются от корня и не
+     обрезаются body — без этого на телефоне появлялась горизонтальная прокрутка. */
+  overflow-x: clip;
   scroll-behavior: smooth;
   /* Якоря не прячутся под липкой шапкой (64px). */
   scroll-padding-top: var(--space-18);

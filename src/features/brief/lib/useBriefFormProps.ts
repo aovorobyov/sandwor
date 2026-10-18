@@ -3,7 +3,8 @@
 import { useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import type { BriefFormProps } from '@sw/components/BriefForm';
-import { SERVICE_IDS } from '@/entities/service';
+import { ACTIVE_SERVICE_IDS, type ServiceId } from '@/entities/service';
+import { byPositioning } from '@/shared/config/positioning';
 import { reachGoal, YM_GOAL } from '@/shared/lib/analytics';
 import { sendBrief } from '../api/sendBrief';
 
@@ -13,14 +14,20 @@ const PHONE_DIGITS = 10;
 
 type BriefFormBaseProps = Pick<
   BriefFormProps,
-  'copy' | 'services' | 'teamOptions' | 'budgetOptions' | 'onSubmit'
+  | 'copy'
+  | 'services'
+  | 'teamOptions'
+  | 'budgetOptions'
+  | 'onSubmit'
+  | 'initialStep'
+  | 'initialValues'
 >;
 
 /**
  * Тексты, варианты и отправка брифа — общие для модального окна и страницы контактов.
  * Время заполнения считается от первого рендера формы: по нему сервер отсекает ботов.
  */
-export const useBriefFormProps = (): BriefFormBaseProps => {
+export const useBriefFormProps = (preset?: ServiceId[]): BriefFormBaseProps => {
   const t = useTranslations('brief');
   const startedAt = useRef(Date.now());
 
@@ -29,9 +36,21 @@ export const useBriefFormProps = (): BriefFormBaseProps => {
     reachGoal(YM_GOAL.orderWebsites);
   };
 
+  // В брифе только работающие направления. Если оно одно — отмечаем его и начинаем
+  // со второго шага: выбирать из одного варианта незачем.
+  const presetServices = (preset ?? []).filter((id) => ACTIVE_SERVICE_IDS.includes(id));
+  const isSingle = ACTIVE_SERVICE_IDS.length === 1;
+  const services = isSingle ? [...ACTIVE_SERVICE_IDS] : presetServices;
+
   return {
     onSubmit,
-    services: SERVICE_IDS.map((id) => ({ value: id, service: id, label: t(`options.${id}`) })),
+    initialStep: isSingle ? 2 : 1,
+    initialValues: services.length > 0 ? { services } : undefined,
+    services: ACTIVE_SERVICE_IDS.map((id) => ({
+      value: id,
+      service: id,
+      label: t(`options.${id}`),
+    })),
     teamOptions: TEAM_SIZES.map((value) => ({ value, label: t(`options.team.${value}`) })),
     budgetOptions: BUDGETS.map((value) => ({ value, label: t(`options.budget.${value}`) })),
     copy: {
@@ -44,7 +63,9 @@ export const useBriefFormProps = (): BriefFormBaseProps => {
       companyPlaceholder: t('company-placeholder'),
       teamSize: t('team-size'),
       task: t('task'),
-      taskPlaceholder: t('task-placeholder'),
+      taskPlaceholder: t(
+        byPositioning({ sites: 'task-placeholder', studio: 'task-placeholder-studio' }),
+      ),
       budget: t('budget'),
       name: t('name'),
       namePlaceholder: t('name-placeholder'),

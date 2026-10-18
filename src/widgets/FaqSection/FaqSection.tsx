@@ -3,12 +3,19 @@ import { Accordion } from '@sw/components/Accordion';
 import { Button } from '@sw/components/Button';
 import { TELEGRAM_URL } from '@/shared/config/contacts';
 import { Section } from '@/shared/ui/Section';
+import { byPositioning } from '@/shared/config/positioning';
 import s from './FaqSection.module.css';
 
 export interface FaqItem {
   q: string;
   a: string;
 }
+
+/** Ключ общего FAQ для текущего позиционирования. */
+export const GENERAL_FAQ_KEY = byPositioning({
+  sites: 'faq.items-sites',
+  studio: 'faq.items-studio',
+});
 
 interface FaqSectionProps {
   items: FaqItem[];

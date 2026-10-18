@@ -1,0 +1,1 @@
+export { ServiceSoonPage } from './ServiceSoonPage';

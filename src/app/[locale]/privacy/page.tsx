@@ -11,17 +11,19 @@ export async function generateMetadata({
   params: { locale: string };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: '' });
+  // В заголовке страницы — мягкий перенос для узких экранов; в мета он не нужен.
+  const title = t('privacy.title').replace(/\u00ad/g, '');
   return {
-    title: t('privacy.title'),
+    title,
     description: t('privacy.intro'),
     alternates: buildPageAlternates(locale, '/privacy'),
     ...buildSocialMeta({
-      title: t('privacy.title'),
+      title,
       description: t('privacy.intro'),
       image: buildPageOgImage({
         locale,
         tag: t('privacy.breadcrumb'),
-        title: t('privacy.title'),
+        title,
       }),
     }),
   };

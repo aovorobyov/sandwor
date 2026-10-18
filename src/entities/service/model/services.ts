@@ -8,6 +8,31 @@ export const SERVICE_IDS = ['crm', 'sites', 'smm', 'ai'] as const satisfies read
 
 export type { ServiceId };
 
+/**
+ * Статус направления. `active` — работает: цена, страница, бриф, меню.
+ * `soon` — готовим к запуску: карточка с плашкой «Скоро» без цены и ссылки,
+ * вместо страницы — заглушка «Скоро» (noindex, вне sitemap), в брифе и
+ * калькуляторе направления нет. Чтобы включить направление — поменять статус здесь;
+ * тексты, цены и полная страница уже готовы.
+ */
+export type ServiceStatus = 'active' | 'soon';
+
+export const SERVICE_STATUS: Record<ServiceId, ServiceStatus> = {
+  crm: 'soon',
+  sites: 'active',
+  smm: 'soon',
+  ai: 'soon',
+};
+
+export const isServiceActive = (id: ServiceId): boolean => {
+  return SERVICE_STATUS[id] === 'active';
+};
+
+/** Работающие направления в порядке SERVICE_IDS. */
+export const ACTIVE_SERVICE_IDS: readonly ServiceId[] = SERVICE_IDS.filter((id) => {
+  return SERVICE_STATUS[id] === 'active';
+});
+
 /** Цены «от» — одни для карточек, калькулятора и мета-описаний. */
 export const SERVICE_PRICES: Record<ServiceId, number> = {
   crm: 45000,
@@ -47,7 +72,8 @@ export const CALCULATOR_TERM_DAYS: Record<ServiceId, number> = {
   ai: 5,
 };
 
-/** Цены тарифов сайтов по `services.items.sites.plans[].id`; без цены — «по запросу». */
+/** Цены тарифов сайтов по `services.items.sites.plans[].id`; без цены — «по запросу».
+ *  Подтверждены: лендинг на Tilda от 50 000 ₽, магазин на Tilda от 100 000 ₽, кастом — по запросу. */
 export const SITE_PLAN_PRICES: Record<string, number | undefined> = {
   landing: 50000,
   store: 100000,

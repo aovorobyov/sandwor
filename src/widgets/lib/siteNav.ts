@@ -1,5 +1,5 @@
 import type { ServiceId } from '@/entities/service';
-import { SERVICE_IDS, getServiceHref } from '@/entities/service';
+import { SERVICE_IDS, getServiceHref, isServiceActive } from '@/entities/service';
 
 export interface SiteNavLink {
   /** Путь без префикса локали. */
@@ -16,11 +16,11 @@ export const SITE_NAV: readonly SiteNavLink[] = [
   { href: '/contact', labelKey: 'nav.contact' },
 ];
 
-/** Ссылки на страницы направлений. */
-export const SERVICE_NAV: readonly { id: ServiceId; href: string }[] = SERVICE_IDS.map((id) => ({
-  id,
-  href: getServiceHref(id),
-}));
+/** Направления для меню и подвала: работающие первыми; у «Скоро» нет ссылки. */
+export const SERVICE_NAV: readonly { id: ServiceId; href: string; isActive: boolean }[] =
+  SERVICE_IDS.map((id) => ({ id, href: getServiceHref(id), isActive: isServiceActive(id) })).sort(
+    (a, b) => Number(b.isActive) - Number(a.isActive),
+  );
 
 /** Раздел активен на своей странице и на вложенных (`/blog/slug`). */
 export const isActivePath = (pathname: string, href: string): boolean => {

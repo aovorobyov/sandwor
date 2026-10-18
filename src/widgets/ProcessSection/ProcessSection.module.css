@@ -1,0 +1,13 @@
+.column {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .row {
+    display: none;
+  }
+
+  .column {
+    display: block;
+  }
+}

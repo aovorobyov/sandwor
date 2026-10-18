@@ -4,6 +4,7 @@ import { Mono } from '@/shared/ui/Mono';
 import { Section } from '@/shared/ui/Section';
 import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
 import { JsonLd, buildBreadcrumbs } from '@/shared/lib/jsonLd';
+import { isPublishedCase } from '@/entities/case';
 import type { CaseItem, CaseMetric } from '@/entities/case/model/types';
 import { CasesFilter } from './CasesFilter';
 import s from './CasesPage.module.css';
@@ -11,7 +12,7 @@ import s from './CasesPage.module.css';
 export const CasesPage = async () => {
   const t = await getTranslations();
 
-  const items = t.raw('cases.items') as CaseItem[];
+  const items = (t.raw('cases.items') as CaseItem[]).filter((item) => isPublishedCase(item.slug));
   const metrics = t.raw('cases.metrics') as CaseMetric[];
 
   const breadcrumbs = buildBreadcrumbs([

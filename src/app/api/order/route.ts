@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { escapeHtml, sendTelegramMessage } from '@/shared/api/telegram';
+import { sendAmoOrderLead } from '@/shared/api/amoForm';
+import { SITE_URL } from '@/shared/config/site';
 
 /** Ограничения длины полей — отсекаем мусор и слишком большие запросы. */
 const MAX_NAME = 100;
@@ -10,6 +11,9 @@ const MAX_TASK = 2000;
 /** Антиспам: минимальная пауза «загрузка → отправка» и потолок ссылок в описании. */
 const MIN_ELAPSED_MS = 2000;
 const MAX_LINKS = 5;
+
+/** Фолбэк для метки происхождения в amoCRM, если браузер не прислал Referer. */
+const ORDER_PAGE_URL = `${SITE_URL}/websites`;
 
 const LINK_PATTERN = /https?:\/\//gi;
 
@@ -69,13 +73,6 @@ const isValid = ({ name, phone, telegram, task, consent }: OrderPayload): boolea
 };
 
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CONTACT_CHAT_ID;
-
-  if (!token || !chatId) {
-    return NextResponse.json({ error: 'Contact channel is not configured' }, { status: 500 });
-  }
-
   let payload: unknown;
 
   try {
@@ -98,24 +95,13 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
   }
 
   const { name, phone, telegram, task } = payload;
+  const referer = req.headers.get('referer') || ORDER_PAGE_URL;
 
-  const lines = [
-    '🌐 <b>Новая заявка на сайт</b>',
-    '',
-    `<b>Имя:</b> ${escapeHtml(name)}`,
-    `<b>Телефон:</b> ${escapeHtml(phone)}`,
-  ];
+  const isLeadCreated = await sendAmoOrderLead({ name, phone, telegram, task, referer });
 
-  if (telegram.trim()) {
-    lines.push(`<b>Telegram:</b> ${escapeHtml(telegram)}`);
-  }
-
-  lines.push('', `<b>Задача:</b> ${escapeHtml(task)}`);
-  lines.push('', '✅ Согласие на обработку ПДн получено');
-
-  const isDelivered = await sendTelegramMessage(lines.join('\n'));
-
-  if (!isDelivered) {
+  // amoCRM — единственный приёмник заявок, поэтому её отказ отдаём формой как ошибку:
+  // посетитель увидит подсказку и напишет напрямую, а не решит, что заявка ушла.
+  if (!isLeadCreated) {
     return NextResponse.json({ error: 'Failed to deliver message' }, { status: 502 });
   }
 

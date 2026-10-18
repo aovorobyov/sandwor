@@ -1,8 +1,8 @@
 .root {
   width: 100%;
-  max-width: var(--container-text);
+  max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(24px, 3vw, 40px) var(--container-pad) clamp(56px, 7vw, 100px);
+  padding: clamp(18px, 2.6vw, 28px) var(--container-pad) clamp(56px, 7vw, 100px);
 }
 
 .breadcrumbs {

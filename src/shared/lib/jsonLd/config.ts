@@ -1,3 +1,4 @@
 export { SITE_URL } from '@/shared/config/site';
 
-export const SAME_AS = ['https://github.com/aovorobyov', 'https://t.me/aovorobyov'];
+/** Профили для schema.org sameAs — только каналы, которые ведут к нам напрямую. */
+export const SAME_AS = ['https://t.me/sandworbot'];

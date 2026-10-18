@@ -5,6 +5,6 @@ import type { DirectChannelId } from './WebsitesPage.types';
  * `id` совпадает с ключом в `websites.order-direct` и именем логотипа ChannelIcon.
  */
 export const DIRECT_CHANNELS: { id: DirectChannelId; href: string }[] = [
-  { id: 'telegram', href: 'https://t.me/aovorobyov' },
+  { id: 'telegram', href: 'https://t.me/sandworbot' },
   { id: 'whatsapp', href: 'https://wa.me/79854316970' },
 ];

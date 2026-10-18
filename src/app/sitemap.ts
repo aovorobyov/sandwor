@@ -1,20 +1,13 @@
 import type { MetadataRoute } from 'next';
 import { getPosts } from '@/entities/post/api/posts';
 import { COURSES_REGISTRY } from '@/views/CoursePage/config/registry';
-import { SITE_URL as BASE_URL } from '@/shared/config/site';
+import { buildLocaleUrl } from '@/shared/lib/seo/buildLocaleUrl';
 import { defaultLocale, locales } from '@/i18n-routing';
 
 type EntryMeta = Pick<
   MetadataRoute.Sitemap[number],
   'lastModified' | 'changeFrequency' | 'priority'
 >;
-
-/** URL страницы для локали: дефолтная — без префикса, остальные — с /{locale}. */
-const buildLocaleUrl = (locale: string, path: string) => {
-  const prefix = locale === defaultLocale ? '' : `/${locale}`;
-
-  return `${BASE_URL}${prefix}${path}`;
-};
 
 /** Блок hreflang-альтернатив: по ссылке на каждую локаль + x-default на дефолтную. */
 const buildLanguageAlternates = (path: string) => {

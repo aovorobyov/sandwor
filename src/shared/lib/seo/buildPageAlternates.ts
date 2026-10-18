@@ -1,13 +1,6 @@
 import type { Metadata } from 'next';
-import { SITE_URL } from '../jsonLd/config';
 import { defaultLocale, locales } from '@/i18n-routing';
-
-/** URL страницы для локали: дефолтная — без префикса, остальные — с /{locale}. */
-const buildLocaleUrl = (locale: string, path: string) => {
-  const prefix = locale === defaultLocale ? '' : `/${locale}`;
-
-  return `${SITE_URL}${prefix}${path}`;
-};
+import { buildLocaleUrl } from './buildLocaleUrl';
 
 /**
  * Canonical + hreflang для `generateMetadata` страницы.

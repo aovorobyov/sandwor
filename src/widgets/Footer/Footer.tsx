@@ -6,12 +6,9 @@ import s from './Footer.module.css';
 
 const SITE_DOMAIN = 'sandwor.ru';
 
-const MORE_LINKS = [{ href: '/course', labelKey: 'nav.course' }] as const;
-
 const CONTACT_LINKS = [
-  { href: 'https://t.me/aovorobyov', label: 'Telegram ↗' },
-  { href: 'https://github.com/aovorobyov', label: 'GitHub ↗' },
-  { href: 'mailto:aovorobyov@mail.ru', label: 'aovorobyov@mail.ru' },
+  { href: 'https://t.me/sandworbot', label: 'Telegram ↗' },
+  { href: 'mailto:sandwor@mail.ru', label: 'sandwor@mail.ru' },
 ] as const;
 
 export const Footer = async () => {
@@ -24,7 +21,7 @@ export const Footer = async () => {
         <div className={s.columns}>
           <div>
             <div className={s.logo}>
-              sandwor
+              {t('brand.wordmark')}
               <span className={s.dot} aria-hidden />
             </div>
 
@@ -47,12 +44,6 @@ export const Footer = async () => {
             <Eyebrow className={s.colTitle}>{t('footer.more')}</Eyebrow>
 
             <div className={s.list}>
-              {MORE_LINKS.map(({ href, labelKey }) => (
-                <Link key={href} href={href} className={s.link}>
-                  {t(labelKey)}
-                </Link>
-              ))}
-
               <a href="/feed.xml" className={s.link}>
                 {t('nav.rss')}
               </a>

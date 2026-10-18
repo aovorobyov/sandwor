@@ -1,17 +1,10 @@
 import { getTranslations } from 'next-intl/server';
-import { Link } from '@/shared/ui/Link';
 import { Eyebrow } from '@/shared/ui/Eyebrow';
 import { Section } from '@/shared/ui/Section';
 import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
 import { ContactForm } from '@/features/contact-form';
 import { JsonLd, buildPerson } from '@/shared/lib/jsonLd';
-import {
-  CONTACT_EMAIL,
-  CONTACT_LINKS,
-  CONTACT_PHONE_HREF,
-  PRIMARY_EMAIL,
-  SECONDARY_LINKS,
-} from './contacts';
+import { CONTACT_EMAIL, CONTACT_LINKS, CONTACT_PHONE_HREF, PRIMARY_EMAIL } from './contacts';
 import s from './ContactPage.module.css';
 
 export const ContactPage = async () => {
@@ -67,15 +60,15 @@ export const ContactPage = async () => {
           <Eyebrow className={s.colTitle}>{t('contact.channels-title')}</Eyebrow>
 
           <div className={s.channels}>
-            {CONTACT_LINKS.map(({ label, handle, href }) => (
+            {CONTACT_LINKS.map(({ id, handle, href }) => (
               <a
-                key={label}
+                key={id}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={s.channel}
               >
-                <span className={s.channelLabel}>{label}</span>
+                <span className={s.channelLabel}>{t(`contact.channels.${id}`)}</span>
 
                 <span className={s.channelHandle}>{handle} ↗</span>
               </a>
@@ -88,16 +81,6 @@ export const ContactPage = async () => {
             <div className={s.aboutName}>{t('home.name')}</div>
 
             <p className={s.aboutBio}>{t('home.bio')}</p>
-          </div>
-
-          <Eyebrow className={s.moreTitle}>{t('contact.more')}</Eyebrow>
-
-          <div className={s.chips}>
-            {SECONDARY_LINKS.map(({ href, labelKey }) => (
-              <Link key={href} href={href} className={s.chip}>
-                {t(labelKey)}
-              </Link>
-            ))}
           </div>
         </div>
 

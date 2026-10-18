@@ -154,7 +154,7 @@ export const HomePage = async () => {
               </Button>
 
               <a
-                href="https://t.me/aovorobyov"
+                href="https://t.me/sandworbot"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={s.ctaTelegram}

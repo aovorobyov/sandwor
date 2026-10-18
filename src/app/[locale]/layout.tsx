@@ -8,6 +8,7 @@ import { Footer } from '@/widgets/Footer';
 import { CommandPalette } from '@/widgets/CommandPalette';
 import { ScrollReset } from '@/widgets/ScrollReset';
 import { CookieConsent } from '@/features/cookie-consent';
+import { AmoCrmButton } from '@/shared/lib/crm';
 
 interface Props {
   children: React.ReactNode;
@@ -42,6 +43,7 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
       <Footer />
       <CommandPalette />
       <CookieConsent />
+      <AmoCrmButton locale={locale as Locale} />
     </NextIntlClientProvider>
   );
 }

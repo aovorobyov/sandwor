@@ -20,8 +20,7 @@ interface SecondaryLink {
   isExternal?: boolean;
 }
 
-/** Второстепенные разделы — чипы в мобильном меню и колонка «Ещё» в футере. */
+/** Второстепенные разделы — чипы в мобильном меню. */
 export const SECONDARY_LINKS: readonly SecondaryLink[] = [
-  { href: '/course', labelKey: 'nav.course' },
   { href: '/feed.xml', labelKey: 'nav.rss', isExternal: true },
 ];

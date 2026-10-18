@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 import { SITE_HOST } from '@/shared/config/site';
 import { FIRA_400, GOLOS_400, UNBOUNDED_600, UNBOUNDED_700 } from './brandFonts';
 import { OFFER_COPY } from './offerCopy';
-import type { CardFact, CardParams, OgVariant } from './route.types';
+import type { CardFact, CardParams, OgLocale, OgVariant } from './route.types';
 
 export const runtime = 'edge';
 
@@ -25,6 +25,12 @@ const AC = '#ff7a2b';
 const LINE = 'rgba(244, 239, 232, 0.13)';
 const LINE_SOFT = 'rgba(244, 239, 232, 0.07)';
 const GLOW = 'radial-gradient(circle at 84% 6%, rgba(255, 122, 43, 0.22), rgba(14, 12, 11, 0) 62%)';
+
+/** Словесный знак логотипа — тот же, что в шапке сайта. */
+const WORDMARK: Record<OgLocale, string> = {
+  ru: 'сандвор',
+  en: 'sandwor',
+};
 
 /** Семейства шрифтов сайта: дисплейный, текстовый, моно. */
 const DISP = 'Unbounded';
@@ -93,8 +99,8 @@ const monoStyle = (color: string, size = 13) => {
   };
 };
 
-/** Логотип: «sandwor» дисплейным шрифтом + акцентная точка. */
-const renderLogo = () => {
+/** Логотип: словесный знак дисплейным шрифтом + акцентная точка. */
+const renderLogo = (wordmark: string) => {
   return (
     <div style={{ display: 'flex', alignItems: 'flex-end' }}>
       <div
@@ -106,7 +112,7 @@ const renderLogo = () => {
           color: TEXT,
         }}
       >
-        sandwor
+        {wordmark}
       </div>
 
       <div
@@ -175,7 +181,7 @@ const renderFooterLine = (text: string) => {
  * фактами (продающая) или строкой с доменом (контентная).
  */
 const renderCard = (params: CardParams) => {
-  const { eyebrow, title, lead, meta, facts, tagline } = params;
+  const { eyebrow, title, lead, meta, facts, tagline, wordmark } = params;
 
   return (
     <div
@@ -220,7 +226,7 @@ const renderCard = (params: CardParams) => {
             borderBottom: `1px solid ${LINE_SOFT}`,
           }}
         >
-          {renderLogo()}
+          {renderLogo(wordmark)}
 
           <div style={monoStyle(DIM)}>{SITE_HOST}</div>
         </div>
@@ -293,6 +299,7 @@ const buildParams = (variant: OgVariant, searchParams: URLSearchParams): CardPar
         meta,
         facts: [],
         tagline: copy.tagline,
+        wordmark: WORDMARK[locale],
       };
     case 'page':
       return {
@@ -302,6 +309,7 @@ const buildParams = (variant: OgVariant, searchParams: URLSearchParams): CardPar
         meta: '',
         facts: [],
         tagline: copy.tagline,
+        wordmark: WORDMARK[locale],
       };
     default:
       return {
@@ -311,6 +319,7 @@ const buildParams = (variant: OgVariant, searchParams: URLSearchParams): CardPar
         meta: '',
         facts: copy.facts,
         tagline: copy.tagline,
+        wordmark: WORDMARK[locale],
       };
   }
 };

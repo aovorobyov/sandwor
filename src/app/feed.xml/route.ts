@@ -1,9 +1,13 @@
 import { getTranslations } from 'next-intl/server';
 import { getPosts } from '@/entities/post/api/posts';
+import { buildLocaleUrl } from '@/shared/lib/seo/buildLocaleUrl';
 import { SITE_URL } from '@/shared/config/site';
 
-/** Контент тг-канала — на русском, поэтому фид одноязычный, без префикса локали в путях. */
+/** Статьи блога — на русском, поэтому фид одноязычный. */
 const FEED_LOCALE = 'ru';
+
+/** Раздел блога — источник ссылок фида. */
+const BLOG_PATH = '/blog';
 
 const escapeXml = (value: string) => {
   return value
@@ -33,7 +37,7 @@ export const GET = async () => {
 
   const entries = posts
     .map((post) => {
-      const url = `${SITE_URL}/${FEED_LOCALE}/blog/${post.slug}`;
+      const url = buildLocaleUrl(FEED_LOCALE, `${BLOG_PATH}/${post.slug}`);
       const isoDate = toIsoDateTime(post.date);
 
       return [
@@ -56,7 +60,7 @@ export const GET = async () => {
   <id>${SITE_URL}/</id>
   <title>${escapeXml(feedTitle)}</title>
   <subtitle>${escapeXml(subtitle)}</subtitle>
-  <link href="${SITE_URL}/${FEED_LOCALE}/blog"/>
+  <link href="${buildLocaleUrl(FEED_LOCALE, BLOG_PATH)}"/>
   <link rel="self" href="${SITE_URL}/feed.xml" type="application/atom+xml"/>
   <updated>${updated}</updated>
   <author>

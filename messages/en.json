@@ -1,4 +1,7 @@
 {
+  "brand": {
+    "wordmark": "sandwor"
+  },
   "nav": {
     "home": "Home",
     "websites": "Services",
@@ -26,10 +29,6 @@
       {
         "value": "1–2 weeks",
         "label": "to publish"
-      },
-      {
-        "value": "4 projects",
-        "label": "in portfolio"
       },
       {
         "value": "1 day",
@@ -88,7 +87,7 @@
     "hero-lead": "The client's task, the chosen solution and the scope of work for each project.",
     "metrics": [
       {
-        "value": "4",
+        "value": "2",
         "label": "projects"
       },
       {
@@ -96,7 +95,7 @@
         "label": "on Tilda"
       },
       {
-        "value": "3",
+        "value": "2",
         "label": "work formats"
       }
     ],
@@ -111,10 +110,14 @@
     "items": [
       {
         "slug": "model-agency",
-        "type": "Tilda store",
-        "title": "Model agency: a site for the adult division",
-        "summary": "A model portfolio, work directions and a casting request. The agency updates the content itself.",
-        "scope": ["Model portfolio catalog", "Casting request form", "Editing in Tilda"]
+        "type": "Tilda redesign",
+        "title": "OpenUP Model Management: redesign and a bilingual site",
+        "summary": "Redesigned the home page, header and footer, hand-coded the navigation instead of using builder blocks, and opened the site to an English-speaking audience.",
+        "scope": [
+          "Home page, header and footer redesign",
+          "Hand-coded navigation instead of Tilda blocks",
+          "A ru/en switch with its own dictionary"
+        ]
       },
       {
         "slug": "kids-agency",
@@ -140,40 +143,50 @@
     ],
     "details": {
       "model-agency": {
-        "lead": "The agency's adult division: the roster of models, work directions and casting requests. The agency updates content itself in the Tilda editor.",
+        "lead": "OpenUP model agency in Moscow. The site already ran on Tilda but looked dated and responded sluggishly. I redesigned the home page, header and footer, cleaned up the model catalogues and made the site bilingual.",
         "facts": [
           {
             "k": "Client",
-            "v": "Model agency, adult division"
+            "v": "OpenUP Model Management, Moscow"
           },
           {
             "k": "Task",
-            "v": "Show models and collect casting requests"
+            "v": "Refresh the site and open it to an English-speaking audience"
           },
           {
             "k": "Solution",
-            "v": "A Tilda store with a portfolio catalog"
+            "v": "Redesign and hand-written markup on top of Tilda"
           },
           {
-            "k": "Format",
-            "v": "Catalog, work directions, request form"
+            "k": "Scope",
+            "v": "Home page, header, footer, catalogues, ru/en translation"
           }
         ],
         "blocks": [
           {
             "title": "The starting point",
-            "p1": "The model portfolio lived in messengers and social networks: selections were sent by hand, and casting requests got lost in chats.",
-            "p2": "They needed a place that shows the agency roster and work directions and where both a client and a prospective model could be sent."
+            "p1": "The agency's site ran on Tilda but looked dated: the styling lagged behind how model agencies present themselves today, and some of the content had not been updated in a long time.",
+            "p2": "The interface was slow to respond, and the navigation followed old patterns and no longer fit every section — and the agency has many: women, men, arrivals, new faces, international, production."
           },
           {
-            "title": "What was done",
-            "p1": "The structure was built around two audiences: a client browses the model catalog and directions, an applicant lands on the casting request form.",
-            "p2": "The portfolio catalog was built on Tilda so the agency could add new cards and change photos itself, without a developer."
+            "title": "What I built",
+            "p1": "I designed a new home page, header and footer, then built them myself — not assembled from ready-made blocks, but written as markup and styles by hand on top of the builder.",
+            "p2": "The header gained a multi-level menu with dropdown sections, the mobile version a burger panel with social links, and on small screens the footer collapses its sections into an accordion. None of this comes with Tilda out of the box."
+          },
+          {
+            "title": "Model catalogues",
+            "p1": "The catalogues run on Tilda Store, and the default card layout did not suit the agency: a model roster is a showcase, not a product list.",
+            "p2": "I changed the display format, the card corner radii and their placement on the page, then went through the breakpoints separately so the grid holds on any screen."
+          },
+          {
+            "title": "Bilingual without a second site",
+            "p1": "Tilda offers no real bilingual support: the usual route is duplicating every page and then maintaining two copies of the site. Instead I wrote a script that translates the page on the fly when the ru or en button is clicked.",
+            "p2": "It carries its own dictionary of more than 800 pairs; strings missing from it are fetched from external translators with a fallback and then cached. Catalogue search is solved separately: model names are stored in Latin script, so a Russian query is rewritten inside the request to the server — visitors search in Russian and find what they need."
           },
           {
             "title": "The outcome",
-            "p1": "Requests come through the form, and model selections are shared as a link to the site instead of a messenger archive.",
-            "p2": "Updating the roster is no longer a job for a contractor — cards are edited in the Tilda editor in a couple of minutes."
+            "p1": "Everything visible was refreshed: the home page, header, footer and catalogues. The navigation now fits every section of the agency, including the link to its children's branch.",
+            "p2": "The English version runs without a second site and without duplicate pages — there is one set of pages and one dictionary to maintain, and that dictionary is edited in a Google Sheet without touching code. The client does not share metrics, so there are no numbers here: everything described can be checked by opening the site."
           }
         ]
       },
@@ -280,12 +293,12 @@
     "similar-title": "A similar task?",
     "similar-lead": "I'll estimate the timeline and budget for your project.",
     "similar-btn": "Discuss",
-    "repo": "Repository"
+    "link-site": "Site",
+    "link-repo": "Repository"
   },
   "contact": {
     "title": "Contact",
     "subtitle": "Open to projects, collaboration, and a good conversation. I usually reply within a day.",
-    "more": "More on the site",
     "name": "Name",
     "email": "Email",
     "message": "Message",
@@ -299,6 +312,11 @@
     "geo": "Moscow · Mon–Sun, 24/7",
     "phone": "+7 985 431-69-70",
     "channels-title": "Channels",
+    "channels": {
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp",
+      "email": "Email"
+    },
     "who-title": "Who replies",
     "message-title": "Send a message"
   },

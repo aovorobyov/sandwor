@@ -4,8 +4,8 @@ import { Link } from '@/shared/ui/Link';
 import { Mono } from '@/shared/ui/Mono';
 import { Eyebrow } from '@/shared/ui/Eyebrow';
 import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
-import { CASE_LINKS } from '@/entities/case';
-import type { CaseDetail, CaseItem } from '@/entities/case/model/types';
+import { CASE_LINKS, isPublishedCase } from '@/entities/case';
+import type { CaseDetail, CaseItem, CaseLinkKind } from '@/entities/case/model/types';
 import { JsonLd, buildBreadcrumbs } from '@/shared/lib/jsonLd';
 import type { CasePageProps } from './CasePage.types';
 import s from './CasePage.module.css';
@@ -20,10 +20,22 @@ export const CasePage = async (props: CasePageProps) => {
   const item = items.find((i) => i.slug === slug);
   const detail = details[slug];
 
-  if (!item || !detail) notFound();
+  if (!item || !detail || !isPublishedCase(slug)) notFound();
 
-  const otherCases = items.filter((i) => i.slug !== slug);
-  const repoHref = CASE_LINKS[slug as keyof typeof CASE_LINKS];
+  const otherCases = items.filter((i) => i.slug !== slug && isPublishedCase(i.slug));
+  const links = CASE_LINKS[slug as keyof typeof CASE_LINKS] || [];
+
+  /** Подпись ссылки: switch, чтобы новый вид ссылки не проскочил молча. */
+  const getLinkLabel = (kind: CaseLinkKind) => {
+    switch (kind) {
+      case 'site':
+        return t('cases.link-site');
+      case 'repo':
+        return t('cases.link-repo');
+      default:
+        throw new Error(`Unknown case link kind: ${kind}`);
+    }
+  };
 
   const breadcrumbs = buildBreadcrumbs([
     { name: t('nav.home'), path: '/' },
@@ -56,10 +68,22 @@ export const CasePage = async (props: CasePageProps) => {
 
             <p className={s.lead}>{detail.lead}</p>
 
-            {repoHref && (
-              <a href={repoHref} target="_blank" rel="noopener noreferrer" className={s.repo}>
-                {t('cases.repo')}: {repoHref.replace('https://', '')} ↗
-              </a>
+            {links.length > 0 && (
+              <div className={s.links}>
+                {links.map(({ kind, href }) => (
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={s.link}
+                  >
+                    <span className={s.linkKind}>{getLinkLabel(kind)}</span>
+
+                    <span className={s.linkHref}>{href.replace('https://', '')} ↗</span>
+                  </a>
+                ))}
+              </div>
             )}
           </div>
         </section>

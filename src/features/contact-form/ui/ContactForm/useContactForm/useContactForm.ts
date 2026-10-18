@@ -4,7 +4,7 @@ import type { FormState } from '../ContactForm.types';
 
 const INITIAL_FORM: FormState = { name: '', email: '', message: '' };
 
-/** Состояние формы обратной связи и отправка сообщения в Telegram-бота через /api/contact. */
+/** Состояние формы обратной связи и отправка сообщения в amoCRM через /api/contact. */
 export const useContactForm = () => {
   return useFormSubmit<FormState>('/api/contact', INITIAL_FORM, () => {
     reachGoal(YM_GOAL.contact);

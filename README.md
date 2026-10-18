@@ -1,449 +1,104 @@
 # sandwor.ru
 
-Personal website built with Next.js 14, Feature-Sliced Design, and next-intl.
+Сайт студии: услуги, кейсы, блог, формы заявок. Next.js 14 (App Router),
+TypeScript, CSS Modules, next-intl (ru / en), архитектура FSD.
 
----
-
-## Stack
-
-| Technology            | Version  | Purpose                       |
-| --------------------- | -------- | ----------------------------- |
-| Next.js               | 14       | Framework (App Router)        |
-| React                 | 18       | UI library                    |
-| TypeScript            | 5        | Type safety (strict mode)     |
-| CSS Modules           | built-in | Styling                       |
-| next-intl             | 3        | i18n (ru / en)                |
-| next-themes           | 0.3      | Dark / Light theme            |
-| node-html-parser      | —        | Telegram channel page parsing |
-| Jest                  | 29       | Test runner                   |
-| React Testing Library | 16       | Component testing             |
-| ESLint                | 8        | Linting                       |
-| Prettier              | 3        | Formatting                    |
-
----
-
-## Getting Started
+## Запуск
 
 ```bash
 npm install
-npm run dev
-npm run build
-npm run test
-npm run lint
+npm run dev      # http://localhost:3000
 ```
 
-> **Node.js ≥ 18** required.
+Node.js ≥ 20.
 
----
+| Скрипт          | Что делает                               |
+| --------------- | ---------------------------------------- |
+| `npm run build` | продакшн-сборка (`output: 'standalone'`) |
+| `npm run lint`  | ESLint + проверка форматирования         |
+| `npm test`      | Jest + Testing Library                   |
+| `npm run size`  | бюджет бандла (350 KB gzip)              |
 
 ## Переменные окружения
 
-Создай `.env.local` в корне проекта:
+`.env.local` в корне:
 
-```env
-TELEGRAM_CHANNEL_USERNAME=nafrontebezperemen   # без @
-TELEGRAM_BOT_TOKEN=<токен от @BotFather>
-TELEGRAM_WEBHOOK_SECRET=<случайная строка>
-TELEGRAM_CONTACT_CHAT_ID=<chat_id для формы контактов>
-NEXT_PUBLIC_YM_ID=<номер счётчика Яндекс.Метрики>
-NEXT_PUBLIC_SITE_URL=https://sandwor.online   # канонический адрес сайта
-```
+| Переменная                  | Зачем                                                 |
+| --------------------------- | ----------------------------------------------------- |
+| `NEXT_PUBLIC_YM_ID`         | счётчик Яндекс.Метрики; без него счётчик не грузится  |
+| `NEXT_PUBLIC_SITE_URL`      | канонический адрес; дефолт — `https://sandwor.online` |
+| `TELEGRAM_CHANNEL_USERNAME` | канал для отключённого телеграм-движка блога          |
+| `TELEGRAM_WEBHOOK_SECRET`   | подпись вебхука того же движка                        |
 
-На Vercel добавь те же переменные в **Settings → Environment Variables**.
+Заявки идут в amoCRM (см. ниже), Telegram в них не участвует. Две `TELEGRAM_*`
+переменные нужны только отключённому движку блога — пока он выключен, сайт
+работает и без них.
 
-`TELEGRAM_CONTACT_CHAT_ID` — куда бот шлёт сообщения из формы на `/contact`
-и заявки на сайт с `/websites` и главной.
-Чтобы узнать свой `chat_id`: напиши боту любое сообщение, открой
-`https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/getUpdates` и возьми
-`result[].message.chat.id`. Без этой переменной форма вернёт ошибку (бот молчит).
+`NEXT_PUBLIC_*` инлайнятся в бандл на сборке, а собирает GitHub Actions — значит,
+значения нужны в секретах репозитория, а не только локально.
 
-`NEXT_PUBLIC_YM_ID` — номер счётчика Яндекс.Метрики (создаётся в
-[metrika.yandex.ru](https://metrika.yandex.ru)). Инлайнится в клиентский бандл,
-поэтому префикс `NEXT_PUBLIC_`. Без переменной счётчик не рендерится — локальная
-разработка не засоряет статистику. Подробнее — раздел «Аналитика» ниже.
-
-`NEXT_PUBLIC_SITE_URL` — канонический адрес сайта, единый источник правды для
-`canonical`, Open Graph, `sitemap.xml`, `robots.txt`, Atom-фида и JSON-LD
-(константа `SITE_URL` в `src/shared/config/site.ts`). Если переменная не задана,
-код падает на дефолт `https://sandwor.online`. Домен `sandwor.ru` остаётся живым
-для связки с телеграм-ботом, но каноническим не является.
-
----
-
-## Аналитика
-
-### Яндекс.Метрика
-
-Счётчик подключён в корневом `src/app/layout.tsx` компонентом `YandexMetrika`
-(`src/shared/lib/analytics`). Скрипт грузится через `next/script` со стратегией
-`afterInteractive` — не блокирует гидрацию. Включены вебвизор, карта кликов,
-точный показатель отказов и трекинг ссылок. Номер счётчика берётся из
-`NEXT_PUBLIC_YM_ID`; без него компонент возвращает `null`.
-
-**JS-цели** (заводятся вручную в интерфейсе Метрики → «Настройка» → «Цели», тип
-«JavaScript-событие», с идентификаторами ниже) засчитываются при успешной
-отправке форм через `reachGoal`:
-
-| Идентификатор    | Событие                                |
-| ---------------- | -------------------------------------- |
-| `order_home`     | заявка на сайт с главной               |
-| `order_websites` | заявка на сайт со страницы `/websites` |
-| `contact`        | сообщение из формы на `/contact`       |
-
-Идентификаторы централизованы в `YM_GOAL` (`analytics.types.ts`) — новые цели
-добавляй туда, а не строкой по месту.
-
-### Google Search Console — подтверждение домена
-
-Подтверждение сделано **через мета-тег**: токены лежат в
-`metadata.verification.google` (`src/app/layout.tsx`) массивом, Next.js рендерит
-из каждого свой `‹meta name="google-site-verification"›` в `‹head›` всех страниц.
-Работает без доступа к DNS — Google читает тег прямо со страницы.
-
-Важно: у каждого ресурса Search Console **свой уникальный токен**. Одна и та же
-сборка отдаётся на оба домена, поэтому в массив кладём токены обоих — на странице
-присутствуют оба тега, а Google для каждого ресурса находит свой (чужие
-игнорирует). Сейчас в массиве два токена: `sandwor.ru` и `sandwor.online`.
-
-Чтобы подтвердить новый ресурс (или сменить домен):
-
-1. В [Search Console](https://search.google.com/search-console) добавь ресурс
-   типа **«Ресурс с префиксом URL»** (напр. `https://sandwor.online`) → способ
-   **«HTML-тег»**.
-2. Скопируй токен из `content="…"`, добавь его отдельным элементом в массив
-   `metadata.verification.google`, задеплой.
-3. В GSC нажми «Подтвердить».
-
-Альтернатива — тип ресурса **«Домен»** через TXT-запись в DNS: подтверждает домен
-целиком (со всеми поддоменами) и не зависит от релизов, но требует доступа к DNS
-домена.
-
-После подтверждения добавь `sitemap.xml` (`/sitemap.ts` уже генерирует его) в
-Search Console → «Файлы Sitemap».
-
----
-
-## Блог (интеграция с Telegram)
-
-Посты блога подтягиваются с публичной превью-страницы Telegram-канала (`t.me/s/<channel>`).
-
-### Как это работает
-
-```
-Telegram-канал
-     │
-     ▼
-t.me/s/nafrontebezperemen  ──parse──►  src/entities/post/api/telegram.ts
-                                               │
-                         ┌─────────────────────┤
-                         ▼                     ▼
-                    BlogPage              HomePage
-                  (все посты)         (3 последних)
-```
-
-- **Парсинг** — `node-html-parser` извлекает текст, дату, фото и жирный заголовок
-- **Заголовок** — первый `<b>...</b>` блок в посте; если его нет — первая строка текста
-- **Обложка** — фото из `.tgme_widget_message_photo_wrap` (если есть)
-- **Теги** — из хэштегов (`#тег`); дефолт — `«На фронтé без перемен»`
-- **Фильтрация** — сервисные посты (смена фото, создание канала) и посты короче 100 символов отсеиваются
-- **Эмодзи** — удаляются из текста и HTML
-
-### Кеширование
-
-| Слой                               | Поведение                                                        |
-| ---------------------------------- | ---------------------------------------------------------------- |
-| `react.cache()`                    | Один fetch на SSR-рендер (дедупликация)                          |
-| `next: { tags, revalidate: 3600 }` | Data Cache: хранится 1 час в production                          |
-| Telegram Webhook                   | При новом посте мгновенно сбрасывает кеш через `revalidateTag()` |
-
-> В dev-режиме Data Cache отключён намеренно — Next.js fetches при каждом запросе.
-
-### Регистрация webhook
-
-Webhook уже зарегистрирован на `https://sandwor.vercel.app/api/telegram/webhook`.
-Для повторной регистрации (например, после смены домена):
-
-```bash
-curl "https://api.telegram.org/bot<TOKEN>/setWebhook\
-?url=https://<domain>/api/telegram/webhook\
-&secret_token=<TELEGRAM_WEBHOOK_SECRET>\
-&allowed_updates=%5B%22channel_post%22%5D"
-```
-
-### Файлы
+## Структура
 
 ```
 src/
-├── app/               # Next.js App Router — routing only, no business logic
-│   ├── api/           # contact, order, course/log, posts/list, og, telegram/webhook
-│   ├── feed.xml/      # Atom-фид блога
-│   └── [locale]/      # RU без префикса, EN на /en (localePrefix: as-needed)
-│       ├── blog/[slug]/     # Страница отдельного поста
-│       ├── cases/[slug]/    # Страница отдельного кейса
-│       └── course/[courseId]/  # Урок курса
-│
-├── shared/            # Reusable code with no business context
-│   ├── ui/            # Base UI components (Button, Input, Badge, Chip, DotIcon, …)
-│   ├── api/           # Server-only helpers (telegram.ts — отправка в бота)
-│   ├── config/        # Constants (site.ts — домен и канонический URL)
-│   └── lib/           # cn, jsonLd builders, seo (og + alternates), analytics
-│
-├── entities/          # Business entities
-│   ├── post/
-│   │   ├── api/       # articles.ts — активный источник; telegram.ts — отключён
-│   │   ├── model/     # Post interface + тексты статей
-│   │   └── ui/        # PostRow
-│   └── case/          # Case type + CaseCard
-│
-├── features/          # User interactions
-│   ├── locale-switch/ # Language switcher (RU / EN)
-│   ├── contact-form/  # Contact form with submit handler
-│   ├── order-form/    # Форма заявки на сайт
-│   └── cookie-consent/ # Баннер согласия на cookie (152-ФЗ)
-│
-├── widgets/           # Large page blocks composed from entities + features
-│   ├── Header/        # Шапка: навигация, ⌘K-триггер, locale switch
-│   ├── Footer/        # Site footer
-│   ├── CommandPalette/ # ⌘K palette: навигация, поиск по статьям, язык
-│   ├── Tariffs/       # Сетка тарифов (данные — websites.tariffs)
-│   ├── ProcessSteps/  # Пять шагов работы (данные — websites.process)
-│   └── ScrollReset/   # Сброс скролла при смене маршрута
-│
-└── views/              # Page-level components (testable, separate from app/)
-    ├── HomePage/       # Главная: оффер, тарифы, процесс, свежие статьи
-    ├── WebsitesPage/   # Продающая страница создания сайтов (/websites)
-    ├── BlogPage/       # Список всех постов с фильтром по тегам
-    ├── ArticlePage/    # Страница отдельного поста
-    ├── CasesPage/      # Коммерческие кейсы (/cases)
-    ├── CasePage/       # Страница отдельного кейса
-    ├── CoursePage/     # Курс: лендинг, уроки, финал (шаблон под новые курсы)
-    ├── PrivacyPage/    # Политика обработки персональных данных
-    └── ContactPage/    # Контакты + форма связи
+├── app/         # роутинг, API-хендлеры, sitemap/robots/feed — без бизнес-логики
+├── views/       # страницы целиком (HomePage, WebsitesPage, CasePage, …)
+├── widgets/     # крупные блоки: Header, Footer, CommandPalette, Tariffs
+├── features/    # действия пользователя: формы, переключатель языка, cookie-баннер
+├── entities/    # сущности: post (статьи), case (кейсы)
+└── shared/      # ui-кит, config, lib (seo, jsonLd, analytics, crm)
 ```
 
-**Layer import rules (FSD):**
-`app → pages → widgets → features → entities → shared`
+Импорты идут только вниз: `app → views → widgets → features → entities → shared`.
+Каждый слайс экспортируется через свой `index.ts`.
 
-Imports must only go **downward**. `shared` must never import from `features`.
+## Где что лежит
 
----
+- **Статьи блога** — `entities/post/model/articles/`, по файлу на статью, ru и en
+  в одном черновике. Телеграм-движок (`api/telegram.ts`) сохранён, но отключён:
+  активный источник задаётся в `api/posts.ts`.
+- **Тексты интерфейса** — `messages/ru.json`, `messages/en.json`.
+- **Маршрутизация локалей** — `src/i18n-routing.ts`. Режим `as-needed`: ru без
+  префикса, en на `/en/…`.
+- **Канонические URL** — `shared/config/site.ts` и `shared/lib/seo/buildLocaleUrl.ts`.
+  Через них строятся canonical, hreflang, `sitemap.xml` и Atom-фид.
+- **SEO** — `app/sitemap.ts`, `app/robots.ts`, `app/feed.xml/`, `app/api/og/`
+  (динамические OG-картинки), `shared/lib/jsonLd`.
+- **Конвенции кода** — `.claude/rules/`.
 
-## Как добавить новую страницу
+## Аналитика и внешние скрипты
 
-1. **Создать page-компонент** в `src/views/NewPage/`:
+**Яндекс.Метрика** (`shared/lib/analytics`) рендерится из `CookieConsent` — только
+после явного согласия. JS-цели собраны в `YM_GOAL` и засчитываются при успешной
+отправке форм: `order_websites` и `contact`. Одноимённые цели заводятся вручную
+в интерфейсе Метрики.
 
-   ```
-   src/views/NewPage/
-   ├── NewPage.tsx
-   ├── NewPage.module.css
-   └── index.ts
-   ```
+**Виджет amoCRM** (`shared/lib/crm`) — плавающая кнопка со связью и чатом,
+подключена в `app/[locale]/layout.tsx`. Грузится независимо от согласия на cookie:
+это канал связи, а не аналитика. `id` и `hash` лежат в `crm/config.ts`, берутся
+в amoCRM → «Сайт» → «Кнопка на сайт».
 
-2. **Добавить роут** в `src/app/[locale]/new-page/page.tsx`:
+**Заявки в amoCRM.** Обе формы шлют данные на свои роуты (`/api/contact`,
+`/api/order`), а оттуда сервер кладёт их в amoCRM (`shared/api/amoForm.ts`) — в ту же
+ручку `forms.amocrm.ru/queue/add`, что дёргают её встроенные формы. Запрос идёт со
+стороны сервера, поэтому CORS не участвует: ручка не отдаёт нужных заголовков и из
+браузера была бы заблокирована. Форме на `/contact` соответствует одна форма в amoCRM,
+форме заявки с `/websites` и главной — другая, у каждой свои `form_id`, `hash` и имена
+полей. amoCRM — единственный приёмник заявок, поэтому её отказ роут отдаёт как 502:
+посетитель увидит ошибку, а не ложное «отправлено».
 
-   ```tsx
-   import { NewPage } from '@/views/NewPage';
-   export default function Page() {
-     return <NewPage />;
-   }
-   ```
+Идентификаторы форм и имена полей (`fields[name_1]` и подобные) зашиты в
+`amoForm.ts`. Свериться после правок формы в amoCRM можно так: отправить её
+вручную и посмотреть тело запроса на `queue/add` в devtools.
 
-3. **Добавить ключи переводов** в `messages/ru.json` и `messages/en.json`:
+**Google Search Console** подтверждён мета-тегом: токены перечислены массивом в
+`metadata.verification.google` (`app/layout.tsx`). У каждого ресурса свой токен,
+поэтому на странице рендерятся оба — каждый ресурс находит нужный.
 
-   ```json
-   { "newpage.title": "Новая страница" }
-   ```
+## Деплой
 
-4. **Добавить ссылку в навигацию** (если нужно) в `src/widgets/Header/config.ts`:
-   ```ts
-   { href: '/new-page', labelKey: 'nav.newpage' }
-   ```
+Автоматически по пушу в `main`:
 
----
-
-## Как добавить новый язык (i18n)
-
-1. Создать `messages/[locale].json` с теми же ключами, что в `ru.json`
-2. Добавить локаль в `src/i18n-routing.ts` — единый источник (`locales`, `defaultLocale`, `routing`); middleware и навигация подхватят её автоматически:
-   ```ts
-   export const locales = ['ru', 'en', 'de'] as const;
-   ```
-
-Режим `localePrefix: 'as-needed'`: дефолтная локаль отдаётся без префикса, остальные — на `/{locale}/…` с собственными canonical/hreflang и записями в sitemap.
-
----
-
-## Как добавить новый компонент
-
-**FSD-правило:** определи слой по роли компонента:
-
-- Переиспользуемый без бизнес-контекста → `shared/ui/`
-- Бизнес-сущность → `entities/[entity]/ui/`
-- Пользовательское действие → `features/[feature]/ui/`
-- Крупный блок страницы → `widgets/[Widget]/`
-
-**Структура каждого слайса:**
-
-```
-ComponentName/
-├── ComponentName.tsx        # Компонент
-├── ComponentName.module.css # Стили
-└── index.ts                 # Public API (export only what's needed)
-```
-
-**index.ts:**
-
-```ts
-export { ComponentName } from './ComponentName';
-export type { ComponentNameProps } from './ComponentName';
-```
-
-**Правило:** другие слои импортируют только из `index.ts`, не напрямую.
-
----
-
-## Как писать тесты
-
-Тестируем **поведение**, не детали реализации.
-
-**Пример теста компонента:**
-
-```tsx
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { Button } from '@/shared/ui/Button';
-
-it('calls onClick when clicked', async () => {
-  const handleClick = jest.fn();
-  render(<Button onClick={handleClick}>Click me</Button>);
-  await userEvent.click(screen.getByRole('button'));
-  expect(handleClick).toHaveBeenCalledTimes(1);
-});
-```
-
-**Пример теста с моком next-intl:**
-
-```tsx
-import { render, screen } from '@testing-library/react';
-import { NextIntlClientProvider } from 'next-intl';
-import messages from '../../../messages/ru.json';
-
-const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <NextIntlClientProvider locale="ru" messages={messages}>
-    {children}
-  </NextIntlClientProvider>
-);
-
-it('renders translated text', () => {
-  render(<MyComponent />, { wrapper });
-  expect(screen.getByText('Главная')).toBeInTheDocument();
-});
-```
-
-**Команды:**
-
-```bash
-npm test                    # run all tests
-npm test -- --watch         # watch mode
-npm test -- --coverage      # with coverage report
-```
-
----
-
-## Темизация
-
-Тема переключается через `next-themes`. Провайдер обёрнут в корневом `layout.tsx`.
-
-Атрибут `data-theme="dark"` / `data-theme="light"` устанавливается на `<html>`.
-
-**Добавить новую CSS-переменную:**
-
-1. В `src/app/globals.css` добавь переменную в `:root` (светлая тема)
-2. Добавь переопределение в `[data-theme='dark']`
-
-```css
-:root {
-  --my-color: #123456;
-}
-[data-theme='dark'] {
-  --my-color: #abcdef;
-}
-```
-
----
-
-## Адаптивность
-
-Mobile-first. Базовые значения — для мобайла, переопределение — в media-queries.
-
-| Breakpoint | px   | Назначение      |
-| ---------- | ---- | --------------- |
-| `sm`       | 640  | Планшет         |
-| `md`       | 1024 | Десктоп         |
-| `lg`       | 1280 | Широкий десктоп |
-
-```css
-/* Mobile (default) */
-.grid {
-  grid-template-columns: 1fr;
-}
-
-/* Tablet */
-@media (min-width: 640px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-```
-
-В TypeScript: `import { breakpoints } from '@/shared/config/breakpoints'`
-
----
-
-## Deployment
-
-### Vercel (рекомендуется)
-
-```bash
-npx vercel
-```
-
-Или подключить GitHub-репозиторий через [vercel.com](https://vercel.com).
-
-### Self-hosted (Node.js)
-
-```bash
-npm run build
-npm start        # запускает Next.js на порту 3000
-```
-
-### Self-hosted (Docker)
-
-```dockerfile
-FROM node:20-alpine AS builder
-WORKDIR /app
-COPY . .
-RUN npm ci && npm run build
-
-FROM node:20-alpine
-WORKDIR /app
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/public ./public
-CMD ["node", "server.js"]
-```
-
-Добавь в `next.config.ts`:
-
-```ts
-const nextConfig: NextConfig = {
-  output: 'standalone',
-};
-```
+- `.github/workflows/ci.yml` — lint, типы, тесты, сборка, бюджет бандла;
+- `.github/workflows/deploy-selectel.yml` — сборка, rsync standalone-бандла на VPS,
+  `systemctl restart sandwor`.

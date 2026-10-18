@@ -39,17 +39,40 @@
   text-wrap: pretty;
 }
 
-.repo {
-  display: inline-block;
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
   margin-top: 18px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
   font-family: var(--mono);
   font-size: 12.5px;
   color: var(--ac);
   transition: color 0.2s ease;
 }
 
-.repo:hover {
+.link:hover {
   color: var(--ac-hi);
+}
+
+/* Подпись вида ссылки: приглушена, чтобы адрес читался первым. */
+.linkKind {
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.link:hover .linkKind {
+  color: var(--muted);
+}
+
+.linkHref {
+  overflow-wrap: anywhere;
 }
 
 /* ── Главный экран ── */

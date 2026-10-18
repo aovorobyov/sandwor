@@ -182,37 +182,6 @@
   text-wrap: pretty;
 }
 
-.moreTitle {
-  padding: 28px 0 14px;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 16px;
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.chip {
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 7px 14px;
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-field);
-  color: var(--muted);
-  transition:
-    border-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.chip:hover {
-  border-color: var(--ac);
-  color: var(--ac);
-}
-
 .formCard {
   align-self: start;
   border: 1px solid var(--line);

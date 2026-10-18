@@ -55,6 +55,11 @@ export const ContactForm: FC = () => {
 
   const isPending = status === 'pending';
 
+  /** Все поля обязательны: в amoCRM не должна уезжать половина заявки. */
+  const isComplete = Boolean(
+    form.name.trim() && form.email.trim() && form.message.trim() && hasConsent,
+  );
+
   return (
     <form className={s.form} onSubmit={handleSubmit} noValidate>
       <input
@@ -108,7 +113,7 @@ export const ContactForm: FC = () => {
 
       {status === 'error' && <p className={s.error}>{t('contact.error')}</p>}
 
-      <Button type="submit" className={s.submit} disabled={isPending || !hasConsent}>
+      <Button type="submit" className={s.submit} disabled={isPending || !isComplete}>
         {isPending ? t('contact.sending') : t('contact.submit')}
       </Button>
     </form>

@@ -27,3 +27,11 @@ export interface CaseMetric {
   value: string;
   label: string;
 }
+
+/** Что за ссылка: живой сайт клиента или открытый репозиторий. */
+export type CaseLinkKind = 'site' | 'repo';
+
+export interface CaseLink {
+  kind: CaseLinkKind;
+  href: string;
+}

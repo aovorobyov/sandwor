@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { escapeHtml, sendTelegramMessage } from '@/shared/api/telegram';
+import { sendAmoContactLead } from '@/shared/api/amoForm';
+import { SITE_URL } from '@/shared/config/site';
 
 /** Ограничения длины полей — отсекаем мусор и слишком большие запросы. */
 const MAX_NAME = 100;
@@ -9,6 +10,9 @@ const MAX_MESSAGE = 4000;
 /** Антиспам: минимальная пауза «загрузка → отправка» и потолок ссылок в сообщении. */
 const MIN_ELAPSED_MS = 2000;
 const MAX_LINKS = 5;
+
+/** Фолбэк для метки происхождения в amoCRM, если браузер не прислал Referer. */
+const CONTACT_PAGE_URL = `${SITE_URL}/contact`;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const LINK_PATTERN = /https?:\/\//gi;
@@ -62,13 +66,6 @@ const isValid = ({ name, email, message, consent }: ContactPayload): boolean => 
 };
 
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CONTACT_CHAT_ID;
-
-  if (!token || !chatId) {
-    return NextResponse.json({ error: 'Contact channel is not configured' }, { status: 500 });
-  }
-
   let payload: unknown;
 
   try {
@@ -91,21 +88,13 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
   }
 
   const { name, email, message } = payload;
+  const referer = req.headers.get('referer') || CONTACT_PAGE_URL;
 
-  const text = [
-    '📨 <b>Новое сообщение с сайта</b>',
-    '',
-    `<b>Имя:</b> ${escapeHtml(name)}`,
-    `<b>Email:</b> ${escapeHtml(email)}`,
-    '',
-    escapeHtml(message),
-    '',
-    '✅ Согласие на обработку ПДн получено',
-  ].join('\n');
+  const isLeadCreated = await sendAmoContactLead({ name, email, message, referer });
 
-  const isDelivered = await sendTelegramMessage(text);
-
-  if (!isDelivered) {
+  // amoCRM — единственный приёмник заявок, поэтому её отказ отдаём формой как ошибку:
+  // посетитель увидит подсказку и напишет напрямую, а не решит, что заявка ушла.
+  if (!isLeadCreated) {
     return NextResponse.json({ error: 'Failed to deliver message' }, { status: 502 });
   }
 

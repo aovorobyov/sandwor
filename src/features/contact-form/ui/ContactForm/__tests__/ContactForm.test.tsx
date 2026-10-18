@@ -65,6 +65,23 @@ describe('ContactForm', () => {
     expect(screen.getByRole('button', { name: /^Отправить$/i })).toBeEnabled();
   });
 
+  it('keeps submit disabled until every field is filled', async () => {
+    render(<ContactForm />, { wrapper });
+    const submit = screen.getByRole('button', { name: /^Отправить$/i });
+
+    await userEvent.click(screen.getByRole('checkbox'));
+    expect(submit).toBeDisabled();
+
+    await userEvent.type(screen.getByLabelText(/Имя/i), 'Kim');
+    expect(submit).toBeDisabled();
+
+    await userEvent.type(screen.getByLabelText(/Email/i), 'kim@example.com');
+    expect(submit).toBeDisabled();
+
+    await userEvent.type(screen.getByLabelText(/Сообщение/i), 'Hi');
+    expect(submit).toBeEnabled();
+  });
+
   it('hides the form after successful submit', async () => {
     render(<ContactForm />, { wrapper });
 

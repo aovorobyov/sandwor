@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CasePage } from '@/views/CasePage';
-import { CASE_SLUGS } from '@/entities/case';
+import { PUBLISHED_CASE_SLUGS, isPublishedCase } from '@/entities/case';
 import type { CaseDetail, CaseItem } from '@/entities/case/model/types';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
@@ -15,7 +15,7 @@ interface Props {
 const OG_SCOPE_LIMIT = 2;
 
 export function generateStaticParams() {
-  return CASE_SLUGS.map((slug) => ({ slug }));
+  return PUBLISHED_CASE_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params: { locale, slug } }: Props): Promise<Metadata> {
@@ -26,7 +26,7 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
   const item = items.find((i) => i.slug === slug);
   const detail = details[slug];
 
-  if (!item || !detail) {
+  if (!item || !detail || !isPublishedCase(slug)) {
     return { title: t('cases.title') };
   }
 

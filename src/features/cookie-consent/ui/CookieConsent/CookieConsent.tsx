@@ -2,8 +2,9 @@
 
 import type { FC } from 'react';
 import { useTranslations } from 'next-intl';
+import { Button } from '@sw/components/Button';
+import { Icon } from '@sw/components/Icon';
 import { Link } from '@/shared/ui/Link';
-import { Button } from '@/shared/ui/Button';
 import { YandexMetrika } from '@/shared/lib/analytics';
 import { useCookieConsent } from '../../lib/useCookieConsent';
 import s from './CookieConsent.module.css';
@@ -11,19 +12,13 @@ import s from './CookieConsent.module.css';
 /**
  * Баннер согласия на cookies и аналитику + условная загрузка Яндекс.Метрики.
  * Метрика инициализируется только после явного «Принять» — до выбора счётчик не грузится.
- * Пока решение не принято, показываем баннер со ссылкой на политику.
+ * Оформлен как тост дизайн-системы: панель surface-overlay слева снизу, чтобы не
+ * спорить с плавающей кнопкой amoCRM справа. Primary-кнопка на экране одна — в шапке,
+ * поэтому здесь secondary и quiet.
  */
 export const CookieConsent: FC = () => {
   const t = useTranslations('cookie');
   const { consent, accept, reject } = useCookieConsent();
-
-  const handleAccept = () => {
-    accept();
-  };
-
-  const handleReject = () => {
-    reject();
-  };
 
   return (
     <>
@@ -31,6 +26,8 @@ export const CookieConsent: FC = () => {
 
       {consent === 'unknown' && (
         <div className={s.root} role="region" aria-label={t('aria')}>
+          <Icon name="info-circle" size={20} className={s.icon} />
+
           <p className={s.text}>
             {t('text')}{' '}
             <Link href="/privacy" className={s.link}>
@@ -39,11 +36,11 @@ export const CookieConsent: FC = () => {
           </p>
 
           <div className={s.actions}>
-            <Button variant="ghost" size="sm" onClick={handleReject}>
+            <Button variant="quiet" size="s" onClick={reject}>
               {t('reject')}
             </Button>
 
-            <Button variant="primary" size="sm" onClick={handleAccept}>
+            <Button variant="secondary" size="s" onClick={accept}>
               {t('accept')}
             </Button>
           </div>

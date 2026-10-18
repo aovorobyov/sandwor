@@ -1,14 +1,11 @@
-import type { ReactNode } from 'react';
+import type { HTMLAttributes } from 'react';
 
-export type SectionTone = 'default' | 'subtle';
+export type SectionTone = 'default' | 'sunken' | 'canvas';
+export type SectionSpacing = 's' | 'm';
 
-export interface SectionProps {
-  children: ReactNode;
-  /** `subtle` — подложка `--bg2` с верхней границей: задаёт ритм секций. */
+export interface SectionProps extends HTMLAttributes<HTMLElement> {
+  /** Фон: default — `bg`, sunken — `bg-sunken` с линиями, canvas — точечная сетка. */
   tone?: SectionTone;
-  /** Убрать вертикальные отступы (для секций, что сами управляют padding). */
-  isFlush?: boolean;
-  /** Класс на внутренний контейнер (1280px). */
-  className?: string;
-  id?: string;
+  /** Вертикальные отступы: m — 96/56px, s — 56/40px (для первой секции под героем). */
+  spacing?: SectionSpacing;
 }

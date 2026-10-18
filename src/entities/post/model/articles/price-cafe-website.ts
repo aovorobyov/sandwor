@@ -149,7 +149,7 @@ export const priceCafeWebsite: ArticleDraft = {
 
 <h2>Что дальше</h2>
 
-<p>Если хотите понять, в какую сумму обойдётся именно ваш проект — не абстрактная вилка, а конкретная цифра под вашу задачу — посмотрите <a href="/websites">форматы и тарифы</a> или сразу <a href="/contact">напишите мне</a>. Расскажите про кофейню в двух словах, а я честно скажу, что реально сделать в вашем бюджете и на чём вам точно не стоит переплачивать.</p>
+<p>Если хотите понять, в какую сумму обойдётся именно ваш проект — не абстрактная вилка, а конкретная цифра под вашу задачу — посмотрите <a href="/services/sites">форматы и тарифы</a> или сразу <a href="/contact">напишите мне</a>. Расскажите про кофейню в двух словах, а я честно скажу, что реально сделать в вашем бюджете и на чём вам точно не стоит переплачивать.</p>
 `,
     },
     en: {
@@ -292,7 +292,7 @@ export const priceCafeWebsite: ArticleDraft = {
 
 <h2>What's next</h2>
 
-<p>If you want to understand what your specific project would cost — not an abstract range but a concrete number for your task — take a look at <a href="/en/websites">the formats and pricing</a> or just <a href="/en/contact">drop me a line</a>. Tell me about your café in a couple of sentences and I'll honestly say what's realistic within your budget, and where you definitely shouldn't overpay.</p>
+<p>If you want to understand what your specific project would cost — not an abstract range but a concrete number for your task — take a look at <a href="/en/services/sites">the formats and pricing</a> or just <a href="/en/contact">drop me a line</a>. Tell me about your café in a couple of sentences and I'll honestly say what's realistic within your budget, and where you definitely shouldn't overpay.</p>
 `,
     },
   },

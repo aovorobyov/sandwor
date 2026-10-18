@@ -1,0 +1,46 @@
+/* ── sandwor · base ───────────────────────────────────────────── */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-text);
+  font-size: 15px;
+  line-height: 23px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+.sw-root, .sw-root *, .sw-root *::before, .sw-root *::after,
+[class^="sw-"], [class^="sw-"]::before, [class^="sw-"]::after { box-sizing: border-box; }
+
+/* Service icon glyph used everywhere: one stroke weight, currentColor */
+.sw-icon {
+  width: 1em; height: 1em; flex: none; display: inline-block; vertical-align: -0.125em;
+  fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
+}
+.sw-icon--spin { animation: sw-spin 0.9s linear infinite; }
+@keyframes sw-spin { to { transform: rotate(360deg); } }
+
+/* Dot-grid canvas: the one decorative texture of the system */
+.sw-canvas {
+  background-color: var(--bg-canvas);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.5px);
+  background-size: var(--dot-pitch) var(--dot-pitch);
+  background-position: calc(var(--dot-pitch) / 2) calc(var(--dot-pitch) / 2);
+}
+.sw-canvas--bordered { border: 1px solid var(--line); border-radius: var(--radius-lg); }
+
+/* Helpers */
+.sw-sr-only {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.sw-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.sw-nowrap { white-space: nowrap; }
+.sw-container { max-width: calc(var(--container) + 2 * var(--space-6)); margin: 0 auto; padding: 0 var(--space-6); }
+@media (max-width: 760px) { .sw-container { padding: 0 var(--space-4); } }
+
+@media (prefers-reduced-motion: reduce) {
+  [class^="sw-"], [class^="sw-"]::before, [class^="sw-"]::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+  .sw-icon--spin { animation: sw-spin 2.4s linear infinite !important; }
+}

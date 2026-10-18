@@ -1,0 +1,130 @@
+/* ── ProcessSteps ─────────────────────────────────────────────── */
+/* geometry: port 28px; the connector leaves the port with an 8px gap and stops 8px before the next port */
+.sw-process {
+  --sw-process-port: 28px;
+  --sw-process-gap: 8px;
+  --sw-process-pad: 0px;      /* step padding (canvas nodes: 16px) */
+  --sw-process-col-gap: 0px;  /* canvas nodes: space-6 */
+  list-style: none; margin: 0; padding: 0; min-width: 0;
+  display: grid; align-items: stretch;
+  grid-template-columns: repeat(var(--sw-process-n), minmax(0, 1fr));
+  grid-template-rows: auto auto 1fr auto; /* port · title · text · duration — shared by every column */
+  column-gap: var(--sw-process-col-gap); row-gap: 0;
+}
+
+.sw-process__step {
+  position: relative; min-width: 0;
+  display: grid; grid-row: span 4; grid-template-rows: subgrid; align-content: start;
+  padding: var(--sw-process-pad); padding-right: calc(var(--sw-process-pad) + var(--space-6));
+}
+.sw-process__step:last-child { padding-right: var(--sw-process-pad); }
+
+/* port — the numbered tile */
+.sw-process__port {
+  grid-row: 1; justify-self: start; align-self: start;
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: var(--sw-process-port); height: var(--sw-process-port);
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-md);
+  font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 500;
+  font-variant-numeric: tabular-nums; color: var(--text-secondary);
+  transition: background-color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard), color var(--duration-base) var(--ease-standard);
+}
+.sw-process__step--done .sw-process__port { color: var(--success); }
+.sw-process__step--current .sw-process__port { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent-text); }
+
+/* connector to the next step: line-strong; the path up to the current step is amber */
+.sw-process__edge {
+  position: absolute; pointer-events: none;
+  top: calc(var(--sw-process-pad) + var(--sw-process-port) / 2 - 0.5px);
+  left: calc(var(--sw-process-pad) + var(--sw-process-port) + var(--sw-process-gap));
+  right: var(--sw-process-gap);
+  height: 1px; background: var(--line-strong);
+  transition: background-color var(--duration-base) var(--ease-standard);
+}
+.sw-process__edge.is-live { background: var(--accent-edge); }
+
+.sw-process__title {
+  grid-row: 2; margin: var(--space-4) 0 0;
+  font-family: var(--font-display); font-size: 16px; line-height: 21px; font-weight: 600; letter-spacing: 0;
+  color: var(--text); text-wrap: balance;
+}
+.sw-process__text {
+  grid-row: 3; margin: 6px 0 0;
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 400;
+  color: var(--text-secondary); text-wrap: pretty;
+}
+.sw-process__meta { grid-row: 4; display: flex; margin: var(--space-4) 0 0; min-width: 0; }
+
+/* on the canvas: every step is a node (text never sits on the dots) */
+.sw-process--canvas {
+  --sw-process-pad: var(--space-4);
+  --sw-process-col-gap: var(--space-6);
+  padding: var(--space-6);
+}
+/* node titles are object labels (Golos 600, like every canvas node), so five nodes fit a row */
+.sw-process--canvas .sw-process__title { margin-top: var(--space-3); font-family: var(--font-text); font-size: 15px; line-height: 21px; font-weight: 600; }
+.sw-process--canvas .sw-process__meta { margin-top: var(--space-3); }
+.sw-process--canvas .sw-process__step,
+.sw-process--canvas .sw-process__step:last-child {
+  padding: var(--sw-process-pad);
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-node);
+}
+.sw-process--canvas .sw-process__step--current { border-color: var(--accent-line); }
+.sw-process--canvas .sw-process__edge {
+  top: calc(var(--sw-process-pad) + var(--sw-process-port) / 2 - 0.5px);
+  left: calc(100% + 1px); right: auto; width: var(--sw-process-col-gap);
+}
+
+/* forced row: keep columns readable, the consumer wraps it in overflow-x:auto if needed */
+.sw-process--horizontal { grid-template-columns: repeat(var(--sw-process-n), minmax(168px, 1fr)); }
+
+/* vertical — the connector runs down the left, under the port */
+.sw-process--vertical { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; --sw-process-col-gap: 0px; }
+.sw-process--vertical .sw-process__step {
+  grid-row: auto; grid-template-rows: none;
+  grid-template-columns: var(--sw-process-port) minmax(0, 1fr); column-gap: var(--space-4);
+  padding: 0 0 var(--space-6);
+}
+.sw-process--vertical .sw-process__step:last-child { padding-bottom: 0; }
+.sw-process--vertical .sw-process__port { grid-column: 1; grid-row: 1 / span 3; }
+.sw-process--vertical .sw-process__title { grid-column: 2; grid-row: 1; margin: 4px 0 0; }
+.sw-process--vertical .sw-process__text { grid-column: 2; grid-row: 2; margin: 4px 0 0; }
+.sw-process--vertical .sw-process__meta { grid-column: 2; grid-row: 3; margin: var(--space-3) 0 0; }
+.sw-process--vertical .sw-process__edge {
+  top: calc(var(--sw-process-port) + var(--sw-process-gap)); bottom: var(--sw-process-gap);
+  left: calc(var(--sw-process-port) / 2 - 0.5px); right: auto; width: 1px; height: auto;
+}
+.sw-process--vertical.sw-process--canvas { padding: var(--space-6); row-gap: var(--space-4); }
+.sw-process--vertical.sw-process--canvas .sw-process__step,
+.sw-process--vertical.sw-process--canvas .sw-process__step:last-child { padding: var(--sw-process-pad); }
+.sw-process--vertical.sw-process--canvas .sw-process__edge {
+  top: calc(100% + 1px); bottom: auto; height: var(--space-4);
+  left: calc(var(--sw-process-pad) + var(--sw-process-port) / 2 - 0.5px);
+}
+
+@media (max-width: 760px) {
+  .sw-process--auto { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; --sw-process-col-gap: 0px; }
+  .sw-process--auto .sw-process__step {
+    grid-row: auto; grid-template-rows: none;
+    grid-template-columns: var(--sw-process-port) minmax(0, 1fr); column-gap: var(--space-4);
+    padding: 0 0 var(--space-6);
+  }
+  .sw-process--auto .sw-process__step:last-child { padding-bottom: 0; }
+  .sw-process--auto .sw-process__port { grid-column: 1; grid-row: 1 / span 3; }
+  .sw-process--auto .sw-process__title { grid-column: 2; grid-row: 1; margin: 4px 0 0; }
+  .sw-process--auto .sw-process__text { grid-column: 2; grid-row: 2; margin: 4px 0 0; }
+  .sw-process--auto .sw-process__meta { grid-column: 2; grid-row: 3; margin: var(--space-3) 0 0; }
+  .sw-process--auto .sw-process__edge {
+    top: calc(var(--sw-process-port) + var(--sw-process-gap)); bottom: var(--sw-process-gap);
+    left: calc(var(--sw-process-port) / 2 - 0.5px); right: auto; width: 1px; height: auto;
+  }
+  .sw-process--auto.sw-process--canvas,
+  .sw-process--vertical.sw-process--canvas { padding: var(--space-4); row-gap: var(--space-4); }
+  .sw-process--auto.sw-process--canvas .sw-process__step,
+  .sw-process--auto.sw-process--canvas .sw-process__step:last-child { padding: var(--sw-process-pad); }
+  .sw-process--auto.sw-process--canvas .sw-process__edge {
+    top: calc(100% + 1px); bottom: auto; height: var(--space-4);
+    left: calc(var(--sw-process-pad) + var(--sw-process-port) / 2 - 0.5px);
+  }
+}

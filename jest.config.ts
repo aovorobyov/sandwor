@@ -10,6 +10,7 @@ const config: Config = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: {
+    '^@sw/(.*)$': '<rootDir>/src/shared/sandwor/src/$1',
     '^@/(.*)$': '<rootDir>/src/$1',
     '^messages/(.*)$': '<rootDir>/messages/$1',
     // ESM-only пакет — Jest без транспилера падает на его импортах. Подменяем стубом.
@@ -21,6 +22,7 @@ const config: Config = {
     '!src/**/*.d.ts',
     '!src/**/index.ts',
     '!src/__mocks__/**',
+    '!src/shared/sandwor/**',
   ],
 };
 

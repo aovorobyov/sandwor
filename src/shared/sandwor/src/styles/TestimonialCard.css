@@ -1,0 +1,50 @@
+/* ── TestimonialCard ──────────────────────────────────────────── */
+.sw-testimonial {
+  display: flex; flex-direction: column; min-width: 0; margin: 0;
+  padding: var(--space-6);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  color: var(--text);
+}
+
+/* top: quote glyph left, result chip right */
+.sw-testimonial__top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 24px; }
+/* the glyph sits 4px inside its 20px box — pull it back to the text edge */
+.sw-testimonial__glyph { margin-left: -4px; color: var(--text-muted); }
+.sw-testimonial__metric {
+  display: inline-block; min-width: 0; max-width: 100%; margin: 0; text-align: right;
+  padding: 3px 8px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm);
+  font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 450; font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+.sw-testimonial__metric-value { margin-right: 1px; font-size: 13px; font-weight: 500; color: var(--accent-text); white-space: nowrap; }
+
+/* quote — body-l; featured 20/30 */
+.sw-testimonial__quote { margin: var(--space-4) 0 0; padding: 0; }
+.sw-testimonial__quote p {
+  margin: 0;
+  font-family: var(--font-text); font-size: 17px; line-height: 27px; font-weight: 400;
+  color: var(--text); text-wrap: pretty;
+}
+.sw-testimonial--featured .sw-testimonial__quote p { font-size: 20px; line-height: 30px; max-width: 36em; }
+
+/* footer: person left, case link right; pinned to the bottom */
+.sw-testimonial__footer {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-4);
+  margin-top: auto; padding-top: var(--space-6);
+}
+.sw-testimonial__person { display: flex; align-items: center; gap: var(--space-3); flex: 1 1 220px; min-width: 0; }
+.sw-testimonial__who { display: flex; flex-direction: column; min-width: 0; }
+.sw-testimonial__name {
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 500; color: var(--text);
+}
+.sw-testimonial__role {
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 400;
+  color: var(--text-secondary); text-wrap: pretty;
+}
+/* the ghost's own padding would push the arrow off the content edge */
+.sw-testimonial__case { flex: none; margin-right: -10px; }
+
+@media (max-width: 760px) {
+  .sw-testimonial--featured .sw-testimonial__quote p { font-size: 17px; line-height: 27px; }
+  .sw-testimonial__case { margin-left: -10px; }
+}

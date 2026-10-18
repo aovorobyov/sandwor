@@ -125,7 +125,7 @@ export const choosingWebDeveloper: ArticleDraft = {
 
 <h2>Что дальше</h2>
 
-<p>Соберите этот чек-лист в заметку и пройдитесь по нему на первом же созвоне с любым подрядчиком — включая меня, я не обижусь. А если хотите сразу обсудить проект с человеком, который сначала слушает и только потом называет цену, — посмотрите, <a href="/websites">как я работаю</a>, или <a href="/contact">напишите мне</a>. Расскажите про задачу, а я честно скажу, что реально сделать в вашем бюджете и с чего лучше начать.</p>
+<p>Соберите этот чек-лист в заметку и пройдитесь по нему на первом же созвоне с любым подрядчиком — включая меня, я не обижусь. А если хотите сразу обсудить проект с человеком, который сначала слушает и только потом называет цену, — посмотрите, <a href="/services/sites">как я работаю</a>, или <a href="/contact">напишите мне</a>. Расскажите про задачу, а я честно скажу, что реально сделать в вашем бюджете и с чего лучше начать.</p>
 `,
     },
     en: {
@@ -244,7 +244,7 @@ export const choosingWebDeveloper: ArticleDraft = {
 
 <h2>What's next</h2>
 
-<p>Save this checklist to a note and run through it on the very first call with any contractor — me included, I won't be offended. And if you'd like to discuss a project straight away with someone who listens first and quotes second, take a look at <a href="/en/websites">how I work</a> or <a href="/en/contact">drop me a line</a>. Tell me about your task and I'll honestly say what's realistic within your budget and where it's best to start.</p>
+<p>Save this checklist to a note and run through it on the very first call with any contractor — me included, I won't be offended. And if you'd like to discuss a project straight away with someone who listens first and quotes second, take a look at <a href="/en/services/sites">how I work</a> or <a href="/en/contact">drop me a line</a>. Tell me about your task and I'll honestly say what's realistic within your budget and where it's best to start.</p>
 `,
     },
   },

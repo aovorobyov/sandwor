@@ -1,170 +1,151 @@
-import { getTranslations, getLocale } from 'next-intl/server';
-import { Link } from '@/shared/ui/Link';
-import { Button } from '@/shared/ui/Button';
-import { Mono } from '@/shared/ui/Mono';
-import { Eyebrow } from '@/shared/ui/Eyebrow';
-import { Section } from '@/shared/ui/Section';
-import { Tariffs } from '@/widgets/Tariffs';
-import { ProcessSteps } from '@/widgets/ProcessSteps';
-import { PostRow } from '@/entities/post/ui/PostRow';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { Button } from '@sw/components/Button';
+import { FlowDiagram } from '@sw/components/FlowDiagram';
+import type { FlowDiagramNode } from '@sw/components/FlowDiagram';
+import { Stats } from '@sw/components/Stats';
+import type { StatsItem } from '@sw/components/Stats';
 import { getPosts } from '@/entities/post/api/posts';
-import { JsonLd, buildPerson, buildWebSite } from '@/shared/lib/jsonLd';
-import { cn } from '@/shared/lib/cn';
-import type { HomeFact, HomeValueProp } from './HomePage.types';
+import { BriefButton } from '@/features/brief';
+import { CaseCards } from '@/widgets/CaseCards';
+import { FaqSection, type FaqItem } from '@/widgets/FaqSection';
+import { FounderSection } from '@/widgets/FounderSection';
+import { PostsGrid } from '@/widgets/PostsGrid';
+import { PriceCalculator } from '@/widgets/PriceCalculator';
+import { ProcessSection } from '@/widgets/ProcessSection';
+import { ServicesGrid } from '@/widgets/ServicesGrid';
+import { SocialProof } from '@/widgets/SocialProof';
+import { JsonLd, buildOrganization, buildWebSite } from '@/shared/lib/jsonLd';
+import { localizeHref } from '@/shared/ui/Link';
+import { PageHero } from '@/shared/ui/PageHero';
+import { Section } from '@/shared/ui/Section';
+import { SectionIntro } from '@/shared/ui/SectionIntro';
 import s from './HomePage.module.css';
+
+/** Иконки узлов схемы «Путь заявки» — по порядку `home.flow.nodes`. */
+const FLOW_ICONS = ['browser', 'cpu', 'layout-kanban', 'brand-telegram'];
+
+const BLOG_LIMIT = 3;
 
 export const HomePage = async () => {
   const locale = await getLocale();
   const [t, posts] = await Promise.all([getTranslations(), getPosts(locale)]);
+  const href = (path: string) => localizeHref(path, locale);
 
-  const facts = t.raw('home.facts') as HomeFact[];
-  const valueProps = t.raw('home.value-props') as HomeValueProp[];
-  const marquee = t.raw('home.marquee') as string[];
-  const marqueeLoop = [...marquee, ...marquee];
-
-  const personData = buildPerson({ name: t('home.name'), bio: t('home.bio') });
-  const siteData = buildWebSite({ name: t('home.name') });
+  const stats = t.raw('home.stats') as StatsItem[];
+  const flowNodes = (t.raw('home.flow.nodes') as FlowDiagramNode[]).map((node, index, all) => ({
+    ...node,
+    icon: FLOW_ICONS[index],
+    state: index === all.length - 1 ? ('live' as const) : ('done' as const),
+  }));
 
   return (
     <>
-      <JsonLd data={personData} />
+      <JsonLd data={buildOrganization({ description: t('meta.description') })} />
 
-      <JsonLd data={siteData} />
+      <JsonLd data={buildWebSite({ name: t('brand.name') })} />
 
-      <main>
-        {/* ── Герой ── */}
-        <section className={s.hero}>
-          <div className={s.heroGlow} aria-hidden />
+      <PageHero
+        size="l"
+        meta={t('home.hero-meta')}
+        title={t('home.hero-title')}
+        lead={t('home.hero-lead')}
+        actions={
+          <>
+            <BriefButton size="l" iconEnd="arrow-right">
+              {t('home.hero-cta')}
+            </BriefButton>
 
-          <div className={s.heroInner}>
-            <div className={s.heroEyebrow}>
-              <span className={s.pulseDot} aria-hidden />
+            <Button variant="secondary" size="l" href="#calculator">
+              {t('home.hero-secondary')}
+            </Button>
+          </>
+        }
+      />
 
-              <Eyebrow tone="muted">{t('home.hero-eyebrow')}</Eyebrow>
-            </div>
+      <div className={`sw-container ${s.flow}`}>
+        <FlowDiagram
+          size="hero"
+          title={t('home.flow.title')}
+          nodes={flowNodes}
+          edges={['', '', '']}
+          branch={{ afterIndex: 1, icon: 'git-branch', label: t('home.flow.branch') }}
+          listLabel={t('home.flow.list-label')}
+        />
 
-            <h1 className={s.heroTitle}>{t('home.hero-title')}</h1>
+        <Stats items={stats} label={t('home.stats-label')} className={s.stats} />
+      </div>
 
-            <p className={s.heroLead}>{t('home.hero-lead')}</p>
+      <Section aria-labelledby="services-title">
+        <SectionIntro
+          layout="row"
+          meta={t('home.services-meta')}
+          title={t('home.services-title')}
+          titleId="services-title"
+          lead={t('home.services-lead')}
+          actions={
+            <Button variant="ghost" iconEnd="arrow-right" href={href('/services')}>
+              {t('home.services-all')}
+            </Button>
+          }
+        />
 
-            <div className={s.heroActions}>
-              <Button href="/contact" variant="primary">
-                {t('home.hero-order')}
-                <Mono>→</Mono>
-              </Button>
+        <ServicesGrid variant="compact" />
+      </Section>
 
-              <Button href="/websites#tariffs" variant="secondary">
-                {t('home.hero-tariffs')}
-              </Button>
-            </div>
+      <ProcessSection />
 
-            <div className={s.facts}>
-              {facts.map((fact, index) => (
-                <div key={fact.label} className={cn(s.fact, index === 0 && s.factFirst)}>
-                  <div className={s.factValue}>{fact.value}</div>
+      <Section aria-labelledby="cases-title">
+        <SectionIntro
+          layout="row"
+          meta={t('home.cases-meta')}
+          title={t('home.cases-title')}
+          titleId="cases-title"
+          lead={t('home.cases-lead')}
+          actions={
+            <Button variant="ghost" iconEnd="arrow-right" href={href('/cases')}>
+              {t('home.cases-all')}
+            </Button>
+          }
+        />
 
-                  <div className={s.factLabel}>{fact.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <CaseCards layout="split" />
+      </Section>
 
-        {/* ── Бегущая строка ── */}
-        <div className={s.marquee}>
-          <div className={s.marqueeTrack}>
-            {marqueeLoop.map((item, index) => (
-              <span key={`${item}-${index}`} className={s.marqueeItem}>
-                {item}
-                <span className={s.marqueeStar}>✦</span>
-              </span>
-            ))}
-          </div>
-        </div>
+      <Section tone="sunken" id="calculator" aria-labelledby="calc-title">
+        <SectionIntro
+          meta={t('home.calc-meta')}
+          title={t('home.calc-title')}
+          titleId="calc-title"
+          lead={t('home.calc-lead')}
+        />
 
-        {/* ── Что входит в работу ── */}
-        <Section>
-          <h2 className={s.headingBordered}>{t('home.value-title')}</h2>
+        <PriceCalculator />
+      </Section>
 
-          <div className={s.valueGrid}>
-            {valueProps.map((prop) => (
-              <div key={prop.kicker} className={s.valueCell}>
-                <Eyebrow tone="accent" className={s.valueKicker}>
-                  {prop.kicker}
-                </Eyebrow>
+      <SocialProof />
 
-                <h3 className={s.valueTitle}>{prop.title}</h3>
+      <FounderSection />
 
-                <p className={s.valueDesc}>{prop.desc}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* ── Тарифы ── */}
-        <Section tone="subtle">
-          <div className={s.headingRow}>
-            <h2 className={s.heading}>{t('websites.pricing-title')}</h2>
-
-            <p className={s.headingNote}>{t('home.tariffs-note')}</p>
-          </div>
-
-          <Tariffs />
-        </Section>
-
-        {/* ── Как мы будем работать ── */}
-        <Section>
-          <h2 className={s.processHeading}>{t('websites.process-title')}</h2>
-
-          <ProcessSteps />
-        </Section>
-
-        {/* ── Из блога ── */}
-        {posts.length > 0 && (
-          <Section tone="subtle">
-            <div className={s.headingRow}>
-              <h2 className={s.heading}>{t('home.blog-title')}</h2>
-
-              <Link href="/blog" className={s.blogAll}>
+      {posts.length > 0 && (
+        <Section tone="sunken" aria-labelledby="blog-title">
+          <SectionIntro
+            layout="row"
+            meta={t('home.blog-meta')}
+            title={t('home.blog-title')}
+            titleId="blog-title"
+            lead={t('home.blog-lead')}
+            actions={
+              <Button variant="ghost" iconEnd="arrow-right" href={href('/blog')}>
                 {t('home.blog-all')}
-              </Link>
-            </div>
-
-            <div className={s.blogList}>
-              {posts.slice(0, 3).map((post) => (
-                <PostRow key={post.slug} post={post} hasExcerpt />
-              ))}
-            </div>
-          </Section>
-        )}
-
-        {/* ── CTA ── */}
-        <section className={s.cta}>
-          <div className={s.ctaGlow} aria-hidden />
-
-          <div className={s.ctaInner}>
-            <h2 className={s.ctaTitle}>{t('home.cta-title')}</h2>
-
-            <p className={s.ctaLead}>{t('home.cta-lead')}</p>
-
-            <div className={s.ctaActions}>
-              <Button href="/contact" variant="primary">
-                {t('home.cta-order')}
-                <Mono>→</Mono>
               </Button>
+            }
+          />
 
-              <a
-                href="https://t.me/sandworbot"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={s.ctaTelegram}
-              >
-                {t('home.cta-telegram')}
-              </a>
-            </div>
-          </div>
-        </section>
-      </main>
+          <PostsGrid posts={posts.slice(0, BLOG_LIMIT)} />
+        </Section>
+      )}
+
+      <FaqSection items={t.raw('faq.items') as FaqItem[]} />
     </>
   );
 };

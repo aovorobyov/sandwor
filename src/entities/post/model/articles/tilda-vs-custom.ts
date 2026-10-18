@@ -152,7 +152,7 @@ export const tildaVsCustom: ArticleDraft = {
 
 <h2>Что дальше</h2>
 
-<p>Не уверены, что подходит вам? Это нормально — со стороны разницу оценить трудно. Я работаю и с Tilda, и с кастомом, и мне без разницы, что вы выберете, поэтому на созвоне скажу честно: где вы переплатите за кастом, а где сэкономите на Tilda и потом об этом пожалеете. Посмотрите <a href="/websites">форматы работы</a> или <a href="/contact">напишите мне</a> с парой слов о задаче.</p>
+<p>Не уверены, что подходит вам? Это нормально — со стороны разницу оценить трудно. Я работаю и с Tilda, и с кастомом, и мне без разницы, что вы выберете, поэтому на созвоне скажу честно: где вы переплатите за кастом, а где сэкономите на Tilda и потом об этом пожалеете. Посмотрите <a href="/services/sites">форматы работы</a> или <a href="/contact">напишите мне</a> с парой слов о задаче.</p>
 `,
     },
     en: {
@@ -298,7 +298,7 @@ export const tildaVsCustom: ArticleDraft = {
 
 <h2>What's next</h2>
 
-<p>Not sure which fits you? That's normal — the difference is hard to judge from the outside. I work with both builders and custom, and I genuinely don't mind which you pick, so on a call I'll tell you honestly: where you'd overpay for custom, and where you'd save on a builder and regret it later. Take a look at <a href="/en/websites">how I work</a> or <a href="/en/contact">drop me a line</a> with a couple of words about your task.</p>
+<p>Not sure which fits you? That's normal — the difference is hard to judge from the outside. I work with both builders and custom, and I genuinely don't mind which you pick, so on a call I'll tell you honestly: where you'd overpay for custom, and where you'd save on a builder and regret it later. Take a look at <a href="/en/services/sites">how I work</a> or <a href="/en/contact">drop me a line</a> with a couple of words about your task.</p>
 `,
     },
   },

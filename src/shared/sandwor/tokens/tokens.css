@@ -1,0 +1,141 @@
+/* sandwor tokens — dark is the default theme; set data-theme="light" on <html> for the light draft. */
+@font-face{font-family:"Unbounded";src:url("../fonts/Unbounded-Variable.woff2") format("woff2");font-weight:200 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Golos Text";src:url("../fonts/GolosText-Variable.woff2") format("woff2");font-weight:400 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Fira Code";src:url("../fonts/FiraCode-Variable.woff2") format("woff2");font-weight:300 700;font-style:normal;font-display:swap}
+:root, [data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0F0D0B;
+  --bg-sunken: #0B0A08;
+  --bg-canvas: #13110E;
+  --surface: #161310;
+  --surface-hover: #1B1714;
+  --surface-raised: #1F1B17;
+  --surface-raised-2: #29241F;
+  --surface-pressed: #191511;
+  --tint-hover: #F4EFE80F;
+  --tint-pressed: #F4EFE81A;
+  --surface-overlay: #1A1612;
+  --line: #2A2520;
+  --line-strong: #3A332C;
+  --line-control: #6E6358;
+  --line-control-hover: #85796C;
+  --text: #F4EFE8;
+  --text-secondary: #C7BDB1;
+  --text-muted: #978C80;
+  --text-disabled: #6B6258;
+  --dot: #F4EFE817;
+  --accent: #FFB21F;
+  --accent-hover: #FFC34D;
+  --accent-pressed: #EB9E0C;
+  --accent-text: #FFB21F;
+  --accent-edge: #FFB21F;
+  --on-accent: #1B1204;
+  --accent-soft: #FFB21F1F;
+  --accent-line: #FFB21F85;
+  --success: #74CF93;
+  --success-soft: #74CF931F;
+  --danger: #FF7B6B;
+  --danger-soft: #FF7B6B1A;
+  --focus: #FFC75A;
+  --scrim: #080705B8;
+  --shadow-node: 0 1px 0 #00000059, 0 12px 24px -16px #000000b3;
+  --shadow-float: 0 24px 48px -32px #000000cc;
+  --shadow-overlay: 0 1px 0 #f4efe80a inset, 0 32px 64px -24px #000000e6;
+  --focus-ring: 0 0 0 2px #0f0d0b, 0 0 0 4px #ffc75a;
+}
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #FAF7F2;
+  --bg-sunken: #F2EDE6;
+  --bg-canvas: #F5F1EA;
+  --surface: #FFFFFF;
+  --surface-hover: #F8F4EE;
+  --surface-raised: #F3EEE7;
+  --surface-raised-2: #E9E2D8;
+  --surface-pressed: #E2DACE;
+  --tint-hover: #1B16110D;
+  --tint-pressed: #1B161117;
+  --surface-overlay: #FFFFFF;
+  --line: #E7E0D6;
+  --line-strong: #D6CCBF;
+  --line-control: #8F8373;
+  --line-control-hover: #6F6457;
+  --text: #1B1611;
+  --text-secondary: #4A4037;
+  --text-muted: #6B6054;
+  --text-disabled: #A89C8E;
+  --dot: #1B161114;
+  --accent: #FFB21F;
+  --accent-hover: #F5A70F;
+  --accent-pressed: #E09800;
+  --accent-text: #8F5400;
+  --accent-edge: #B87A00;
+  --on-accent: #1B1204;
+  --accent-soft: #FFB21F29;
+  --accent-line: #B87A00;
+  --success: #1D7443;
+  --success-soft: #1D74431A;
+  --danger: #B83A2B;
+  --danger-soft: #B83A2B14;
+  --focus: #9A5C00;
+  --scrim: #1B161166;
+  --shadow-node: 0 1px 0 #1b16110a, 0 10px 20px -14px #1b161133;
+  --shadow-float: 0 20px 40px -28px #1b161140;
+  --shadow-overlay: 0 1px 2px #1b16110f, 0 24px 56px -20px #1b161147;
+  --focus-ring: 0 0 0 2px #faf7f2, 0 0 0 4px #9a5c00;
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-14: 56px;
+  --space-18: 72px;
+  --space-24: 96px;
+  --radius-sm: 4px;
+  --radius-md: 5px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-round: 50%;
+  --control-xs: 28px;
+  --control-s: 32px;
+  --control-m: 40px;
+  --control-l: 48px;
+  --container: 1120px;
+  --dot-pitch: 16px;
+  --icon-s: 16px;
+  --icon-m: 20px;
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 240ms;
+  --ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --z-header: 50;
+  --z-overlay: 100;
+  --z-toast: 200;
+  --z-tooltip: 300;
+  --font-display: "Unbounded", "Golos Text", system-ui, sans-serif;
+  --font-text: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Fira Code", ui-monospace, "SF Mono", Menlo, monospace;
+}
+.display-1{font-family:var(--font-display);font-size:48px;line-height:52px;font-weight:600;letter-spacing:-0.03em;}
+.display-2{font-family:var(--font-display);font-size:32px;line-height:36px;font-weight:600;letter-spacing:-0.02em;}
+.heading-1{font-family:var(--font-display);font-size:24px;line-height:29px;font-weight:600;letter-spacing:-0.01em;}
+.heading-2{font-family:var(--font-display);font-size:20px;line-height:25px;font-weight:600;letter-spacing:-0.01em;}
+.heading-3{font-family:var(--font-display);font-size:16px;line-height:21px;font-weight:600;letter-spacing:0;}
+.body-l{font-family:var(--font-text);font-size:17px;line-height:27px;font-weight:400;}
+.body{font-family:var(--font-text);font-size:15px;line-height:23px;font-weight:400;}
+.body-s{font-family:var(--font-text);font-size:14px;line-height:20px;font-weight:400;}
+.label{font-family:var(--font-text);font-size:14px;line-height:20px;font-weight:500;}
+.label-s{font-family:var(--font-text);font-size:13px;line-height:18px;font-weight:500;}
+.hint{font-family:var(--font-text);font-size:13px;line-height:18px;font-weight:400;}
+.caption{font-family:var(--font-text);font-size:12px;line-height:17px;font-weight:400;}
+.numeral-l{font-family:var(--font-mono);font-size:34px;line-height:36px;font-weight:500;letter-spacing:-0.04em;font-variant-numeric:tabular-nums;}
+.numeral-m{font-family:var(--font-mono);font-size:26px;line-height:28px;font-weight:500;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;}
+.mono{font-family:var(--font-mono);font-size:13px;line-height:20px;font-weight:450;font-variant-numeric:tabular-nums;}
+.mono-s{font-family:var(--font-mono);font-size:12px;line-height:16px;font-weight:450;font-variant-numeric:tabular-nums;}
+.mono-xs{font-family:var(--font-mono);font-size:11.5px;line-height:16px;font-weight:450;font-variant-numeric:tabular-nums;}

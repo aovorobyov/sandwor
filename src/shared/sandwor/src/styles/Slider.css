@@ -1,0 +1,98 @@
+/* ── Slider ───────────────────────────────────────────────────── */
+.sw-slider {
+  --sw-slider-thumb: 18px;
+  /* the thumb's ring = page background; set --sw-slider-ring on any ancestor (e.g. to var(--surface) on a card) */
+  display: flex; flex-direction: column; min-width: 0;
+}
+
+.sw-slider__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); min-width: 0; }
+/* label-s */
+.sw-slider__label {
+  min-width: 0; font-family: var(--font-text); font-size: 13px; line-height: 18px; font-weight: 500;
+  color: var(--text-secondary); text-wrap: pretty;
+}
+/* mono — Fira 450 13/20, tabular; brighter than the label so the value reads first */
+.sw-slider__value {
+  flex: none; font-family: var(--font-mono); font-size: 13px; line-height: 20px; font-weight: 450;
+  font-variant-numeric: tabular-nums; color: var(--text); white-space: nowrap;
+}
+
+/* the native range: transparent box, drawn track + thumb */
+.sw-slider__input {
+  --sw-slider-fill: var(--accent);
+  --sw-slider-rest: var(--surface-raised-2);
+  --sw-slider-stop: calc(var(--sw-slider-thumb) / 2 + (100% - var(--sw-slider-thumb)) * var(--sw-slider-pct, 0) / 100);
+  -webkit-appearance: none; appearance: none; display: block;
+  width: 100%; height: 28px; margin: 0; padding: 0;
+  background: transparent; outline: none; cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.sw-slider__input::-webkit-slider-runnable-track {
+  height: 4px; border: 0; border-radius: var(--radius-sm);
+  background: linear-gradient(to right, var(--sw-slider-fill) 0 var(--sw-slider-stop), var(--sw-slider-rest) var(--sw-slider-stop) 100%);
+}
+.sw-slider__input::-moz-range-track {
+  height: 4px; border: 0; border-radius: var(--radius-sm);
+  background: linear-gradient(to right, var(--sw-slider-fill) 0 var(--sw-slider-stop), var(--sw-slider-rest) var(--sw-slider-stop) 100%);
+}
+.sw-slider__input::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; box-sizing: border-box;
+  width: var(--sw-slider-thumb); height: var(--sw-slider-thumb); margin-top: calc((4px - var(--sw-slider-thumb)) / 2);
+  background: var(--text); border: 2px solid var(--sw-slider-ring, var(--bg)); border-radius: var(--radius-round);
+  box-shadow: var(--shadow-node);
+  transition: box-shadow var(--duration-base) var(--ease-standard), background-color var(--duration-base) var(--ease-standard);
+}
+.sw-slider__input::-moz-range-thumb {
+  box-sizing: border-box; width: var(--sw-slider-thumb); height: var(--sw-slider-thumb);
+  background: var(--text); border: 2px solid var(--sw-slider-ring, var(--bg)); border-radius: var(--radius-round);
+  box-shadow: var(--shadow-node);
+  transition: box-shadow var(--duration-base) var(--ease-standard), background-color var(--duration-base) var(--ease-standard);
+}
+
+/* hover · drag — a quiet halo around the thumb (webkit and moz rules must stay separate) */
+.sw-slider__input:not(:disabled):hover::-webkit-slider-thumb { box-shadow: 0 0 0 6px var(--tint-hover), var(--shadow-node); }
+.sw-slider.is-hover .sw-slider__input::-webkit-slider-thumb { box-shadow: 0 0 0 6px var(--tint-hover), var(--shadow-node); }
+.sw-slider__input:not(:disabled):hover::-moz-range-thumb { box-shadow: 0 0 0 6px var(--tint-hover), var(--shadow-node); }
+.sw-slider__input:not(:disabled):active::-webkit-slider-thumb { box-shadow: 0 0 0 6px var(--tint-pressed), var(--shadow-node); }
+.sw-slider__input:not(:disabled):active::-moz-range-thumb { box-shadow: 0 0 0 6px var(--tint-pressed), var(--shadow-node); }
+.sw-slider__input:not(:disabled):active { cursor: grabbing; }
+
+/* focus — ring on the thumb: 2px ring of the background, then 2px focus */
+.sw-slider__input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 2px var(--focus), var(--shadow-node); }
+.sw-slider.is-focus .sw-slider__input::-webkit-slider-thumb { box-shadow: 0 0 0 2px var(--focus), var(--shadow-node); }
+.sw-slider__input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 2px var(--focus), var(--shadow-node); }
+
+/* scale: min/max or marks — mono-xs */
+.sw-slider__scale {
+  position: relative; display: flex; justify-content: space-between; gap: var(--space-3); margin-top: -2px;
+  font-family: var(--font-mono); font-size: 11.5px; line-height: 16px; font-weight: 450;
+  font-variant-numeric: tabular-nums; color: var(--text-muted); white-space: nowrap;
+}
+.sw-slider__scale--marks { display: block; height: 24px; margin-top: -6px; }
+.sw-slider__mark {
+  position: absolute; top: 0; padding-top: 8px;
+  left: calc(var(--sw-slider-thumb) / 2 + (100% - var(--sw-slider-thumb)) * var(--sw-slider-mark) / 100);
+  transform: translateX(-50%);
+}
+.sw-slider__mark::before {
+  content: ""; position: absolute; top: 0; left: 50%; width: 1px; height: 4px; margin-left: -0.5px;
+  background: var(--line-control);
+}
+.sw-slider__mark--start { transform: translateX(calc(var(--sw-slider-thumb) / -2)); }
+.sw-slider__mark--start::before { left: calc(var(--sw-slider-thumb) / 2); }
+.sw-slider__mark--end { transform: translateX(calc(-100% + var(--sw-slider-thumb) / 2)); }
+.sw-slider__mark--end::before { left: auto; right: calc(var(--sw-slider-thumb) / 2); margin: 0 -0.5px 0 0; }
+.sw-slider__mark.is-current { color: var(--text-secondary); }
+
+/* disabled */
+.sw-slider.is-disabled .sw-slider__label { color: var(--text-muted); }
+.sw-slider.is-disabled .sw-slider__value,
+.sw-slider.is-disabled .sw-slider__scale { color: var(--text-disabled); }
+.sw-slider.is-disabled .sw-slider__input { --sw-slider-fill: var(--text-disabled); --sw-slider-rest: var(--surface-raised); cursor: not-allowed; }
+.sw-slider.is-disabled .sw-slider__input::-webkit-slider-thumb { background: var(--text-disabled); box-shadow: none; }
+.sw-slider.is-disabled .sw-slider__input::-moz-range-thumb { background: var(--text-disabled); box-shadow: none; }
+
+/* base.css zeroes transitions for sw- classes but cannot reach the range pseudo-elements */
+@media (prefers-reduced-motion: reduce) {
+  .sw-slider__input::-webkit-slider-thumb { transition: none; }
+  .sw-slider__input::-moz-range-thumb { transition: none; }
+}

@@ -10,19 +10,19 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: 'cases' });
+  const t = await getTranslations({ locale, namespace: 'cases-page' });
   return {
     title: t('title'),
-    description: t('hero-lead'),
+    description: t('lead'),
     alternates: buildPageAlternates(locale, '/cases'),
     ...buildSocialMeta({
       title: t('title'),
-      description: t('hero-lead'),
+      description: t('lead'),
       image: buildPageOgImage({
         locale,
-        tag: t('title'),
-        title: t('hero-title'),
-        lead: t('hero-lead'),
+        tag: t('meta'),
+        title: t('title'),
+        lead: t('lead'),
       }),
     }),
   };

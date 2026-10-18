@@ -1,46 +1,58 @@
-import { getTranslations } from 'next-intl/server';
-import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
+import { Fragment } from 'react';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { Article } from '@sw/components/Article';
 import { JsonLd, buildBreadcrumbs } from '@/shared/lib/jsonLd';
-import type { PrivacySection } from './PrivacyPage.types';
+import { localizeHref } from '@/shared/ui/Link';
 import s from './PrivacyPage.module.css';
 
+interface PrivacySection {
+  heading: string;
+  paragraphs: string[];
+}
+
+/** Политика конфиденциальности — длинный текст на Article с оглавлением по разделам. */
 export const PrivacyPage = async () => {
+  const locale = await getLocale();
   const t = await getTranslations();
+  const href = (path: string) => localizeHref(path, locale);
   const sections = t.raw('privacy.sections') as PrivacySection[];
 
-  const breadcrumbs = buildBreadcrumbs([
-    { name: t('nav.home'), path: '/' },
-    { name: t('privacy.breadcrumb'), path: '/privacy' },
-  ]);
-
   return (
-    <main className={s.root}>
-      <JsonLd data={breadcrumbs} />
-
-      <Breadcrumbs
-        className={s.breadcrumbs}
-        items={[{ label: t('nav.home'), href: '/' }, { label: t('privacy.breadcrumb') }]}
+    <>
+      <JsonLd
+        data={buildBreadcrumbs([
+          { name: t('nav.home'), path: href('/') },
+          { name: t('privacy.breadcrumb'), path: href('/privacy') },
+        ])}
       />
 
-      <h1 className={s.title}>{t('privacy.title')}</h1>
+      <div className={`sw-container ${s.wrap}`}>
+        <Article
+          breadcrumbs={[
+            { label: t('nav.home'), href: href('/') },
+            { label: t('privacy.breadcrumb') },
+          ]}
+          title={t('privacy.title')}
+          lead={t('privacy.intro')}
+          date={t('privacy.updated')}
+          toc={sections.map((section, index) => ({
+            id: `privacy-${index + 1}`,
+            label: section.heading,
+          }))}
+          tocLabel={t('blog-page.toc')}
+        >
+          {/* Без обёрток: отступы ArticleProse считаются между прямыми детьми. */}
+          {sections.map((section, index) => (
+            <Fragment key={section.heading}>
+              <h2 id={`privacy-${index + 1}`}>{section.heading}</h2>
 
-      <p className={s.updated}>{t('privacy.updated')}</p>
-
-      <p className={s.intro}>{t('privacy.intro')}</p>
-
-      <div className={s.sections}>
-        {sections.map((section) => (
-          <section key={section.heading} className={s.section}>
-            <h2 className={s.heading}>{section.heading}</h2>
-
-            {section.paragraphs.map((paragraph) => (
-              <p key={paragraph} className={s.paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </section>
-        ))}
+              {section.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </Fragment>
+          ))}
+        </Article>
       </div>
-    </main>
+    </>
   );
 };

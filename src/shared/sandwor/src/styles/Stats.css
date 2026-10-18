@@ -1,0 +1,66 @@
+/* ── Stats ────────────────────────────────────────────────────── */
+.sw-stats {
+  /* value size: 40px, or less when the longest value would not fit its column (Fira advance 0.6em − 0.04em tracking) */
+  --sw-stats-c: var(--sw-stats-cols);
+  --sw-stats-gap: 0px;       /* column gap */
+  --sw-stats-ipad: 48px;     /* item inline padding + borders */
+  --sw-stats-max: 40px;
+  --sw-stats-colw: calc((100cqi - (var(--sw-stats-c) - 1) * var(--sw-stats-gap)) / var(--sw-stats-c) - var(--sw-stats-ipad));
+  container-type: inline-size;
+  list-style: none; margin: 0; padding: 0; min-width: 0;
+  display: grid; grid-template-columns: repeat(var(--sw-stats-c), minmax(0, 1fr)); column-gap: var(--sw-stats-gap);
+}
+.sw-stats__item { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+
+.sw-stats__value {
+  display: block; max-width: 100%;
+  font-family: var(--font-mono); font-size: min(var(--sw-stats-max), calc(var(--sw-stats-colw) / (var(--sw-stats-chars, 5) * 0.57)));
+  line-height: 1.1; font-weight: 500; letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums; color: var(--text); white-space: nowrap;
+}
+.sw-stats__item--accent .sw-stats__value { color: var(--accent-text); }
+.sw-stats__label {
+  display: block; max-width: 24ch; margin-top: var(--space-2);
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 400;
+  color: var(--text-secondary); text-wrap: pretty;
+}
+.sw-stats__note {
+  display: block; margin-top: auto; padding-top: var(--space-3);
+  font-family: var(--font-mono); font-size: 11.5px; line-height: 16px; font-weight: 450; font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+/* flat (page flow): top hairline, vertical hairlines between numbers */
+.sw-stats--flat { border-top: 1px solid var(--line); }
+.sw-stats--flat .sw-stats__item { padding: var(--space-6); border-left: 1px solid var(--line); }
+.sw-stats--flat .sw-stats__item.is-row-start { border-left: 0; padding-left: 0; }
+.sw-stats--flat .sw-stats__item.is-row-next { border-top: 1px solid var(--line); }
+.sw-stats--flat .sw-stats__item.is-row-last { padding-bottom: 0; }
+
+/* on the canvas: every number is a node */
+.sw-stats--canvas { --sw-stats-gap: var(--space-4); --sw-stats-ipad: 42px; row-gap: var(--space-4); padding: var(--space-6); }
+.sw-stats--canvas .sw-stats__item {
+  padding: var(--space-5);
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-node);
+}
+.sw-stats--canvas .sw-stats__item--accent { border-color: var(--accent-line); }
+
+@media (max-width: 760px) {
+  .sw-stats { --sw-stats-c: 2; --sw-stats-max: 32px; }
+
+  .sw-stats--flat { --sw-stats-ipad: 16px; }
+  .sw-stats--flat .sw-stats__item,
+  .sw-stats--flat .sw-stats__item.is-row-start,
+  .sw-stats--flat .sw-stats__item.is-row-last { border-left: 0; padding: var(--space-5) var(--space-4) var(--space-5) 0; border-top: 1px solid var(--line); }
+  .sw-stats--flat .sw-stats__item:nth-child(even) { padding-left: var(--space-4); padding-right: 0; }
+  .sw-stats--flat .sw-stats__item:nth-child(-n + 2) { border-top: 0; }
+  .sw-stats--flat .sw-stats__item:last-child,
+  .sw-stats--flat .sw-stats__item:nth-last-child(2):nth-child(odd) { padding-bottom: 0; }
+
+  .sw-stats--canvas { --sw-stats-gap: var(--space-3); --sw-stats-ipad: 34px; row-gap: var(--space-3); padding: var(--space-4); }
+  .sw-stats--canvas .sw-stats__item { padding: var(--space-4); }
+
+  /* an odd last number takes the whole row */
+  .sw-stats__item:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}

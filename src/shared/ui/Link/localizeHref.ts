@@ -18,3 +18,12 @@ export const localizeHref = (href: string, locale: string): string => {
 
   return href === '/' ? `/${locale}` : `/${locale}${href}`;
 };
+
+/** Обратное к `localizeHref`: путь без префикса локали (`/en/blog` → `/blog`). */
+export const delocalizePath = (pathname: string, locale: string): string => {
+  if (locale === defaultLocale) {
+    return pathname;
+  }
+
+  return pathname.replace(new RegExp(`^/${locale}(?=/|$)`), '') || '/';
+};

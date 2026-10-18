@@ -1,0 +1,35 @@
+.grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.compact {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.default {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.compact.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card {
+  height: 100%;
+}
+
+@media (max-width: 1100px) {
+  .compact,
+  .compact.three {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .compact,
+  .compact.three,
+  .default {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,56 @@
+/* ── ChipGroup ────────────────────────────────────────────────── */
+.sw-chipgroup { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); min-width: 0; }
+
+.sw-chipgroup__chip {
+  --sw-chip-h: var(--control-s); /* 32 */
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: var(--sw-chip-h); max-width: 100%; margin: 0; padding: 0 12px;
+  background: var(--surface-raised); border: 1px solid var(--line-strong); border-radius: var(--radius-md);
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 500; color: var(--text-secondary);
+  white-space: nowrap; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard),
+    color var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-base) var(--ease-standard);
+}
+.sw-chipgroup__chip--glyph { padding-left: 10px; }
+.sw-chipgroup__label { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.sw-chipgroup__icon { flex: none; color: var(--text-muted); transition: color var(--duration-base) var(--ease-standard); }
+
+/* s — 28px (control-xs), label-s */
+.sw-chipgroup--s .sw-chipgroup__chip { --sw-chip-h: var(--control-xs); padding: 0 10px; gap: 5px; font-size: 13px; line-height: 18px; border-radius: var(--radius-sm); }
+.sw-chipgroup--s .sw-chipgroup__chip--glyph { padding-left: 8px; }
+
+/* hover · pressed — same tints as Button secondary */
+.sw-chipgroup__chip:hover:not(:disabled):not(.is-selected),
+.sw-chipgroup__chip.is-hover:not(.is-selected) { background: var(--surface-raised-2); border-color: var(--line-control); color: var(--text); }
+.sw-chipgroup__chip:hover:not(:disabled) .sw-chipgroup__icon,
+.sw-chipgroup__chip.is-hover .sw-chipgroup__icon { color: var(--text-secondary); }
+.sw-chipgroup__chip:active:not(:disabled):not(.is-selected),
+.sw-chipgroup__chip.is-pressed { background: var(--surface-pressed); box-shadow: inset 0 1px 2px #00000052; transform: translateY(0.5px); }
+
+/* focus */
+.sw-chipgroup__chip:focus-visible,
+.sw-chipgroup__chip.is-focus { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* selected — soft amber well, amber check, label in text; hover firms the edge in both themes */
+.sw-chipgroup__chip.is-selected { background: var(--accent-soft); border-color: var(--accent-line); color: var(--text); }
+.sw-chipgroup__chip.is-selected:hover:not(:disabled),
+.sw-chipgroup__chip.is-selected.is-hover { border-color: var(--accent-text); }
+.sw-chipgroup__chip.is-selected .sw-chipgroup__icon.sw-chipgroup__icon--check { color: var(--accent-text); stroke-width: 2.25; }
+
+/* disabled */
+.sw-chipgroup__chip:disabled {
+  background: transparent; border-style: dashed; border-color: var(--line-strong); color: var(--text-disabled); cursor: not-allowed;
+}
+.sw-chipgroup__chip:disabled .sw-chipgroup__icon,
+.sw-chipgroup__chip:disabled .sw-chipgroup__icon.sw-chipgroup__icon--check { color: var(--text-disabled); }
+
+/* error — unselected chips take the danger edge; the message follows the group (hint 13/18).
+   No own margin: the field column around label + group + message sets the 8px gap. */
+.sw-chipgroup.is-error .sw-chipgroup__chip:not(.is-selected):not(:disabled) { border-color: var(--danger); }
+.sw-chipgroup__msg {
+  display: flex; align-items: flex-start; gap: 6px; min-width: 0; margin: 0;
+  font-family: var(--font-text); font-size: 13px; line-height: 18px; font-weight: 400;
+  color: var(--danger); text-wrap: pretty;
+}
+.sw-chipgroup__msg-icon { margin-top: 2px; }

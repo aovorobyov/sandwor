@@ -1,9 +1,12 @@
+import { CONTACT_EMAIL } from '@/shared/config/contacts';
+import { buildLocaleUrl } from '@/shared/lib/seo/buildLocaleUrl';
 import { SAME_AS, SITE_URL } from './config';
 import type {
   BlogPostingInput,
   BreadcrumbInput,
-  CourseInput,
+  OrganizationInput,
   PersonInput,
+  ServiceInput,
   WebSiteInput,
 } from './builders.types';
 
@@ -34,8 +37,7 @@ export const buildWebSite = (input: WebSiteInput) => {
 export const buildBlogPosting = (input: BlogPostingInput) => {
   const { title, description, date, slug, locale, authorName, image } = input;
 
-  // localePrefix: 'never' — реальные URL без префикса локали
-  const articleUrl = `${SITE_URL}/blog/${slug}`;
+  const articleUrl = buildLocaleUrl(locale, `/blog/${slug}`);
   const ogFallback = `${SITE_URL}/api/og?title=${encodeURIComponent(title)}`;
 
   return {
@@ -74,23 +76,42 @@ export const buildBreadcrumbs = (items: BreadcrumbInput[]) => {
   };
 };
 
-export const buildCourse = (input: CourseInput) => {
-  const { title, description, courseId, locale, authorName } = input;
-
-  // localePrefix: 'never' — реальные URL без префикса локали
-  const courseUrl = `${SITE_URL}/course/${courseId}`;
+/** Студия как организация: ProfessionalService с каналами связи. */
+export const buildOrganization = (input: OrganizationInput) => {
+  const { description } = input;
 
   return {
     '@context': 'https://schema.org',
-    '@type': 'Course',
-    name: title,
+    '@type': 'ProfessionalService',
+    name: 'sandwor',
+    url: SITE_URL,
     description,
-    url: courseUrl,
-    inLanguage: locale,
-    provider: {
-      '@type': 'Person',
-      name: authorName,
-      url: SITE_URL,
+    email: CONTACT_EMAIL,
+    areaServed: 'RU',
+    sameAs: SAME_AS,
+  };
+};
+
+/** Направление услуг: название, описание, цена «от» в рублях. */
+export const buildService = (input: ServiceInput) => {
+  const { name, description, path, locale, price } = input;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name,
+    description,
+    url: buildLocaleUrl(locale, path),
+    provider: { '@type': 'ProfessionalService', name: 'sandwor', url: SITE_URL },
+    areaServed: 'RU',
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'RUB',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        minPrice: price,
+        priceCurrency: 'RUB',
+      },
     },
   };
 };

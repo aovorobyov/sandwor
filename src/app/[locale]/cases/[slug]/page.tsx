@@ -27,7 +27,7 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
   const detail = details[slug];
 
   if (!item || !detail || !isPublishedCase(slug)) {
-    return { title: t('cases.title') };
+    return { title: t('cases-page.title') };
   }
 
   return {

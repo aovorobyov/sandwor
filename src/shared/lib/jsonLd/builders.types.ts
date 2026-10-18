@@ -17,12 +17,18 @@ export interface BlogPostingInput {
   image?: string;
 }
 
-export interface CourseInput {
-  title: string;
+export interface OrganizationInput {
   description: string;
-  courseId: string;
+}
+
+export interface ServiceInput {
+  name: string;
+  description: string;
+  /** Путь страницы без префикса локали: '/services/crm'. */
+  path: string;
   locale: string;
-  authorName: string;
+  /** Цена «от», ₽. */
+  price: number;
 }
 
 export interface BreadcrumbInput {

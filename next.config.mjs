@@ -11,6 +11,15 @@ const withAnalyzer = withBundleAnalyzer({
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
+  // Старые адреса v1: «Создание сайтов» стало направлением в «Услугах», курс снят.
+  async redirects() {
+    return [
+      { source: '/websites', destination: '/services/sites', permanent: true },
+      { source: '/en/websites', destination: '/en/services/sites', permanent: true },
+      { source: '/course/:path*', destination: '/', permanent: true },
+      { source: '/en/course/:path*', destination: '/en', permanent: true },
+    ];
+  },
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },

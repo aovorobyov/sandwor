@@ -29,9 +29,9 @@ export const GET = async () => {
     getTranslations({ locale: FEED_LOCALE, namespace: '' }),
   ]);
 
-  const authorName = t('home.name');
-  const subtitle = t('home.bio');
-  const feedTitle = `${authorName} — ${t('blog.title')}`;
+  const authorName = t('blog-page.author');
+  const subtitle = t('blog-page.lead');
+  const feedTitle = `${t('brand.name')} — ${t('blog-page.title')}`;
 
   const updated = posts.length > 0 ? toIsoDateTime(posts[0].date) : new Date().toISOString();
 

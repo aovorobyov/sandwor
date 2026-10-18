@@ -1,0 +1,72 @@
+/* ── PricingCard ──────────────────────────────────────────────── */
+.sw-pricing-card {
+  display: flex; flex-direction: column; min-width: 0;
+  padding: var(--space-6);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  color: var(--text);
+}
+/* featured — amber hairline + a soft highlight along the top edge */
+.sw-pricing-card--featured {
+  background: var(--surface); border-color: var(--accent-line);
+  box-shadow: inset 0 1px 0 var(--accent-soft);
+}
+
+/* name (heading-2) + badge on one row */
+.sw-pricing-card__head {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-3);
+  min-height: 25px;
+}
+.sw-pricing-card__name {
+  margin: 0; min-width: 0;
+  font-family: var(--font-display); font-size: 20px; line-height: 25px; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--text); text-wrap: balance;
+}
+.sw-pricing-card__subtitle {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 400;
+  color: var(--text-secondary); text-wrap: pretty;
+}
+
+/* price: «от» body-s muted · number numeral-l · ₽ Golos 26px, all on one baseline */
+.sw-pricing-card__price {
+  margin: var(--space-6) 0 0;
+  font-family: var(--font-text); font-size: 20px; line-height: 36px; font-weight: 400; /* sets the width of the spaces */
+  color: var(--text); white-space: nowrap;
+}
+.sw-pricing-card__from {
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 400; color: var(--text-muted);
+}
+.sw-pricing-card__amount {
+  font-family: var(--font-mono); font-size: 34px; line-height: 36px; font-weight: 500; letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.sw-pricing-card__currency {
+  font-family: var(--font-text); font-size: 26px; line-height: 36px; font-weight: 500; color: var(--text-secondary);
+}
+.sw-pricing-card__note {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-text); font-size: 13px; line-height: 18px; font-weight: 400;
+  color: var(--text-muted); text-wrap: pretty;
+}
+
+/* term — clock + mono */
+.sw-pricing-card__term {
+  display: flex; align-items: center; gap: var(--space-2); margin: var(--space-3) 0 0;
+  font-family: var(--font-mono); font-size: 13px; line-height: 20px; font-weight: 450; font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+}
+.sw-pricing-card__term-icon { color: var(--text-muted); }
+
+/* features — separated from the price by a hairline */
+.sw-pricing-card__features {
+  list-style: none; display: grid; gap: 10px;
+  margin: var(--space-5) 0 0; padding: var(--space-5) 0 0; border-top: 1px solid var(--line);
+}
+.sw-pricing-card__feature {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 400; color: var(--text);
+}
+.sw-pricing-card__check { flex: none; margin-top: 2px; color: var(--text-muted); }
+
+/* CTA pinned to the bottom so a row of cards lines up */
+.sw-pricing-card__cta { margin-top: auto; padding-top: var(--space-6); }

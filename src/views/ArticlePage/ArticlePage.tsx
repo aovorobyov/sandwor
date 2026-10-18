@@ -1,123 +1,96 @@
 import { notFound } from 'next/navigation';
-import { getTranslations, getLocale } from 'next-intl/server';
-import { Link } from '@/shared/ui/Link';
-import { Mono } from '@/shared/ui/Mono';
-import { Eyebrow } from '@/shared/ui/Eyebrow';
-import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { Article, ArticleCallout, ArticleProse } from '@sw/components/Article';
 import { getPost, getRelatedPosts } from '@/entities/post/api/posts';
-import { PostRow } from '@/entities/post/ui/PostRow';
+import { withHeadingIds } from '@/entities/post';
+import { BriefButton } from '@/features/brief';
+import { PostsGrid } from '@/widgets/PostsGrid';
+import { formatDate } from '@/shared/lib/format';
 import { JsonLd, buildBlogPosting, buildBreadcrumbs } from '@/shared/lib/jsonLd';
-import type { ArticlePageProps } from './ArticlePage.types';
+import { localizeHref } from '@/shared/ui/Link';
+import { Section } from '@/shared/ui/Section';
+import { SectionIntro } from '@/shared/ui/SectionIntro';
 import s from './ArticlePage.module.css';
 
-export const ArticlePage = async (props: ArticlePageProps) => {
-  const { slug } = props;
+interface ArticlePageProps {
+  slug: string;
+}
+
+const RELATED_LIMIT = 3;
+
+/** Статья на Article дизайн-системы: крошки, автор, дата, текст 17/28 и оглавление с 1100px. */
+export const ArticlePage = async ({ slug }: ArticlePageProps) => {
   const locale = await getLocale();
-  const [post, relatedPosts, t] = await Promise.all([
+  const [post, related, t] = await Promise.all([
     getPost(slug, locale),
-    getRelatedPosts(slug, locale, 3),
+    getRelatedPosts(slug, locale, RELATED_LIMIT),
     getTranslations(),
   ]);
 
   if (!post) notFound();
 
-  const formattedDate = new Date(post.date).toLocaleDateString(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-
-  const readTimeLabel = t('blog.min-read', { count: post.readTime });
-
-  const blogPostingData = buildBlogPosting({
-    title: post.title,
-    description: post.description || post.excerpt,
-    date: post.date,
-    slug: post.slug,
-    locale,
-    authorName: t('home.name'),
-    image: post.image,
-  });
-
-  const breadcrumbsData = buildBreadcrumbs([
-    { name: t('nav.blog'), path: '/blog' },
-    { name: post.title, path: `/blog/${post.slug}` },
-  ]);
+  const href = (path: string) => localizeHref(path, locale);
+  const { html, headings } = withHeadingIds(post.body);
 
   return (
     <>
-      <JsonLd data={blogPostingData} />
+      <JsonLd
+        data={buildBlogPosting({
+          title: post.title,
+          description: post.description || post.excerpt,
+          date: post.date,
+          slug: post.slug,
+          locale,
+          authorName: t('blog-page.author'),
+          image: post.image,
+        })}
+      />
 
-      <JsonLd data={breadcrumbsData} />
+      <JsonLd
+        data={buildBreadcrumbs([
+          { name: t('nav.home'), path: href('/') },
+          { name: t('nav.blog'), path: href('/blog') },
+          { name: post.title, path: href(`/blog/${post.slug}`) },
+        ])}
+      />
 
-      <main>
-        <article>
-          <header className={s.header}>
-            <Breadcrumbs
-              className={s.breadcrumbs}
-              items={[
-                { label: t('nav.home'), href: '/' },
-                { label: t('nav.blog'), href: '/blog' },
-                { label: post.title },
-              ]}
-            />
+      <div className={`sw-container ${s.wrap}`}>
+        <Article
+          breadcrumbs={[
+            { label: t('nav.home'), href: href('/') },
+            { label: t('nav.blog'), href: href('/blog') },
+            { label: post.title },
+          ]}
+          title={post.title}
+          lead={post.excerpt}
+          author={{ name: t('blog-page.author'), tone: 'founder' }}
+          date={formatDate(post.date, locale)}
+          dateTime={post.date}
+          readingTime={t('blog-page.min-read', { count: post.readTime })}
+          toc={headings}
+          tocLabel={t('blog-page.toc')}
+          prose={false}
+        >
+          {/* Доверенный HTML только из своих статей (entities/post/model/articles). */}
+          <ArticleProse html={html} />
 
-            <div className={s.meta}>
-              <span className={s.tag}>{post.tag}</span>
+          <ArticleCallout title={t('blog-page.cta-title')} icon="message-circle" className={s.cta}>
+            <p>{t('blog-page.cta-text')}</p>
 
-              <time dateTime={post.date}>{formattedDate}</time>
+            <BriefButton variant="secondary" className={s.ctaButton}>
+              {t('blog-page.cta')}
+            </BriefButton>
+          </ArticleCallout>
+        </Article>
+      </div>
 
-              <span>{readTimeLabel}</span>
-            </div>
+      {related.length > 0 && (
+        <Section tone="sunken" aria-labelledby="related-title">
+          <SectionIntro title={t('blog-page.related-title')} titleId="related-title" />
 
-            <h1 className={s.title}>{post.title}</h1>
-          </header>
-
-          <div className={s.coverWrap}>
-            {post.image ? (
-              // Доверенный источник обложек; next/image не нужен для одной картинки статьи
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={post.image} alt={post.title} className={s.cover} />
-            ) : (
-              <div className={s.coverPlaceholder} aria-hidden />
-            )}
-          </div>
-
-          <div className={s.bodyWrap}>
-            {/* Доверенный HTML только из своей CMS */}
-            <div className={s.body} dangerouslySetInnerHTML={{ __html: post.body }} />
-
-            <div className={s.cta}>
-              <div>
-                <div className={s.ctaTitle}>{t('blog.cta-title')}</div>
-
-                <div className={s.ctaLead}>{t('blog.cta-lead')}</div>
-              </div>
-
-              <Link href="/contact" className={s.ctaButton}>
-                {t('blog.cta-btn')}
-                <Mono>→</Mono>
-              </Link>
-            </div>
-          </div>
-
-          {relatedPosts.length > 0 && (
-            <section className={s.related}>
-              <div className={s.relatedInner}>
-                <Eyebrow className={s.relatedTitle} as="h2">
-                  {t('blog.read-next')}
-                </Eyebrow>
-
-                <div className={s.relatedList}>
-                  {relatedPosts.map((related) => (
-                    <PostRow key={related.slug} post={related} />
-                  ))}
-                </div>
-              </div>
-            </section>
-          )}
-        </article>
-      </main>
+          <PostsGrid posts={related} />
+        </Section>
+      )}
     </>
   );
 };

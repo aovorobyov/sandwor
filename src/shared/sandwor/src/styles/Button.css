@@ -1,0 +1,47 @@
+/* ── Button ───────────────────────────────────────────────────── */
+.sw-btn {
+  --sw-btn-h: var(--control-m);
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  height: var(--sw-btn-h); padding: 0 16px;
+  border: 1px solid transparent; border-radius: var(--radius-md);
+  font-family: var(--font-text); font-size: 14px; line-height: 1; font-weight: 500;
+  white-space: nowrap; text-decoration: none; cursor: pointer; user-select: none;
+  transition: background-color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard),
+    color var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard), transform var(--duration-base) var(--ease-standard);
+}
+.sw-btn--s { --sw-btn-h: var(--control-s); padding: 0 12px; gap: 6px; font-size: 13px; border-radius: var(--radius-sm); }
+.sw-btn--l { --sw-btn-h: var(--control-l); padding: 0 22px; font-size: 15px; border-radius: var(--radius-lg); }
+.sw-btn--icon { width: var(--sw-btn-h); padding: 0; }
+.sw-btn--block { display: flex; width: 100%; }
+.sw-btn:focus-visible, .sw-btn.is-focus { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sw-btn:disabled, .sw-btn[aria-disabled="true"] { cursor: not-allowed; }
+.sw-btn.is-loading { cursor: progress; }
+
+/* primary — amber fill, dark label */
+.sw-btn--primary { background: var(--accent); color: var(--on-accent); font-weight: 600; }
+.sw-btn--primary:hover:not(:disabled), .sw-btn--primary.is-hover { background: var(--accent-hover); }
+.sw-btn--primary:active:not(:disabled), .sw-btn--primary.is-pressed { background: var(--accent-pressed); box-shadow: inset 0 1px 2px #0000003d; transform: translateY(0.5px); }
+.sw-btn--primary:disabled { background: var(--surface-raised-2); color: var(--text-disabled); }
+.sw-btn--primary.is-loading { background: var(--accent); color: var(--on-accent); }
+
+/* secondary — raised surface, control border */
+.sw-btn--secondary { background: var(--surface-raised); border-color: var(--line-control); color: var(--text); }
+.sw-btn--secondary:hover:not(:disabled), .sw-btn--secondary.is-hover { background: var(--surface-raised-2); border-color: var(--line-control-hover); }
+.sw-btn--secondary:active:not(:disabled), .sw-btn--secondary.is-pressed { background: var(--surface-pressed); box-shadow: inset 0 1px 2px #00000052; transform: translateY(0.5px); }
+.sw-btn--secondary:disabled { background: transparent; border-color: var(--line-strong); color: var(--text-disabled); }
+.sw-btn--secondary.is-loading .sw-icon { color: var(--text-secondary); }
+
+/* ghost — text with an amber trailing arrow; for "Подробнее", "Читать кейс" */
+.sw-btn--ghost { background: transparent; color: var(--text); padding: 0 10px; }
+.sw-btn--ghost .sw-btn__icon--end { color: var(--accent-text); transition: transform var(--duration-base) var(--ease-standard); }
+.sw-btn--ghost:hover:not(:disabled), .sw-btn--ghost.is-hover { background: var(--tint-hover); }
+.sw-btn--ghost:hover:not(:disabled) .sw-btn__icon--end, .sw-btn--ghost.is-hover .sw-btn__icon--end { transform: translateX(2px); }
+.sw-btn--ghost:active:not(:disabled), .sw-btn--ghost.is-pressed { background: var(--tint-pressed); }
+.sw-btn--ghost:disabled, .sw-btn--ghost:disabled .sw-btn__icon--end { color: var(--text-disabled); }
+.sw-btn--ghost.is-loading .sw-icon { color: var(--accent-text); }
+
+/* quiet — icon buttons in toolbars, "Отмена", close */
+.sw-btn--quiet { background: transparent; color: var(--text-secondary); }
+.sw-btn--quiet:hover:not(:disabled), .sw-btn--quiet.is-hover { background: var(--tint-hover); color: var(--text); }
+.sw-btn--quiet:active:not(:disabled), .sw-btn--quiet.is-pressed { background: var(--tint-pressed); color: var(--text); }
+.sw-btn--quiet:disabled { color: var(--text-disabled); }

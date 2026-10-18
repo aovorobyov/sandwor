@@ -1,3 +1,4 @@
+import type { ServiceId } from '@/entities/service';
 import type { CaseLink } from './types';
 
 /** Стабильные слаги кейсов — порядок совпадает с `cases.items` в переводах. */
@@ -35,4 +36,29 @@ export const CASE_LINKS: Partial<Record<CaseSlug, readonly CaseLink[]>> = {
     { kind: 'site', href: 'https://openupmodels.ru' },
     { kind: 'repo', href: 'https://github.com/aovorobyov/translation_module' },
   ],
+};
+
+/** Направления кейса — бейджи на карточке и фильтр на странице кейсов. */
+export const CASE_SERVICES: Record<CaseSlug, readonly ServiceId[]> = {
+  'model-agency': ['sites'],
+  'kids-agency': ['sites'],
+  'event-spaces': ['sites'],
+  'tilda-translate': ['sites'],
+};
+
+/** Что нарисовать на схематичной обложке кейса (окно браузера на канве). */
+export interface CaseCoverSpec {
+  /** Домен в адресной строке; без него там выводится тип проекта. */
+  domain?: string;
+  /** Раскладка страницы: каталог карточек или лендинг с блоками. */
+  layout: 'catalog' | 'landing';
+  /** Моно-чипы в шапке окна: «ru / en». */
+  chips?: readonly string[];
+}
+
+export const CASE_COVERS: Record<CaseSlug, CaseCoverSpec> = {
+  'model-agency': { domain: 'openupmodels.ru', layout: 'catalog', chips: ['ru', 'en'] },
+  'kids-agency': { layout: 'catalog' },
+  'event-spaces': { layout: 'landing' },
+  'tilda-translate': { layout: 'landing', chips: ['ru', 'en'] },
 };

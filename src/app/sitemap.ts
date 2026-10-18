@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getPosts } from '@/entities/post/api/posts';
-import { COURSES_REGISTRY } from '@/views/CoursePage/config/registry';
+import { SERVICE_IDS, getServiceHref } from '@/entities/service';
+import { PUBLISHED_CASE_SLUGS } from '@/entities/case';
 import { buildLocaleUrl } from '@/shared/lib/seo/buildLocaleUrl';
 import { defaultLocale, locales } from '@/i18n-routing';
 
@@ -41,9 +42,10 @@ const toLocalizedEntries = (path: string, meta: EntryMeta): MetadataRoute.Sitema
 const STATIC_PATHS = [
   { path: '', priority: 1, changeFrequency: 'weekly' as const },
   { path: '/blog', priority: 0.8, changeFrequency: 'daily' as const },
-  { path: '/websites', priority: 0.9, changeFrequency: 'monthly' as const },
+  { path: '/services', priority: 0.9, changeFrequency: 'monthly' as const },
   { path: '/cases', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/contact', priority: 0.5, changeFrequency: 'yearly' as const },
+  { path: '/privacy', priority: 0.2, changeFrequency: 'yearly' as const },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -54,11 +56,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     toLocalizedEntries(path, { lastModified: now, changeFrequency, priority }),
   );
 
-  const courseEntries = Object.keys(COURSES_REGISTRY).flatMap((courseId) =>
-    toLocalizedEntries(`/course/${courseId}`, {
+  const serviceEntries = SERVICE_IDS.flatMap((id) =>
+    toLocalizedEntries(getServiceHref(id), {
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.9,
+    }),
+  );
+
+  const caseEntries = PUBLISHED_CASE_SLUGS.flatMap((slug) =>
+    toLocalizedEntries(`/cases/${slug}`, {
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.6,
     }),
   );
 
@@ -70,5 +80,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }),
   );
 
-  return [...staticEntries, ...courseEntries, ...postEntries];
+  return [...staticEntries, ...serviceEntries, ...caseEntries, ...postEntries];
 }

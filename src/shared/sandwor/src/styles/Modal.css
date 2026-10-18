@@ -1,0 +1,113 @@
+/* ── Modal ────────────────────────────────────────────────────── */
+.sw-modal {
+  --sw-modal-w: 480px;
+  --sw-modal-pad: var(--space-6);
+  position: fixed; inset: 0; z-index: var(--z-overlay);
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--space-6);
+}
+.sw-modal--s { --sw-modal-w: 400px; }
+.sw-modal--l { --sw-modal-w: 640px; }
+.sw-modal--contained { position: absolute; z-index: auto; }
+
+.sw-modal__scrim {
+  position: absolute; inset: 0; background: var(--scrim);
+}
+
+.sw-modal__panel {
+  position: relative; display: flex; flex-direction: column;
+  width: 100%; max-width: var(--sw-modal-w); max-height: 100%; min-height: 0;
+  background: var(--surface-overlay); color: var(--text);
+  border: 1px solid var(--line-strong); border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-overlay);
+  --sw-modal-from: translateY(8px) scale(0.98);
+}
+.sw-modal__panel:focus { outline: none; }
+
+/* enter: opacity + translateY(8px) scale(.98), duration-slow; exit runs the same path backwards */
+.sw-modal--animate .sw-modal__scrim { animation: sw-modal-fade var(--duration-slow) var(--ease-standard) both; }
+.sw-modal--animate .sw-modal__panel { animation: sw-modal-rise var(--duration-slow) var(--ease-standard) both; }
+.sw-modal.is-closing { pointer-events: none; }
+.sw-modal.is-closing .sw-modal__scrim { animation: sw-modal-fade-out var(--duration-slow) var(--ease-standard) both; }
+.sw-modal.is-closing .sw-modal__panel { animation: sw-modal-sink var(--duration-slow) var(--ease-standard) both; }
+@keyframes sw-modal-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sw-modal-fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes sw-modal-rise { from { opacity: 0; transform: var(--sw-modal-from); } to { opacity: 1; transform: none; } }
+@keyframes sw-modal-sink { from { opacity: 1; transform: none; } to { opacity: 0; transform: var(--sw-modal-from); } }
+
+/* head: a grid — title beside the quiet S close, the close centred on the title's first line;
+   the description runs the full width, under the close */
+.sw-modal__head {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--space-4); align-items: start;
+  padding: var(--sw-modal-pad) var(--sw-modal-pad) 0;
+}
+.sw-modal--no-body .sw-modal__head { padding-bottom: var(--sw-modal-pad); }
+.sw-modal__close {
+  grid-column: 2; grid-row: 1;
+  /* 32px box on a 25px line: centre it, and let the glyph (not the box) sit on the content edge */
+  margin: calc((25px - var(--control-s)) / 2) calc(var(--space-2) * -1) 0 0;
+}
+.sw-modal--with-icon .sw-modal__close { margin-top: calc((40px - var(--control-s)) / 2); }
+.sw-modal__icon { grid-column: 1; grid-row: 1; }
+.sw-modal__title { grid-column: 1; }
+.sw-modal--with-icon .sw-modal__title, .sw-modal__desc { grid-column: 1 / -1; }
+
+.sw-modal__icon {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 40px; height: 40px; margin-bottom: var(--space-4);
+  border-radius: var(--radius-lg); border: 1px solid var(--line-strong);
+  background: var(--surface-raised); color: var(--text-secondary);
+}
+.sw-modal__icon--success { background: var(--success-soft); border-color: transparent; color: var(--success); }
+.sw-modal__icon--accent { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent-text); }
+.sw-modal__icon--danger { background: var(--danger-soft); border-color: transparent; color: var(--danger); }
+
+/* heading-2 */
+.sw-modal__title {
+  margin: 0; min-width: 0;
+  font-family: var(--font-display); font-size: 20px; line-height: 25px; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--text); text-wrap: balance;
+}
+/* body-s */
+.sw-modal__desc {
+  margin: 6px 0 0; min-width: 0;
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 400;
+  color: var(--text-secondary); text-wrap: pretty;
+}
+
+.sw-modal__body {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  padding: var(--sw-modal-pad);
+  font-family: var(--font-text); font-size: 15px; line-height: 23px; color: var(--text-secondary);
+}
+
+.sw-modal__foot {
+  flex: none;
+  padding: var(--space-4) var(--sw-modal-pad);
+  border-top: 1px solid var(--line);
+}
+.sw-modal__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: var(--space-2); }
+/* caption */
+.sw-modal__fine {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-text); font-size: 12px; line-height: 17px; font-weight: 400;
+  color: var(--text-muted); text-align: right; text-wrap: balance;
+}
+.sw-modal__fine:first-child { margin-top: 0; }
+
+/* ≤760px: bottom sheet — full width, top corners only, actions stacked, primary on top */
+@media (max-width: 760px) {
+  .sw-modal { --sw-modal-pad: var(--space-4); align-items: flex-end; padding: var(--space-4) 0 0; }
+  .sw-modal__panel {
+    max-width: none;
+    border-bottom: 0; border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    --sw-modal-from: translateY(16px);
+  }
+  .sw-modal__head { padding-top: var(--space-5); }
+  .sw-modal--no-body .sw-modal__head { padding-bottom: var(--space-5); }
+  .sw-modal__body { padding-top: var(--space-5); padding-bottom: var(--space-5); }
+  .sw-modal__foot { padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px)); }
+  .sw-modal__actions { flex-direction: column-reverse; align-items: stretch; }
+  .sw-modal__actions > * { width: 100%; }
+  .sw-modal__fine { text-align: center; }
+}

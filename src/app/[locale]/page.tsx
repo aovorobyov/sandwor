@@ -12,7 +12,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: '' });
   return {
-    description: t('home.bio'),
+    description: t('meta.description'),
     alternates: buildPageAlternates(locale, ''),
     ...buildSocialMeta({
       // В превью уходит позиционирование из героя, а не био: ссылку чаще всего

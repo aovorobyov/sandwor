@@ -1,167 +1,149 @@
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
-import { Link } from '@/shared/ui/Link';
-import { Mono } from '@/shared/ui/Mono';
-import { Eyebrow } from '@/shared/ui/Eyebrow';
-import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
-import { CASE_LINKS, isPublishedCase } from '@/entities/case';
-import type { CaseDetail, CaseItem, CaseLinkKind } from '@/entities/case/model/types';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { Badge } from '@sw/components/Badge';
+import { Button } from '@sw/components/Button';
+import { Canvas } from '@sw/components/Canvas';
+import {
+  CASE_COVERS,
+  CASE_LINKS,
+  CASE_SERVICES,
+  PUBLISHED_CASE_SLUGS,
+  SiteCover,
+  isPublishedCase,
+  type CaseDetail,
+  type CaseItem,
+  type CaseLinkKind,
+  type CaseSlug,
+} from '@/entities/case';
+import { BriefButton } from '@/features/brief';
+import { CaseCards } from '@/widgets/CaseCards';
 import { JsonLd, buildBreadcrumbs } from '@/shared/lib/jsonLd';
-import type { CasePageProps } from './CasePage.types';
+import { localizeHref } from '@/shared/ui/Link';
+import { PageHero } from '@/shared/ui/PageHero';
+import { Section } from '@/shared/ui/Section';
+import { SectionIntro } from '@/shared/ui/SectionIntro';
 import s from './CasePage.module.css';
 
-export const CasePage = async (props: CasePageProps) => {
-  const { slug } = props;
+interface CasePageProps {
+  slug: string;
+}
+
+const LINK_ICONS: Record<CaseLinkKind, string> = {
+  site: 'external-link',
+  repo: 'brand-github',
+};
+
+export const CasePage = async ({ slug }: CasePageProps) => {
+  const locale = await getLocale();
   const t = await getTranslations();
+  const href = (path: string) => localizeHref(path, locale);
 
   const items = t.raw('cases.items') as CaseItem[];
   const details = t.raw('cases.details') as Record<string, CaseDetail>;
-
   const item = items.find((i) => i.slug === slug);
   const detail = details[slug];
 
   if (!item || !detail || !isPublishedCase(slug)) notFound();
 
-  const otherCases = items.filter((i) => i.slug !== slug && isPublishedCase(i.slug));
-  const links = CASE_LINKS[slug as keyof typeof CASE_LINKS] || [];
-
-  /** Подпись ссылки: switch, чтобы новый вид ссылки не проскочил молча. */
-  const getLinkLabel = (kind: CaseLinkKind) => {
-    switch (kind) {
-      case 'site':
-        return t('cases.link-site');
-      case 'repo':
-        return t('cases.link-repo');
-      default:
-        throw new Error(`Unknown case link kind: ${kind}`);
-    }
-  };
-
-  const breadcrumbs = buildBreadcrumbs([
-    { name: t('nav.home'), path: '/' },
-    { name: t('nav.cases'), path: '/cases' },
-    { name: item.title, path: `/cases/${slug}` },
-  ]);
+  const caseSlug = slug as CaseSlug;
+  const services = CASE_SERVICES[caseSlug];
+  const links = CASE_LINKS[caseSlug] ?? [];
+  const others = PUBLISHED_CASE_SLUGS.filter((other) => other !== caseSlug);
 
   return (
     <>
-      <JsonLd data={breadcrumbs} />
+      <JsonLd
+        data={buildBreadcrumbs([
+          { name: t('nav.home'), path: href('/') },
+          { name: t('nav.cases'), path: href('/cases') },
+          { name: item.title, path: href(`/cases/${slug}`) },
+        ])}
+      />
 
-      <main>
-        {/* ── Шапка кейса ── */}
-        <section className={s.hero}>
-          <div className={s.heroInner}>
-            <Breadcrumbs
-              className={s.breadcrumbs}
-              items={[
-                { label: t('nav.home'), href: '/' },
-                { label: t('nav.cases'), href: '/cases' },
-                { label: item.title },
-              ]}
-            />
+      <PageHero
+        breadcrumbs={[
+          { label: t('nav.home'), href: href('/') },
+          { label: t('nav.cases'), href: href('/cases') },
+          { label: item.title },
+        ]}
+        meta={
+          <>
+            {services.map((service) => (
+              <Badge key={service} service={service}>
+                {t(`service-labels.${service}`)}
+              </Badge>
+            ))}
 
-            <Eyebrow tone="accent" className={s.type}>
-              {item.type}
-            </Eyebrow>
+            <Badge variant="tag">{item.type}</Badge>
+          </>
+        }
+        title={item.title}
+        lead={detail.lead}
+        actions={
+          links.length > 0 ? (
+            <>
+              {links.map((link) => (
+                <Button
+                  key={link.href}
+                  variant="secondary"
+                  icon={LINK_ICONS[link.kind]}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t(link.kind === 'site' ? 'cases.link-site' : 'cases.link-repo')}
+                </Button>
+              ))}
+            </>
+          ) : undefined
+        }
+        aside={
+          <Canvas bordered className={s.cover}>
+            <SiteCover spec={CASE_COVERS[caseSlug]} label={item.type} size="l" />
+          </Canvas>
+        }
+      />
 
-            <h1 className={s.title}>{item.title}</h1>
+      <Section spacing="s" aria-labelledby="case-facts-title">
+        <div className={s.layout}>
+          <aside className={s.facts}>
+            <h2 id="case-facts-title" className={s.factsTitle}>
+              {t('cases-page.facts-title')}
+            </h2>
 
-            <p className={s.lead}>{detail.lead}</p>
-
-            {links.length > 0 && (
-              <div className={s.links}>
-                {links.map(({ kind, href }) => (
-                  <a
-                    key={href}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={s.link}
-                  >
-                    <span className={s.linkKind}>{getLinkLabel(kind)}</span>
-
-                    <span className={s.linkHref}>{href.replace('https://', '')} ↗</span>
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* ── Главный экран ── */}
-        <section className={s.coverSection}>
-          <div className={s.cover} aria-hidden />
-        </section>
-
-        {/* ── Тело кейса ── */}
-        <section className={s.bodySection}>
-          <div className={s.bodyGrid}>
-            <aside className={s.facts}>
-              <Eyebrow className={s.factsTitle}>{t('cases.facts-label')}</Eyebrow>
-
-              <div className={s.factsList}>
-                {detail.facts.map((fact) => (
-                  <div key={fact.k} className={s.fact}>
-                    <div className={s.factKey}>{fact.k}</div>
-
-                    <div className={s.factValue}>{fact.v}</div>
-                  </div>
-                ))}
-              </div>
-            </aside>
-
-            <div className={s.blocks}>
-              {detail.blocks.map((block) => (
-                <div key={block.title} className={s.block}>
-                  <h2 className={s.blockTitle}>{block.title}</h2>
-
-                  <p className={s.blockText}>{block.p1}</p>
-
-                  <p className={s.blockText}>{block.p2}</p>
+            <dl className={s.factsList}>
+              {detail.facts.map((fact) => (
+                <div key={fact.k} className={s.fact}>
+                  <dt>{fact.k}</dt>
+                  <dd>{fact.v}</dd>
                 </div>
               ))}
+            </dl>
 
-              <div className={s.gallery}>
-                <div className={s.shot} aria-hidden />
+            <BriefButton variant="secondary" block services={[...services]}>
+              {t('services.cta')}
+            </BriefButton>
+          </aside>
 
-                <div className={s.shot} aria-hidden />
-              </div>
-
-              <div className={s.similar}>
-                <div>
-                  <div className={s.similarTitle}>{t('cases.similar-title')}</div>
-
-                  <div className={s.similarLead}>{t('cases.similar-lead')}</div>
-                </div>
-
-                <Link href="/contact" className={s.similarButton}>
-                  {t('cases.similar-btn')}
-                  <Mono>→</Mono>
-                </Link>
-              </div>
-            </div>
+          <div className={s.story}>
+            {detail.blocks.map((block) => (
+              <section key={block.title} className={s.block}>
+                <h2 className={s.blockTitle}>{block.title}</h2>
+                <p>{block.p1}</p>
+                <p>{block.p2}</p>
+              </section>
+            ))}
           </div>
-        </section>
+        </div>
+      </Section>
 
-        {/* ── Другие кейсы ── */}
-        <section className={s.other}>
-          <div className={s.otherInner}>
-            <Eyebrow className={s.otherTitle}>{t('cases.other-title')}</Eyebrow>
+      {others.length > 0 && (
+        <Section tone="sunken" aria-labelledby="other-cases-title">
+          <SectionIntro title={t('cases-page.other-title')} titleId="other-cases-title" />
 
-            <div className={s.otherList}>
-              {otherCases.map((other) => (
-                <Link key={other.slug} href={`/cases/${other.slug}`} className={s.otherRow}>
-                  <span className={s.otherType}>{other.type}</span>
-
-                  <span className={s.otherName}>{other.title}</span>
-
-                  <span className={s.otherCta}>{t('cases.other-cta')}</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      </main>
+          <CaseCards slugs={others} layout="split" />
+        </Section>
+      )}
     </>
   );
 };

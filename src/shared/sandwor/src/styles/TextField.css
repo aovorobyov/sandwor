@@ -1,0 +1,111 @@
+/* ── TextField ────────────────────────────────────────────────── */
+.sw-textfield { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+
+.sw-textfield__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); min-width: 0; }
+/* label-s */
+.sw-textfield__label {
+  font-family: var(--font-text); font-size: 13px; line-height: 18px; font-weight: 500;
+  color: var(--text-secondary); cursor: default;
+}
+/* mono-xs */
+.sw-textfield__optional {
+  flex: none; font-family: var(--font-mono); font-size: 11.5px; line-height: 16px; font-weight: 450;
+  font-variant-numeric: tabular-nums; color: var(--text-muted);
+}
+
+.sw-textfield__control {
+  --sw-tf-h: var(--control-m);
+  position: relative; display: flex; align-items: center; gap: var(--space-2);
+  height: var(--sw-tf-h); padding: 0 var(--space-3);
+  background: var(--bg-sunken); border: 1px solid var(--line-control); border-radius: var(--radius-md);
+  color: var(--text); cursor: text;
+  transition: border-color var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard),
+    background-color var(--duration-base) var(--ease-standard);
+}
+.sw-textfield--l .sw-textfield__control { --sw-tf-h: var(--control-l); padding: 0 14px; }
+
+/* body — Golos 15/23 */
+.sw-textfield__input {
+  flex: 1 1 auto; min-width: 0; width: 100%; height: 100%; margin: 0; padding: 0;
+  border: 0; border-radius: 0; outline: none; background: transparent; box-shadow: none;
+  -webkit-appearance: none; appearance: none;
+  font-family: var(--font-text); font-size: 15px; line-height: 23px; font-weight: 400; letter-spacing: 0;
+  color: inherit; caret-color: var(--accent-text); text-overflow: ellipsis;
+}
+.sw-textfield__input::placeholder { color: var(--text-muted); opacity: 1; }
+.sw-textfield__input::-webkit-search-decoration,
+.sw-textfield__input::-webkit-search-cancel-button { -webkit-appearance: none; }
+/* browser autofill keeps the sunken field instead of a pale yellow/blue fill */
+.sw-textfield__input:-webkit-autofill,
+.sw-textfield__input:-webkit-autofill:hover,
+.sw-textfield__input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text);
+  -webkit-box-shadow: 0 0 0 40px var(--bg-sunken) inset;
+  caret-color: var(--accent-text);
+}
+
+.sw-textfield__icon { flex: none; color: var(--text-muted); transition: color var(--duration-base) var(--ease-standard); }
+.sw-textfield__suffix {
+  flex: none; font-family: var(--font-text); font-size: 15px; line-height: 23px; font-weight: 400;
+  color: var(--text-muted); white-space: nowrap; cursor: text;
+}
+
+/* multiline — auto-growing textarea, min 96px */
+.sw-textfield--multiline .sw-textfield__control { height: auto; min-height: 96px; padding: 0; align-items: stretch; }
+.sw-textfield--multiline .sw-textfield__input {
+  display: block; height: auto; min-height: 94px; max-height: 320px; padding: var(--space-2) var(--space-3);
+  resize: none; overflow-y: auto; text-overflow: clip; scrollbar-width: thin;
+}
+
+/* hover */
+.sw-textfield:not(.is-disabled):not(.is-readonly):not(.is-error) .sw-textfield__control:hover:not(:focus-within),
+.sw-textfield.is-hover .sw-textfield__control { border-color: var(--line-control-hover); }
+.sw-textfield:not(.is-disabled) .sw-textfield__control:hover .sw-textfield__icon,
+.sw-textfield.is-hover .sw-textfield__icon { color: var(--text-secondary); }
+
+/* focus — 2px edge in `focus` (≥3:1 in both themes) + soft amber halo */
+.sw-textfield .sw-textfield__control:focus-within,
+.sw-textfield.is-focus .sw-textfield__control { border-color: var(--focus); box-shadow: 0 0 0 1px var(--focus), 0 0 0 4px var(--accent-soft); }
+.sw-textfield .sw-textfield__control:focus-within .sw-textfield__icon,
+.sw-textfield.is-focus .sw-textfield__icon { color: var(--text-secondary); }
+
+/* error */
+.sw-textfield.is-error .sw-textfield__control { border-color: var(--danger); }
+.sw-textfield.is-error .sw-textfield__control:focus-within,
+.sw-textfield.is-error.is-focus .sw-textfield__control { border-color: var(--danger); box-shadow: 0 0 0 1px var(--danger), 0 0 0 4px var(--danger-soft); }
+.sw-textfield.is-error .sw-textfield__input { caret-color: var(--danger); }
+
+/* read-only — no well, quiet border, text stays readable */
+.sw-textfield.is-readonly .sw-textfield__control { background: transparent; border-color: var(--line-strong); }
+.sw-textfield.is-readonly .sw-textfield__control:focus-within { border-color: var(--focus); box-shadow: 0 0 0 1px var(--focus); }
+.sw-textfield.is-readonly .sw-textfield__input { caret-color: transparent; }
+
+/* disabled */
+.sw-textfield.is-disabled .sw-textfield__label { color: var(--text-muted); }
+.sw-textfield.is-disabled .sw-textfield__control {
+  background: transparent; border-style: dashed; border-color: var(--line-strong); color: var(--text-disabled); cursor: not-allowed;
+}
+.sw-textfield.is-disabled .sw-textfield__input { cursor: not-allowed; opacity: 1; -webkit-text-fill-color: var(--text-disabled); }
+.sw-textfield.is-disabled .sw-textfield__input::placeholder { color: var(--text-disabled); -webkit-text-fill-color: var(--text-disabled); }
+.sw-textfield.is-disabled .sw-textfield__icon,
+.sw-textfield.is-disabled .sw-textfield__suffix { color: var(--text-disabled); cursor: not-allowed; }
+
+/* hint / error / counter */
+.sw-textfield__foot { display: flex; align-items: flex-start; gap: var(--space-3); min-width: 0; }
+.sw-textfield__msg {
+  display: flex; align-items: flex-start; gap: 6px; min-width: 0; margin: 0;
+  font-family: var(--font-text); font-size: 13px; line-height: 18px; font-weight: 400;
+  color: var(--text-muted); text-wrap: pretty;
+}
+.sw-textfield__msg--error { color: var(--danger); }
+.sw-textfield__msg-icon { margin-top: 2px; }
+.sw-textfield__count {
+  flex: none; margin-left: auto; font-family: var(--font-mono); font-size: 11.5px; line-height: 18px; font-weight: 450;
+  font-variant-numeric: tabular-nums; color: var(--text-muted); white-space: nowrap;
+}
+.sw-textfield__count.is-full { color: var(--text-secondary); }
+
+/* 16px on phones: iOS Safari zooms into any field set smaller */
+@media (max-width: 760px) {
+  .sw-textfield__input, .sw-textfield__suffix { font-size: 16px; }
+}

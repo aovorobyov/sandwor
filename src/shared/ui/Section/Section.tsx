@@ -1,15 +1,18 @@
 import type { FC } from 'react';
-import { cn } from '@/shared/lib/cn';
+import { cx } from '@sw/utils';
 import type { SectionProps } from './Section.types';
 import s from './Section.module.css';
 
-/** Секция страницы: полноширинная подложка + центрированный контейнер 1280px. */
+/**
+ * Секция страницы: вертикальный ритм и контейнер дизайн-системы (`sw-container`).
+ * `tone` — фон секции: обычный `bg`, утопленный `bg-sunken` или точечная канва.
+ */
 export const Section: FC<SectionProps> = (props) => {
-  const { children, tone = 'default', isFlush = false, className, id } = props;
+  const { tone = 'default', spacing = 'm', className, children, ...rest } = props;
 
   return (
-    <section id={id} className={cn(s.root, tone === 'subtle' && s.subtle)}>
-      <div className={cn(isFlush ? s.flush : s.inner, className)}>{children}</div>
+    <section className={cx(s.root, s[tone], s[spacing], className)} {...rest}>
+      <div className="sw-container">{children}</div>
     </section>
   );
 };

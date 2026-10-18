@@ -19,7 +19,7 @@ const stripLocalePrefix = (pathname: string, locale: Locale) => {
 };
 
 /** Собирает путь для целевой локали: дефолтная — без префикса, остальные — с /{locale}. */
-const buildLocalePath = (pathname: string, from: Locale, to: Locale) => {
+export const buildLocalePath = (pathname: string, from: Locale, to: Locale) => {
   const base = stripLocalePrefix(pathname, from);
 
   if (to === defaultLocale) {

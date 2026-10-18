@@ -21,7 +21,7 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
   const t = await getTranslations({ locale, namespace: '' });
 
   if (!post) {
-    return { title: t('blog.title') };
+    return { title: t('blog-page.title') };
   }
 
   const description = post.description || post.excerpt;
@@ -39,7 +39,7 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
         locale,
         tag: post.tag,
         title: post.title,
-        meta: t('blog.min-read', { count: post.readTime }),
+        meta: t('blog-page.min-read', { count: post.readTime }),
       }),
     }),
   };

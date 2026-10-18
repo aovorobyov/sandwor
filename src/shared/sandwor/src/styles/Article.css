@@ -1,0 +1,229 @@
+/* ── Article · page ───────────────────────────────────────────── */
+/* font-size 17px on the root so 68ch is the reading measure of the prose */
+.sw-article {
+  display: grid; grid-template-columns: minmax(0, 68ch); grid-template-areas: "header" "body";
+  font-family: var(--font-text); font-size: 17px; line-height: 28px; color: var(--text-secondary);
+  min-width: 0;
+}
+.sw-article__header {
+  grid-area: header; min-width: 0;
+  display: flex; flex-direction: column; align-items: flex-start;
+  padding-bottom: var(--space-8); border-bottom: 1px solid var(--line);
+}
+.sw-article__crumbs { max-width: 100%; margin-bottom: var(--space-8); }
+.sw-article__services { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); }
+/* display-2 */
+.sw-article__title {
+  margin: 0; max-width: 100%;
+  font-family: var(--font-display); font-size: 32px; line-height: 36px; font-weight: 600; letter-spacing: -0.02em;
+  color: var(--text); text-wrap: balance;
+}
+/* body-l */
+.sw-article__lead {
+  margin: var(--space-4) 0 0; max-width: 100%;
+  font-family: var(--font-text); font-size: 17px; line-height: 27px; font-weight: 400;
+  color: var(--text-secondary); text-wrap: pretty;
+}
+.sw-article__meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3);
+  margin-top: var(--space-6);
+}
+.sw-article__author { display: inline-flex; align-items: center; gap: var(--space-2); min-width: 0; }
+/* label */
+.sw-article__author-name { font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 500; color: var(--text); }
+/* mono */
+.sw-article__stamp {
+  padding-left: var(--space-3); border-left: 1px solid var(--line-strong);
+  font-family: var(--font-mono); font-size: 13px; line-height: 20px; font-weight: 450;
+  font-variant-numeric: tabular-nums; color: var(--text-muted);
+}
+.sw-article__author + .sw-article__stamp { margin-left: 0; }
+.sw-article__stamp:first-child { padding-left: 0; border-left: 0; }
+
+.sw-article__body { grid-area: body; min-width: 0; padding-top: var(--space-10); }
+.sw-article__aside { grid-area: aside; display: none; min-width: 0; }
+
+@media (min-width: 1100px) {
+  .sw-article--toc {
+    grid-template-columns: minmax(0, 68ch) 224px; column-gap: var(--space-18);
+    grid-template-areas: "header ." "body aside";
+  }
+  .sw-article--toc .sw-article__aside { display: block; padding-top: var(--space-10); }
+}
+
+@media (max-width: 760px) {
+  .sw-article__crumbs { margin-bottom: var(--space-6); }
+  .sw-article__title { font-size: 26px; line-height: 30px; }
+  .sw-article__meta { margin-top: var(--space-5); }
+  /* the stamp drops under the name, aligned to it */
+  .sw-article__author + .sw-article__stamp {
+    flex-basis: 100%; margin-top: calc(var(--space-2) * -1);
+    padding-left: calc(28px + var(--space-2)); border-left: 0;
+  }
+  .sw-article__body { padding-top: var(--space-8); }
+}
+
+/* ── Article · table of contents ──────────────────────────────── */
+.sw-article__toc { position: sticky; top: var(--space-24); }
+/* mono-s */
+.sw-article__toc-caption {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 450;
+  font-variant-numeric: tabular-nums; color: var(--text-muted);
+}
+.sw-article__toc-list { margin: 0; padding: 0; list-style: none; box-shadow: inset 1px 0 0 var(--line); }
+.sw-article__toc-item { margin: 0; padding: 0; }
+/* body-s; the bar is a single-side border — never rounded */
+.sw-article__toc-link {
+  display: block; padding: 6px 0 6px 14px;
+  border-left: 2px solid transparent; border-radius: 0;
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 400;
+  color: var(--text-muted); text-decoration: none; text-wrap: pretty;
+  transition: color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard);
+}
+.sw-article__toc-link:hover, .sw-article__toc-link.is-hover { color: var(--text-secondary); border-left-color: var(--line-control); }
+.sw-article__toc-link.is-active { color: var(--text); border-left-color: var(--accent-edge); }
+.sw-article__toc-link:focus-visible, .sw-article__toc-link.is-focus { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ── ArticleProse ─────────────────────────────────────────────── */
+/* :where() keeps every rule at element specificity; `>` limits it to the prose's own flow,
+   and inline rules skip elements with a class, so components placed inside keep their look. */
+.sw-prose {
+  max-width: 68ch; min-width: 0;
+  font-family: var(--font-text); font-size: 17px; line-height: 28px; font-weight: 400;
+  color: var(--text-secondary);
+}
+:where(.sw-prose) > * { margin-top: 0; margin-bottom: 0; }
+:where(.sw-prose) > * + * { margin-top: var(--space-5); }
+:where(.sw-prose) > p { text-wrap: pretty; }
+
+/* heading-1 */
+:where(.sw-prose) > h2 {
+  margin-top: calc(var(--space-6) * 2);
+  font-family: var(--font-display); font-size: 24px; line-height: 29px; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--text); text-wrap: balance; scroll-margin-top: var(--space-24);
+}
+/* heading-3 */
+:where(.sw-prose) > h3 {
+  margin-top: var(--space-8);
+  font-family: var(--font-display); font-size: 16px; line-height: 21px; font-weight: 600; letter-spacing: 0;
+  color: var(--text); text-wrap: balance; scroll-margin-top: var(--space-24);
+}
+:where(.sw-prose) > :is(h2, h3):first-child { margin-top: 0; }
+
+/* lists: muted dashes for ul, mono numbers for ol */
+:where(.sw-prose) > :is(ul, ol) { padding-left: var(--space-6); list-style: none; }
+:where(.sw-prose) > ol { counter-reset: sw-prose-ol; padding-left: var(--space-8); }
+:where(.sw-prose) > :is(ul, ol) > li { position: relative; text-wrap: pretty; }
+:where(.sw-prose) > :is(ul, ol) > li + li { margin-top: var(--space-2); }
+:where(.sw-prose) > ul > li::before {
+  content: "—"; position: absolute; left: calc(var(--space-6) * -1); color: var(--text-muted);
+}
+:where(.sw-prose) > ol > li { counter-increment: sw-prose-ol; }
+:where(.sw-prose) > ol > li::before {
+  content: counter(sw-prose-ol, decimal-leading-zero);
+  position: absolute; left: calc(var(--space-8) * -1); line-height: inherit;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 450; font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+/* blockquote: a 2px rule on the left, square — no radius on a one-sided border */
+:where(.sw-prose) > blockquote {
+  margin-left: 0; margin-right: 0; padding-left: var(--space-5);
+  border-left: 2px solid var(--line-strong); border-radius: 0;
+  font-size: 17px; line-height: 27px; color: var(--text);
+}
+:where(.sw-prose) > blockquote > * { margin: 0; }
+:where(.sw-prose) > blockquote > * + * { margin-top: var(--space-3); }
+:where(.sw-prose) > blockquote > footer {
+  font-size: 14px; line-height: 20px; color: var(--text-muted);
+}
+:where(.sw-prose) > blockquote cite { font-style: normal; color: var(--text-secondary); }
+
+/* blocks that need more air around them */
+:where(.sw-prose) > :is(figure, blockquote, table, pre, aside, hr) { margin-top: var(--space-8); }
+:where(.sw-prose) > :is(figure, blockquote, table, pre, aside, hr) + * { margin-top: var(--space-8); }
+:where(.sw-prose) > :is(figure, blockquote, table, pre, aside, hr) + :is(h2) { margin-top: calc(var(--space-6) * 2); }
+/* a heading hugs what follows it */
+:where(.sw-prose) > h3 + * { margin-top: var(--space-3); }
+:where(.sw-prose) > h2 + * { margin-top: var(--space-4); }
+
+/* figure + caption */
+:where(.sw-prose) > figure { margin-left: 0; margin-right: 0; min-width: 0; }
+:where(.sw-prose) > figure > img, :where(.sw-prose) > p > img {
+  display: block; max-width: 100%; height: auto;
+  border: 1px solid var(--line); border-radius: var(--radius-lg);
+}
+.sw-prose__caption, :where(.sw-prose) > figure > figcaption {
+  margin-top: var(--space-3);
+  font-family: var(--font-text); font-size: 12px; line-height: 17px; font-weight: 400;
+  color: var(--text-muted); text-wrap: pretty;
+}
+
+/* inline: links, code, strong — only raw elements without a class */
+:where(.sw-prose) :where(a:not([class])) {
+  color: var(--accent-text); text-decoration: underline; text-decoration-thickness: 1px;
+  text-underline-offset: 3px; text-decoration-color: var(--accent-line); border-radius: var(--radius-sm);
+  transition: text-decoration-color var(--duration-base) var(--ease-standard);
+}
+:where(.sw-prose) :where(a:not([class])):hover { text-decoration-color: currentColor; }
+:where(.sw-prose) :where(a:not([class])):focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+:where(.sw-prose) :where(strong:not([class]), b:not([class])) { font-weight: 600; color: var(--text); }
+:where(.sw-prose) :where(:not(pre) > code:not([class])) {
+  padding: 0.1em 0.35em; border-radius: var(--radius-sm); background: var(--surface-raised);
+  font-family: var(--font-mono); font-size: 0.9em; font-weight: 450; color: var(--text);
+  font-variant-numeric: tabular-nums; overflow-wrap: anywhere;
+}
+:where(.sw-prose) > pre {
+  overflow-x: auto; padding: var(--space-4) var(--space-5);
+  background: var(--bg-sunken); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  font-family: var(--font-mono); font-size: 13px; line-height: 20px; font-weight: 450; color: var(--text);
+}
+
+/* table: hairlines, mono numbers in right-aligned cells */
+:where(.sw-prose) > table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 20px; }
+:where(.sw-prose) > table :is(th, td) {
+  padding: var(--space-3) var(--space-4) var(--space-3) 0; text-align: left; vertical-align: baseline;
+  border-bottom: 1px solid var(--line);
+}
+:where(.sw-prose) > table :is(th, td):last-child { padding-right: 0; }
+:where(.sw-prose) > table th {
+  padding-top: 0; font-size: 13px; line-height: 18px; font-weight: 500; color: var(--text-muted);
+  border-bottom-color: var(--line-strong);
+}
+:where(.sw-prose) > table td { color: var(--text-secondary); }
+:where(.sw-prose) > table :is([align="right"], [style*="right"], .sw-prose__num) {
+  text-align: right; white-space: nowrap;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 450; font-variant-numeric: tabular-nums;
+}
+:where(.sw-prose) > table th:is([align="right"], [style*="right"], .sw-prose__num) { font-family: var(--font-text); font-weight: 500; }
+
+:where(.sw-prose) > hr { height: 1px; border: 0; background: var(--line); }
+
+/* callout */
+.sw-prose__callout {
+  display: grid; grid-template-columns: 20px minmax(0, 1fr); column-gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-lg);
+}
+.sw-prose__callout-icon { color: var(--accent-text); margin-top: 1.5px; }
+.sw-prose__callout-body { min-width: 0; }
+.sw-prose__callout-title {
+  margin: 0; font-family: var(--font-text); font-size: 15px; line-height: 23px; font-weight: 600; color: var(--text);
+}
+.sw-prose__callout-text {
+  font-family: var(--font-text); font-size: 15px; line-height: 23px; color: var(--text-secondary); text-wrap: pretty;
+}
+.sw-prose__callout-title + .sw-prose__callout-text { margin-top: var(--space-1); }
+.sw-prose__callout-text > * { margin: 0; }
+.sw-prose__callout-text > * + * { margin-top: var(--space-2); }
+
+.sw-prose__figure { margin-left: 0; margin-right: 0; min-width: 0; }
+
+@media (max-width: 760px) {
+  :where(.sw-prose) > h2 { font-size: 21px; line-height: 26px; margin-top: var(--space-10); }
+  :where(.sw-prose) > :is(figure, blockquote, table, pre, aside, hr) + :is(h2) { margin-top: var(--space-10); }
+  /* wide tables scroll inside themselves, not the page */
+  :where(.sw-prose) > table { display: block; overflow-x: auto; }
+  .sw-prose__callout { padding: var(--space-4); }
+}

@@ -1,0 +1,43 @@
+/* ── Toast ────────────────────────────────────────────────────── */
+.sw-toast {
+  display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; column-gap: 12px; align-items: start;
+  width: 360px; max-width: 100%; padding: 14px 12px 14px 16px;
+  background: var(--surface-overlay); border: 1px solid var(--line-strong); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-overlay); color: var(--text);
+  font-family: var(--font-text); text-align: left;
+  pointer-events: auto;
+  animation: sw-toast-in var(--duration-slow) var(--ease-standard);
+  transition: opacity var(--duration-slow) var(--ease-standard), transform var(--duration-slow) var(--ease-standard);
+}
+@keyframes sw-toast-in { from { opacity: 0; transform: translateY(8px); } }
+.sw-toast.is-leaving { opacity: 0; transform: translateY(8px); pointer-events: none; }
+
+.sw-toast--success .sw-toast__icon { color: var(--success); }
+.sw-toast--error .sw-toast__icon { color: var(--danger); }
+.sw-toast--neutral .sw-toast__icon { color: var(--text-secondary); }
+
+.sw-toast__body { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+.sw-toast__title { font-size: 14px; line-height: 20px; font-weight: 500; color: var(--text); text-wrap: pretty; }
+.sw-toast__desc { margin-top: 2px; font-size: 14px; line-height: 20px; font-weight: 400; color: var(--text-secondary); text-wrap: pretty; }
+/* ghost-ish action: text lines up with the title, hover tint bleeds into the padding */
+.sw-toast__action { margin: 8px 0 -6px -10px; }
+/* 32px quiet close sits on the title line: its glyph mirrors the 16px left inset */
+.sw-toast__close { margin: -6px -4px -6px 0; }
+
+/* ── ToastViewport ── */
+.sw-toast-viewport {
+  position: fixed; right: var(--space-6); bottom: var(--space-6); z-index: var(--z-toast);
+  display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-2);
+  width: 360px; max-width: calc(100vw - 2 * var(--space-4));
+  margin: 0; padding: 0; pointer-events: none; outline: none;
+}
+.sw-toast-viewport--contained { position: absolute; right: var(--space-4); bottom: var(--space-4); max-width: calc(100% - 2 * var(--space-4)); }
+
+@media (max-width: 760px) {
+  .sw-toast-viewport {
+    left: var(--space-4); right: var(--space-4); bottom: max(var(--space-4), env(safe-area-inset-bottom));
+    width: auto; max-width: none; align-items: stretch;
+  }
+  .sw-toast-viewport--contained { bottom: var(--space-4); }
+  .sw-toast-viewport .sw-toast { width: 100%; }
+}

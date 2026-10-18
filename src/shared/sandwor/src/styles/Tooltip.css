@@ -1,0 +1,56 @@
+/* ── Tooltip ──────────────────────────────────────────────────── */
+.sw-tooltip { position: relative; display: inline-block; max-width: 100%; }
+.sw-tooltip__text { border-radius: var(--radius-sm); text-decoration: underline dotted var(--line-control); text-underline-offset: 3px; cursor: help; }
+.sw-tooltip__text:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.sw-tooltip__bubble {
+  --sw-tooltip-gap: 10px;
+  --sw-tooltip-shift: 0px;
+  position: absolute; z-index: var(--z-tooltip);
+  display: block; width: max-content; max-width: min(280px, calc(100vw - 16px));
+  padding: 8px 12px;
+  background: var(--surface-overlay); border: 1px solid var(--line-strong); border-radius: var(--radius-md);
+  box-shadow: var(--shadow-overlay);
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 400; font-style: normal;
+  color: var(--text); text-align: left; white-space: normal; text-wrap: balance; letter-spacing: 0; text-transform: none;
+  visibility: hidden; opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard), visibility 0s linear var(--duration-fast);
+}
+.sw-tooltip__bubble.is-open {
+  visibility: visible; opacity: 1;
+  transition: opacity var(--duration-fast) var(--ease-standard), visibility 0s;
+}
+
+/* invisible bridge over the gap so the pointer can travel onto the bubble */
+.sw-tooltip__bubble::before { content: ""; position: absolute; }
+
+.sw-tooltip__bubble--top { bottom: calc(100% + var(--sw-tooltip-gap)); left: 50%; transform: translateX(calc(-50% + var(--sw-tooltip-shift))); }
+.sw-tooltip__bubble--bottom { top: calc(100% + var(--sw-tooltip-gap)); left: 50%; transform: translateX(calc(-50% + var(--sw-tooltip-shift))); }
+.sw-tooltip__bubble--left { right: calc(100% + var(--sw-tooltip-gap)); top: 50%; transform: translateY(-50%); }
+.sw-tooltip__bubble--right { left: calc(100% + var(--sw-tooltip-gap)); top: 50%; transform: translateY(-50%); }
+.sw-tooltip__bubble--top::before { left: 0; right: 0; top: 100%; height: calc(var(--sw-tooltip-gap) + 1px); }
+.sw-tooltip__bubble--bottom::before { left: 0; right: 0; bottom: 100%; height: calc(var(--sw-tooltip-gap) + 1px); }
+.sw-tooltip__bubble--left::before { top: 0; bottom: 0; left: 100%; width: calc(var(--sw-tooltip-gap) + 1px); }
+.sw-tooltip__bubble--right::before { top: 0; bottom: 0; right: 100%; width: calc(var(--sw-tooltip-gap) + 1px); }
+
+/* arrow — a rotated square in the bubble colours; its inner half hides the bubble border */
+.sw-tooltip__arrow {
+  position: absolute; width: 8px; height: 8px;
+  background: var(--surface-overlay); border: 0 solid var(--line-strong);
+  transform: rotate(45deg);
+}
+.sw-tooltip__bubble--top .sw-tooltip__arrow { bottom: -5px; left: calc(50% - 4px - var(--sw-tooltip-shift)); border-right-width: 1px; border-bottom-width: 1px; }
+.sw-tooltip__bubble--bottom .sw-tooltip__arrow { top: -5px; left: calc(50% - 4px - var(--sw-tooltip-shift)); border-left-width: 1px; border-top-width: 1px; }
+.sw-tooltip__bubble--left .sw-tooltip__arrow { right: -5px; top: calc(50% - 4px); border-right-width: 1px; border-top-width: 1px; }
+.sw-tooltip__bubble--right .sw-tooltip__arrow { left: -5px; top: calc(50% - 4px); border-left-width: 1px; border-bottom-width: 1px; }
+
+/* the «i» trigger next to a term */
+.sw-tooltip__info {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 24px; height: 24px; padding: 0; margin: -4px 0;
+  border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--text-muted);
+  vertical-align: middle; cursor: pointer;
+  transition: color var(--duration-base) var(--ease-standard), background-color var(--duration-base) var(--ease-standard);
+}
+.sw-tooltip__info:hover, .sw-tooltip__info.is-hover, .sw-tooltip.is-open .sw-tooltip__info { color: var(--text); background: var(--tint-hover); }
+.sw-tooltip__info:focus-visible, .sw-tooltip__info.is-focus { outline: 2px solid var(--focus); outline-offset: 2px; }

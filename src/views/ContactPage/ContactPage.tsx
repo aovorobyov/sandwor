@@ -1,97 +1,79 @@
-import { getTranslations } from 'next-intl/server';
-import { Eyebrow } from '@/shared/ui/Eyebrow';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { Badge } from '@sw/components/Badge';
+import { Icon } from '@sw/components/Icon';
+import { BriefCard } from '@/features/brief';
+import { CONTACT_CHANNELS } from '@/shared/config/contacts';
+import { JsonLd, buildBreadcrumbs, buildOrganization } from '@/shared/lib/jsonLd';
+import { localizeHref } from '@/shared/ui/Link';
+import { PageHero } from '@/shared/ui/PageHero';
 import { Section } from '@/shared/ui/Section';
-import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
-import { ContactForm } from '@/features/contact-form';
-import { JsonLd, buildPerson } from '@/shared/lib/jsonLd';
-import { CONTACT_EMAIL, CONTACT_LINKS, CONTACT_PHONE_HREF, PRIMARY_EMAIL } from './contacts';
 import s from './ContactPage.module.css';
 
+/** Контакты: бриф прямо на странице и прямые каналы связи справа. */
 export const ContactPage = async () => {
+  const locale = await getLocale();
   const t = await getTranslations();
-
-  const personData = buildPerson({ name: t('home.name'), bio: t('home.bio') });
+  const href = (path: string) => localizeHref(path, locale);
 
   return (
-    <main>
-      <JsonLd data={personData} />
+    <>
+      <JsonLd data={buildOrganization({ description: t('meta.description') })} />
 
-      {/* ── Герой ── */}
-      <section className={s.hero}>
-        <div className={s.heroGlow} aria-hidden />
+      <JsonLd
+        data={buildBreadcrumbs([
+          { name: t('nav.home'), path: href('/') },
+          { name: t('nav.contact'), path: href('/contact') },
+        ])}
+      />
 
-        <div className={s.heroInner}>
-          <Breadcrumbs
-            className={s.breadcrumbs}
-            items={[{ label: t('nav.home'), href: '/' }, { label: t('nav.contact') }]}
-          />
+      <PageHero
+        breadcrumbs={[{ label: t('nav.home'), href: href('/') }, { label: t('nav.contact') }]}
+        meta={<Badge tone="ok">{t('contact-page.status')}</Badge>}
+        title={t('contact-page.title')}
+        lead={t('contact-page.lead')}
+      />
 
-          <div className={s.heroCols}>
-            <div className={s.heroMain}>
-              <h1 className={s.heroTitle}>{t('contact.hero-title')}</h1>
+      <Section spacing="s" aria-label={t('contact-page.title')}>
+        <div className={s.layout}>
+          <BriefCard />
 
-              <p className={s.heroLead}>{t('contact.subtitle')}</p>
-            </div>
+          <aside className={s.channels} aria-labelledby="channels-title">
+            <h2 id="channels-title" className={s.channelsTitle}>
+              {t('contact-page.channels-title')}
+            </h2>
 
-            <div className={s.status}>
-              <div className={s.statusRow}>
-                <span className={s.pulseDot} aria-hidden />
+            <ul className={s.list}>
+              {CONTACT_CHANNELS.map((channel) => (
+                <li key={channel.id}>
+                  <a
+                    href={channel.href}
+                    className={s.channel}
+                    {...(channel.isExternal
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : undefined)}
+                  >
+                    <span className={s.tile} aria-hidden="true">
+                      <Icon name={channel.icon} size={20} />
+                    </span>
 
-                <span className={s.statusLabel}>{t('contact.status')}</span>
-              </div>
+                    <span className={s.text}>
+                      <span className={s.label}>{t(`contacts.${channel.id}`)}</span>
+                      <span className={s.handle}>{channel.handle}</span>
+                    </span>
 
-              <a href={PRIMARY_EMAIL} className={s.statusBig}>
-                {CONTACT_EMAIL}
-              </a>
+                    <Icon name="arrow-up-right" size={16} className={s.arrow} />
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-              <a href={CONTACT_PHONE_HREF} className={s.statusBig}>
-                {t('contact.phone')}
-              </a>
-
-              <div className={s.geo}>{t('contact.geo')}</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Каналы + форма ── */}
-      <Section className={s.grid}>
-        <div>
-          <Eyebrow className={s.colTitle}>{t('contact.channels-title')}</Eyebrow>
-
-          <div className={s.channels}>
-            {CONTACT_LINKS.map(({ id, handle, href }) => (
-              <a
-                key={id}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={s.channel}
-              >
-                <span className={s.channelLabel}>{t(`contact.channels.${id}`)}</span>
-
-                <span className={s.channelHandle}>{handle} ↗</span>
-              </a>
-            ))}
-          </div>
-
-          <div className={s.about}>
-            <Eyebrow className={s.aboutEyebrow}>{t('contact.who-title')}</Eyebrow>
-
-            <div className={s.aboutName}>{t('home.name')}</div>
-
-            <p className={s.aboutBio}>{t('home.bio')}</p>
-          </div>
-        </div>
-
-        <div className={s.formCard}>
-          <Eyebrow tone="accent" className={s.formTitle}>
-            {t('contact.message-title')}
-          </Eyebrow>
-
-          <ContactForm />
+            <p className={s.geo}>
+              <Icon name="map-pin" size={16} />
+              {t('contact-page.geo')}
+            </p>
+          </aside>
         </div>
       </Section>
-    </main>
+    </>
   );
 };

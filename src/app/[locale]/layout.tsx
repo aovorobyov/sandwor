@@ -3,12 +3,14 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { locales, type Locale } from '@/i18n-routing';
-import { Header } from '@/widgets/Header';
-import { Footer } from '@/widgets/Footer';
+import { SiteHeader } from '@/widgets/SiteHeader';
+import { SiteFooter } from '@/widgets/SiteFooter';
 import { CommandPalette } from '@/widgets/CommandPalette';
 import { ScrollReset } from '@/widgets/ScrollReset';
+import { BriefProvider } from '@/features/brief';
 import { CookieConsent } from '@/features/cookie-consent';
 import { AmoCrmButton } from '@/shared/lib/crm';
+import { LinkInterceptor } from '@/shared/lib/navigation';
 
 interface Props {
   children: React.ReactNode;
@@ -20,10 +22,11 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: '' });
+  const t = await getTranslations({ locale, namespace: 'meta' });
 
   return {
-    title: t('home.name'),
+    title: { template: '%s | sandwor', absolute: t('title') },
+    description: t('description'),
   };
 }
 
@@ -37,12 +40,15 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <ScrollReset />
-      <Header />
-      <div style={{ flex: 1 }}>{children}</div>
-      <Footer />
-      <CommandPalette />
-      <CookieConsent />
+      <BriefProvider>
+        <LinkInterceptor />
+        <ScrollReset />
+        <SiteHeader />
+        <main style={{ flex: 1 }}>{children}</main>
+        <SiteFooter />
+        <CommandPalette />
+        <CookieConsent />
+      </BriefProvider>
       <AmoCrmButton locale={locale as Locale} />
     </NextIntlClientProvider>
   );

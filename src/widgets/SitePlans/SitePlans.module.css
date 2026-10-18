@@ -1,0 +1,32 @@
+.root {
+  display: grid;
+  gap: var(--space-14);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  align-items: stretch;
+}
+
+.card {
+  height: 100%;
+}
+
+@media (max-width: 1000px) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 760px) {
+  .root {
+    gap: var(--space-10);
+  }
+
+  .cards {
+    max-width: none;
+  }
+}

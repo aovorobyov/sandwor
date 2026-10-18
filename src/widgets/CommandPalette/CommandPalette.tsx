@@ -1,14 +1,12 @@
 'use client';
 
-import type {
-  ChangeEvent,
-  FC,
-  KeyboardEvent as ReactKeyboardEvent,
-  MouseEvent as ReactMouseEvent,
-} from 'react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import type { ChangeEvent, FC, KeyboardEvent as ReactKeyboardEvent } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { cn } from '@/shared/lib/cn';
+import { Modal } from '@sw/components/Modal';
+import { TextField } from '@sw/components/TextField';
+import { Icon } from '@sw/components/Icon';
+import { cx } from '@sw/utils';
 import type { PaletteCommand } from './CommandPalette.types';
 import { useCommands } from './lib/useCommands';
 import { fetchPalettePosts, type PaletteSearchPost } from './lib/paletteApi';
@@ -26,56 +24,48 @@ const matchesQuery = (cmd: PaletteCommand, query: string): boolean => {
   return haystack.includes(query.toLowerCase());
 };
 
+/**
+ * Поиск и навигация по ⌘K / Ctrl+K: Modal дизайн-системы с полем поиска и
+ * списком команд. Стрелки выбирают пункт, Enter выполняет, Esc закрывает.
+ */
 export const CommandPalette: FC = () => {
-  const t = useTranslations('palette');
+  const t = useTranslations();
+  const listId = useId();
   const [posts, setPosts] = useState<PaletteSearchPost[]>([]);
   const [hasFetchedPosts, setHasFetchedPosts] = useState(false);
   const commands = useCommands(posts);
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
 
   const filtered = useMemo(() => {
-    return commands.filter((cmd) => {
-      return matchesQuery(cmd, query);
-    });
+    return commands.filter((cmd) => matchesQuery(cmd, query));
   }, [commands, query]);
 
   useEffect(() => {
-    const handleGlobalKey = (event: KeyboardEvent) => {
-      const isTrigger = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === COMMAND_KEY;
-      if (isTrigger) {
-        event.preventDefault();
-        setIsOpen((prev) => !prev);
-        setQuery('');
-        setSelectedIndex(0);
-        return;
-      }
-      if (event.key === 'Escape') {
-        setIsOpen(false);
-      }
-    };
-
-    const handleOpenRequest = () => {
+    const open = () => {
       setIsOpen(true);
       setQuery('');
       setSelectedIndex(0);
     };
 
+    const handleGlobalKey = (event: KeyboardEvent) => {
+      const isTrigger = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === COMMAND_KEY;
+      if (isTrigger) {
+        event.preventDefault();
+        open();
+      }
+    };
+
     document.addEventListener('keydown', handleGlobalKey);
-    document.addEventListener(PALETTE_OPEN_EVENT, handleOpenRequest);
+    document.addEventListener(PALETTE_OPEN_EVENT, open);
     return () => {
       document.removeEventListener('keydown', handleGlobalKey);
-      document.removeEventListener(PALETTE_OPEN_EVENT, handleOpenRequest);
+      document.removeEventListener(PALETTE_OPEN_EVENT, open);
     };
   }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      inputRef.current?.focus();
-    }
-  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen || hasFetchedPosts) {
@@ -87,115 +77,114 @@ export const CommandPalette: FC = () => {
   }, [isOpen, hasFetchedPosts]);
 
   useEffect(() => {
-    setSelectedIndex((prev) => {
-      const max = Math.max(filtered.length - 1, 0);
-      return Math.min(prev, max);
-    });
+    setSelectedIndex((prev) => Math.min(prev, Math.max(filtered.length - 1, 0)));
   }, [filtered.length]);
+
+  useEffect(() => {
+    const active = listRef.current?.querySelector('[aria-selected="true"]');
+    active?.scrollIntoView({ block: 'nearest' });
+  }, [selectedIndex]);
+
+  const close = () => {
+    setIsOpen(false);
+  };
 
   const runCommand = (cmd: PaletteCommand) => {
     setIsOpen(false);
     cmd.onSelect();
   };
 
-  const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleQueryChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setQuery(event.target.value);
     setSelectedIndex(0);
   };
 
-  const handleInputKey = (event: ReactKeyboardEvent<HTMLInputElement>) => {
+  const handleInputKey = (event: ReactKeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const total = filtered.length;
     if (total === 0) {
       return;
     }
 
-    switch (event.key) {
-      case 'ArrowDown':
-        event.preventDefault();
-        setSelectedIndex((i) => (i + 1) % total);
-        return;
-      case 'ArrowUp':
-        event.preventDefault();
-        setSelectedIndex((i) => (i - 1 + total) % total);
-        return;
-      case 'Enter': {
-        event.preventDefault();
-        const cmd = filtered[selectedIndex];
-        if (cmd) {
-          runCommand(cmd);
-        }
-        return;
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setSelectedIndex((i) => (i + 1) % total);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      setSelectedIndex((i) => (i - 1 + total) % total);
+    } else if (event.key === 'Enter') {
+      event.preventDefault();
+      const cmd = filtered[selectedIndex];
+      if (cmd) {
+        runCommand(cmd);
       }
     }
   };
 
-  const handleBackdropClick = () => {
-    setIsOpen(false);
-  };
-
-  const handlePanelClick = (event: ReactMouseEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-  };
-
-  const createItemClickHandler = (cmd: PaletteCommand) => {
-    return () => {
-      runCommand(cmd);
-    };
-  };
-
-  const createItemHoverHandler = (idx: number) => {
-    return () => {
-      setSelectedIndex(idx);
-    };
-  };
-
-  if (!isOpen) {
-    return null;
-  }
+  const activeId = filtered[selectedIndex] ? `${listId}-${selectedIndex}` : undefined;
 
   return (
-    <div className={s.backdrop} role="dialog" aria-modal="true" onClick={handleBackdropClick}>
-      <div className={s.panel} onClick={handlePanelClick}>
-        <input
-          ref={inputRef}
-          type="text"
-          value={query}
-          onChange={handleQueryChange}
-          onKeyDown={handleInputKey}
-          placeholder={t('placeholder')}
-          className={s.input}
-          aria-label={t('placeholder')}
-        />
-
-        {filtered.length === 0 ? (
-          <p className={s.empty}>{t('empty')}</p>
-        ) : (
-          <ul className={s.list}>
-            {filtered.map((cmd, idx) => (
-              <li
-                key={cmd.id}
-                className={cn(s.item, idx === selectedIndex && s.itemActive)}
-                onClick={createItemClickHandler(cmd)}
-                onMouseEnter={createItemHoverHandler(idx)}
-              >
-                <span className={s.itemDot} aria-hidden />
-
-                <span className={s.itemLabel}>{cmd.label}</span>
-
-                <span className={s.itemGroup}>{t(`group.${cmd.group}`)}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <div className={s.hints}>
-          <span>↑↓ {t('hintNavigate')}</span>
-
-          <span>Enter {t('hintSelect')}</span>
-
-          <span>Esc {t('hintClose')}</span>
+    <Modal
+      open={isOpen}
+      onClose={close}
+      label={t('palette.placeholder')}
+      closeLabel={t('common.close')}
+      initialFocus={inputRef as React.RefObject<HTMLElement>}
+      hideClose
+      footer={
+        <div className={s.hints} aria-hidden="true">
+          <span>
+            <kbd className={s.kbd}>↑↓</kbd> {t('palette.hintNavigate')}
+          </span>
+          <span>
+            <kbd className={s.kbd}>Enter</kbd> {t('palette.hintSelect')}
+          </span>
+          <span>
+            <kbd className={s.kbd}>Esc</kbd> {t('palette.hintClose')}
+          </span>
         </div>
-      </div>
-    </div>
+      }
+    >
+      <TextField
+        icon="search"
+        value={query}
+        onChange={handleQueryChange}
+        onKeyDown={handleInputKey}
+        placeholder={t('palette.placeholder')}
+        aria-label={t('palette.placeholder')}
+        role="combobox"
+        aria-expanded="true"
+        aria-controls={listId}
+        aria-activedescendant={activeId}
+        autoComplete="off"
+        inputRef={inputRef}
+        size="l"
+      />
+
+      {filtered.length === 0 ? (
+        <p className={s.empty}>{t('palette.empty')}</p>
+      ) : (
+        <ul ref={listRef} id={listId} role="listbox" className={s.list}>
+          {filtered.map((cmd, idx) => (
+            <li
+              key={cmd.id}
+              id={`${listId}-${idx}`}
+              role="option"
+              aria-selected={idx === selectedIndex}
+              className={cx(s.item, idx === selectedIndex && s.itemActive)}
+              onClick={() => runCommand(cmd)}
+              onMouseEnter={() => setSelectedIndex(idx)}
+            >
+              <span className={s.itemIcon} aria-hidden="true">
+                <Icon name={cmd.icon} size={16} />
+              </span>
+
+              <span className={s.itemLabel}>{cmd.label}</span>
+
+              <span className={s.itemGroup}>{t(`palette.group.${cmd.group}`)}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Modal>
   );
 };

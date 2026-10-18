@@ -1,2 +1,1 @@
-export { LocaleSwitch } from './ui/LocaleSwitch';
-export { useLocaleSwitch } from './lib/useLocaleSwitch';
+export { useLocaleSwitch, buildLocalePath } from './lib/useLocaleSwitch';

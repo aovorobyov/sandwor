@@ -16,19 +16,22 @@ const LEAD_MAX = 150;
 const TAG_MAX = 32;
 const META_MAX = 80;
 
-/** Палитра — те же токены, что в `globals.css` (единственная тёмная тема). */
-const BG = '#0e0c0b';
-const TEXT = '#f4efe8';
-const MUTED = '#9a9086';
-const DIM = '#6b635b';
-const AC = '#ff7a2b';
-const LINE = 'rgba(244, 239, 232, 0.13)';
-const LINE_SOFT = 'rgba(244, 239, 232, 0.07)';
-const GLOW = 'radial-gradient(circle at 84% 6%, rgba(255, 122, 43, 0.22), rgba(14, 12, 11, 0) 62%)';
+/**
+ * Палитра — тёмная тема дизайн-системы (`shared/sandwor/tokens/tokens.css`).
+ * ImageResponse не видит CSS-переменные, поэтому значения продублированы здесь.
+ */
+const BG = '#0F0D0B';
+const TEXT = '#F4EFE8';
+const MUTED = '#978C80';
+const DIM = '#6B6258';
+const AC = '#FFB21F';
+const LINE = '#2A2520';
+const LINE_SOFT = '#1F1B17';
+const GLOW = 'radial-gradient(circle at 84% 6%, rgba(255, 178, 31, 0.16), rgba(15, 13, 11, 0) 62%)';
 
-/** Словесный знак логотипа — тот же, что в шапке сайта. */
+/** Словесный знак логотипа — тот же, что в шапке сайта (Logo дизайн-системы). */
 const WORDMARK: Record<OgLocale, string> = {
-  ru: 'сандвор',
+  ru: 'sandwor',
   en: 'sandwor',
 };
 
@@ -117,12 +120,12 @@ const renderLogo = (wordmark: string) => {
 
       <div
         style={{
-          width: 7,
-          height: 7,
+          width: 8,
+          height: 8,
           borderRadius: 4,
           background: AC,
-          marginLeft: 6,
-          marginBottom: 6,
+          marginLeft: 7,
+          marginBottom: 4,
         }}
       />
     </div>

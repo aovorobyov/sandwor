@@ -1,0 +1,5 @@
+.stats {
+  width: 100%;
+  max-width: 480px;
+  margin-top: var(--space-6);
+}

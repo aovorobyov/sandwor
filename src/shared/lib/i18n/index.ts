@@ -1,0 +1,1 @@
+export { useLocalePaths } from './useLocalePaths';

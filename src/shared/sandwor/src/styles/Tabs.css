@@ -1,0 +1,63 @@
+/* ── Tabs ─────────────────────────────────────────────────────── */
+.sw-tabs { --sw-tabs-h: var(--control-m); --sw-tabs-pad: 12px; min-width: 0; }
+.sw-tabs--s { --sw-tabs-h: var(--control-s); --sw-tabs-pad: 10px; }
+
+/* the list scrolls sideways on narrow screens instead of wrapping.
+   4px of padding (cancelled by a -4px margin) leaves room for the outer focus ring,
+   so the scroll box does not clip it; scroll-padding keeps a focused edge tab's ring in view. */
+.sw-tabs__scroll {
+  overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain;
+  padding: var(--space-1); margin: calc(-1 * var(--space-1));
+  scroll-padding-inline: var(--space-1);
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.sw-tabs__scroll::-webkit-scrollbar { display: none; }
+
+.sw-tabs__list { position: relative; display: flex; gap: 2px; min-width: max-content; }
+/* the 1px baseline across the whole list; the active underline sits on top of it */
+.sw-tabs__list::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--line);
+}
+
+.sw-tabs__tab {
+  position: relative; flex: none;
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  height: var(--sw-tabs-h); margin: 0; padding: 0 var(--sw-tabs-pad);
+  border: 0; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: transparent;
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 500;
+  color: var(--text-secondary); white-space: nowrap; cursor: pointer; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color var(--duration-base) var(--ease-standard), background-color var(--duration-base) var(--ease-standard);
+}
+.sw-tabs--s .sw-tabs__tab { font-size: 13px; line-height: 18px; gap: 6px; }
+.sw-tabs__tab::after {
+  content: ""; position: absolute; z-index: 1; left: var(--sw-tabs-pad); right: var(--sw-tabs-pad); bottom: 0;
+  height: 2px; background: transparent;
+  transition: background-color var(--duration-base) var(--ease-standard);
+}
+
+.sw-tabs__icon { color: var(--text-muted); transition: color var(--duration-base) var(--ease-standard); }
+.sw-tabs__count {
+  font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 450;
+  font-variant-numeric: tabular-nums; color: var(--text-muted);
+  transition: color var(--duration-base) var(--ease-standard);
+}
+
+.sw-tabs__tab:hover:not(:disabled), .sw-tabs__tab.is-hover { color: var(--text); background: var(--tint-hover); }
+.sw-tabs__tab:not([aria-selected="true"]):hover:not(:disabled) .sw-tabs__icon, .sw-tabs__tab.is-hover:not([aria-selected="true"]) .sw-tabs__icon { color: var(--text-secondary); }
+.sw-tabs__tab:active:not(:disabled), .sw-tabs__tab.is-pressed { background: var(--tint-pressed); }
+
+.sw-tabs__tab[aria-selected="true"], .sw-tabs__tab.is-active { color: var(--text); }
+.sw-tabs__tab[aria-selected="true"]::after, .sw-tabs__tab.is-active::after { background: var(--accent); }
+.sw-tabs__tab[aria-selected="true"] .sw-tabs__count, .sw-tabs__tab.is-active .sw-tabs__count,
+.sw-tabs__tab[aria-selected="true"] .sw-tabs__icon, .sw-tabs__tab.is-active .sw-tabs__icon { color: var(--accent-text); }
+
+/* outer ring like Button: it surrounds the tab and its underline (the scroll box has room for it) */
+.sw-tabs__tab:focus-visible, .sw-tabs__tab.is-focus { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); z-index: 2; }
+
+.sw-tabs__tab:disabled { color: var(--text-disabled); cursor: not-allowed; }
+.sw-tabs__tab:disabled .sw-tabs__count, .sw-tabs__tab:disabled .sw-tabs__icon { color: var(--text-disabled); }
+
+.sw-tabs__panel { padding-top: var(--space-5); border-radius: var(--radius-sm); }
+.sw-tabs__panel:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sw-tabs__panel[hidden] { display: none; }

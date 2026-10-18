@@ -12,17 +12,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: '' });
   return {
-    title: t('contact.title'),
-    description: t('contact.subtitle'),
+    title: t('contact-page.meta'),
+    description: t('contact-page.lead'),
     alternates: buildPageAlternates(locale, '/contact'),
     ...buildSocialMeta({
-      title: t('contact.title'),
-      description: t('contact.subtitle'),
+      title: t('contact-page.meta'),
+      description: t('contact-page.lead'),
       image: buildPageOgImage({
         locale,
-        tag: t('contact.title'),
-        title: t('contact.hero-title'),
-        lead: t('contact.subtitle'),
+        tag: t('contact-page.meta'),
+        title: t('contact-page.title'),
+        lead: t('contact-page.lead'),
       }),
     }),
   };

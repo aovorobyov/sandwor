@@ -17,14 +17,14 @@ const buildOgImage = (params: Record<string, string>, alt: string): OgImage => {
 };
 
 /**
- * Продающая обложка для главной и /websites: позиционирование, ценовой якорь и
+ * Продающая обложка для главной: позиционирование, ценовой якорь и
  * сроки. Текст локализован по `locale` внутри роута.
  */
 export const buildOfferOgImage = (locale: string): OgImage => {
   const alt =
     locale === 'en'
-      ? 'Websites that bring you leads — sandwor'
-      : 'Сайты, которые приносят заявки — sandwor';
+      ? 'We bring order to your sales — sandwor'
+      : 'Наводим порядок в продажах — sandwor';
 
   return buildOgImage({ variant: 'offer', locale }, alt);
 };

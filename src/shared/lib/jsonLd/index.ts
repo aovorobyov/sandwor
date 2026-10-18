@@ -3,7 +3,8 @@ export type { JsonLdProps } from './JsonLd.types';
 export {
   buildBlogPosting,
   buildBreadcrumbs,
-  buildCourse,
+  buildOrganization,
   buildPerson,
+  buildService,
   buildWebSite,
 } from './builders';

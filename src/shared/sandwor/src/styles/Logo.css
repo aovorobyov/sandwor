@@ -1,0 +1,9 @@
+/* ── Logo ─────────────────────────────────────────────────────── */
+.sw-logo {
+  display: inline-flex; align-items: baseline; gap: 0.2222em;
+  font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em; line-height: 1;
+  color: var(--text); text-decoration: none; white-space: nowrap; border-radius: var(--radius-sm);
+}
+.sw-logo__dot { display: block; flex: none; width: 0.2778em; height: 0.2778em; border-radius: var(--radius-round); background: var(--accent); }
+.sw-logo--mono .sw-logo__dot { background: currentColor; }
+a.sw-logo:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }

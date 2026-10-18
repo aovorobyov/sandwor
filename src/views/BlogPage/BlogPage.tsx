@@ -1,32 +1,65 @@
-import { getTranslations, getLocale } from 'next-intl/server';
-import { Section } from '@/shared/ui/Section';
-import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { Tabs } from '@sw/components/Tabs';
 import { getPosts } from '@/entities/post/api/posts';
-import { BlogFilter } from './BlogFilter';
-import s from './BlogPage.module.css';
+import { PostsGrid } from '@/widgets/PostsGrid';
+import { JsonLd, buildBreadcrumbs } from '@/shared/lib/jsonLd';
+import { localizeHref } from '@/shared/ui/Link';
+import { PageHero } from '@/shared/ui/PageHero';
+import { Section } from '@/shared/ui/Section';
+
+const ALL = 'all';
 
 export const BlogPage = async () => {
   const locale = await getLocale();
   const [t, posts] = await Promise.all([getTranslations(), getPosts(locale)]);
+  const href = (path: string) => localizeHref(path, locale);
+
+  const tags = Array.from(new Set(posts.map((post) => post.tag)));
 
   return (
-    <main>
-      <section className={s.hero}>
-        <div className={s.heroInner}>
-          <Breadcrumbs
-            className={s.breadcrumbs}
-            items={[{ label: t('nav.home'), href: '/' }, { label: t('nav.blog') }]}
+    <>
+      <JsonLd
+        data={buildBreadcrumbs([
+          { name: t('nav.home'), path: href('/') },
+          { name: t('nav.blog'), path: href('/blog') },
+        ])}
+      />
+
+      <PageHero
+        breadcrumbs={[{ label: t('nav.home'), href: href('/') }, { label: t('nav.blog') }]}
+        meta={t('blog-page.meta')}
+        title={t('blog-page.title')}
+        lead={t('blog-page.lead')}
+      />
+
+      <Section spacing="s" aria-label={t('blog-page.title')}>
+        {tags.length > 1 ? (
+          <Tabs
+            label={t('blog-page.filter-label')}
+            items={[
+              { id: ALL, label: t('blog-page.filter-all'), count: posts.length },
+              ...tags.map((tag) => ({
+                id: tag,
+                label: tag,
+                count: posts.filter((post) => post.tag === tag).length,
+              })),
+            ]}
+            panels={Object.fromEntries([
+              [ALL, <PostsGrid key={ALL} posts={posts} headingLevel={2} />],
+              ...tags.map((tag) => [
+                tag,
+                <PostsGrid
+                  key={tag}
+                  posts={posts.filter((post) => post.tag === tag)}
+                  headingLevel={2}
+                />,
+              ]),
+            ])}
           />
-
-          <h1 className={s.title}>{t('blog.title')}</h1>
-
-          <p className={s.lead}>{t('blog.subtitle')}</p>
-        </div>
-      </section>
-
-      <Section>
-        <BlogFilter posts={posts} />
+        ) : (
+          <PostsGrid posts={posts} headingLevel={2} />
+        )}
       </Section>
-    </main>
+    </>
   );
 };

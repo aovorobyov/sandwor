@@ -1,81 +1,67 @@
-import { getTranslations } from 'next-intl/server';
-import { Button } from '@/shared/ui/Button';
-import { Mono } from '@/shared/ui/Mono';
-import { Section } from '@/shared/ui/Section';
-import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { Tabs } from '@sw/components/Tabs';
+import { CASE_SERVICES, PUBLISHED_CASE_SLUGS } from '@/entities/case';
+import { SERVICE_IDS } from '@/entities/service';
+import { CaseCards } from '@/widgets/CaseCards';
 import { JsonLd, buildBreadcrumbs } from '@/shared/lib/jsonLd';
-import { isPublishedCase } from '@/entities/case';
-import type { CaseItem, CaseMetric } from '@/entities/case/model/types';
-import { CasesFilter } from './CasesFilter';
-import s from './CasesPage.module.css';
+import { localizeHref } from '@/shared/ui/Link';
+import { PageHero } from '@/shared/ui/PageHero';
+import { Section } from '@/shared/ui/Section';
+
+const ALL = 'all';
 
 export const CasesPage = async () => {
+  const locale = await getLocale();
   const t = await getTranslations();
+  const href = (path: string) => localizeHref(path, locale);
 
-  const items = (t.raw('cases.items') as CaseItem[]).filter((item) => isPublishedCase(item.slug));
-  const metrics = t.raw('cases.metrics') as CaseMetric[];
-
-  const breadcrumbs = buildBreadcrumbs([
-    { name: t('nav.home'), path: '/' },
-    { name: t('nav.cases'), path: '/cases' },
-  ]);
+  // Табы по направлениям — только по тем, где есть кейсы; при одном направлении
+  // фильтр ничего не меняет, и табов нет.
+  const groups = SERVICE_IDS.map((id) => ({
+    id,
+    slugs: PUBLISHED_CASE_SLUGS.filter((slug) => CASE_SERVICES[slug].includes(id)),
+  })).filter((group) => group.slugs.length > 0);
 
   return (
-    <main>
-      <JsonLd data={breadcrumbs} />
+    <>
+      <JsonLd
+        data={buildBreadcrumbs([
+          { name: t('nav.home'), path: href('/') },
+          { name: t('nav.cases'), path: href('/cases') },
+        ])}
+      />
 
-      {/* ── Герой ── */}
-      <section className={s.hero}>
-        <div className={s.heroGlow} aria-hidden />
+      <PageHero
+        breadcrumbs={[{ label: t('nav.home'), href: href('/') }, { label: t('nav.cases') }]}
+        meta={t('cases-page.meta')}
+        title={t('cases-page.title')}
+        lead={t('cases-page.lead')}
+      />
 
-        <div className={s.heroInner}>
-          <Breadcrumbs
-            className={s.breadcrumbs}
-            items={[{ label: t('nav.home'), href: '/' }, { label: t('cases.breadcrumb') }]}
+      <Section spacing="s" aria-label={t('cases-page.title')}>
+        {groups.length > 1 ? (
+          <Tabs
+            label={t('cases-page.filter-label')}
+            items={[
+              { id: ALL, label: t('cases-page.filter-all'), count: PUBLISHED_CASE_SLUGS.length },
+              ...groups.map((group) => ({
+                id: group.id,
+                label: t(`service-labels.${group.id}`),
+                count: group.slugs.length,
+              })),
+            ]}
+            panels={Object.fromEntries([
+              [ALL, <CaseCards key={ALL} layout="stacked" headingLevel={2} />],
+              ...groups.map((group) => [
+                group.id,
+                <CaseCards key={group.id} slugs={group.slugs} layout="stacked" headingLevel={2} />,
+              ]),
+            ])}
           />
-
-          <div className={s.heroCols}>
-            <div className={s.heroMain}>
-              <h1 className={s.heroTitle}>{t('cases.hero-title')}</h1>
-
-              <p className={s.heroLead}>{t('cases.hero-lead')}</p>
-            </div>
-
-            <div className={s.metrics}>
-              {metrics.map((metric, index) => (
-                <div key={metric.label} className={s.metric} data-first={index === 0}>
-                  <div className={s.metricValue}>{metric.value}</div>
-
-                  <div className={s.metricLabel}>{metric.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Фильтр + сетка ── */}
-      <Section>
-        <CasesFilter
-          items={items}
-          allLabel={t('cases.filter-all')}
-          ctaLabel={t('cases.card-cta')}
-        />
+        ) : (
+          <CaseCards layout="stacked" headingLevel={2} />
+        )}
       </Section>
-
-      {/* ── CTA ── */}
-      <section className={s.cta}>
-        <div className={s.ctaInner}>
-          <h2 className={s.ctaTitle}>{t('cases.cta-title')}</h2>
-
-          <p className={s.ctaLead}>{t('cases.cta-lead')}</p>
-
-          <Button href="/contact" variant="primary">
-            {t('cases.cta-btn')}
-            <Mono>→</Mono>
-          </Button>
-        </div>
-      </section>
-    </main>
+    </>
   );
 };

@@ -9,7 +9,6 @@ import { CommandPalette } from '@/widgets/CommandPalette';
 import { ScrollReset } from '@/widgets/ScrollReset';
 import { BriefProvider } from '@/features/brief';
 import { CookieConsent } from '@/features/cookie-consent';
-import { AmoCrmButton } from '@/shared/lib/crm';
 import { LinkInterceptor } from '@/shared/lib/navigation';
 import { byPositioning } from '@/shared/config/positioning';
 
@@ -51,9 +50,9 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
         <main style={{ flex: 1 }}>{children}</main>
         <SiteFooter />
         <CommandPalette />
+        {/* Уведомление о cookie, Метрика и чат amoCRM (появляется после уведомления). */}
         <CookieConsent />
       </BriefProvider>
-      <AmoCrmButton locale={locale as Locale} />
     </NextIntlClientProvider>
   );
 }

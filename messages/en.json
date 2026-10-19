@@ -1089,11 +1089,11 @@
     "switchLocale": "Switch language: {locale}"
   },
   "cookie": {
-    "aria": "Cookie consent",
-    "text": "We use cookies and Yandex.Metrica for analytics. Learn more —",
-    "policy": "Privacy Policy",
-    "accept": "Accept",
-    "reject": "Decline"
+    "aria": "Cookie notice",
+    "text": "By continuing to use the site, you agree to the use of cookies and Yandex Metrica.",
+    "more": "Learn more",
+    "ok": "OK",
+    "ok-aria": "OK, close the notice"
   },
   "404": {
     "page-not-found": "Page not found",
@@ -1104,7 +1104,7 @@
   "privacy": {
     "breadcrumb": "Privacy",
     "title": "Privacy Policy",
-    "updated": "Updated: 13 August 2026",
+    "updated": "Updated: 19 October 2026",
     "intro": "We respect your privacy. Below is what personal data the site collects, why it is needed and how you can manage it.",
     "sections": [
       {
@@ -1145,7 +1145,7 @@
         "heading": "6. Cookies and web analytics",
         "paragraphs": [
           "The Site uses cookies and the Yandex.Metrica service (Yandex LLC, servers located in the Russian Federation) to analyse traffic. Metrica may collect your IP address, cookies, device data and on-site behaviour.",
-          "Analytics loads only after your consent in the cookie banner; if you decline, the counter is not loaded. You can withdraw consent by clearing site data in your browser or disabling cookies in its settings."
+          "On your first visit the Site shows a notice about cookies and Yandex Metrica. By continuing to use the Site you agree to their use: the counter loads after 5 seconds on a page or earlier — when you scroll, tap or go to another page. If you leave the Site earlier without doing anything, no data is sent to Metrica. You can opt out of analytics by disabling cookies in your browser settings or clearing the Site's data."
         ]
       },
       {

@@ -1,49 +1,50 @@
 'use client';
 
 import type { FC } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@sw/components/Button';
 import { Icon } from '@sw/components/Icon';
-import { Link } from '@/shared/ui/Link';
+import type { Locale } from '@/i18n-routing';
 import { YandexMetrika } from '@/shared/lib/analytics';
-import { useCookieConsent } from '../../lib/useCookieConsent';
+import { AmoCrmButton } from '@/shared/lib/crm';
+import { Link } from '@/shared/ui/Link';
+import { useCookieNotice } from '../../lib/useCookieNotice';
 import s from './CookieConsent.module.css';
 
+/** Раздел «Файлы cookie и веб-аналитика» на странице политики. */
+const POLICY_HREF = '/privacy#privacy-6';
+
 /**
- * Баннер согласия на cookies и аналитику + условная загрузка Яндекс.Метрики.
- * Метрика инициализируется только после явного «Принять» — до выбора счётчик не грузится.
- * Оформлен как тост дизайн-системы: панель surface-overlay слева снизу, чтобы не
- * спорить с плавающей кнопкой amoCRM справа. Primary-кнопка на экране одна — в шапке,
- * поэтому здесь secondary и quiet.
+ * Уведомление о cookie («Продолжая пользоваться сайтом…» + «Хорошо») и то,
+ * что от него зависит: Яндекс Метрика стартует при продолжении пользования
+ * сайтом, а плавающая кнопка чата amoCRM появляется только после того, как
+ * уведомление скрылось, — чтобы не спорить с ним за угол экрана.
  */
 export const CookieConsent: FC = () => {
   const t = useTranslations('cookie');
-  const { consent, accept, reject } = useCookieConsent();
+  const locale = useLocale() as Locale;
+  const { state, hide, isAnalyticsAllowed } = useCookieNotice();
 
   return (
     <>
-      {consent === 'accepted' && <YandexMetrika />}
+      {isAnalyticsAllowed && <YandexMetrika />}
 
-      {consent === 'unknown' && (
-        <div className={s.root} role="region" aria-label={t('aria')}>
+      {state === 'hidden' && <AmoCrmButton locale={locale} />}
+
+      {state === 'visible' && (
+        <div className={s.root} role="region" aria-label={t('aria')} data-cookie-notice>
           <Icon name="info-circle" size={20} className={s.icon} />
 
           <p className={s.text}>
             {t('text')}{' '}
-            <Link href="/privacy" className={s.link}>
-              {t('policy')}
+            <Link href={POLICY_HREF} className={s.link}>
+              {t('more')}
             </Link>
           </p>
 
-          <div className={s.actions}>
-            <Button variant="quiet" size="s" onClick={reject}>
-              {t('reject')}
-            </Button>
-
-            <Button variant="secondary" size="s" onClick={accept}>
-              {t('accept')}
-            </Button>
-          </div>
+          <Button variant="secondary" size="s" onClick={hide} aria-label={t('ok-aria')}>
+            {t('ok')}
+          </Button>
         </div>
       )}
     </>

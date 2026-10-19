@@ -18,7 +18,8 @@
     "contact": "Contact",
     "privacy": "Privacy",
     "rss": "RSS",
-    "label": "Main navigation"
+    "label": "Main navigation",
+    "consent": "Consent"
   },
   "header": {
     "cta": "Discuss a project",
@@ -37,9 +38,10 @@
     "company": "Company",
     "contacts-title": "Get in touch",
     "rights": "© {year} sandwor",
-    "privacy": "Privacy Policy",
+    "privacy": "Data policy",
     "language": "Русский",
-    "language-aria": "Переключить на русский"
+    "language-aria": "Переключить на русский",
+    "consent": "Data processing consent"
   },
   "contacts": {
     "email": "Email",
@@ -272,7 +274,6 @@
     "next": "Next",
     "submit": "Send request",
     "sending": "Sending…",
-    "fine": "By clicking the button you agree to the personal data processing policy",
     "err-services": "Pick at least one service",
     "err-name": "Tell us how to address you",
     "err-contact": "Enter a phone number or Telegram username",
@@ -298,7 +299,8 @@
         "unknown": "Not sure yet"
       }
     },
-    "task-placeholder-studio": "For example: leads from the website and messengers get lost, we want everything in one CRM"
+    "task-placeholder-studio": "For example: leads from the website and messengers get lost, we want everything in one CRM",
+    "err-consent": "Please tick the consent to personal data processing"
   },
   "founder": {
     "meta": "Who owns your project",
@@ -1102,88 +1104,139 @@
     "description": "It may have been moved or the link is out of date. The homepage will get you back on track."
   },
   "privacy": {
-    "breadcrumb": "Privacy",
-    "title": "Privacy Policy",
-    "updated": "Updated: 19 October 2026",
-    "intro": "We respect your privacy. Below is what personal data the site collects, why it is needed and how you can manage it.",
+    "breadcrumb": "Data policy",
+    "title": "Personal Data Processing Policy",
+    "updated": "Edition of {edition}",
+    "intro": "This page describes what personal data the sandwor.online and sandwor.ru websites collect, why, to whom and where it is transferred, how long it is kept and how you can manage it. Consents to data processing — when sending a request and for cookies and web analytics — are separate documents. This is a translation; the Russian version prevails.",
     "sections": [
       {
-        "heading": "1. General provisions",
+        "heading": "1. Who processes the data",
         "paragraphs": [
-          "This Policy governs how personal data of visitors to the sandwor website (the “Site”) is processed and protected, and is prepared in accordance with Russian Federal Law No. 152-FZ of 27 July 2006 “On Personal Data”.",
-          "The data operator is Alexander Olegovich Vorobyov (the “Operator”). Contact for personal-data matters: aovorobyov@mail.ru.",
-          "By using the Site and submitting data through its forms, you confirm your agreement with this Policy."
+          "The personal data operator is {operator}, a self-employed professional income tax payer{inn_part} (the Operator). The Operator provides services under the sandwor name and owns the sandwor.online and sandwor.ru websites (the Site).",
+          "This policy is prepared under Russian Federal Law No. 152-FZ “On Personal Data” of 27.07.2006 and covers all data the Operator receives through the Site, the online chat on the Site and related contact channels.",
+          "Send questions about data processing, requests and consent withdrawals to {email}."
         ]
       },
       {
-        "heading": "2. What data is processed",
+        "heading": "2. A request via the “Let's talk about your project” brief",
         "paragraphs": [
-          "When you fill in the forms on the Site, the Operator processes the data you provide voluntarily: name, email address, phone number, Telegram username, and the text of your message or task description.",
-          "When you visit the Site, technical data is processed automatically: IP address, cookies, browser and device information, and on-page activity. It is collected via the Yandex.Metrica web-analytics service."
+          "Data: name; phone number or Telegram username; preferred contact method; company name and number of people in sales (optional); selected services, task description and budget (optional). The request also stores the page it was sent from, the date and time of sending and a consent mark with its edition number.",
+          "Purpose: to review the request, contact you, prepare an offer and, if both parties agree, conclude and perform a services contract.",
+          "Legal basis: your consent (Art. 6(1)(1) of 152-FZ), given with a separate checkbox before sending the brief; once a contract is concluded — performance of a contract to which you are a party (Art. 6(1)(5)).",
+          "Processing: the request is sent over a secure connection (HTTPS) to the Site's server, checked for spam and stored in the amoCRM system, where only the Operator can see it. Requests from the Site are not forwarded to messengers or email.",
+          "Retention: if no contract is concluded — 1 year from the last contact; if it is — for the term of the contract and 5 years after its performance. The data is then deleted."
         ]
       },
       {
-        "heading": "3. Purposes of processing",
+        "heading": "3. Online chat and messengers",
         "paragraphs": [
-          "Personal data is processed in order to: handle requests submitted through the forms; contact you upon your request; and improve the Site and analyse its traffic."
+          "The Site has a contact button and an online chat by amoCRM. If you write in the chat, the Operator receives your name or nickname, the contact details you provide, message texts and attachments. The conversation is stored in amoCRM.",
+          "The Site also links to Telegram and WhatsApp. If you write to the Operator in a messenger, your data (name or nickname, phone number, messages and files) is processed in that messenger under its rules, and Telegram and WhatsApp servers are located outside Russia. This is a cross-border transfer of personal data on your initiative: if you don't want it, use the brief or the chat on the Site — they run on servers in Russia.",
+          "Purpose and basis: to answer your inquiry and correspond about it — on the basis of your consent expressed by sending a message.",
+          "Retention: 1 year from the last message unless a contract is concluded (then as in section 2)."
         ]
       },
       {
-        "heading": "4. Legal basis",
+        "heading": "4. Cookies and web analytics",
         "paragraphs": [
-          "The basis for processing is the consent of the data subject. You give it by ticking the relevant checkbox when submitting a form or by continuing to use the Site with analytics enabled. Consent may be withdrawn at any time (see the section on rights)."
+          "The Site uses Yandex Metrica (Yandex LLC): it collects cookies and browser identifiers, IP address, device, browser and operating system details, addresses of viewed pages and the referral source (including ad campaign tags), on-page actions — scrolling, clicks, navigation — and session recordings (Webvisor) without the contents of input fields.",
+          "Purpose: to understand how visitors use the Site, evaluate traffic sources and improve the Site.",
+          "Legal basis — your consent to cookies and web analytics. On your first visit the Site shows the notice “By continuing to use the site, you agree to the use of cookies and Yandex Metrica”. Metrica loads only when you continue to use the Site: after 5 seconds on a page or earlier — when you scroll, tap, press a key or go to another page. If you leave the Site earlier without doing anything, no data is sent to Metrica. The mark that the notice was shown is kept in the browser for 12 months; while it exists, Metrica loads right away on later visits.",
+          "How to opt out: disable cookies for the Site in your browser settings or clear the Site's data, install a tracker blocker or Yandex's official Metrica opt-out add-on. You can also withdraw consent by writing to {email}.",
+          "Retention: Metrica data is kept by Yandex under the service rules; the Operator uses it in aggregated form for no longer than 1 year. Yandex keeps Webvisor recordings for up to 15 days.",
+          "Technical data in the browser: the mark that the cookie notice was shown (localStorage, 12 months) and data the amoCRM chat button stores for the chat to work. They are needed for the Site to work and are not used for analytics."
         ]
       },
       {
-        "heading": "5. Manner and means of processing",
+        "heading": "5. Server logs",
         "paragraphs": [
-          "Processing is carried out both with and without automation. Data submitted through the forms reaches the Operator as a message in the Telegram messenger and is used solely to contact you.",
-          "The Operator does not sell personal data and does not transfer it to third parties, except as described in this Policy or required by law."
+          "With every request to the Site the server automatically records the IP address, date and time, page address and browser details. These logs are needed for the Site to work, to find failures and to defend against attacks. Legal basis — the Operator's legitimate interest in the secure operation of the Site (Art. 6(1)(7) of 152-FZ). Logs are kept for no more than 3 months and are not used to identify you."
         ]
       },
       {
-        "heading": "6. Cookies and web analytics",
+        "heading": "6. Who receives the data",
         "paragraphs": [
-          "The Site uses cookies and the Yandex.Metrica service (Yandex LLC, servers located in the Russian Federation) to analyse traffic. Metrica may collect your IP address, cookies, device data and on-site behaviour.",
-          "On your first visit the Site shows a notice about cookies and Yandex Metrica. By continuing to use the Site you agree to their use: the counter loads after 5 seconds on a page or earlier — when you scroll, tap or go to another page. If you leave the Site earlier without doing anything, no data is sent to Metrica. You can opt out of analytics by disabling cookies in your browser settings or clearing the Site's data."
+          "The Operator does not sell personal data or share it for advertising. Data is processed on the Operator's behalf or with its involvement only by these services — to the extent needed for them to work:",
+          "amoCRM JSC (TIN 7709477879, Moscow) — the amoCRM system and the online chat on the Site: storing requests and conversations. Data is stored on servers in Russia.",
+          "Yandex LLC (TIN 7736207543, Moscow) — Yandex Metrica: processes data on the Operator's behalf under the service terms. Servers in Russia.",
+          "Selectel JSC (TIN 7810962785) — hosting: the server the Site runs on and requests pass through. The server is located in Russia.",
+          "Telegram and WhatsApp — only if you write to the Operator in a messenger yourself (section 3). WhatsApp is owned by Meta Platforms, Inc., whose activities are recognised as extremist and banned in Russia.",
+          "Data may be disclosed to public authorities only where required by law."
         ]
       },
       {
-        "heading": "7. Retention periods",
+        "heading": "7. Where the data is stored",
         "paragraphs": [
-          "Personal data is kept no longer than the purposes of processing require, or until consent is withdrawn. Once the purposes are achieved or consent is withdrawn, the data is deleted unless the law provides otherwise."
+          "Recording, systematisation, accumulation, storage, clarification and retrieval of personal data of Russian citizens received through the brief and the chat on the Site take place in databases located in Russia: on the Site's server and in amoCRM. A cross-border transfer is possible only when you correspond in messengers on your own initiative (section 3); the Operator notifies Roskomnadzor of it as required."
         ]
       },
       {
-        "heading": "8. Data protection",
+        "heading": "8. What is done with the data",
         "paragraphs": [
-          "The Operator takes reasonable organisational and technical measures to protect personal data from unlawful access, alteration, disclosure and destruction."
+          "Collection, recording, systematisation, accumulation, storage, clarification (updating, changing), retrieval, use, transfer (provision, access) to the services in section 6, blocking, deletion and destruction. Processing is mixed: with and without automation, with transfer over the internet. Decisions with legal consequences for you are not made solely on the basis of automated processing."
         ]
       },
       {
-        "heading": "9. Rights of the data subject",
+        "heading": "9. How the data is protected",
         "paragraphs": [
-          "You have the right to obtain information about the processing of your data, to request its correction, blocking or deletion, and to withdraw your consent. To exercise these rights, send a request to aovorobyov@mail.ru."
+          "Data is transferred only over a secure connection (HTTPS). Only the Operator has access to requests and conversations; CRM, hosting and analytics accounts are protected with passwords and two-factor authentication, and server access is key-based. The form filters spam and no unnecessary data is collected. The Operator keeps software up to date and, in case of a leak, notifies Roskomnadzor of the incident within 24 hours and of the investigation results within 72 hours."
         ]
       },
       {
-        "heading": "10. Withdrawal of consent",
+        "heading": "10. Your rights",
         "paragraphs": [
-          "You can withdraw consent to the processing of personal data by emailing aovorobyov@mail.ru. After withdrawal, the Operator stops processing and deletes the data unless there is another lawful basis to retain it."
+          "You have the right to: find out whether and how your data is processed; get a copy of it; demand that data be clarified, blocked or deleted if it is incomplete, outdated, inaccurate or unlawfully obtained; withdraw consent; appeal the Operator's actions to Roskomnadzor or a court.",
+          "How: write to {email}, stating how to contact you and which data you mean (for example, the phone number from a request). The Operator replies within 10 business days; this may be extended by 5 business days with an explanation."
         ]
       },
       {
-        "heading": "11. Changes to this Policy",
+        "heading": "11. Withdrawing consent and deletion",
         "paragraphs": [
-          "The Operator may amend this Policy. The current version is always published on this page."
+          "Consent is withdrawn by writing to {email}. The Operator stops processing and deletes the data within 30 days unless there are other lawful grounds to keep it (for example, a contract still being performed). Deletion is confirmed by a statement. Withdrawing consent to web analytics — see section 4."
         ]
       },
       {
-        "heading": "12. Contacts",
+        "heading": "12. Changes to the policy",
         "paragraphs": [
-          "For any questions related to the processing of personal data, contact aovorobyov@mail.ru."
+          "The Operator may update this policy, for example when connecting new services. A new edition applies from its publication on this page; the edition date is shown at the top. If the purposes or the data requiring consent change, the Operator will ask for consent again."
         ]
       }
     ]
+  },
+  "consent": {
+    "breadcrumb": "Data processing consent",
+    "title": "Consent to Personal Data Processing",
+    "updated": "Edition {version} of {edition}",
+    "intro": "This page contains two separate consents: to data processing when sending a request and to cookies and web analytics. Details are in the personal data processing policy. This is a translation; the Russian version prevails.",
+    "policy-link": "Personal data processing policy",
+    "sections": [
+      {
+        "id": "request",
+        "heading": "1. Consent when sending a request",
+        "paragraphs": [
+          "By ticking “I consent to the processing of personal data” and sending the brief on sandwor.online or sandwor.ru, I freely, of my own will and in my own interest consent to {operator}, a self-employed professional income tax payer{inn_part} (the Operator), processing my personal data on the following terms.",
+          "Purpose: to review my request, contact me, prepare an offer and, if we agree, conclude and perform a services contract.",
+          "Data: name; phone number or Telegram username; preferred contact method; company name and number of people in sales, selected services, task description and budget — if I provided them; the page address, date and time of sending the request.",
+          "Actions: collection, recording, systematisation, accumulation, storage, clarification, retrieval, use, transfer (provision, access) to processors, blocking, deletion, destruction — with and without automation.",
+          "Processors engaged by the Operator: amoCRM JSC (TIN 7709477879) — the amoCRM system where the request is stored; Selectel JSC (TIN 7810962785) — website hosting. Data is stored on servers in Russia.",
+          "Term: the consent is valid for 1 year from sending the request, and if a contract is concluded — for its term and 5 years after its performance. I may withdraw consent at any time by writing to {email}; the Operator will then stop processing and delete the data within 30 days unless there are other lawful grounds to keep it."
+        ]
+      },
+      {
+        "id": "cookies",
+        "heading": "2. Consent to cookies and web analytics",
+        "paragraphs": [
+          "By continuing to use the site after the cookie notice (after 5 seconds on a page, when scrolling, tapping, pressing a key, clicking “OK” or going to another page), I consent to {operator} (the Operator) processing the data collected by Yandex Metrica.",
+          "Purpose: analysing traffic and how visitors use the site, evaluating traffic sources and improving the site.",
+          "Data: cookies and browser identifiers, IP address, device, browser and operating system details, addresses of viewed pages, the referral source and ad campaign tags, on-page actions and session recordings (Webvisor) without the contents of input fields.",
+          "Actions: collection, recording, storage, use in aggregated form, transfer to the processor — with automation.",
+          "Processor: Yandex LLC (TIN 7736207543) processes data on the Operator's behalf under the Yandex Metrica terms of use. Servers in Russia.",
+          "Term: 1 year; the mark that the notice was shown is kept in the browser for 12 months. You can withdraw consent by disabling cookies for the site in your browser or clearing the site's data, installing Yandex's official Metrica opt-out add-on, or writing to {email}."
+        ]
+      }
+    ],
+    "checkbox": "I consent to the processing of personal data",
+    "checkbox-policy": "By clicking “Send request” you confirm that you have read the",
+    "checkbox-policy-link": "data processing policy"
   }
 }

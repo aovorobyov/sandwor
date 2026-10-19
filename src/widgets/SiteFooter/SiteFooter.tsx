@@ -72,6 +72,7 @@ export const SiteFooter: FC = () => {
       legal={t('footer.rights', { year: new Date().getFullYear() })}
       legalLinks={[
         { label: t('footer.privacy'), href: href('/privacy') },
+        { label: t('footer.consent'), href: href('/consent') },
         { label: t('footer.language'), href: otherLocaleHref },
       ]}
     />

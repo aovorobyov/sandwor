@@ -1,11 +1,12 @@
 'use client';
 
 import { useRef } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import type { BriefFormProps } from '@sw/components/BriefForm';
 import { ACTIVE_SERVICE_IDS, type ServiceId } from '@/entities/service';
 import { byPositioning } from '@/shared/config/positioning';
 import { reachGoal, YM_GOAL } from '@/shared/lib/analytics';
+import { localizeHref } from '@/shared/ui/Link/localizeHref';
 import { sendBrief } from '../api/sendBrief';
 
 const TEAM_SIZES = ['1-5', '6-20', '20+'] as const;
@@ -21,6 +22,7 @@ type BriefFormBaseProps = Pick<
   | 'onSubmit'
   | 'initialStep'
   | 'initialValues'
+  | 'consent'
 >;
 
 /**
@@ -29,7 +31,16 @@ type BriefFormBaseProps = Pick<
  */
 export const useBriefFormProps = (preset?: ServiceId[]): BriefFormBaseProps => {
   const t = useTranslations('brief');
+  const tConsent = useTranslations('consent');
+  const locale = useLocale();
   const startedAt = useRef(Date.now());
+
+  // Документы открываются в новой вкладке — чтобы не потерять заполненный бриф.
+  const docLink = (path: string, text: string) => (
+    <a href={localizeHref(path, locale)} target="_blank" rel="noopener noreferrer">
+      {text}
+    </a>
+  );
 
   const onSubmit: BriefFormProps['onSubmit'] = async (values) => {
     await sendBrief(values, Date.now() - startedAt.current);
@@ -44,6 +55,8 @@ export const useBriefFormProps = (preset?: ServiceId[]): BriefFormBaseProps => {
 
   return {
     onSubmit,
+    // Согласие — отдельным обязательным чекбоксом, не в тексте политики (152-ФЗ ст. 9 в ред. 156-ФЗ).
+    consent: docLink('/consent#request', tConsent('checkbox')),
     initialStep: isSingle ? 2 : 1,
     initialValues: services.length > 0 ? { services } : undefined,
     services: ACTIVE_SERVICE_IDS.map((id) => ({
@@ -76,7 +89,12 @@ export const useBriefFormProps = (preset?: ServiceId[]): BriefFormBaseProps => {
       next: t('next'),
       submit: t('submit'),
       sending: t('sending'),
-      fine: t('fine'),
+      fine: (
+        <>
+          {tConsent('checkbox-policy')} {docLink('/privacy', tConsent('checkbox-policy-link'))}.
+        </>
+      ),
+      errConsent: t('err-consent'),
       errServices: t('err-services'),
       errName: t('err-name'),
       errContact: t('err-contact'),

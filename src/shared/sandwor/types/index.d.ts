@@ -912,6 +912,8 @@ export interface BriefFormValues {
   contact: string;
   /** Шаг 4 — «Удобнее в Telegram». */
   telegram: boolean;
+  /** Шаг 4 — согласие на обработку ПД; есть, только если передан проп consent. [sandwor.ru] */
+  consent?: boolean;
 }
 
 export interface BriefFormResult {
@@ -951,12 +953,14 @@ export interface BriefFormCopy {
   next?: string;
   submit?: string;
   sending?: string;
-  /** Мелкий текст под кнопкой на последнем шаге. */
-  fine?: string;
+  /** Мелкий текст под кнопкой на последнем шаге (можно со ссылкой). [sandwor.ru: ReactNode] */
+  fine?: React.ReactNode;
   errServices?: string;
   errName?: string;
   /** По умолчанию «Укажите телефон или ник в Telegram». */
   errContact?: string;
+  /** Ошибка, если не отмечено согласие (при пропе consent). [sandwor.ru] */
+  errConsent?: string;
   /** Ошибка отправки (onSubmit отклонил промис). */
   errSubmit?: string;
   successTitle?: string;
@@ -995,6 +999,11 @@ export interface BriefFormProps extends Omit<React.FormHTMLAttributes<HTMLFormEl
   budgetOptions?: BriefFormOption[];
   /** Тексты интерфейса. */
   copy?: BriefFormCopy;
+  /**
+   * Подпись обязательного чекбокса согласия на обработку ПД на шаге «Контакты»
+   * (не отмечен заранее; без него заявка не уходит). Не передан — чекбокса нет. [sandwor.ru]
+   */
+  consent?: React.ReactNode;
   className?: string;
 }
 

@@ -47,7 +47,8 @@ export const buildBlogPosting = (input: BlogPostingInput) => {
     description,
     datePublished: date,
     url: articleUrl,
-    image: image || ogFallback,
+    // Картинки статей лежат у нас (/blog/…) — в разметке нужен абсолютный адрес.
+    image: image ? (image.startsWith('/') ? `${SITE_URL}${image}` : image) : ogFallback,
     inLanguage: locale,
     author: {
       '@type': 'Person',

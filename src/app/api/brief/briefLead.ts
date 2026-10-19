@@ -3,6 +3,8 @@
  * сборка заявки для amoCRM. Тексты заявки — по-русски: их читает менеджер в CRM.
  */
 
+import { LEGAL } from '@/shared/config/legal';
+
 export const BRIEF_SERVICES = ['crm', 'sites', 'smm', 'ai'] as const;
 const TEAM_SIZES = ['1-5', '6-20', '20+'] as const;
 const BUDGETS = ['lt100', '100-300', 'gt300', 'unknown'] as const;
@@ -43,6 +45,8 @@ export interface BriefPayload {
   name: string;
   contact: string;
   telegram: boolean;
+  /** Отметка чекбокса согласия на обработку ПД — без неё заявку не принимаем. */
+  consent?: unknown;
   /** Время от открытия брифа до отправки, мс. */
   elapsedMs?: unknown;
 }
@@ -103,6 +107,7 @@ export const isValidBrief = (brief: BriefPayload): boolean => {
   const contact = brief.contact.trim();
 
   return (
+    brief.consent === true &&
     brief.services.length > 0 &&
     brief.services.every((service) => isOneOf(BRIEF_SERVICES, service)) &&
     (brief.teamSize === null || isOneOf(TEAM_SIZES, brief.teamSize)) &&
@@ -144,6 +149,8 @@ export const buildBriefLead = (brief: BriefPayload): BriefLead => {
     isOneOf(BUDGETS, brief.budget) && `Бюджет: ${BUDGET_LABELS[brief.budget]}`,
     brief.task.trim() && `Задача: ${brief.task.trim()}`,
     `Удобный канал: ${prefersTelegram ? 'Telegram' : 'звонок'}`,
+    // Доказательство согласия: какую редакцию текста человек принял (152-ФЗ ст. 9 ч. 3).
+    `Согласие на обработку ПД: дано, редакция ${LEGAL.consentVersion} от ${LEGAL.edition.ru}`,
   ];
 
   return {

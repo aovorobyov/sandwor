@@ -11,6 +11,7 @@ const brief = (patch: Partial<BriefPayload> = {}): BriefPayload => {
     name: 'Ирина',
     contact: '+7 900 123-45-67',
     telegram: false,
+    consent: true,
     elapsedMs: 10000,
     ...patch,
   };
@@ -32,6 +33,15 @@ describe('бриф «Обсудим ваш проект»', () => {
     expect(isValidBrief(brief({ contact: '@kedr_mebel' }))).toBe(true);
     expect(isValidBrief(brief({ contact: 't.me/kedr' }))).toBe(true);
     expect(isValidBrief(brief({ contact: '123' }))).toBe(false);
+  });
+
+  it('не принимает заявку без согласия на обработку ПД', () => {
+    expect(isValidBrief(brief({ consent: false }))).toBe(false);
+    expect(isValidBrief(brief({ consent: undefined }))).toBe(false);
+  });
+
+  it('записывает в заявку редакцию согласия', () => {
+    expect(buildBriefLead(brief()).task).toMatch(/Согласие на обработку ПД: дано, редакция \d/);
   });
 
   it('требует имя', () => {

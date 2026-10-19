@@ -11,8 +11,8 @@ import { Link } from '@/shared/ui/Link';
 import { useCookieNotice } from '../../lib/useCookieNotice';
 import s from './CookieConsent.module.css';
 
-/** Раздел «Файлы cookie и веб-аналитика» на странице политики. */
-const POLICY_HREF = '/privacy#privacy-6';
+/** Текст согласия на cookie и веб-аналитику (отдельно от политики). */
+const POLICY_HREF = '/consent#cookies';
 
 /**
  * Уведомление о cookie («Продолжая пользоваться сайтом…» + «Хорошо») и то,

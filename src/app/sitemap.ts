@@ -46,6 +46,7 @@ const STATIC_PATHS = [
   { path: '/cases', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/contact', priority: 0.5, changeFrequency: 'yearly' as const },
   { path: '/privacy', priority: 0.2, changeFrequency: 'yearly' as const },
+  { path: '/consent', priority: 0.2, changeFrequency: 'yearly' as const },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

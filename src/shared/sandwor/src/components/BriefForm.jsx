@@ -19,6 +19,7 @@ const EMPTY = {
   name: '',
   contact: '',
   telegram: false,
+  consent: false,
 };
 
 const SERVICE_OPTIONS = [
@@ -64,6 +65,7 @@ const DEFAULT_COPY = {
   errServices: 'Выберите хотя бы одно направление',
   errName: 'Напишите, как к вам обращаться',
   errContact: 'Укажите телефон или ник в Telegram',
+  errConsent: 'Отметьте согласие на обработку персональных данных',
   errSubmit: `Не удалось отправить. Проверьте соединение и${NB}попробуйте ещё раз`,
   successTitle: 'Заявка отправлена',
   successText: (v) => {
@@ -77,7 +79,7 @@ const DEFAULT_COPY = {
   successAction: 'Вернуться на сайт',
 };
 
-const STEP_FIELDS = [['services'], [], [], ['name', 'contact']];
+const STEP_FIELDS = [['services'], [], [], ['name', 'contact', 'consent']];
 
 /** Phone (≥ 10 digits) or a Telegram handle (@nick, t.me/nick, or a bare nick). */
 function isContact(raw) {
@@ -88,12 +90,14 @@ function isContact(raw) {
   return /^[A-Za-z][A-Za-z0-9_]{4,31}$/.test(s);
 }
 
-function validate(step, v, copy) {
+function validate(step, v, copy, requireConsent) {
   const e = {};
   if (step === 0 && !(v.services && v.services.length)) e.services = copy.errServices;
   if (step === 3) {
     if (!String(v.name || '').trim()) e.name = copy.errName;
     if (!isContact(v.contact)) e.contact = copy.errContact;
+    // [sandwor.ru] обязательное согласие на обработку ПД (152-ФЗ ст. 9, отдельно от политики)
+    if (requireConsent && !v.consent) e.consent = copy.errConsent;
   }
   return e;
 }
@@ -118,6 +122,7 @@ export function BriefForm({
   teamOptions = TEAM_OPTIONS,
   budgetOptions = BUDGET_OPTIONS,
   copy: copyProp,
+  consent,
   className,
   ...rest
 }) {
@@ -128,7 +133,7 @@ export function BriefForm({
 
   const [step, setStep] = useState(() => clampStep(initialStep));
   const [values, setValues] = useState(() => ({ ...EMPTY, ...(initialValues || {}) }));
-  const [errors, setErrors] = useState(() => (validateOnMount ? validate(clampStep(initialStep), { ...EMPTY, ...(initialValues || {}) }, copy) : {}));
+  const [errors, setErrors] = useState(() => (validateOnMount ? validate(clampStep(initialStep), { ...EMPTY, ...(initialValues || {}) }, copy, Boolean(consent)) : {}));
   const [status, setStatus] = useState(initialState === 'success' ? 'success' : 'form'); // form | sending | error | success
   const [result, setResult] = useState(null);
 
@@ -137,6 +142,7 @@ export function BriefForm({
   const servicesRef = useRef(null);
   const nameRef = useRef(null);
   const contactRef = useRef(null);
+  const consentRef = useRef(null);
   const moved = useRef(false);
   const alive = useRef(true);
   useEffect(() => () => { alive.current = false; }, []);
@@ -164,6 +170,7 @@ export function BriefForm({
       if (btn) btn.focus();
     } else if (first === 'name' && nameRef.current) nameRef.current.focus();
     else if (first === 'contact' && contactRef.current) contactRef.current.focus();
+    else if (first === 'consent' && consentRef.current) consentRef.current.focus();
   };
 
   const goTo = (n) => {
@@ -176,7 +183,7 @@ export function BriefForm({
   const handleSubmit = (event) => {
     event.preventDefault();
     if (status === 'sending') return;
-    const e = validate(step, values, copy);
+    const e = validate(step, values, copy, Boolean(consent));
     if (Object.keys(e).length) {
       setErrors(e);
       focusFirstInvalid(e);
@@ -341,6 +348,18 @@ export function BriefForm({
           checked={values.telegram}
           onChange={(e) => set('telegram', e.target.checked)}
         />
+        {consent && (
+          <Checkbox
+            label={consent}
+            name="consent"
+            required
+            aria-required="true"
+            checked={values.consent}
+            error={errors.consent}
+            inputRef={consentRef}
+            onChange={(e) => set('consent', e.target.checked)}
+          />
+        )}
       </>
     );
   };

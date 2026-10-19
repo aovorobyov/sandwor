@@ -7,7 +7,7 @@ import type { ArticleDraft } from './articles.types';
 export const priceCafeWebsite: ArticleDraft = {
   slug: 'skolko-stoit-sajt-dlya-kofejni',
   date: '2026-06-20',
-  image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200&q=80',
+  image: '/blog/photo-1554118811-1e0d58224f24.webp',
   translations: {
     ru: {
       title: 'Сколько стоит сайт для кофейни в 2026 году',
@@ -93,7 +93,7 @@ export const priceCafeWebsite: ArticleDraft = {
 <p>Разница в цене — это не «наглость кастомщика». Это разница между «собрать из готовых блоков» и «сшить костюм по вашим меркам». Оба варианта могут быть правильными — зависит от того, что вам на самом деле нужно. Об этом у меня есть <a href="/blog/tilda-ili-kastomnaya-razrabotka">отдельный разбор Tilda против кастома</a>, если хотите копнуть глубже.</p>
 
 <figure>
-  <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1200&q=80" alt="Интерьер кофейни с посетителями" />
+  <img src="/blog/photo-1501339847302-ac426a4a7cbb.webp" alt="Интерьер кофейни с посетителями" />
   <figcaption>Сайту кофейни важнее всего три вещи: меню, адрес и кнопка связи. Всё остальное — приятные дополнения, за которые часто переплачивают.</figcaption>
 </figure>
 
@@ -236,7 +236,7 @@ export const priceCafeWebsite: ArticleDraft = {
 <p>The price gap isn't "the custom guy being greedy". It's the difference between "assembled from ready blocks" and "tailored to your measurements". Both can be the right call — it depends on what you actually need. I've written a <a href="/en/blog/tilda-ili-kastomnaya-razrabotka">separate breakdown of builder versus custom</a> if you want to dig deeper.</p>
 
 <figure>
-  <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1200&q=80" alt="Café interior with guests" />
+  <img src="/blog/photo-1501339847302-ac426a4a7cbb.webp" alt="Café interior with guests" />
   <figcaption>A café site cares about three things above all: the menu, the address, and a button to get in touch. Everything else is a nice extra people often overpay for.</figcaption>
 </figure>
 

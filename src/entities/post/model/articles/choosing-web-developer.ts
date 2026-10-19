@@ -7,7 +7,7 @@ import type { ArticleDraft } from './articles.types';
 export const choosingWebDeveloper: ArticleDraft = {
   slug: 'kak-vybrat-veb-razrabotchika',
   date: '2026-07-04',
-  image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80',
+  image: '/blog/photo-1600880292203-757bb62b4baf.webp',
   translations: {
     ru: {
       title: 'Как выбрать веб-разработчика и не переплатить',
@@ -57,7 +57,7 @@ export const choosingWebDeveloper: ArticleDraft = {
 </ol>
 
 <figure>
-  <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80" alt="Команда обсуждает проект за ноутбуками" />
+  <img src="/blog/photo-1521737604893-d14cc237f11d.webp" alt="Команда обсуждает проект за ноутбуками" />
   <figcaption>Хороший старт проекта — это разговор о вашей задаче, а не про технологии. Технологии подберутся под задачу; если начинают с них — что-то не так.</figcaption>
 </figure>
 
@@ -176,7 +176,7 @@ export const choosingWebDeveloper: ArticleDraft = {
 </ol>
 
 <figure>
-  <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80" alt="A team discussing a project over laptops" />
+  <img src="/blog/photo-1521737604893-d14cc237f11d.webp" alt="A team discussing a project over laptops" />
   <figcaption>A good project start is a conversation about your task, not about technologies. The technology will follow the task; if they lead with it, something's off.</figcaption>
 </figure>
 

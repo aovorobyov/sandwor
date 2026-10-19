@@ -10,6 +10,7 @@
 | ServiceCard | `label` — моно-метка услуги вместо `SERVICES[service].label`; `badge` — метка справа в шапке (+ `.sw-service-card__badge` в CSS) |
 | CaseCard    | `labels` — `{ task, solution, services }`: подписи строк и бейджей услуг                          |
 | SiteHeader  | `menu.closeLabel`, `menu.navLabel`, `menu.label` — подписи MobileMenu для скринридера                |
+| BriefForm   | `consent` — обязательный чекбокс согласия на обработку ПД на шаге «Контакты» (`values.consent`, `copy.errConsent`); `copy.fine` принимает ReactNode (ссылка на политику) |
 | Calculator  | `copy.serviceLabels`, `copy.managersText`, `copy.monthsText`, `copy.managersHint`, `copy.perMonth` |
 
 SiteHeader: уже 760px ширины шапки primary-кнопка скрыта (`.sw-header__cta`) — на телефоне

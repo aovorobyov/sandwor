@@ -7,7 +7,7 @@ import type { ArticleDraft } from './articles.types';
 export const tildaVsCustom: ArticleDraft = {
   slug: 'tilda-ili-kastomnaya-razrabotka',
   date: '2026-06-27',
-  image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=80',
+  image: '/blog/photo-1517245386807-bb43f82c33c4.webp',
   translations: {
     ru: {
       title: 'Tilda или кастомная разработка: что выбрать',
@@ -50,7 +50,7 @@ export const tildaVsCustom: ArticleDraft = {
 </ol>
 
 <figure>
-  <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1200&q=80" alt="Рабочее место дизайнера с макетами интерфейса" />
+  <img src="/blog/photo-1559136555-9303baea8ebd.webp" alt="Рабочее место дизайнера с макетами интерфейса" />
   <figcaption>Индивидуальный дизайн заметен в мелочах — там, где шаблон вынуждает пойти на компромисс, а вы соглашаетесь, потому что «и так сойдёт».</figcaption>
 </figure>
 
@@ -196,7 +196,7 @@ export const tildaVsCustom: ArticleDraft = {
 </ol>
 
 <figure>
-  <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1200&q=80" alt="Designer's desk with interface mockups" />
+  <img src="/blog/photo-1559136555-9303baea8ebd.webp" alt="Designer's desk with interface mockups" />
   <figcaption>A bespoke design shows in the small things — where a template forces a compromise and you accept it, because "it'll do".</figcaption>
 </figure>
 

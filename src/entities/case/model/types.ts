@@ -13,14 +13,22 @@ export interface CaseFact {
 
 export interface CaseBlock {
   title: string;
-  p1: string;
-  p2: string;
+  paragraphs: string[];
+}
+
+/** Подпись к скриншоту; `id` совпадает с ключом в CASE_SHOTS. Порядок — порядок показа. */
+export interface CaseGalleryItem {
+  id: string;
+  caption: string;
 }
 
 export interface CaseDetail {
   lead: string;
   facts: CaseFact[];
   blocks: CaseBlock[];
+  /** Цифры о нашей работе (не о бизнесе клиента): «15 страниц», «97 из 100». */
+  metrics?: CaseMetric[];
+  gallery?: CaseGalleryItem[];
 }
 
 export interface CaseMetric {

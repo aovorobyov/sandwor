@@ -703,7 +703,12 @@
     "facts-title": "In brief",
     "links-title": "Links",
     "other-title": "Other cases",
-    "cover-label": "Schematic website cover: {title}"
+    "cover-label": "Schematic website cover: {title}",
+    "metrics-label": "Project numbers",
+    "gallery-title": "How it looks",
+    "gallery-meta": "Screens",
+    "soon-link": "We will add a link after launch",
+    "cover-shot-label": "Website screenshot: {title}"
   },
   "blog-page": {
     "meta": "Blog",
@@ -740,10 +745,21 @@
   "cases": {
     "items": [
       {
+        "slug": "skynia-hall",
+        "type": "Tilda redesign",
+        "title": "SKYNIA HALL: a venue website that sells the hall for every event format",
+        "summary": "We rebuilt the site of a 1,200-guest event hall: a dark premium theme, three-step booking and 12 pages for event formats. It all lives in Tilda, so the venue edits the site itself.",
+        "scope": [
+          "Home page redesign and 15 pages",
+          "Three-step booking",
+          "12 pages for event formats"
+        ]
+      },
+      {
         "slug": "model-agency",
         "type": "Tilda redesign",
         "title": "OpenUP Model Management: redesign and a bilingual site",
-        "summary": "Redesigned the home page, header and footer, hand-coded the navigation instead of using builder blocks, and opened the site to an English-speaking audience.",
+        "summary": "We redesigned the home page, header, footer and model catalogues, hand-coded the navigation instead of builder blocks and opened the site to an English-speaking audience without a second copy of the site.",
         "scope": [
           "Home page, header and footer redesign",
           "Hand-coded navigation instead of Tilda blocks",
@@ -752,17 +768,10 @@
       },
       {
         "slug": "kids-agency",
-        "type": "Tilda store",
-        "title": "Kids model agency and image school",
-        "summary": "Two directions in one structure: classes for children and an image school program with sign-up.",
-        "scope": ["Two directions on one site", "Image school program", "Class sign-up"]
-      },
-      {
-        "slug": "event-spaces",
-        "type": "Landing page",
-        "title": "Event space rental",
-        "summary": "A single page with venues, capacity and rental terms. A booking request without a phone call.",
-        "scope": ["Venues with capacity", "Rental terms and price", "Booking request"]
+        "type": "Design concept",
+        "title": "OPENUP Teens: a kids' model school in the style of the adult agency",
+        "summary": "A design system and home page for the kids' school and agency at OpenUP: the same palette and fonts with a playful character — stickers, marker strokes and painterly spots.",
+        "scope": ["Design system", "Home page", "School programme and casting"]
       },
       {
         "slug": "tilda-translate",
@@ -774,7 +783,7 @@
     ],
     "details": {
       "model-agency": {
-        "lead": "OpenUP model agency in Moscow. The site already ran on Tilda but looked dated and responded sluggishly. I redesigned the home page, header and footer, cleaned up the model catalogues and made the site bilingual.",
+        "lead": "OpenUP model agency in Moscow. The site already ran on Tilda but looked dated and responded sluggishly. We redesigned the home page, header and footer, cleaned up the model catalogues and made the site bilingual.",
         "facts": [
           {
             "k": "Client",
@@ -796,28 +805,78 @@
         "blocks": [
           {
             "title": "The starting point",
-            "p1": "The agency's site ran on Tilda but looked dated: the styling lagged behind how model agencies present themselves today, and some of the content had not been updated in a long time.",
-            "p2": "The interface was slow to respond, and the navigation followed old patterns and no longer fit every section — and the agency has many: women, men, arrivals, new faces, international, production."
+            "paragraphs": [
+              "The agency's site ran on Tilda but looked dated: the styling lagged behind how model agencies present themselves today, and some of the content had not been updated in a long time.",
+              "The interface was slow to respond, and the navigation followed old patterns and no longer fit every section — and the agency has many: women, men, arrivals, new faces, international, production."
+            ]
           },
           {
-            "title": "What I built",
-            "p1": "I designed a new home page, header and footer, then built them myself — not assembled from ready-made blocks, but written as markup and styles by hand on top of the builder.",
-            "p2": "The header gained a multi-level menu with dropdown sections, the mobile version a burger panel with social links, and on small screens the footer collapses its sections into an accordion. None of this comes with Tilda out of the box."
+            "title": "What we built",
+            "paragraphs": [
+              "We designed a new home page, header and footer, then built them ourselves — not assembled from ready-made blocks, but written as markup and styles by hand on top of the builder.",
+              "The header gained a multi-level menu with dropdown sections, the mobile version a burger panel with social links, and on small screens the footer collapses its sections into an accordion. None of this comes with Tilda out of the box."
+            ]
           },
           {
             "title": "Model catalogues",
-            "p1": "The catalogues run on Tilda Store, and the default card layout did not suit the agency: a model roster is a showcase, not a product list.",
-            "p2": "I changed the display format, the card corner radii and their placement on the page, then went through the breakpoints separately so the grid holds on any screen."
+            "paragraphs": [
+              "The catalogues run on Tilda Store, and the default card layout did not suit the agency: a model roster is a showcase, not a product list.",
+              "We changed the display format, the card corner radii and their placement on the page, then went through the breakpoints separately so the grid holds on any screen."
+            ]
           },
           {
             "title": "Bilingual without a second site",
-            "p1": "Tilda offers no real bilingual support: the usual route is duplicating every page and then maintaining two copies of the site. Instead I wrote a script that translates the page on the fly when the ru or en button is clicked.",
-            "p2": "It carries its own dictionary of more than 800 pairs; strings missing from it are fetched from external translators with a fallback and then cached. Catalogue search is solved separately: model names are stored in Latin script, so a Russian query is rewritten inside the request to the server — visitors search in Russian and find what they need."
+            "paragraphs": [
+              "Tilda offers no real bilingual support: the usual route is duplicating every page and then maintaining two copies of the site. Instead we wrote a script that translates the page on the fly when the ru or en button is clicked.",
+              "It carries its own dictionary of more than 800 pairs; strings missing from it are fetched from external translators with a fallback and then cached. Catalogue search is solved separately: model names are stored in Latin script, so a Russian query is rewritten inside the request to the server — visitors search in Russian and find what they need."
+            ]
           },
           {
             "title": "The outcome",
-            "p1": "Everything visible was refreshed: the home page, header, footer and catalogues. The navigation now fits every section of the agency, including the link to its children's branch.",
-            "p2": "The English version runs without a second site and without duplicate pages — there is one set of pages and one dictionary to maintain, and that dictionary is edited in a Google Sheet without touching code. The client does not share metrics, so there are no numbers here: everything described can be checked by opening the site."
+            "paragraphs": [
+              "Everything visible was refreshed: the home page, header, footer and catalogues. The navigation now fits every section of the agency, including the link to its children's branch.",
+              "The English version runs without a second site and without duplicate pages — there is one set of pages and one dictionary to maintain, and that dictionary is edited in a Google Sheet without touching code. The client does not share business metrics, so the numbers here are about our work only: everything described can be checked by opening the site."
+            ]
+          }
+        ],
+        "metrics": [
+          {
+            "value": "800+",
+            "label": "pairs in the translation dictionary"
+          },
+          {
+            "value": "2 languages",
+            "label": "on a single set of pages"
+          },
+          {
+            "value": "0",
+            "label": "duplicate pages for the English version"
+          }
+        ],
+        "gallery": [
+          {
+            "id": "catalog",
+            "caption": "Model catalogue: a showcase instead of a Tilda Store product list"
+          },
+          {
+            "id": "menu",
+            "caption": "A menu panel with every agency section, including the children's branch"
+          },
+          {
+            "id": "news",
+            "caption": "A shoot feed and a footer with navigation columns"
+          },
+          {
+            "id": "mobile-menu-ru",
+            "caption": "Mobile menu in Russian"
+          },
+          {
+            "id": "mobile-menu-en",
+            "caption": "The same menu after switching to English — no second copy of the site"
+          },
+          {
+            "id": "mobile-catalog",
+            "caption": "The catalogue on a phone: filters and search in Russian"
           }
         ]
       },
@@ -844,46 +903,17 @@
         "blocks": [
           {
             "title": "The starting point",
-            "p1": "Two different directions — the kids agency and the image school — had to fit into one clear structure without confusing parents.",
-            "p2": "The class program needed to be shown with a simple path to sign up."
+            "paragraphs": [
+              "Two different directions — the kids agency and the image school — had to fit into one clear structure without confusing parents.",
+              "The class program needed to be shown with a simple path to sign up."
+            ]
           },
           {
             "title": "What was done",
-            "p1": "The directions were split into site sections: the agency and the image school with its own program.",
-            "p2": "The site was built on Tilda with class sign-up and the option to update the program independently."
-          }
-        ]
-      },
-      "event-spaces": {
-        "lead": "A single-page site for space rental: venues, capacity, rental terms and a booking request without a phone call.",
-        "facts": [
-          {
-            "k": "Client",
-            "v": "Event space rental"
-          },
-          {
-            "k": "Task",
-            "v": "Show venues and collect bookings"
-          },
-          {
-            "k": "Solution",
-            "v": "A landing page with a booking form"
-          },
-          {
-            "k": "Format",
-            "v": "Venues, terms, booking form"
-          }
-        ],
-        "blocks": [
-          {
-            "title": "The starting point",
-            "p1": "Information about the venues was scattered, and bookings had to be arranged by phone.",
-            "p2": "They needed one page that immediately shows capacity, terms and rental price."
-          },
-          {
-            "title": "What was done",
-            "p1": "A landing page was built with venues, capacity and rental terms in one scroll.",
-            "p2": "A booking request form was added so a request could be left without a call."
+            "paragraphs": [
+              "The directions were split into site sections: the agency and the image school with its own program.",
+              "The site was built on Tilda with class sign-up and the option to update the program independently."
+            ]
           }
         ]
       },
@@ -910,13 +940,133 @@
         "blocks": [
           {
             "title": "The starting point",
-            "p1": "Tilda has no convenient bilingual support out of the box: usually you have to duplicate pages, which complicates maintenance.",
-            "p2": "They needed a language switch that translates content and remembers the visitor's choice."
+            "paragraphs": [
+              "Tilda has no convenient bilingual support out of the box: usually you have to duplicate pages, which complicates maintenance.",
+              "They needed a language switch that translates content and remembers the visitor's choice."
+            ]
           },
           {
             "title": "What was done",
-            "p1": "I wrote a script that translates content on the fly and keeps the selected locale across pages.",
-            "p2": "We avoided duplicating pages — the sources and code are open in a GitHub repository."
+            "paragraphs": [
+              "I wrote a script that translates content on the fly and keeps the selected locale across pages.",
+              "We avoided duplicating pages — the sources and code are open in a GitHub repository."
+            ]
+          }
+        ]
+      },
+      "skynia-hall": {
+        "lead": "SKYNIA HALL is an event venue next to Volgogradsky Prospekt metro: a main hall for 1,200 guests, a small hall and six meeting rooms. The old site showed the hall as one long page and didn't answer the key question — will it work for my wedding, conference or prom? We rebuilt the site from design to forms and kept the venue on Tilda, where it's comfortable.",
+        "facts": [
+          {
+            "k": "Client",
+            "v": "SKYNIA HALL, Moscow"
+          },
+          {
+            "k": "Task",
+            "v": "A site that sells the hall for a specific event and collects requests"
+          },
+          {
+            "k": "Solution",
+            "v": "Redesign and custom code blocks inside Tilda"
+          },
+          {
+            "k": "Scope",
+            "v": "Home page, 12 format pages, booking, legal pages"
+          }
+        ],
+        "metrics": [
+          {
+            "value": "15 pages",
+            "label": "in one block system"
+          },
+          {
+            "value": "97 of 100",
+            "label": "mobile speed, Lighthouse"
+          },
+          {
+            "value": "3 steps",
+            "label": "from choosing a hall to a request"
+          }
+        ],
+        "blocks": [
+          {
+            "title": "The starting point",
+            "paragraphs": [
+              "The venue had a draft of a new site and a clear feeling: it should look premium, not templated. The old Tilda page showed the hall, but guests had to call to find out whether their event would fit, what it cost and whether the date was free.",
+              "Booking lived on a separate page and requests had to be clarified by phone — a long way for someone who just wanted to ask about Saturday."
+            ]
+          },
+          {
+            "title": "Design in three rounds",
+            "paragraphs": [
+              "The first, light version felt too plain. The second — a serif and gold — was beautiful but hard to read. The third kept the dark background and gold accent but switched to Geologica and Golos Text: premium and easy to read on a phone.",
+              "We removed extra labels, left the first screen with a headline, one line and two buttons, and gave every section a clear next step. On desktop a short “Check available dates” form sits next to the hero."
+            ]
+          },
+          {
+            "title": "Three-step booking",
+            "paragraphs": [
+              "The separate booking page became a three-step window: hall and format, date and guests, contacts. A preliminary total is shown right away, the draft is saved if the guest gets distracted, and the selection can be sent to WhatsApp with one button.",
+              "On phones a smart bar sits at the bottom: its button label changes by section — “Book the hall”, “Pick a format”, “Ask a question” — and a round button opens call, WhatsApp and Telegram."
+            ]
+          },
+          {
+            "title": "12 pages for event formats",
+            "paragraphs": [
+              "Wedding, corporate party, conference, prom, concert, training, exhibition and five more formats got their own pages: a headline for the search query, fitting photos, real events from the venue, answers to common questions and a form that already knows which event it's about.",
+              "Each page has its own meta tags, Schema.org markup and social cover, and they all share one frame: a new landing page is assembled from ready blocks rather than built from scratch."
+            ]
+          },
+          {
+            "title": "Our own code inside Tilda",
+            "paragraphs": [
+              "The venue wanted to stay on Tilda and edit texts and photos itself. So the design is built from custom blocks with our code: the editor works as usual and the layout holds on every screen.",
+              "The header, footer and booking window are shared across the site. Requests from every form land in Tilda CRM marked with the page and form they came from."
+            ]
+          },
+          {
+            "title": "Speed, search and legal pages",
+            "paragraphs": [
+              "Photos are served as WebP through Tilda's CDN, fonts are uploaded to the platform and unused code is stripped at build time: the mobile version scores 97 of 100 for performance in Lighthouse and 100 for accessibility, SEO and best practices.",
+              "We added a personal data policy, a separate consent document and a short cookie notice; Yandex Metrica starts only after it."
+            ]
+          },
+          {
+            "title": "The outcome",
+            "paragraphs": [
+              "The site now leads a guest from the event format to a request instead of just showing the hall. The venue updates texts, photos and prices itself, and new pages are built from the same block system.",
+              "The new version is being prepared to move to the main domain — we'll add a link to the live site after launch."
+            ]
+          }
+        ],
+        "gallery": [
+          {
+            "id": "hero",
+            "caption": "First screen: capacity, address and a “Check available dates” form next to the headline"
+          },
+          {
+            "id": "spaces",
+            "caption": "Halls and prices: the main and small hall with capacity for each format"
+          },
+          {
+            "id": "formats",
+            "caption": "Choosing a format leads to a dedicated event page"
+          },
+          {
+            "id": "svadba",
+            "caption": "The “Wedding” format page: its own headline, photos and form"
+          },
+          {
+            "id": "booking",
+            "caption": "Three-step booking instead of a separate page"
+          },
+          {
+            "id": "mobile-hero",
+            "caption": "Mobile version: only the essentials on the first screen"
+          },
+          {
+            "id": "mobile-spaces",
+            "caption": "A smart bar at the bottom changes its action by section"
           }
         ]
       }

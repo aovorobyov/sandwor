@@ -3,10 +3,14 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import { Badge } from '@sw/components/Badge';
 import { Button } from '@sw/components/Button';
 import { Canvas } from '@sw/components/Canvas';
+import { ArticleFigure } from '@sw/components/Article';
+import { Stats } from '@sw/components/Stats';
 import {
   CASE_COVERS,
   CASE_LINKS,
   CASE_SERVICES,
+  CASE_SHOTS,
+  CaseShot,
   PUBLISHED_CASE_SLUGS,
   SiteCover,
   isPublishedCase,
@@ -49,6 +53,11 @@ export const CasePage = async ({ slug }: CasePageProps) => {
   const services = CASE_SERVICES[caseSlug];
   const links = CASE_LINKS[caseSlug] ?? [];
   const others = PUBLISHED_CASE_SLUGS.filter((other) => other !== caseSlug);
+  const shots = CASE_SHOTS[caseSlug];
+  // Подписи из переводов, устройство — из CASE_SHOTS; кадры без записи там не показываем.
+  const gallery = (detail.gallery ?? []).filter((shot) => shots?.shots[shot.id]);
+  const desktopShots = gallery.filter((shot) => shots?.shots[shot.id].device === 'desktop');
+  const mobileShots = gallery.filter((shot) => shots?.shots[shot.id].device === 'mobile');
 
   return (
     <>
@@ -99,10 +108,32 @@ export const CasePage = async ({ slug }: CasePageProps) => {
         }
         aside={
           <Canvas bordered className={s.cover}>
-            <SiteCover spec={CASE_COVERS[caseSlug]} label={item.type} size="l" />
+            {shots ? (
+              <div className={s.coverShot}>
+                <CaseShot
+                  slug={caseSlug}
+                  id={shots.cover}
+                  device={shots.shots[shots.cover].device}
+                  domain={shots.domain}
+                  alt={t('cases-page.cover-shot-label', { title: item.title })}
+                  sizes="(max-width: 1100px) 92vw, 560px"
+                  isPriority
+                />
+              </div>
+            ) : (
+              <SiteCover spec={CASE_COVERS[caseSlug]} label={item.type} size="l" />
+            )}
           </Canvas>
         }
-      />
+      >
+        {detail.metrics && detail.metrics.length > 0 && (
+          <Stats
+            className={s.metrics}
+            label={t('cases-page.metrics-label')}
+            items={detail.metrics.map((metric, index) => ({ ...metric, accent: index === 0 }))}
+          />
+        )}
+      </PageHero>
 
       <Section spacing="s" aria-labelledby="case-facts-title">
         <div className={s.layout}>
@@ -129,13 +160,52 @@ export const CasePage = async ({ slug }: CasePageProps) => {
             {detail.blocks.map((block) => (
               <section key={block.title} className={s.block}>
                 <h2 className={s.blockTitle}>{block.title}</h2>
-                <p>{block.p1}</p>
-                <p>{block.p2}</p>
+
+                {block.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </section>
             ))}
           </div>
         </div>
       </Section>
+
+      {shots && gallery.length > 0 && (
+        <Section tone="canvas" aria-labelledby="case-gallery-title">
+          <SectionIntro
+            meta={t('cases-page.gallery-meta')}
+            title={t('cases-page.gallery-title')}
+            titleId="case-gallery-title"
+          />
+
+          {desktopShots.length > 0 && (
+            <div className={s.galleryDesktop}>
+              {desktopShots.map((shot) => (
+                <ArticleFigure key={shot.id} caption={shot.caption} className={s.figure}>
+                  <CaseShot
+                    slug={caseSlug}
+                    id={shot.id}
+                    device="desktop"
+                    domain={shots.domain}
+                    alt={shot.caption}
+                    sizes="(max-width: 900px) 92vw, 540px"
+                  />
+                </ArticleFigure>
+              ))}
+            </div>
+          )}
+
+          {mobileShots.length > 0 && (
+            <div className={s.galleryMobile}>
+              {mobileShots.map((shot) => (
+                <ArticleFigure key={shot.id} caption={shot.caption} className={s.figure}>
+                  <CaseShot slug={caseSlug} id={shot.id} device="mobile" alt={shot.caption} />
+                </ArticleFigure>
+              ))}
+            </div>
+          )}
+        </Section>
+      )}
 
       {others.length > 0 && (
         <Section tone="sunken" aria-labelledby="other-cases-title">

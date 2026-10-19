@@ -4,7 +4,9 @@ import { cx } from '@sw/utils';
 import {
   CASE_COVERS,
   CASE_SERVICES,
+  CASE_SHOTS,
   PUBLISHED_CASE_SLUGS,
+  CaseShot,
   SiteCover,
   type CaseDetail,
   type CaseItem,
@@ -32,8 +34,9 @@ const findFact = (detail: CaseDetail | undefined, index: number): string | undef
 
 /**
  * Карточки кейсов на CaseCard дизайн-системы. Обложка — схематичное окно сайта
- * (SiteCover), задача и решение — из фактов кейса. Цифр-результатов нет:
- * клиенты их не раскрывают, а выдумывать метрики мы не будем.
+ * (скриншот сайта или схематичный SiteCover), задача и решение — из фактов кейса.
+ * Цифры — только о нашей работе («15 страниц», «800+ пар в словаре»): метрики
+ * бизнеса клиенты не раскрывают, а выдумывать их мы не будем.
  */
 export const CaseCards = async ({
   slugs,
@@ -58,6 +61,22 @@ export const CaseCards = async ({
       {list.map((item) => {
         const slug = item.slug as CaseSlug;
         const detail = details[slug];
+        const shots = CASE_SHOTS[slug];
+        const cover = shots ? (
+          <div className={s.cover}>
+            <CaseShot
+              slug={slug}
+              id={shots.cover}
+              device={shots.shots[shots.cover].device}
+              domain={shots.domain}
+              alt=""
+              variant="peek"
+              sizes="(max-width: 900px) 92vw, 520px"
+            />
+          </div>
+        ) : (
+          <SiteCover spec={CASE_COVERS[slug]} label={item.type} />
+        );
 
         return (
           <CaseCard
@@ -72,10 +91,13 @@ export const CaseCards = async ({
               solution: t('common.solution'),
               services: serviceLabels,
             }}
-            cover={<SiteCover spec={CASE_COVERS[slug]} label={item.type} />}
-            coverLabel={t('cases-page.cover-label', { title: item.title })}
+            cover={cover}
+            coverLabel={t(shots ? 'cases-page.cover-shot-label' : 'cases-page.cover-label', {
+              title: item.title,
+            })}
             task={findFact(detail, 1) ?? item.summary}
             solution={findFact(detail, 2)}
+            metrics={detail?.metrics?.slice(0, 2)}
             href={localizeHref(`/cases/${slug}`, locale)}
             cta={t('common.read-case')}
           />

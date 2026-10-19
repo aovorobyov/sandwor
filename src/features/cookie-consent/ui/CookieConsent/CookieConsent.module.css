@@ -49,6 +49,18 @@
   }
 }
 
+/* На телефоне справа внизу живёт кнопка чата amoCRM (≈64px + отступ) —
+   баннер не заходит под неё, иначе она закрывает «Принять». */
+@media (max-width: 520px) {
+  .root {
+    width: calc(100vw - var(--space-4) - var(--space-24));
+  }
+
+  .actions {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .root {
     animation: none;

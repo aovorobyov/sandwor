@@ -52,6 +52,14 @@ body:has(.sw-mmenu, .sw-modal) .amo-button-holder {
   display: none;
 }
 
+/* Приветствие чата живёт в iframe со светлой страницей amoCRM. У сайта тёмная
+   схема (`color-scheme: dark` из токенов ДС), а когда схема iframe и его страницы
+   не совпадают, браузер подкладывает под iframe непрозрачный белый фон — отсюда
+   белый прямоугольник вокруг пузыря. Светлая схема на виджете убирает подложку. */
+.amo-button-holder {
+  color-scheme: light;
+}
+
 /* ─── View Transitions API ────────────────────────────────── */
 
 .sw-header {

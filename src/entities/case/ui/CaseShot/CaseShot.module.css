@@ -1,0 +1,78 @@
+.window {
+  width: 100%;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-node);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: var(--control-xs);
+  padding: 0 var(--space-3);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-raised);
+}
+
+.dots {
+  display: inline-flex;
+  gap: var(--space-1);
+}
+
+.dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-round);
+  background: var(--line-control);
+}
+
+.url {
+  min-width: 0;
+  overflow: hidden;
+  font: 450 11.5px/16px var(--font-mono);
+  color: var(--text-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viewport {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--bg-sunken);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Обложка карточки: окно стоит на канве и уходит за нижний край. */
+.peek {
+  align-self: flex-end;
+  border-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.phone {
+  width: 100%;
+  max-width: 240px;
+  padding: var(--space-2);
+  background: var(--surface-raised);
+  border: 1px solid var(--line-strong);
+  border-radius: calc(var(--radius-xl) * 3);
+  box-shadow: var(--shadow-node);
+}
+
+.screen {
+  aspect-ratio: 390 / 844;
+  overflow: hidden;
+  border-radius: calc(var(--radius-xl) * 2);
+  background: var(--bg-sunken);
+}

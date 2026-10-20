@@ -3,6 +3,8 @@ import type { ArticleDraft, ArticleLocale } from './articles.types';
 import { priceCafeWebsite } from './price-cafe-website';
 import { tildaVsCustom } from './tilda-vs-custom';
 import { choosingWebDeveloper } from './choosing-web-developer';
+import { whatIsCta } from './what-is-cta';
+import { vibeCoding } from './vibe-coding';
 
 const WORDS_PER_MINUTE = 200;
 
@@ -23,7 +25,13 @@ const toPost = (draft: ArticleDraft, locale: ArticleLocale): Post => {
 };
 
 /** Новые статьи добавляются сюда — по файлу на статью в этой же директории. */
-const DRAFTS: ArticleDraft[] = [priceCafeWebsite, tildaVsCustom, choosingWebDeveloper];
+const DRAFTS: ArticleDraft[] = [
+  vibeCoding,
+  whatIsCta,
+  priceCafeWebsite,
+  tildaVsCustom,
+  choosingWebDeveloper,
+];
 
 /** Все статьи под локаль, новейшие первыми. */
 export const getArticlesForLocale = (locale: ArticleLocale): Post[] => {

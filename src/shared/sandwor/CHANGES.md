@@ -22,6 +22,9 @@ SiteHeader: уже 760px ширины шапки primary-кнопка скрыт
 В типах `ButtonProps` добавлены `target` и `rel`: компонент и раньше передавал их на `<a>`,
 но в `index.d.ts` их не было.
 
+Article (`.sw-prose`): `figure > picture > img` оформляется так же, как `figure > img`, —
+в статьях есть схемы с отдельной картинкой для телефона (`<source media="(max-width: 600px)">`).
+
 Типы новых пропсов — в `types/index.d.ts`, помечены `[sandwor.ru]`.
 
 Ещё добавлены файлы `src/components/*.d.ts` и `src/utils.d.ts` — их генерирует

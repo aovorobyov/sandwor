@@ -2873,7 +2873,9 @@ button.sw-brief__step-btn:hover .sw-brief__bar { background: var(--line-control-
 
 /* figure + caption */
 :where(.sw-prose) > figure { margin-left: 0; margin-right: 0; min-width: 0; }
-:where(.sw-prose) > figure > img, :where(.sw-prose) > p > img {
+/* [sandwor.ru] figure > picture — адаптивные схемы в статьях (своя картинка для телефона) */
+:where(.sw-prose) > figure > picture { display: block; }
+:where(.sw-prose) > figure > img, :where(.sw-prose) > figure > picture > img, :where(.sw-prose) > p > img {
   display: block; max-width: 100%; height: auto;
   border: 1px solid var(--line); border-radius: var(--radius-lg);
 }

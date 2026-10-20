@@ -1,4 +1,4 @@
-import { YM_ID } from './config';
+import { YM_ID, isAnalyticsHost } from './config';
 import type { YmGoal } from './analytics.types';
 
 /** Сколько ждать загрузки Метрики для цели, случившейся раньше неё (мс). */
@@ -11,10 +11,10 @@ const STEP_MS = 1_000;
  *
  * Метрика подключается только после согласия на cookie, поэтому цель, случившаяся
  * раньше, ждёт её до 30 секунд; не дождалась — не отправляется. Без ID и вне браузера
- * тихо выходит.
+ * тихо выходит; на localhost и превью — тоже (см. isAnalyticsHost).
  */
 export const reachGoal = (goal: YmGoal | string, params?: Record<string, unknown>, waited = 0) => {
-  if (!YM_ID || typeof window === 'undefined') {
+  if (!YM_ID || !isAnalyticsHost()) {
     return;
   }
 

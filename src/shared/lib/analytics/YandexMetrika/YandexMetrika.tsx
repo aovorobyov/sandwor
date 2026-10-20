@@ -1,14 +1,15 @@
 import Script from 'next/script';
 import type { FC } from 'react';
-import { YM_ID } from '../config';
+import { YM_ID, isAnalyticsHost } from '../config';
 
 /**
  * Счётчик Яндекс.Метрики: вебвизор, карта кликов, точный показатель отказов, трекинг ссылок.
  * Грузится через next/script (afterInteractive) — не блокирует гидрацию.
- * Без NEXT_PUBLIC_YM_ID ничего не рендерит — локальная разработка не засоряет статистику.
+ * Рендерится только на боевых доменах (isAnalyticsHost) — локальная разработка и превью
+ * не засоряют статистику. Компонент клиентский: CookieConsent включает его после согласия.
  */
 export const YandexMetrika: FC = () => {
-  if (!YM_ID) {
+  if (!YM_ID || !isAnalyticsHost()) {
     return null;
   }
 

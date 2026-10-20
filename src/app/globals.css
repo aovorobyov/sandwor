@@ -48,7 +48,8 @@ body {
    Плавающая кнопка чата стоит поверх всего (z-index 301) и закрывала бы
    кнопки мобильного меню и брифа. Пока открыт диалог дизайн-системы, прячем её. */
 
-body:has(.sw-mmenu, .sw-modal) .amo-button-holder {
+body:has(.sw-mmenu, .sw-modal) .amo-button-holder,
+body:has(.sw-mmenu, .sw-modal) [data-cookie-notice] {
   display: none;
 }
 
@@ -106,4 +107,26 @@ body:has(.sw-mmenu, .sw-modal) .amo-button-holder {
   ::view-transition-new(root) {
     animation: none;
   }
+}
+
+/* Ссылка «К содержимому»: видна только при фокусе с клавиатуры. */
+.skip-link {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: calc(var(--z-toast) + 1);
+  padding: var(--space-2) var(--space-4);
+  font: 600 14px/20px var(--font-text);
+  color: var(--on-accent);
+  background: var(--accent);
+  border-radius: var(--radius-lg);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+main:focus {
+  outline: none;
 }

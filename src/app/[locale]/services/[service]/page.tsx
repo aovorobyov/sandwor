@@ -41,6 +41,8 @@ export async function generateMetadata({ params: { locale, service } }: Props): 
     description: t('meta-description'),
     alternates: buildPageAlternates(locale, `/services/${service}`),
     ...buildSocialMeta({
+      locale,
+      path: `/services/${service}`,
       title: t('meta-title'),
       description: t('meta-description'),
       image: buildPageOgImage({

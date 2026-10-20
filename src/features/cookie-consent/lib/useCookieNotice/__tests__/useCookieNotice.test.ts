@@ -1,12 +1,15 @@
 import { act, renderHook } from '@testing-library/react';
 import { useCookieNotice } from '../useCookieNotice';
 
-jest.mock('next/navigation', () => ({ usePathname: () => '/' }));
+let mockPathname = '/';
+jest.mock('next/navigation', () => ({ usePathname: () => mockPathname }));
 
 describe('useCookieNotice', () => {
   beforeEach(() => {
     jest.useFakeTimers();
     window.localStorage.clear();
+    mockPathname = '/';
+    document.body.innerHTML = '';
   });
 
   afterEach(() => {
@@ -63,5 +66,52 @@ describe('useCookieNotice', () => {
     const { result } = renderHook(() => useCookieNotice());
 
     expect(result.current.state).toBe('visible');
+  });
+
+  it('Tab и клавиши внутри уведомления согласием не считаются', () => {
+    const { result } = renderHook(() => useCookieNotice());
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }));
+    });
+    expect(result.current.isAnalyticsAllowed).toBe(false);
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+    });
+    expect(result.current.isAnalyticsAllowed).toBe(true);
+  });
+
+  it('Esc, уже обработанный модальным окном, уведомление не закрывает', () => {
+    const { result } = renderHook(() => useCookieNotice());
+    const event = new KeyboardEvent('keydown', { key: 'Escape', cancelable: true });
+    event.preventDefault();
+
+    act(() => {
+      document.dispatchEvent(event);
+    });
+
+    expect(result.current.state).toBe('visible');
+  });
+
+  it('переход по «Подробнее» на условия не включает аналитику, следующий переход — включает', () => {
+    document.body.innerHTML =
+      '<div data-cookie-notice><a id="more" href="/consent">Подробнее</a></div>';
+    const { result, rerender } = renderHook(() => useCookieNotice());
+
+    act(() => {
+      document.getElementById('more')!.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    });
+    mockPathname = '/consent';
+    rerender();
+    act(() => {
+      jest.advanceTimersByTime(6000);
+      window.dispatchEvent(new Event('scroll'));
+    });
+    expect(result.current.isAnalyticsAllowed).toBe(false);
+
+    mockPathname = '/services';
+    rerender();
+    expect(result.current.isAnalyticsAllowed).toBe(true);
   });
 });

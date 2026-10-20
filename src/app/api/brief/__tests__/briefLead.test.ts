@@ -3,7 +3,7 @@ import type { BriefPayload } from '../briefLead';
 
 const brief = (patch: Partial<BriefPayload> = {}): BriefPayload => {
   return {
-    services: ['crm', 'sites'],
+    services: ['sites'],
     company: 'Кедр',
     teamSize: '6-20',
     task: 'Заявки теряются',
@@ -27,6 +27,11 @@ describe('бриф «Обсудим ваш проект»', () => {
   it('требует хотя бы одно известное направление', () => {
     expect(isValidBrief(brief({ services: [] }))).toBe(false);
     expect(isValidBrief(brief({ services: ['seo'] }))).toBe(false);
+  });
+
+  it('не принимает направления «Скоро» и повторы', () => {
+    expect(isValidBrief(brief({ services: ['crm'] }))).toBe(false);
+    expect(isValidBrief(brief({ services: ['sites', 'sites'] }))).toBe(false);
   });
 
   it('принимает телефон или ник в Telegram и отклоняет мусор', () => {
@@ -53,8 +58,13 @@ describe('бриф «Обсудим ваш проект»', () => {
     expect(isSpamBrief(brief())).toBe(false);
   });
 
+  it('считает спамом заявку без отметки времени', () => {
+    expect(isSpamBrief(brief({ elapsedMs: undefined }))).toBe(true);
+    expect(isSpamBrief(brief({ elapsedMs: '10000' }))).toBe(true);
+  });
+
   it('собирает примечание для менеджера из всех шагов', () => {
-    const lead = buildBriefLead(brief());
+    const lead = buildBriefLead(brief({ services: ['crm', 'sites'] }));
 
     expect(lead.name).toBe('Ирина');
     expect(lead.phone).toBe('+7 900 123-45-67');

@@ -38,16 +38,17 @@ export const BlogPage = async () => {
             label={t('blog-page.filter-label')}
             items={[
               { id: ALL, label: t('blog-page.filter-all'), count: posts.length },
-              ...tags.map((tag) => ({
-                id: tag,
+              // id без пробелов: из него собираются aria-controls / aria-labelledby.
+              ...tags.map((tag, index) => ({
+                id: `tag-${index}`,
                 label: tag,
                 count: posts.filter((post) => post.tag === tag).length,
               })),
             ]}
             panels={Object.fromEntries([
               [ALL, <PostsGrid key={ALL} posts={posts} headingLevel={2} />],
-              ...tags.map((tag) => [
-                tag,
+              ...tags.map((tag, index) => [
+                `tag-${index}`,
                 <PostsGrid
                   key={tag}
                   posts={posts.filter((post) => post.tag === tag)}

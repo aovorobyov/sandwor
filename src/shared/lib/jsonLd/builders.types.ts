@@ -1,8 +1,3 @@
-export interface PersonInput {
-  name: string;
-  bio?: string;
-}
-
 export interface WebSiteInput {
   name: string;
 }

@@ -961,6 +961,8 @@ export interface BriefFormCopy {
   errContact?: string;
   /** Ошибка, если не отмечено согласие (при пропе consent). [sandwor.ru] */
   errConsent?: string;
+  /** [sandwor.ru] Подпись необязательного поля, по умолчанию «необязательно». */
+  optional?: string;
   /** Ошибка отправки (onSubmit отклонил промис). */
   errSubmit?: string;
   successTitle?: string;
@@ -1585,6 +1587,8 @@ export interface ArticleTocItem {
 export interface ArticleProps extends Omit<React.HTMLAttributes<HTMLElement>, 'title'> {
   /** Хлебные крошки: [{ label: 'Главная', href: '/' }, { label: 'Блог', href: '/blog' }, { label: 'Как не терять заявки с Авито' }]. */
   breadcrumbs?: { label: React.ReactNode; href?: string }[];
+  /** [sandwor.ru] aria-label навигационной цепочки (по умолчанию по-русски). */
+  breadcrumbsLabel?: string;
   /** Услуги статьи — бейджи с иконкой и меткой из SERVICES над заголовком. */
   services?: ('crm' | 'sites' | 'smm' | 'ai')[];
   /** Заголовок H1 (display-2, Unbounded 600 32/36; на мобильном 26/30). */

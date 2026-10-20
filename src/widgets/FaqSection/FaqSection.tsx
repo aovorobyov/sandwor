@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { Accordion } from '@sw/components/Accordion';
 import { Button } from '@sw/components/Button';
 import { TELEGRAM_URL } from '@/shared/config/contacts';
+import { JsonLd, buildFaqPage } from '@/shared/lib/jsonLd';
 import { Section } from '@/shared/ui/Section';
 import { byPositioning } from '@/shared/config/positioning';
 import s from './FaqSection.module.css';
@@ -29,6 +30,8 @@ export const FaqSection = async ({ items, title, tone = 'default' }: FaqSectionP
 
   return (
     <Section tone={tone} aria-labelledby="faq-title">
+      <JsonLd data={buildFaqPage(items.map((item) => ({ question: item.q, answer: item.a })))} />
+
       <div className={s.grid}>
         <div className={s.intro}>
           <span className={s.meta}>{t('meta')}</span>

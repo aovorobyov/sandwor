@@ -5,23 +5,9 @@ import type {
   BlogPostingInput,
   BreadcrumbInput,
   OrganizationInput,
-  PersonInput,
   ServiceInput,
   WebSiteInput,
 } from './builders.types';
-
-export const buildPerson = (input: PersonInput) => {
-  const { name, bio } = input;
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name,
-    url: SITE_URL,
-    ...(bio ? { description: bio } : {}),
-    sameAs: SAME_AS,
-  };
-};
 
 export const buildWebSite = (input: WebSiteInput) => {
   const { name } = input;
@@ -71,19 +57,20 @@ export const buildBreadcrumbs = (items: BreadcrumbInput[]) => {
         '@type': 'ListItem',
         position: index + 1,
         name: item.name,
-        item: `${SITE_URL}${item.path}`,
+        // Главная — без хвостового слэша, как в canonical и hreflang.
+        item: `${SITE_URL}${item.path === '/' ? '' : item.path}`,
       };
     }),
   };
 };
 
-/** Студия как организация: ProfessionalService с каналами связи. */
+/** Студия как организация с каналами связи (без адреса — поэтому не LocalBusiness). */
 export const buildOrganization = (input: OrganizationInput) => {
   const { description } = input;
 
   return {
     '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
+    '@type': 'Organization',
     name: 'sandwor',
     url: SITE_URL,
     description,
@@ -103,7 +90,7 @@ export const buildService = (input: ServiceInput) => {
     name,
     description,
     url: buildLocaleUrl(locale, path),
-    provider: { '@type': 'ProfessionalService', name: 'sandwor', url: SITE_URL },
+    provider: { '@type': 'Organization', name: 'sandwor', url: SITE_URL },
     areaServed: 'RU',
     offers: {
       '@type': 'Offer',
@@ -114,5 +101,18 @@ export const buildService = (input: ServiceInput) => {
         priceCurrency: 'RUB',
       },
     },
+  };
+};
+
+/** FAQ: вопросы и ответы для FAQPage (Яндекс и Google показывают их в выдаче). */
+export const buildFaqPage = (items: { question: string; answer: string }[]) => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
   };
 };

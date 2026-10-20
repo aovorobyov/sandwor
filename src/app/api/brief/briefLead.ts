@@ -3,6 +3,7 @@
  * сборка заявки для amoCRM. Тексты заявки — по-русски: их читает менеджер в CRM.
  */
 
+import { ACTIVE_SERVICE_IDS } from '@/entities/service';
 import { LEGAL } from '@/shared/config/legal';
 
 export const BRIEF_SERVICES = ['crm', 'sites', 'smm', 'ai'] as const;
@@ -109,7 +110,10 @@ export const isValidBrief = (brief: BriefPayload): boolean => {
   return (
     brief.consent === true &&
     brief.services.length > 0 &&
-    brief.services.every((service) => isOneOf(BRIEF_SERVICES, service)) &&
+    brief.services.length <= BRIEF_SERVICES.length &&
+    new Set(brief.services).size === brief.services.length &&
+    // В брифе только работающие направления: «Скоро» не принимаем и с подделанным запросом.
+    brief.services.every((service) => isOneOf(ACTIVE_SERVICE_IDS, service)) &&
     (brief.teamSize === null || isOneOf(TEAM_SIZES, brief.teamSize)) &&
     (brief.budget === null || isOneOf(BUDGETS, brief.budget)) &&
     !!brief.name.trim() &&
@@ -121,9 +125,9 @@ export const isValidBrief = (brief: BriefPayload): boolean => {
   );
 };
 
-/** Похоже на бота: мгновенная отправка или ссылочный флуд. */
+/** Похоже на бота: нет отметки времени (форма её всегда присылает), мгновенная отправка или ссылочный флуд. */
 export const isSpamBrief = ({ elapsedMs, task }: BriefPayload): boolean => {
-  if (typeof elapsedMs === 'number' && elapsedMs < MIN_ELAPSED_MS) {
+  if (typeof elapsedMs !== 'number' || !Number.isFinite(elapsedMs) || elapsedMs < MIN_ELAPSED_MS) {
     return true;
   }
 

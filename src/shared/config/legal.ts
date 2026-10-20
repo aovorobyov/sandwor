@@ -23,7 +23,7 @@ export const LEGAL = {
   /** Адрес для запросов субъектов и отзыва согласия. */
   email: 'aovorobyov@mail.ru',
   /** Дата текущей редакции политики и согласий. */
-  edition: { ru: '19 октября 2026', en: '19 October 2026' },
+  edition: { ru: '20 октября 2026', en: '20 October 2026' },
   consentVersion: '1.0',
 } as const;
 

@@ -5,6 +5,7 @@ import type { FlowDiagramNode } from '@sw/components/FlowDiagram';
 import { Stats } from '@sw/components/Stats';
 import type { StatsItem } from '@sw/components/Stats';
 import { getPosts } from '@/entities/post/api/posts';
+import { SERVICE_PRICES } from '@/entities/service';
 import { BriefButton } from '@/features/brief';
 import { CaseCards } from '@/widgets/CaseCards';
 import { FaqSection, GENERAL_FAQ_KEY, type FaqItem } from '@/widgets/FaqSection';
@@ -16,6 +17,7 @@ import { ServicesGrid } from '@/widgets/ServicesGrid';
 import { SocialProof } from '@/widgets/SocialProof';
 import { JsonLd, buildOrganization, buildWebSite } from '@/shared/lib/jsonLd';
 import { FEATURES, POSITIONING, byPositioning } from '@/shared/config/positioning';
+import { formatPrice } from '@/shared/lib/format';
 import { localizeHref } from '@/shared/ui/Link';
 import { PageHero } from '@/shared/ui/PageHero';
 import { Section } from '@/shared/ui/Section';
@@ -33,11 +35,16 @@ export const HomePage = async () => {
   const href = (path: string) => localizeHref(path, locale);
 
   const hero = `home.hero-${POSITIONING}`;
-  const stats = (t.raw(`home.stats-${POSITIONING}`) as StatsItem[]).map((item, index) => ({
-    ...item,
-    // Главная цифра блока — цена старта у сайтов.
-    accent: POSITIONING === 'sites' && index === 0,
-  }));
+  const stats = (t.raw(`home.stats-${POSITIONING}`) as StatsItem[]).map((item, index) => {
+    // Главная цифра блока — цена старта у сайтов; берём её из прайса, а не из переводов.
+    const isPrice = POSITIONING === 'sites' && index === 0;
+
+    return {
+      ...item,
+      ...(isPrice ? { value: formatPrice(SERVICE_PRICES.sites, t('common.from')) } : {}),
+      accent: isPrice,
+    };
+  });
   const flowNodes = (t.raw('home.flow.nodes') as FlowDiagramNode[]).map((node, index, all) => ({
     ...node,
     icon: FLOW_ICONS[index],
@@ -161,7 +168,7 @@ export const HomePage = async () => {
             }
           />
 
-          <PostsGrid posts={posts.slice(0, BLOG_LIMIT)} />
+          <PostsGrid posts={posts.slice(0, BLOG_LIMIT)} teaser />
         </Section>
       )}
 

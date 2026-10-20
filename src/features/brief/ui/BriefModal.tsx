@@ -28,7 +28,13 @@ export const BriefModal: FC<BriefModalProps> = ({ open, onClose, services }) => 
       closeOnScrim={false}
       closeLabel={t('common.close')}
     >
-      <BriefForm {...formProps} container="bare" headingLevel={3} onReturn={onClose} />
+      <BriefForm
+        {...formProps}
+        container="bare"
+        headingLevel={3}
+        onReturn={onClose}
+        className="ym-hide-content"
+      />
     </Modal>
   );
 };

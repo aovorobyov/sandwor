@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
+import { permanentRedirect } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ArticlePage } from '@/views/ArticlePage';
 import { getPosts, getPost } from '@/entities/post/api/posts';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
 import { buildContentOgImage } from '@/shared/lib/seo/ogImage';
+import { localizeHref } from '@/shared/ui/Link';
 
 interface Props {
   params: { locale: string; slug: string };
@@ -31,6 +33,8 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
     description,
     alternates: buildPageAlternates(locale, `/blog/${post.slug}`),
     ...buildSocialMeta({
+      locale,
+      path: `/blog/${post.slug}`,
       title: post.title,
       description,
       type: 'article',
@@ -45,7 +49,13 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
   };
 }
 
-export default function Page({ params: { slug, locale } }: Props) {
+export default async function Page({ params: { slug, locale } }: Props) {
   setRequestLocale(locale);
+
+  // Адреса постов из Telegram-ленты v1 больше не существуют — ведём в блог, а не на 404.
+  if (!(await getPost(slug, locale))) {
+    permanentRedirect(localizeHref('/blog', locale));
+  }
+
   return <ArticlePage slug={slug} />;
 }

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { ViewTransitions } from 'next-view-transitions';
 import { OG_DEFAULT_IMAGE } from '@/shared/lib/seo/ogImage';
 import { SITE_URL } from '@/shared/config/site';
 // Порядок важен: токены и шрифты ДС → сброс отступов → стили компонентов ДС → глобальные стили сайта.
@@ -14,8 +13,9 @@ export const metadata: Metadata = {
     template: '%s | sandwor',
     default: 'sandwor',
   },
+  // Запасное описание (404 и страницы без своего): совпадает с позиционированием «сайты».
   description:
-    'CRM, сайты, SMM и ИИ-автоматизации для малого и среднего бизнеса. Наводим порядок в продажах.',
+    'Сайты для бизнеса под ключ: лендинги и магазины на Tilda, кастомная разработка. Заявки сразу в CRM.',
   verification: {
     // По тегу на каждый ресурс Search Console — у доменов свои токены, Google берёт свой.
     google: [
@@ -39,12 +39,10 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Корневой layout только подключает стили и общие метаданные. <html> с верным `lang`
+ * рендерит layout локали (`[locale]/layout.tsx`), а адреса вне локалей — `not-found.tsx`.
+ */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <ViewTransitions>
-      <html lang="ru" data-theme="dark" suppressHydrationWarning>
-        <body>{children}</body>
-      </html>
-    </ViewTransitions>
-  );
+  return children;
 }

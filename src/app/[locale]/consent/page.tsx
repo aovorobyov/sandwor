@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ConsentPage } from '@/views/PrivacyPage';
+import { toMetaDescription } from '@/shared/lib/seo/metaDescription';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
 import { buildPageOgImage } from '@/shared/lib/seo/ogImage';
@@ -14,11 +15,13 @@ export async function generateMetadata({
   const title = t('consent.title');
   return {
     title,
-    description: t('consent.intro'),
+    description: toMetaDescription(t('consent.intro')),
     alternates: buildPageAlternates(locale, '/consent'),
     ...buildSocialMeta({
+      locale,
+      path: '/consent',
       title,
-      description: t('consent.intro'),
+      description: toMetaDescription(t('consent.intro')),
       image: buildPageOgImage({
         locale,
         tag: t('consent.breadcrumb'),

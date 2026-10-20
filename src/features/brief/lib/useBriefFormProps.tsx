@@ -95,6 +95,7 @@ export const useBriefFormProps = (preset?: ServiceId[]): BriefFormBaseProps => {
         </>
       ),
       errConsent: t('err-consent'),
+      optional: t('optional'),
       errServices: t('err-services'),
       errName: t('err-name'),
       errContact: t('err-contact'),

@@ -87,6 +87,7 @@ export function ArticleToc({ items = [], activeId, onNavigate, label = 'Соде
  */
 export function Article({
   breadcrumbs,
+  breadcrumbsLabel,
   services = [],
   title,
   lead,
@@ -152,7 +153,7 @@ export function Article({
   return (
     <Tag className={cx('sw-article', items.length > 0 && 'sw-article--toc', className)} {...rest}>
       <header className="sw-article__header">
-        {breadcrumbs && breadcrumbs.length > 0 && <Breadcrumbs items={breadcrumbs} className="sw-article__crumbs" />}
+        {breadcrumbs && breadcrumbs.length > 0 && <Breadcrumbs items={breadcrumbs} label={breadcrumbsLabel} className="sw-article__crumbs" />}
         {services.length > 0 && (
           <div className="sw-article__services">
             {services.map((s) => <Badge key={s} variant="service" service={s} />)}

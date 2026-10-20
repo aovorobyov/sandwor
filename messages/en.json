@@ -19,7 +19,9 @@
     "privacy": "Privacy",
     "rss": "RSS",
     "label": "Main navigation",
-    "consent": "Consent"
+    "consent": "Consent",
+    "breadcrumbs": "Breadcrumb",
+    "skip": "Skip to content"
   },
   "header": {
     "cta": "Discuss a project",
@@ -300,7 +302,8 @@
       }
     },
     "task-placeholder-studio": "For example: leads from the website and messengers get lost, we want everything in one CRM",
-    "err-consent": "Please tick the consent to personal data processing"
+    "err-consent": "Please tick the consent to personal data processing",
+    "optional": "optional"
   },
   "founder": {
     "meta": "Who owns your project",
@@ -447,7 +450,7 @@
           "Forms and quizzes to CRM",
           "Speed and SEO basics"
         ],
-        "term": "1+ week",
+        "term": "1–2 weeks",
         "meta-title": "Turnkey websites — landing pages and Tilda stores | from 50,000 ₽",
         "meta-description": "Websites for business: landing pages from 50,000 ₽, Tilda stores and custom websites. We pick the tool for the task, launch turnkey and support after launch.",
         "hero-title": "Website development",
@@ -1128,9 +1131,10 @@
         ]
       },
       {
-        "heading": "3. Online chat and messengers",
+        "heading": "3. Online chat, email, phone and messengers",
         "paragraphs": [
           "The Site has a contact button and an online chat by amoCRM. If you write in the chat, the Operator receives your name or nickname, the contact details you provide, message texts and attachments. The conversation is stored in amoCRM.",
+          "If you write to sandwor@mail.ru or call the number shown on the Site, the Operator receives your email address or phone number, your name and whatever you tell. Emails are stored in the Mail.ru email service (VK LLC), whose servers are located in Russia.",
           "The Site also links to Telegram and WhatsApp. If you write to the Operator in a messenger, your data (name or nickname, phone number, messages and files) is processed in that messenger under its rules, and Telegram and WhatsApp servers are located outside Russia. This is a cross-border transfer of personal data on your initiative: if you don't want it, use the brief or the chat on the Site — they run on servers in Russia.",
           "Purpose and basis: to answer your inquiry and correspond about it — on the basis of your consent expressed by sending a message.",
           "Retention: 1 year from the last message unless a contract is concluded (then as in section 2)."
@@ -1141,7 +1145,7 @@
         "paragraphs": [
           "The Site uses Yandex Metrica (Yandex LLC): it collects cookies and browser identifiers, IP address, device, browser and operating system details, addresses of viewed pages and the referral source (including ad campaign tags), on-page actions — scrolling, clicks, navigation — and session recordings (Webvisor) without the contents of input fields.",
           "Purpose: to understand how visitors use the Site, evaluate traffic sources and improve the Site.",
-          "Legal basis — your consent to cookies and web analytics. On your first visit the Site shows the notice “By continuing to use the site, you agree to the use of cookies and Yandex Metrica”. Metrica loads only when you continue to use the Site: after 5 seconds on a page or earlier — when you scroll, tap, press a key or go to another page. If you leave the Site earlier without doing anything, no data is sent to Metrica. The mark that the notice was shown is kept in the browser for 12 months; while it exists, Metrica loads right away on later visits.",
+          "Legal basis — your consent to cookies and web analytics. On your first visit the Site shows the notice “By continuing to use the site, you agree to the use of cookies and Yandex Metrica”. Metrica loads only when you continue to use the Site: after 5 seconds on a page or earlier — when you scroll, tap, press a key or go to another page. Following the \"Learn more\" link to these terms and reading them does not count as continued use. If you leave the Site earlier without doing anything, no data is sent to Metrica. The mark that the notice was shown is kept in the browser for 12 months; while it exists, Metrica loads right away on later visits.",
           "How to opt out: disable cookies for the Site in your browser settings or clear the Site's data, install a tracker blocker or Yandex's official Metrica opt-out add-on. You can also withdraw consent by writing to {email}.",
           "Retention: Metrica data is kept by Yandex under the service rules; the Operator uses it in aggregated form for no longer than 1 year. Yandex keeps Webvisor recordings for up to 15 days.",
           "Technical data in the browser: the mark that the cookie notice was shown (localStorage, 12 months) and data the amoCRM chat button stores for the chat to work. They are needed for the Site to work and are not used for analytics."
@@ -1159,6 +1163,7 @@
           "The Operator does not sell personal data or share it for advertising. Data is processed on the Operator's behalf or with its involvement only by these services — to the extent needed for them to work:",
           "amoCRM JSC (TIN 7709477879, Moscow) — the amoCRM system and the online chat on the Site: storing requests and conversations. Data is stored on servers in Russia.",
           "Yandex LLC (TIN 7736207543, Moscow) — Yandex Metrica: processes data on the Operator's behalf under the service terms. Servers in Russia.",
+          "VK LLC (TIN 7743001840, Moscow) — the Mail.ru email service: storing the emails you send to the Operator. Servers in Russia.",
           "Selectel JSC (TIN 7810962785) — hosting: the server the Site runs on and requests pass through. The server is located in Russia.",
           "Telegram and WhatsApp — only if you write to the Operator in a messenger yourself (section 3). WhatsApp is owned by Meta Platforms, Inc., whose activities are recognised as extremist and banned in Russia.",
           "Data may be disclosed to public authorities only where required by law."
@@ -1167,7 +1172,7 @@
       {
         "heading": "7. Where the data is stored",
         "paragraphs": [
-          "Recording, systematisation, accumulation, storage, clarification and retrieval of personal data of Russian citizens received through the brief and the chat on the Site take place in databases located in Russia: on the Site's server and in amoCRM. A cross-border transfer is possible only when you correspond in messengers on your own initiative (section 3); the Operator notifies Roskomnadzor of it as required."
+          "Recording, systematisation, accumulation, storage, clarification and retrieval of personal data of Russian citizens received through the brief, the chat and email take place in databases located in Russia: on the Site's server, in amoCRM and in the Mail.ru email service. A cross-border transfer is possible only when you correspond in messengers on your own initiative (section 3); the Operator notifies Roskomnadzor of it as required."
         ]
       },
       {

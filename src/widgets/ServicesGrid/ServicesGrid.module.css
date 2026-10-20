@@ -19,15 +19,23 @@
   height: 100%;
 }
 
-/* «Скоро»: карточка без ссылки, приглушена, чтобы не спорить с работающими. */
-.soon {
-  opacity: 0.72;
+/* «Скоро»: карточка без ссылки; статус показывает плашка. Без прозрачности —
+   иначе мелкий текст плашки проваливается ниже контраста 4.5:1. */
+
+/* Список «Скоро» нужен только на телефоне. */
+.soonList {
+  display: none;
 }
 
 @media (max-width: 1100px) {
   .compact,
   .compact.three {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Нечётная последняя карточка — на всю строку, без «дыры» справа. */
+  .grid > article:last-of-type:nth-of-type(odd) {
+    grid-column: 1 / -1;
   }
 }
 
@@ -37,4 +45,57 @@
   .default {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .soon {
+    display: none;
+  }
+
+  .soonList {
+    display: block;
+    padding: var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+  }
+}
+
+.soonHead {
+  margin-bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-muted);
+}
+
+.soonRows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.soonRow {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--line);
+}
+
+.soonTile {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: var(--text-muted);
+  background: var(--surface-raised);
+  border-radius: var(--radius-lg);
+}
+
+.soonTitle {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21px;
+  color: var(--text-secondary);
 }

@@ -1,7 +1,8 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Badge } from '@sw/components/Badge';
+import { Icon } from '@sw/components/Icon';
 import { ServiceCard } from '@sw/components/ServiceCard';
-import { cx } from '@sw/utils';
+import { SERVICES, cx } from '@sw/utils';
 import {
   MONTHLY_SERVICES,
   SERVICE_IDS,
@@ -35,6 +36,8 @@ export const ServicesGrid = async (props: ServicesGridProps) => {
   const ids = SERVICE_IDS.filter((id) => id !== exclude).sort((a, b) => {
     return Number(isServiceActive(b)) - Number(isServiceActive(a));
   });
+
+  const soonIds = ids.filter((id) => !isServiceActive(id));
 
   return (
     <div className={cx(s.grid, s[variant], ids.length === 3 && s.three)}>
@@ -83,6 +86,23 @@ export const ServicesGrid = async (props: ServicesGridProps) => {
           />
         );
       })}
+
+      {/* Телефон: «Скоро» — одним компактным списком вместо стопки карточек на несколько экранов. */}
+      {soonIds.length > 0 && (
+        <div className={s.soonList}>
+          <p className={s.soonHead}>{t('services.soon')}</p>
+          <ul className={s.soonRows}>
+            {soonIds.map((id) => (
+              <li key={id} className={s.soonRow}>
+                <span className={s.soonTile} aria-hidden="true">
+                  <Icon name={SERVICES[id].icon} size={18} />
+                </span>
+                <span className={s.soonTitle}>{t(`services.items.${id}.title`)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

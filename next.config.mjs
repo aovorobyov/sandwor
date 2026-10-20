@@ -11,9 +11,18 @@ const withAnalyzer = withBundleAnalyzer({
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
-  // Старые адреса v1: «Создание сайтов» стало направлением в «Услугах», курс снят.
+  // Старые адреса v1: «Создание сайтов» стало направлением в «Услугах», курс снят,
+  // проекты стали кейсами, лента новостей и таймлайн — блогом.
   async redirects() {
     return [
+      { source: '/projects/:path*', destination: '/cases', permanent: true },
+      { source: '/en/projects/:path*', destination: '/en/cases', permanent: true },
+      { source: '/projects', destination: '/cases', permanent: true },
+      { source: '/en/projects', destination: '/en/cases', permanent: true },
+      { source: '/:old(news|notes|timeline)/:path*', destination: '/blog', permanent: true },
+      { source: '/en/:old(news|notes|timeline)/:path*', destination: '/en/blog', permanent: true },
+      { source: '/:old(news|notes|timeline)', destination: '/blog', permanent: true },
+      { source: '/en/:old(news|notes|timeline)', destination: '/en/blog', permanent: true },
       { source: '/websites', destination: '/services/sites', permanent: true },
       { source: '/en/websites', destination: '/en/services/sites', permanent: true },
       { source: '/course/:path*', destination: '/', permanent: true },

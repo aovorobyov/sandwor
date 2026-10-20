@@ -1,18 +1,28 @@
 import type { Metadata } from 'next';
 import type { SocialMetaOptions } from './buildSocialMeta.types';
+import { buildLocaleUrl } from './buildLocaleUrl';
 
 /**
  * OG-блок страницы. Вынесен отдельно, потому что `publishedTime` в типах Next
  * разрешён только при `type: 'article'`.
  */
 const buildOpenGraph = (options: SocialMetaOptions): Metadata['openGraph'] => {
-  const { title, description, image, type, publishedTime } = options;
+  const { title, description, image, type, publishedTime, locale, path } = options;
+  // Страница со своим OG целиком заменяет рутовый блок, поэтому общие поля — здесь.
+  const common = {
+    title,
+    description,
+    siteName: 'sandwor',
+    images: [image],
+    ...(locale ? { locale: locale === 'en' ? 'en_US' : 'ru_RU' } : {}),
+    ...(locale && path !== undefined ? { url: buildLocaleUrl(locale, path) } : {}),
+  };
 
   switch (type) {
     case 'article':
-      return { title, description, type: 'article', publishedTime, images: [image] };
+      return { ...common, type: 'article', publishedTime };
     default:
-      return { title, description, type: 'website', images: [image] };
+      return { ...common, type: 'website' };
   }
 };
 

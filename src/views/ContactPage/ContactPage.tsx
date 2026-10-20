@@ -4,6 +4,7 @@ import { Icon } from '@sw/components/Icon';
 import { BriefCard } from '@/features/brief';
 import { CONTACT_CHANNELS } from '@/shared/config/contacts';
 import { JsonLd, buildBreadcrumbs, buildOrganization } from '@/shared/lib/jsonLd';
+import { byPositioning } from '@/shared/config/positioning';
 import { localizeHref } from '@/shared/ui/Link';
 import { PageHero } from '@/shared/ui/PageHero';
 import { Section } from '@/shared/ui/Section';
@@ -17,7 +18,13 @@ export const ContactPage = async () => {
 
   return (
     <>
-      <JsonLd data={buildOrganization({ description: t('meta.description') })} />
+      <JsonLd
+        data={buildOrganization({
+          description: t(
+            byPositioning({ sites: 'meta.description', studio: 'meta.description-studio' }),
+          ),
+        })}
+      />
 
       <JsonLd
         data={buildBreadcrumbs([

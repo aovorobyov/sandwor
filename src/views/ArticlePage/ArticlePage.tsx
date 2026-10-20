@@ -61,6 +61,7 @@ export const ArticlePage = async ({ slug }: ArticlePageProps) => {
             { label: t('nav.blog'), href: href('/blog') },
             { label: post.title },
           ]}
+          breadcrumbsLabel={t('nav.breadcrumbs')}
           title={post.title}
           lead={post.excerpt}
           author={{ name: t('blog-page.author'), tone: 'founder' }}
@@ -88,7 +89,7 @@ export const ArticlePage = async ({ slug }: ArticlePageProps) => {
         <Section tone="sunken" aria-labelledby="related-title">
           <SectionIntro title={t('blog-page.related-title')} titleId="related-title" />
 
-          <PostsGrid posts={related} />
+          <PostsGrid posts={related} teaser />
         </Section>
       )}
     </>

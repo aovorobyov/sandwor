@@ -7,15 +7,17 @@ import s from './PostsGrid.module.css';
 interface PostsGridProps {
   posts: Post[];
   headingLevel?: 2 | 3;
+  /** Подборка (главная, «Читайте также»): на планшете без одинокой карточки в последнем ряду. */
+  teaser?: boolean;
 }
 
 /** Сетка карточек статей: 3 в ряд, 2 на планшете, 1 на телефоне. */
-export const PostsGrid = async ({ posts, headingLevel = 3 }: PostsGridProps) => {
+export const PostsGrid = async ({ posts, headingLevel = 3, teaser = false }: PostsGridProps) => {
   const locale = await getLocale();
   const t = await getTranslations('blog-page');
 
   return (
-    <div className={s.grid}>
+    <div className={teaser ? `${s.grid} ${s.teaser}` : s.grid}>
       {posts.map((post) => (
         <PostCard
           key={post.slug}

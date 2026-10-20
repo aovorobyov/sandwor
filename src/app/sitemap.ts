@@ -49,9 +49,15 @@ const STATIC_PATHS = [
   { path: '/consent', priority: 0.2, changeFrequency: 'yearly' as const },
 ];
 
+/**
+ * Дата последней заметной правки страниц (не время запроса: lastmod, который меняется
+ * при каждом обходе, поисковики перестают учитывать). Обновлять вместе с контентом.
+ */
+const CONTENT_UPDATED = new Date('2026-10-20');
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getPosts();
-  const now = new Date();
+  const now = CONTENT_UPDATED;
 
   const staticEntries = STATIC_PATHS.flatMap(({ path, priority, changeFrequency }) =>
     toLocalizedEntries(path, { lastModified: now, changeFrequency, priority }),

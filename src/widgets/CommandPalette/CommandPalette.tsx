@@ -2,7 +2,7 @@
 
 import type { ChangeEvent, FC, KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Modal } from '@sw/components/Modal';
 import { TextField } from '@sw/components/TextField';
 import { Icon } from '@sw/components/Icon';
@@ -30,9 +30,11 @@ const matchesQuery = (cmd: PaletteCommand, query: string): boolean => {
  */
 export const CommandPalette: FC = () => {
   const t = useTranslations();
+  const locale = useLocale();
   const listId = useId();
   const [posts, setPosts] = useState<PaletteSearchPost[]>([]);
-  const [hasFetchedPosts, setHasFetchedPosts] = useState(false);
+  // Статьи грузим при первом открытии — и заново после смены языка.
+  const [fetchedLocale, setFetchedLocale] = useState<string | null>(null);
   const commands = useCommands(posts);
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -68,13 +70,13 @@ export const CommandPalette: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!isOpen || hasFetchedPosts) {
+    if (!isOpen || fetchedLocale === locale) {
       return;
     }
 
-    setHasFetchedPosts(true);
-    fetchPalettePosts().then(setPosts);
-  }, [isOpen, hasFetchedPosts]);
+    setFetchedLocale(locale);
+    fetchPalettePosts(locale).then(setPosts);
+  }, [isOpen, fetchedLocale, locale]);
 
   useEffect(() => {
     setSelectedIndex((prev) => Math.min(prev, Math.max(filtered.length - 1, 0)));

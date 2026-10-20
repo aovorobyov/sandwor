@@ -41,7 +41,9 @@ export const SiteFooter: FC = () => {
           links: SERVICE_NAV.map((item) =>
             item.isActive
               ? { label: t(`services.items.${item.id}.title`), href: href(item.href) }
-              : { label: `${t(`services.items.${item.id}.title`)} · ${t('common.soon')}` },
+              : {
+                  label: `${t(`service-labels.${item.id}`)}\u00a0·\u00a0${t('common.soon')}`,
+                },
           ),
         },
         {

@@ -16,6 +16,8 @@ export async function generateMetadata({
     description: t('blog-page.lead'),
     alternates: buildPageAlternates(locale, '/blog'),
     ...buildSocialMeta({
+      locale,
+      path: '/blog',
       title: t('blog-page.title'),
       description: t('blog-page.lead'),
       image: buildPageOgImage({

@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
+import { ViewTransitions } from 'next-view-transitions';
 import { locales, type Locale } from '@/i18n-routing';
 import { SiteHeader } from '@/widgets/SiteHeader';
 import { SiteFooter } from '@/widgets/SiteFooter';
@@ -39,20 +40,32 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
   // Enable static rendering for this locale
   setRequestLocale(locale);
 
-  const messages = await getMessages();
+  const [messages, t] = await Promise.all([getMessages(), getTranslations('nav')]);
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <BriefProvider>
-        <LinkInterceptor />
-        <ScrollReset />
-        <SiteHeader />
-        <main style={{ flex: 1 }}>{children}</main>
-        <SiteFooter />
-        <CommandPalette />
-        {/* Уведомление о cookie, Метрика и чат amoCRM (появляется после уведомления). */}
-        <CookieConsent />
-      </BriefProvider>
-    </NextIntlClientProvider>
+    <ViewTransitions>
+      <html lang={locale} data-theme="dark" suppressHydrationWarning>
+        <body>
+          <NextIntlClientProvider messages={messages}>
+            <BriefProvider>
+              {/* Первая ссылка на странице: с клавиатуры — сразу к содержимому, мимо меню. */}
+              <a href="#main" className="skip-link">
+                {t('skip')}
+              </a>
+              <LinkInterceptor />
+              <ScrollReset />
+              <SiteHeader />
+              <main id="main" tabIndex={-1} style={{ flex: 1 }}>
+                {children}
+              </main>
+              <SiteFooter />
+              <CommandPalette />
+              {/* Уведомление о cookie, Метрика и чат amoCRM (появляется после уведомления). */}
+              <CookieConsent />
+            </BriefProvider>
+          </NextIntlClientProvider>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

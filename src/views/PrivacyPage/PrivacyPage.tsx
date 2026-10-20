@@ -41,6 +41,7 @@ export const LegalDocumentPage = async ({ doc, path }: LegalDocumentPageProps) =
 
       <div className={`sw-container ${s.wrap}`}>
         <Article
+          breadcrumbsLabel={t('nav.breadcrumbs')}
           breadcrumbs={[
             { label: t('nav.home'), href: href('/') },
             { label: t(`${doc}.breadcrumb`) },

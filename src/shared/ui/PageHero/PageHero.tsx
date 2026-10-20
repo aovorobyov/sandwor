@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useTranslations } from 'next-intl';
 import { Breadcrumbs } from '@sw/components/Breadcrumbs';
 import { cx } from '@sw/utils';
 import type { PageHeroProps } from './PageHero.types';
@@ -22,12 +23,17 @@ export const PageHero: FC<PageHeroProps> = (props) => {
     className,
     children,
   } = props;
+  const t = useTranslations('nav');
 
   return (
     <section className={cx(s.root, s[size], aside && s.withAside, className)}>
       <div className="sw-container">
         {breadcrumbs && (
-          <Breadcrumbs items={breadcrumbs} label={breadcrumbsLabel} className={s.crumbs} />
+          <Breadcrumbs
+            items={breadcrumbs}
+            label={breadcrumbsLabel ?? t('breadcrumbs')}
+            className={s.crumbs}
+          />
         )}
 
         <div className={s.grid}>

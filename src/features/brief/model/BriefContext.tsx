@@ -3,7 +3,12 @@
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import type { FC, ReactNode } from 'react';
 import type { ServiceId } from '@/entities/service';
-import { BriefModal } from '../ui/BriefModal';
+import dynamic from 'next/dynamic';
+
+// Окно брифа (форма, чипы, поля) грузится при первом открытии, а не на каждой странице.
+const BriefModal = dynamic(() => import('../ui/BriefModal').then((mod) => mod.BriefModal), {
+  ssr: false,
+});
 
 export interface OpenBriefOptions {
   /** Услуги, отмеченные на первом шаге (из калькулятора или страницы услуги). */
@@ -44,12 +49,14 @@ export const BriefProvider: FC<{ children: ReactNode }> = ({ children }) => {
     <BriefContext.Provider value={api}>
       {children}
 
-      <BriefModal
-        key={state.session}
-        open={state.isOpen}
-        onClose={closeBrief}
-        services={state.services}
-      />
+      {state.session > 0 && (
+        <BriefModal
+          key={state.session}
+          open={state.isOpen}
+          onClose={closeBrief}
+          services={state.services}
+        />
+      )}
     </BriefContext.Provider>
   );
 };

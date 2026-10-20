@@ -66,6 +66,8 @@ const DEFAULT_COPY = {
   errName: 'Напишите, как к вам обращаться',
   errContact: 'Укажите телефон или ник в Telegram',
   errConsent: 'Отметьте согласие на обработку персональных данных',
+  /** [sandwor.ru] подпись необязательного поля (для EN). */
+  optional: 'необязательно',
   errSubmit: `Не удалось отправить. Проверьте соединение и${NB}попробуйте ещё раз`,
   successTitle: 'Заявка отправлена',
   successText: (v) => {
@@ -271,6 +273,8 @@ export function BriefForm({
           <TextField
             label={copy.company}
             optional
+            optionalLabel={copy.optional}
+            maxLength={200}
             name="company"
             autoComplete="organization"
             placeholder={copy.companyPlaceholder}
@@ -320,6 +324,7 @@ export function BriefForm({
       <>
         <TextField
           label={copy.name}
+          maxLength={100}
           name="name"
           autoComplete="given-name"
           placeholder={copy.namePlaceholder}
@@ -332,6 +337,7 @@ export function BriefForm({
         />
         <TextField
           label={copy.contact}
+          maxLength={100}
           name="contact"
           autoComplete="tel"
           placeholder={copy.contactPlaceholder}

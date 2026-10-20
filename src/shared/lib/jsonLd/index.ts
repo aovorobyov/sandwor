@@ -4,7 +4,7 @@ export {
   buildBlogPosting,
   buildBreadcrumbs,
   buildOrganization,
-  buildPerson,
+  buildFaqPage,
   buildService,
   buildWebSite,
 } from './builders';

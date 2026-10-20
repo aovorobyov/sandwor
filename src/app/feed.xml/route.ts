@@ -56,7 +56,7 @@ export const GET = async () => {
     .join('\n');
 
   const xml = `<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="${FEED_LOCALE}">
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="${FEED_LOCALE}" xml:base="${SITE_URL}/">
   <id>${SITE_URL}/</id>
   <title>${escapeXml(feedTitle)}</title>
   <subtitle>${escapeXml(subtitle)}</subtitle>

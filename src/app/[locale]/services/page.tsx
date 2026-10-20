@@ -18,6 +18,8 @@ export async function generateMetadata({
     description: t(byPositioning({ sites: 'meta-description', studio: 'meta-description-studio' })),
     alternates: buildPageAlternates(locale, '/services'),
     ...buildSocialMeta({
+      locale,
+      path: '/services',
       title: t(byPositioning({ sites: 'meta-title', studio: 'meta-title-studio' })),
       description: t(
         byPositioning({ sites: 'meta-description', studio: 'meta-description-studio' }),

@@ -11,4 +11,7 @@ export interface SocialMetaOptions {
   type?: SocialMetaType;
   /** ISO-дата публикации — только для `type: 'article'`. */
   publishedTime?: string;
+  /** Локаль и путь страницы без префикса — для og:locale и og:url. */
+  locale?: string;
+  path?: string;
 }

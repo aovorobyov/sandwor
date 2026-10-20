@@ -16,6 +16,8 @@ export async function generateMetadata({
     description: t(byPositioning({ sites: 'meta.description', studio: 'meta.description-studio' })),
     alternates: buildPageAlternates(locale, ''),
     ...buildSocialMeta({
+      locale,
+      path: '',
       // В превью уходит позиционирование из героя, а не био: ссылку чаще всего
       // отправляют потенциальному заказчику.
       title: t(`home.hero-${POSITIONING}.title`),

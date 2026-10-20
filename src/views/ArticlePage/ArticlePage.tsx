@@ -4,6 +4,7 @@ import { Article, ArticleCallout, ArticleProse } from '@sw/components/Article';
 import { getPost, getRelatedPosts } from '@/entities/post/api/posts';
 import { withHeadingIds } from '@/entities/post';
 import { BriefButton } from '@/features/brief';
+import { LeadMagnet } from '@/features/lead-magnet';
 import { PostsGrid } from '@/widgets/PostsGrid';
 import { formatDate } from '@/shared/lib/format';
 import { JsonLd, buildBlogPosting, buildBreadcrumbs } from '@/shared/lib/jsonLd';
@@ -84,6 +85,10 @@ export const ArticlePage = async ({ slug }: ArticlePageProps) => {
           </ArticleCallout>
         </Article>
       </div>
+
+      <Section spacing="s" aria-label={t('materials.kicker')}>
+        <LeadMagnet placement="article" />
+      </Section>
 
       {related.length > 0 && (
         <Section tone="sunken" aria-labelledby="related-title">

@@ -106,6 +106,8 @@ export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonE
   /** Атрибуты ссылки — уходят на <a>, когда задан href. [sandwor.ru] */
   target?: string;
   rel?: string;
+  /** [sandwor.ru] Для ссылки на файл: скачать, а не открыть (уходит на <a>). */
+  download?: boolean | string;
   type?: 'button' | 'submit' | 'reset';
   children?: React.ReactNode;
 }

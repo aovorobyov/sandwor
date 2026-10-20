@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Tabs } from '@sw/components/Tabs';
 import { getPosts } from '@/entities/post/api/posts';
+import { LeadMagnet } from '@/features/lead-magnet';
 import { PostsGrid } from '@/widgets/PostsGrid';
 import { JsonLd, buildBreadcrumbs } from '@/shared/lib/jsonLd';
 import { localizeHref } from '@/shared/ui/Link';
@@ -60,6 +61,10 @@ export const BlogPage = async () => {
         ) : (
           <PostsGrid posts={posts} headingLevel={2} />
         )}
+      </Section>
+
+      <Section spacing="s" aria-label={t('materials.kicker')}>
+        <LeadMagnet placement="blog" />
       </Section>
     </>
   );

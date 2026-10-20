@@ -19,6 +19,7 @@ const CLIENT_NAMESPACES = [
   'cookie',
   'footer',
   'header',
+  'materials',
   'nav',
   'palette',
   'service-labels',

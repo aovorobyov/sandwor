@@ -21,12 +21,4 @@ export const sendBrief = async (
   }
 };
 
-const REQUEST_ID_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-
-/** Идентификатор одной заявки: тот же на повторных нажатиях «Отправить» после сбоя сети. */
-export const createRequestId = (length = 16): string => {
-  const bytes = crypto.getRandomValues(new Uint8Array(length));
-  return Array.from(bytes, (byte) => REQUEST_ID_ALPHABET[byte % REQUEST_ID_ALPHABET.length]).join(
-    '',
-  );
-};
+export { createRequestId } from '@/shared/lib/requestId';

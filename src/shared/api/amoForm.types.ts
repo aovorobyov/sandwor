@@ -14,6 +14,8 @@ export interface AmoContactLead extends AmoLeadOrigin {
   name: string;
   email: string;
   message: string;
+  /** Идентификатор отправки из браузера — amoCRM отсекает по нему повторы. */
+  requestId?: string;
 }
 
 /** Заявка на сайт (`/websites` и главная). */

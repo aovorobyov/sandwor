@@ -5,6 +5,7 @@ import { Stats } from '@sw/components/Stats';
 import { CASE_SERVICES, PUBLISHED_CASE_SLUGS } from '@/entities/case';
 import { MONTHLY_SERVICES, SERVICE_PRICES, type ServiceId } from '@/entities/service';
 import { BriefButton } from '@/features/brief';
+import { LeadMagnet } from '@/features/lead-magnet';
 import { CaseCards } from '@/widgets/CaseCards';
 import { FaqSection, type FaqItem } from '@/widgets/FaqSection';
 import { FeatureGrid, type FeatureItem } from '@/widgets/FeatureGrid';
@@ -156,6 +157,12 @@ export const ServicePage = async ({ service }: ServicePageProps) => {
           />
 
           <PriceCalculator services={[service]} />
+        </Section>
+      )}
+
+      {service === 'sites' && (
+        <Section spacing="s" aria-label={t('materials.kicker')}>
+          <LeadMagnet placement="services" />
         </Section>
       )}
 

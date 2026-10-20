@@ -14,7 +14,8 @@
     "analyze": "ANALYZE=true next build",
     "size": "node scripts/check-bundle-size.mjs",
     "prepare": "husky",
-    "og": "node scripts/blog-art/og.mjs"
+    "og": "node scripts/blog-art/og.mjs",
+    "materials": "node scripts/materials/build.mjs"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [

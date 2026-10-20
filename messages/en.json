@@ -1160,13 +1160,14 @@
         ]
       },
       {
-        "heading": "2. A request via the “Let's talk about your project” brief",
+        "heading": "2. Requests via the brief and materials",
         "paragraphs": [
           "Data: name; phone number or Telegram username; preferred contact method; company name and number of people in sales (optional); selected services, task description and budget (optional). The request also stores the page it was sent from, the source of the visit (campaign tags, the first page on the Site and the domain you came from), the date and time of sending and a consent mark with its edition number.",
           "Purpose: to review the request, contact you, prepare an offer and, if both parties agree, conclude and perform a services contract.",
           "Legal basis: your consent (Art. 6(1)(1) of 152-FZ), given with a separate checkbox before sending the brief; once a contract is concluded — performance of a contract to which you are a party (Art. 6(1)(5)).",
           "Processing: the request is sent over a secure connection (HTTPS) to the Site's server, checked for spam and stored in the amoCRM system, where only the Operator can see it. Requests from the Site are not forwarded to messengers or email.",
-          "Retention: if no contract is concluded — 1 year from the last contact; if it is — for the term of the contract and 5 years after its performance. The data is then deleted."
+          "Retention: if no contract is concluded — 1 year from the last contact; if it is — for the term of the contract and 5 years after its performance. The data is then deleted.",
+          "Checklists and other materials. If you request a material on the Site, the Operator receives your name, email address, the material, the page where it was offered and the source of the visit. Purpose: to provide the material and, if needed, answer questions about it; no promotional mailings are sent using this data. Basis — your separate consent (art. 6 part 1 item 1 of 152-FZ), given with a checkbox in the form. The data is stored in amoCRM for 1 year from the request."
         ]
       },
       {
@@ -1251,7 +1252,7 @@
     "breadcrumb": "Data processing consent",
     "title": "Consent to Personal Data Processing",
     "updated": "Edition {version} of {edition}",
-    "intro": "This page contains two separate consents: to data processing when sending a request and to cookies and web analytics. Details are in the personal data processing policy. This is a translation; the Russian version prevails.",
+    "intro": "This page contains three separate consents: for processing data when you send a request, for cookies and web analytics, and when you request materials. Details are in the personal data policy.",
     "policy-link": "Personal data processing policy",
     "sections": [
       {
@@ -1277,10 +1278,75 @@
           "Processor: Yandex LLC (TIN 7736207543) processes data on the Operator's behalf under the Yandex Metrica terms of use. Servers in Russia.",
           "Term: 1 year; the mark that the notice was shown is kept in the browser for 12 months. You can withdraw consent by disabling cookies for the site in your browser or clearing the site's data, installing Yandex's official Metrica opt-out add-on, or writing to {email}."
         ]
+      },
+      {
+        "id": "materials",
+        "heading": "3. Consent when requesting materials",
+        "paragraphs": [
+          "By ticking \"I consent to the processing of my personal data\" in the form for receiving a material (for example, a checklist) on sandwor.online or sandwor.ru, I freely, of my own will and in my own interest give consent to {operator_dat} (the Operator) to process my personal data on the following terms.",
+          "Purpose: to provide me with the requested material and, if needed, to answer my questions about it. No promotional mailings are sent using this data.",
+          "Data: name; email address; which material I requested and on which page; the source of the visit (campaign tags, the first page and the domain I came from); the date and time of the request.",
+          "Actions: collection, recording, systematisation, accumulation, storage, clarification, retrieval, use, transfer (provision, access) to processors, blocking, deletion, destruction — with and without automation.",
+          "Processors: amoCRM JSC (TIN 7709477879) — the amoCRM system where the request is stored; Selectel JSC (TIN 7810962785) — website hosting. Data is stored on servers in Russia.",
+          "Term: 1 year from the date of the request. I can withdraw consent at any time by writing to {email}; the Operator will then stop processing and delete the data within 30 days."
+        ]
       }
     ],
     "checkbox": "I consent to the processing of personal data",
     "checkbox-policy": "By clicking “Send request” you confirm that you have read the",
     "checkbox-policy-link": "data processing policy"
+  },
+  "materials": {
+    "kicker": "Free checklist · PDF",
+    "cta": "Get the checklist",
+    "items": {
+      "site-law": {
+        "title": "Your website and the law: what to check before launch",
+        "pitch": "13 points small-business websites most often miss — before the regulator reminds you.",
+        "points": [
+          "Personal data: policy, consent, Roskomnadzor notification",
+          "Cookies, analytics and messenger chats",
+          "Advertising, mailings and online sales"
+        ]
+      },
+      "site-prep": {
+        "title": "What to prepare for your website",
+        "pitch": "What to gather before the start, so the project runs without \"waiting for materials\" pauses and stays on budget.",
+        "points": [
+          "The task, texts, photos and examples",
+          "Domain, hosting and analytics in your name, not the contractor's",
+          "Who approves and who will update the site"
+        ]
+      },
+      "lead-leaks": {
+        "title": "20 places where your website loses leads",
+        "pitch": "A 20-minute self-check: open your site on a phone and go through the list.",
+        "points": [
+          "First screen, prices and trust",
+          "Buttons, forms and mobile speed",
+          "What happens to a request after it is sent"
+        ]
+      }
+    },
+    "form": {
+      "description": "The PDF link appears right away. No mailings, no spam.",
+      "name": "Your name",
+      "name-placeholder": "Anna",
+      "email": "Email",
+      "email-placeholder": "anna@company.com",
+      "consent": "I consent to the processing of my personal data",
+      "fine": "By clicking \"Get the checklist\" you confirm that you have read the",
+      "policy-link": "privacy policy",
+      "submit": "Get the checklist",
+      "sending": "Preparing…",
+      "err-name": "What should we call you?",
+      "err-email": "Check your email address",
+      "err-consent": "Please tick the consent box",
+      "err-submit": "Could not send. Check your connection and try again.",
+      "success-title": "The checklist is yours",
+      "success-text": "Download the PDF — the link keeps working later. If you have questions, message us on Telegram.",
+      "download": "Download PDF",
+      "close": "Close"
+    }
   }
 }

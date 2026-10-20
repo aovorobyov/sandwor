@@ -18,4 +18,7 @@ export const routing = defineRouting({
   defaultLocale,
   localePrefix: 'as-needed',
   localeDetection: false,
+  // hreflang уже есть в <head> каждой страницы с адресами sandwor.ru; заголовок Link
+  // от middleware брал бы хост запроса и на любом другом адресе спорил бы с canonical.
+  alternateLinks: false,
 });

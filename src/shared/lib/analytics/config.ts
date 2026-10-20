@@ -9,7 +9,7 @@
 const PRODUCTION_YM_ID = 110349494;
 
 /** Домены, где счётчик включён; на localhost и превью статистика не засоряется. */
-const PRODUCTION_HOSTS = ['sandwor.online', 'sandwor.ru'];
+const PRODUCTION_HOSTS = ['sandwor.ru'];
 
 export const YM_ID = Number(process.env.NEXT_PUBLIC_YM_ID) || PRODUCTION_YM_ID;
 

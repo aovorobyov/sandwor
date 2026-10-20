@@ -1,7 +1,7 @@
 /* sandwor tokens — dark is the default theme; set data-theme="light" on <html> for the light draft. */
-@font-face{font-family:"Unbounded";src:url("../fonts/Unbounded-Variable.woff2") format("woff2");font-weight:200 900;font-style:normal;font-display:swap}
-@font-face{font-family:"Golos Text";src:url("../fonts/GolosText-Variable.woff2") format("woff2");font-weight:400 900;font-style:normal;font-display:swap}
-@font-face{font-family:"Fira Code";src:url("../fonts/FiraCode-Variable.woff2") format("woff2");font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Unbounded";src:url("../fonts/Unbounded-Variable.woff2") format("woff2");font-weight:600 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Golos Text";src:url("../fonts/GolosText-Variable.woff2") format("woff2");font-weight:400 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Fira Code";src:url("../fonts/FiraCode-Variable.woff2") format("woff2");font-weight:400 600;font-style:normal;font-display:swap}
 :root, [data-theme="dark"] {
   color-scheme: dark;
   --bg: #0F0D0B;

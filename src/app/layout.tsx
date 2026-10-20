@@ -17,11 +17,8 @@ export const metadata: Metadata = {
   description:
     'Сайты для бизнеса под ключ: лендинги и магазины на Tilda, кастомная разработка. Заявки сразу в CRM.',
   verification: {
-    // По тегу на каждый ресурс Search Console — у доменов свои токены, Google берёт свой.
-    google: [
-      'u0eIVBtknauZqtkXlaBQ18pLIkExBF5UJifDJ0KeUCo', // sandwor.ru
-      'arN6y5jaZLjtoMERFP81bY07HuVvPbBbhVysMeZRFRk', // sandwor.online
-    ],
+    // Ресурс sandwor.ru в Search Console.
+    google: 'u0eIVBtknauZqtkXlaBQ18pLIkExBF5UJifDJ0KeUCo',
   },
   alternates: {
     types: {

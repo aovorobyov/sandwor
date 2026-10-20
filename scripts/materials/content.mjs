@@ -82,7 +82,7 @@ export const MATERIALS = {
         },
       ],
       note: 'Штрафы за нарушения при обработке персональных данных (КоАП, ст. 13.11) с 2025 года заметно выросли. Чек-лист — не юридическая консультация: в спорных случаях покажите сайт юристу.',
-      cta: 'Хотите, проверим ваш сайт по этому списку и всё поправим? Напишите на sandwor.online — ответим в течение рабочего дня.',
+      cta: 'Хотите, проверим ваш сайт по этому списку и всё поправим? Напишите на sandwor.ru — ответим в течение рабочего дня.',
     },
     en: {
       kicker: 'Checklist',
@@ -158,7 +158,7 @@ export const MATERIALS = {
         },
       ],
       note: 'Fines for personal data violations (Administrative Code, art. 13.11) increased noticeably in 2025. This checklist is not legal advice: in doubtful cases, show your site to a lawyer.',
-      cta: 'Want us to check your site against this list and fix everything? Write to us at sandwor.online — we reply within one business day.',
+      cta: 'Want us to check your site against this list and fix everything? Write to us at sandwor.ru — we reply within one business day.',
     },
   },
 
@@ -256,7 +256,7 @@ export const MATERIALS = {
         },
       ],
       note: 'Не обязательно готовить всё идеально: черновики и голосовые заметки тоже подойдут. Главное — чтобы они были на старте, а не в конце проекта.',
-      cta: 'Готовы обсудить сайт? Расскажите о задаче на sandwor.online — ответим в течение рабочего дня и скажем, что из списка нужно именно вам.',
+      cta: 'Готовы обсудить сайт? Расскажите о задаче на sandwor.ru — ответим в течение рабочего дня и скажем, что из списка нужно именно вам.',
     },
     en: {
       kicker: 'Client checklist',
@@ -354,7 +354,7 @@ export const MATERIALS = {
         },
       ],
       note: 'You do not need everything to be perfect: drafts and voice notes work too. What matters is having them at the start, not at the end of the project.',
-      cta: 'Ready to discuss your site? Tell us about the task at sandwor.online — we reply within one business day and tell you which points matter for you.',
+      cta: 'Ready to discuss your site? Tell us about the task at sandwor.ru — we reply within one business day and tell you which points matter for you.',
     },
   },
 
@@ -471,7 +471,7 @@ export const MATERIALS = {
         },
       ],
       note: 'Отметили больше пяти пунктов? Начните с форм и скорости — там заявки теряются чаще всего, а исправить их проще всего.',
-      cta: 'Хотите разбор именно вашего сайта? Напишите на sandwor.online — посмотрим и скажем, что исправить в первую очередь.',
+      cta: 'Хотите разбор именно вашего сайта? Напишите на sandwor.ru — посмотрим и скажем, что исправить в первую очередь.',
     },
     en: {
       kicker: 'Self-check',
@@ -585,7 +585,7 @@ export const MATERIALS = {
         },
       ],
       note: 'Ticked more than five points? Start with forms and speed — that is where leads are lost most often, and they are the easiest to fix.',
-      cta: 'Want a review of your own site? Write to us at sandwor.online — we will take a look and tell you what to fix first.',
+      cta: 'Want a review of your own site? Write to us at sandwor.ru — we will take a look and tell you what to fix first.',
     },
   },
 };

@@ -7,10 +7,28 @@ const withAnalyzer = withBundleAnalyzer({
   openAnalyzer: false,
 });
 
+// Заголовки безопасности для всех ответов. Встраивать сайт во фрейм можно только себе
+// и Метрике — иначе не работают карта кликов и просмотр записей Вебвизора.
+const SECURITY_HEADERS = [
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  {
+    key: 'Content-Security-Policy',
+    value:
+      "frame-ancestors 'self' https://metrika.yandex.ru https://metrika.yandex.by https://metrica.yandex.com https://*.webvisor.com",
+  },
+  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+  { key: 'Strict-Transport-Security', value: 'max-age=31536000' },
+];
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
+  poweredByHeader: false,
+  async headers() {
+    return [{ source: '/:path*', headers: SECURITY_HEADERS }];
+  },
   // Старые адреса v1: «Создание сайтов» стало направлением в «Услугах», курс снят,
   // проекты стали кейсами, лента новостей и таймлайн — блогом.
   async redirects() {

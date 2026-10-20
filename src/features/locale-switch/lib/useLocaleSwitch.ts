@@ -3,24 +3,16 @@
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import { defaultLocale, type Locale } from '@/i18n-routing';
+import { delocalizePath } from '@/shared/ui/Link';
 
 interface LocaleSwitchApi {
   currentLocale: Locale;
   switchLocale: (locale: Locale) => void;
 }
 
-/** Убирает префикс текущей локали из пути (для дефолтной — путь и так без префикса). */
-const stripLocalePrefix = (pathname: string, locale: Locale) => {
-  if (locale === defaultLocale) {
-    return pathname;
-  }
-
-  return pathname.replace(new RegExp(`^/${locale}(?=/|$)`), '') || '/';
-};
-
 /** Собирает путь для целевой локали: дефолтная — без префикса, остальные — с /{locale}. */
 export const buildLocalePath = (pathname: string, from: Locale, to: Locale) => {
-  const base = stripLocalePrefix(pathname, from);
+  const base = delocalizePath(pathname, from);
 
   if (to === defaultLocale) {
     return base;

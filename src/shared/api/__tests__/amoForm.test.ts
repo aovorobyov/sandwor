@@ -4,7 +4,7 @@ const CONTACT_LEAD = {
   name: 'Тест',
   email: 'test@test.test',
   message: 'Тестовое описание',
-  referer: 'https://sandwor.online/contact',
+  referer: 'https://sandwor.ru/contact',
 };
 
 const ORDER_LEAD = {
@@ -12,7 +12,7 @@ const ORDER_LEAD = {
   phone: '+79999999999',
   telegram: 'sandwor',
   task: 'Лендинг для кофейни',
-  referer: 'https://sandwor.online/websites',
+  referer: 'https://sandwor.ru/websites',
 };
 
 /** Разбирает вызов fetch: адрес, настройки и тело как URLSearchParams. */

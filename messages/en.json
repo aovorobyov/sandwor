@@ -1149,12 +1149,12 @@
     "breadcrumb": "Data policy",
     "title": "Personal Data Processing Policy",
     "updated": "Edition of {edition}",
-    "intro": "This page describes what personal data the sandwor.online and sandwor.ru websites collect, why, to whom and where it is transferred, how long it is kept and how you can manage it. Consents to data processing — when sending a request and for cookies and web analytics — are separate documents. This is a translation; the Russian version prevails.",
+    "intro": "This page describes what personal data the sandwor.ru website collects, why, to whom and where it is transferred, how long it is kept and how you can manage it. Consents to data processing — when sending a request and for cookies and web analytics — are separate documents. This is a translation; the Russian version prevails.",
     "sections": [
       {
         "heading": "1. Who processes the data",
         "paragraphs": [
-          "The personal data operator is {operator}, a self-employed professional income tax payer{inn_part} (the Operator). The Operator provides services under the sandwor name and owns the sandwor.online and sandwor.ru websites (the Site).",
+          "The personal data operator is {operator}, a self-employed professional income tax payer{inn_part} (the Operator). The Operator provides services under the sandwor name and owns the sandwor.ru website (the Site).",
           "This policy is prepared under Russian Federal Law No. 152-FZ “On Personal Data” of 27.07.2006 and covers all data the Operator receives through the Site, the online chat on the Site and related contact channels.",
           "Send questions about data processing, requests and consent withdrawals to {email}."
         ]
@@ -1259,7 +1259,7 @@
         "id": "request",
         "heading": "1. Consent when sending a request",
         "paragraphs": [
-          "By ticking “I consent to the processing of personal data” and sending the brief on sandwor.online or sandwor.ru, I freely, of my own will and in my own interest consent to {operator}, a self-employed professional income tax payer{inn_part} (the Operator), processing my personal data on the following terms.",
+          "By ticking “I consent to the processing of personal data” and sending the brief on sandwor.ru, I freely, of my own will and in my own interest consent to {operator}, a self-employed professional income tax payer{inn_part} (the Operator), processing my personal data on the following terms.",
           "Purpose: to review my request, contact me, prepare an offer and, if we agree, conclude and perform a services contract.",
           "Data: name; phone number or Telegram username; preferred contact method; company name and number of people in sales, selected services, task description and budget — if I provided them; the page address, date and time of sending the request, the source of the visit (campaign tags, the first page and the domain I came from).",
           "Actions: collection, recording, systematisation, accumulation, storage, clarification, retrieval, use, transfer (provision, access) to processors, blocking, deletion, destruction — with and without automation.",
@@ -1283,7 +1283,7 @@
         "id": "materials",
         "heading": "3. Consent when requesting materials",
         "paragraphs": [
-          "By ticking \"I consent to the processing of my personal data\" in the form for receiving a material (for example, a checklist) on sandwor.online or sandwor.ru, I freely, of my own will and in my own interest give consent to {operator_dat} (the Operator) to process my personal data on the following terms.",
+          "By ticking \"I consent to the processing of my personal data\" in the form for receiving a material (for example, a checklist) on sandwor.ru, I freely, of my own will and in my own interest give consent to {operator_dat} (the Operator) to process my personal data on the following terms.",
           "Purpose: to provide me with the requested material and, if needed, to answer my questions about it. No promotional mailings are sent using this data.",
           "Data: name; email address; which material I requested and on which page; the source of the visit (campaign tags, the first page and the domain I came from); the date and time of the request.",
           "Actions: collection, recording, systematisation, accumulation, storage, clarification, retrieval, use, transfer (provision, access) to processors, blocking, deletion, destruction — with and without automation.",

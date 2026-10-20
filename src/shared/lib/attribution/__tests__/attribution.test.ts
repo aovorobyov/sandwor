@@ -3,7 +3,7 @@ import { readAttribution } from '../attribution';
 describe('источник визита', () => {
   it('берёт метки UTM, путь первой страницы и только домен реферера', () => {
     const result = readAttribution(
-      'https://sandwor.online/services/sites?utm_source=yandex&utm_medium=cpc&utm_campaign=tilda&phone=79000000000',
+      'https://sandwor.ru/services/sites?utm_source=yandex&utm_medium=cpc&utm_campaign=tilda&phone=79000000000',
       'https://www.google.com/search?q=sandwor',
     );
 
@@ -18,7 +18,7 @@ describe('источник визита', () => {
 
   it('не считает реферером свой же сайт', () => {
     expect(
-      readAttribution('https://sandwor.online/blog', 'https://sandwor.online/').referrer,
+      readAttribution('https://sandwor.ru/blog', 'https://sandwor.ru/').referrer,
     ).toBeUndefined();
   });
 });

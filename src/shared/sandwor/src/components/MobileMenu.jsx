@@ -29,6 +29,7 @@ export function MobileMenu({
   contacts,
   logoHref = '/',
   contained = false,
+  underHeader = false,
   closeOnNavigate = true,
   onNavigate,
   closeLabel = 'Закрыть меню',
@@ -105,7 +106,7 @@ export function MobileMenu({
   const rows = services && services.length ? services.map(toService) : null;
 
   return (
-    <div className={cx('sw-mmenu', contained && 'sw-mmenu--contained', className)} {...rest}>
+    <div className={cx('sw-mmenu', contained && 'sw-mmenu--contained', underHeader && 'sw-mmenu--under-header', className)} {...rest}>
       <div className="sw-mmenu__scrim" aria-hidden="true" onClick={close} />
       <div
         ref={panelRef}
@@ -153,6 +154,7 @@ export function MobileMenu({
                         {s.icon && <Icon name={s.icon} size={16} />}
                       </span>
                       <span className="sw-mmenu__service-label">{s.label}</span>
+                      {s.badge && <span className="sw-mmenu__badge">{s.badge}</span>}
                     </>
                   );
                   return (

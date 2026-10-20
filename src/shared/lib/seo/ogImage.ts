@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { defaultLocale } from '@/i18n-routing';
 import { byPositioning } from '@/shared/config/positioning';
 import type { ContentOgImageOptions, OgImage, PageOgImageOptions } from './ogImage.types';
@@ -31,14 +33,7 @@ export const buildOfferOgImage = (locale: string): OgImage => {
   return buildOgImage({ variant: 'offer', locale }, alt);
 };
 
-/**
- * Обложка уровня рут-лейаута — фолбэк для страниц без своей.
- *
- * Рисуется тем же роутом, а не статичным файлом: в картинку впечатан домен, а
- * он зависит от окружения (sandwor.online / sandwor.ru), — статика на одном из
- * доменов врала бы.
- */
-export const OG_DEFAULT_IMAGE: OgImage = buildOfferOgImage(defaultLocale);
+/** Обложка уровня рут-лейаута — фолбэк для страниц без своей (определена ниже). */
 
 /** Обложка статьи или кейса: тег/тип, заголовок и мета-строка в подвале. */
 export const buildContentOgImage = (options: ContentOgImageOptions): OgImage => {
@@ -53,3 +48,25 @@ export const buildPageOgImage = (options: PageOgImageOptions): OgImage => {
 
   return buildOgImage({ variant: 'page', locale, title, tag, lead }, title);
 };
+
+/**
+ * Готовая картинка из public/og (её рисует scripts/blog-art/og.mjs на токенах ДС):
+ * `<key>-<locale>.jpg`. Если файла нет — например, статью добавили, а скрипт не
+ * перезапускали, — страница берёт динамическую обложку `fallback`.
+ */
+export const withStaticOg = (key: string, locale: string, fallback: OgImage): OgImage => {
+  const file = `${key}-${locale}.jpg`;
+
+  if (!existsSync(join(process.cwd(), 'public', 'og', file))) {
+    return fallback;
+  }
+
+  return { url: `/og/${file}`, width: OG_WIDTH, height: OG_HEIGHT, alt: fallback.alt };
+};
+
+/** Обложка рут-лейаута: картинка главной (в статичных картинках домена нет — подходит обоим доменам). */
+export const OG_DEFAULT_IMAGE: OgImage = withStaticOg(
+  'home',
+  defaultLocale,
+  buildOfferOgImage(defaultLocale),
+);

@@ -1,0 +1,1 @@
+export { HeroActivity } from './HeroActivity';

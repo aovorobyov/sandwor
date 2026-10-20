@@ -4,7 +4,7 @@ import { HomePage } from '@/views/HomePage';
 import { POSITIONING, byPositioning } from '@/shared/config/positioning';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
-import { buildOfferOgImage } from '@/shared/lib/seo/ogImage';
+import { buildOfferOgImage, withStaticOg } from '@/shared/lib/seo/ogImage';
 
 export async function generateMetadata({
   params: { locale },
@@ -22,7 +22,7 @@ export async function generateMetadata({
       // отправляют потенциальному заказчику.
       title: t(`home.hero-${POSITIONING}.title`),
       description: t(`home.hero-${POSITIONING}.lead`),
-      image: buildOfferOgImage(locale),
+      image: withStaticOg('home', locale, buildOfferOgImage(locale)),
     }),
   };
 }

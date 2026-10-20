@@ -34,6 +34,15 @@ Article: проп `breadcrumbsLabel` — aria-label крошек (на EN был
 официальными знаками брендов (Simple Icons, CC0; источники — брендбуки Telegram, Meta, VK, GitHub,
 YouTube): заливка `currentColor`, масштаб 86% — по оптическому весу с контурными иконками Tabler.
 
+BriefForm, экран успеха: занимает высоту формы (окно не прыгает), отметка по центру с анимацией,
+блок «Что дальше» (`copy.successSteps`, `successNextTitle`) и вторая ссылка (`copy.successLink`);
+проп `onStatusChange`. Исправлено: под StrictMode флаг `alive` оставался `false`, и форма
+зависала в «Отправляем…».
+
+SiteHeader + MobileMenu: бургер из трёх полосок складывается в крестик, меню открывается под
+шапкой (`underHeader`), шапка остаётся над ним; разделы — Golos 17/24 вместо Unbounded 20/25;
+у строк услуг плашка `badge` («скоро») вместо хвоста в названии.
+
 Типы новых пропсов — в `types/index.d.ts`, помечены `[sandwor.ru]`.
 
 Ещё добавлены файлы `src/components/*.d.ts` и `src/utils.d.ts` — их генерирует

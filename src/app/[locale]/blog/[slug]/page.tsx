@@ -5,7 +5,7 @@ import { ArticlePage } from '@/views/ArticlePage';
 import { getPosts, getPost } from '@/entities/post/api/posts';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
-import { buildContentOgImage } from '@/shared/lib/seo/ogImage';
+import { buildContentOgImage, withStaticOg } from '@/shared/lib/seo/ogImage';
 import { localizeHref } from '@/shared/ui/Link';
 
 interface Props {
@@ -39,12 +39,16 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
       description,
       type: 'article',
       publishedTime: post.date,
-      image: buildContentOgImage({
+      image: withStaticOg(
+        `blog-${post.slug}`,
         locale,
-        tag: post.tag,
-        title: post.title,
-        meta: t('blog-page.min-read', { count: post.readTime }),
-      }),
+        buildContentOgImage({
+          locale,
+          tag: post.tag,
+          title: post.title,
+          meta: t('blog-page.min-read', { count: post.readTime }),
+        }),
+      ),
     }),
   };
 }

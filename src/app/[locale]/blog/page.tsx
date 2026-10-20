@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { BlogPage } from '@/views/BlogPage';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
-import { buildPageOgImage } from '@/shared/lib/seo/ogImage';
+import { buildPageOgImage, withStaticOg } from '@/shared/lib/seo/ogImage';
 
 export async function generateMetadata({
   params: { locale },
@@ -20,12 +20,16 @@ export async function generateMetadata({
       path: '/blog',
       title: t('blog-page.title'),
       description: t('blog-page.lead'),
-      image: buildPageOgImage({
+      image: withStaticOg(
+        'blog',
         locale,
-        tag: t('nav.blog'),
-        title: t('blog-page.title'),
-        lead: t('blog-page.lead'),
-      }),
+        buildPageOgImage({
+          locale,
+          tag: t('nav.blog'),
+          title: t('blog-page.title'),
+          lead: t('blog-page.lead'),
+        }),
+      ),
     }),
   };
 }

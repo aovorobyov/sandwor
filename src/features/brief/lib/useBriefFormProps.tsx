@@ -7,7 +7,7 @@ import { ACTIVE_SERVICE_IDS, type ServiceId } from '@/entities/service';
 import { byPositioning } from '@/shared/config/positioning';
 import { reachGoal, YM_GOAL } from '@/shared/lib/analytics';
 import { localizeHref } from '@/shared/ui/Link/localizeHref';
-import { sendBrief } from '../api/sendBrief';
+import { createRequestId, sendBrief } from '../api/sendBrief';
 
 const TEAM_SIZES = ['1-5', '6-20', '20+'] as const;
 const BUDGETS = ['lt100', '100-300', 'gt300', 'unknown'] as const;
@@ -34,6 +34,8 @@ export const useBriefFormProps = (preset?: ServiceId[]): BriefFormBaseProps => {
   const tConsent = useTranslations('consent');
   const locale = useLocale();
   const startedAt = useRef(Date.now());
+  // Один идентификатор на заполнение брифа: повтор после ошибки сети не создаст вторую сделку.
+  const requestId = useRef<string | null>(null);
 
   // Документы открываются в новой вкладке — чтобы не потерять заполненный бриф.
   const docLink = (path: string, text: string) => (
@@ -43,7 +45,8 @@ export const useBriefFormProps = (preset?: ServiceId[]): BriefFormBaseProps => {
   );
 
   const onSubmit: BriefFormProps['onSubmit'] = async (values) => {
-    await sendBrief(values, Date.now() - startedAt.current);
+    requestId.current ??= createRequestId();
+    await sendBrief(values, Date.now() - startedAt.current, requestId.current);
     reachGoal(YM_GOAL.orderWebsites);
   };
 
@@ -111,6 +114,9 @@ export const useBriefFormProps = (preset?: ServiceId[]): BriefFormBaseProps => {
           : t('success-phone', { name });
       },
       successAction: t('success-action'),
+      successNextTitle: t('success-next'),
+      successSteps: t.raw('success-steps') as string[],
+      successLink: { label: t('success-link'), href: localizeHref('/cases', locale) },
     },
   };
 };

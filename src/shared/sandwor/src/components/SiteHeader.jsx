@@ -68,7 +68,7 @@ export function SiteHeader({
     <>
       <header
         ref={rootRef}
-        className={cx('sw-header', sticky && 'sw-header--sticky', scrolled && 'is-scrolled', className)}
+        className={cx('sw-header', sticky && 'sw-header--sticky', scrolled && 'is-scrolled', open && !contained && 'is-menu-open', className)}
         {...rest}
       >
         <div className="sw-header__inner">
@@ -114,16 +114,22 @@ export function SiteHeader({
               </Button>
             )}
             {hasNav && (
-              <Button
-                variant="quiet"
-                iconOnly
-                icon="menu-2"
-                aria-label={menuLabel}
+              // [sandwor.ru] Бургер из трёх полосок: при открытии меню они складываются в крестик,
+              // шапка остаётся над меню, и эта же кнопка его закрывает.
+              <button
+                type="button"
+                aria-label={open ? menuProps.closeLabel || 'Закрыть меню' : menuLabel}
                 aria-haspopup="dialog"
                 aria-expanded={open}
-                onClick={() => setOpen(true)}
-                className="sw-header__burger"
-              />
+                onClick={() => (open ? closeMenu() : setOpen(true))}
+                className="sw-header__burger sw-burger"
+              >
+                <span className="sw-burger__lines" aria-hidden="true">
+                  <span className="sw-burger__line" />
+                  <span className="sw-burger__line" />
+                  <span className="sw-burger__line" />
+                </span>
+              </button>
             )}
           </div>
         </div>
@@ -139,6 +145,7 @@ export function SiteHeader({
           contacts={menuProps.contacts}
           logoHref={logoHref}
           contained={contained}
+          underHeader={!contained}
           closeLabel={menuProps.closeLabel}
           navLabel={menuProps.navLabel}
           aria-label={menuProps.label}

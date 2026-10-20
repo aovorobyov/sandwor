@@ -126,13 +126,14 @@ const submitForm = async (
   form: AmoFormConfig,
   fields: Record<string, string>,
   referer: string,
+  requestId: string = buildRequestId(),
 ): Promise<boolean> => {
   const body = new URLSearchParams({
     ...fields,
     form_id: form.id,
     hash: form.hash,
     user_origin: buildUserOrigin(referer),
-    form_request_id: buildRequestId(),
+    form_request_id: requestId,
   });
 
   // AbortController, а не AbortSignal.timeout: тот же результат, но без завязки
@@ -199,6 +200,7 @@ export const sendAmoOrderLead = ({
   telegram,
   task,
   referer,
+  requestId,
 }: AmoOrderLead): Promise<boolean> => {
   return submitForm(
     ORDER_FORM,
@@ -209,5 +211,6 @@ export const sendAmoOrderLead = ({
       [ORDER_FIELD.task]: task,
     },
     referer,
+    requestId,
   );
 };

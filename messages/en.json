@@ -30,7 +30,7 @@
     "menu-title": "Menu",
     "menu-close": "Close menu",
     "menu-nav": "Site sections",
-    "services-title": "Services"
+    "services-title": "What we do"
   },
   "footer": {
     "cta-title": "Let's talk about your project",
@@ -154,7 +154,37 @@
       }
     ],
     "services-lead-studio": "Start with one service and add the rest as you grow. Everything we launch is connected to your CRM.",
-    "services-lead-sites": "Right now we take website projects. CRM setup, SMM and AI automation are being prepared for launch."
+    "services-lead-sites": "Right now we take website projects. CRM setup, SMM and AI automation are being prepared for launch.",
+    "activity": {
+      "label": "Diagram: a website with requests flowing into a CRM, a deal pipeline, speed, posts and an AI assistant around it",
+      "domain": "your-site.com",
+      "lead": {
+        "title": "New request",
+        "brief": "Brief from the site → CRM",
+        "chat": "Question from the site chat",
+        "tg": "Message on Telegram",
+        "time": "now"
+      },
+      "speed": {
+        "title": "Mobile speed",
+        "text": "PageSpeed Insights",
+        "value": "98"
+      },
+      "smm": {
+        "title": "Post published",
+        "text": "Telegram channel · 9:00"
+      },
+      "ai": {
+        "title": "AI assistant",
+        "text": "Replied to a client overnight"
+      },
+      "crm": {
+        "title": "CRM pipeline",
+        "new": "New",
+        "work": "In progress",
+        "deal": "Contract"
+      }
+    }
   },
   "process": {
     "meta": "5 stages · you always know what's happening",
@@ -303,7 +333,14 @@
     },
     "task-placeholder-studio": "For example: leads from the website and messengers get lost, we want everything in one CRM",
     "err-consent": "Please tick the consent to personal data processing",
-    "optional": "optional"
+    "optional": "optional",
+    "success-next": "What's next",
+    "success-steps": [
+      "We review your task and ask a couple of questions if needed",
+      "We discuss the details on a short call",
+      "We send a proposal: scope, timeline and price"
+    ],
+    "success-link": "See case studies"
   },
   "founder": {
     "meta": "Who owns your project",
@@ -697,7 +734,9 @@
     "soon-sites": "Website development",
     "soon-telegram": "Message on Telegram",
     "plans-link": "See pricing",
-    "soon-page-title": "{title} — coming soon"
+    "soon-page-title": "{title} — coming soon",
+    "plans-panel": "Website plans",
+    "plans-compare": "What's in each plan"
   },
   "cases-page": {
     "meta": "Cases",
@@ -1123,7 +1162,7 @@
       {
         "heading": "2. A request via the “Let's talk about your project” brief",
         "paragraphs": [
-          "Data: name; phone number or Telegram username; preferred contact method; company name and number of people in sales (optional); selected services, task description and budget (optional). The request also stores the page it was sent from, the date and time of sending and a consent mark with its edition number.",
+          "Data: name; phone number or Telegram username; preferred contact method; company name and number of people in sales (optional); selected services, task description and budget (optional). The request also stores the page it was sent from, the source of the visit (campaign tags, the first page on the Site and the domain you came from), the date and time of sending and a consent mark with its edition number.",
           "Purpose: to review the request, contact you, prepare an offer and, if both parties agree, conclude and perform a services contract.",
           "Legal basis: your consent (Art. 6(1)(1) of 152-FZ), given with a separate checkbox before sending the brief; once a contract is concluded — performance of a contract to which you are a party (Art. 6(1)(5)).",
           "Processing: the request is sent over a secure connection (HTTPS) to the Site's server, checked for spam and stored in the amoCRM system, where only the Operator can see it. Requests from the Site are not forwarded to messengers or email.",
@@ -1221,7 +1260,7 @@
         "paragraphs": [
           "By ticking “I consent to the processing of personal data” and sending the brief on sandwor.online or sandwor.ru, I freely, of my own will and in my own interest consent to {operator}, a self-employed professional income tax payer{inn_part} (the Operator), processing my personal data on the following terms.",
           "Purpose: to review my request, contact me, prepare an offer and, if we agree, conclude and perform a services contract.",
-          "Data: name; phone number or Telegram username; preferred contact method; company name and number of people in sales, selected services, task description and budget — if I provided them; the page address, date and time of sending the request.",
+          "Data: name; phone number or Telegram username; preferred contact method; company name and number of people in sales, selected services, task description and budget — if I provided them; the page address, date and time of sending the request, the source of the visit (campaign tags, the first page and the domain I came from).",
           "Actions: collection, recording, systematisation, accumulation, storage, clarification, retrieval, use, transfer (provision, access) to processors, blocking, deletion, destruction — with and without automation.",
           "Processors engaged by the Operator: amoCRM JSC (TIN 7709477879) — the amoCRM system where the request is stored; Selectel JSC (TIN 7810962785) — website hosting. Data is stored on servers in Russia.",
           "Term: the consent is valid for 1 year from sending the request, and if a contract is concluded — for its term and 5 years after its performance. I may withdraw consent at any time by writing to {email}; the Operator will then stop processing and delete the data within 30 days unless there are other lawful grounds to keep it."

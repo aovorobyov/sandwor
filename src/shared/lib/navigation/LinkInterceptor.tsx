@@ -18,6 +18,11 @@ const getInternalPath = (anchor: HTMLAnchorElement): string | null => {
     return null;
   }
 
+  // Ссылка на другой язык — обычная загрузка: виджеты (чат amoCRM) подхватят новую локаль.
+  if (anchor.hreflang && anchor.hreflang !== document.documentElement.lang) {
+    return null;
+  }
+
   const url = new URL(anchor.href, window.location.href);
   const isSameOrigin = url.origin === window.location.origin;
   const isFile = /\.[a-z0-9]+$/i.test(url.pathname);

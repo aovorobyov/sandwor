@@ -11,6 +11,8 @@ import { ScrollReset } from '@/widgets/ScrollReset';
 import { BriefProvider } from '@/features/brief';
 import { CookieConsent } from '@/features/cookie-consent';
 import { LinkInterceptor } from '@/shared/lib/navigation';
+import { AttributionCapture } from '@/shared/lib/attribution';
+import { pickClientMessages } from '@/shared/lib/i18n/clientMessages';
 import { byPositioning } from '@/shared/config/positioning';
 
 interface Props {
@@ -46,13 +48,14 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
     <ViewTransitions>
       <html lang={locale} data-theme="dark" suppressHydrationWarning>
         <body>
-          <NextIntlClientProvider messages={messages}>
+          <NextIntlClientProvider messages={pickClientMessages(messages)}>
             <BriefProvider>
               {/* Первая ссылка на странице: с клавиатуры — сразу к содержимому, мимо меню. */}
               <a href="#main" className="skip-link">
                 {t('skip')}
               </a>
               <LinkInterceptor />
+              <AttributionCapture />
               <ScrollReset />
               <SiteHeader />
               <main id="main" tabIndex={-1} style={{ flex: 1 }}>

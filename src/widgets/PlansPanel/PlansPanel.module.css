@@ -1,0 +1,94 @@
+.root {
+  padding: var(--space-6);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-float);
+}
+
+.head {
+  margin-bottom: var(--space-3);
+  font: 450 12px/16px var(--font-mono);
+  color: var(--text-muted);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--line);
+}
+
+.info {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.name {
+  font: 600 16px/21px var(--font-display);
+  color: var(--text);
+}
+
+.sub {
+  font: 400 13px/18px var(--font-text);
+  color: var(--text-muted);
+}
+
+.price {
+  flex: none;
+  font: 450 15px/20px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.featured .price {
+  color: var(--accent-text);
+}
+
+.link {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  margin-top: var(--space-4);
+  font: 600 14px/20px var(--font-text);
+  color: var(--text);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+
+.link svg {
+  color: var(--accent);
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+
+.link:hover svg {
+  transform: translateX(2px);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@media (max-width: 1100px) {
+  .root {
+    max-width: 560px;
+  }
+}
+
+/* На телефоне те же цены уже в цифрах под заголовком и в тарифах ниже. */
+@media (max-width: 760px) {
+  .root {
+    display: none;
+  }
+}

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import type { FC } from 'react';
 import { useTranslations } from 'next-intl';
 import { Modal } from '@sw/components/Modal';
@@ -17,13 +18,15 @@ interface BriefModalProps {
 export const BriefModal: FC<BriefModalProps> = ({ open, onClose, services }) => {
   const t = useTranslations();
   const formProps = useBriefFormProps(services);
+  // После отправки подзаголовок «Четыре коротких шага…» уже не к месту.
+  const [isDone, setIsDone] = useState(false);
 
   return (
     <Modal
       open={open}
       onClose={onClose}
       title={t('brief.title')}
-      description={t('brief.description')}
+      description={isDone ? undefined : t('brief.description')}
       size="l"
       closeOnScrim={false}
       closeLabel={t('common.close')}
@@ -33,6 +36,7 @@ export const BriefModal: FC<BriefModalProps> = ({ open, onClose, services }) => 
         container="bare"
         headingLevel={3}
         onReturn={onClose}
+        onStatusChange={(status) => setIsDone(status === 'success')}
         className="ym-hide-content"
       />
     </Modal>

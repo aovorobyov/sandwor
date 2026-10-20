@@ -420,6 +420,8 @@ export type MobileMenuService =
       href?: string;
       /** Иконка; по умолчанию из SERVICES. */
       icon?: string;
+      /** [sandwor.ru] Плашка справа, например «скоро». */
+      badge?: string;
       onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
       className?: string;
     };
@@ -448,7 +450,7 @@ export interface MobileMenuProps extends Omit<React.HTMLAttributes<HTMLDivElemen
   open?: boolean;
   /** Закрыть: крестик, Esc, тап по scrim, переход по ссылке (см. closeOnNavigate). */
   onClose?: () => void;
-  /** Разделы сайта — крупные ссылки Unbounded 20/25 с шевроном. */
+  /** Разделы сайта — ссылки Golos 17/24 с шевроном ([sandwor.ru], было Unbounded 20/25). */
   nav?: MobileMenuNavItem[];
   /** Необязательная группа «Услуги» — строки с иконкой в плитке. */
   services?: MobileMenuService[];
@@ -464,6 +466,8 @@ export interface MobileMenuProps extends Omit<React.HTMLAttributes<HTMLDivElemen
   contained?: boolean;
   /** Закрывать меню после клика по ссылке (если обработчик не вызвал preventDefault). По умолчанию true. */
   closeOnNavigate?: boolean;
+  /** [sandwor.ru] Меню под шапкой: своя полоса скрыта, крестиком служит бургер SiteHeader. */
+  underHeader?: boolean;
   /** Колбэк перехода по пункту nav или услуге. */
   onNavigate?: (item: MobileMenuNavItem | Exclude<MobileMenuService, ServiceId>, e: React.MouseEvent) => void;
   /** aria-label крестика, по умолчанию «Закрыть меню». */
@@ -602,7 +606,8 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   /** Левая часть нижней строки; по умолчанию «© 2026 sandwor». */
   legal?: React.ReactNode;
   /** Ссылки справа в нижней строке: «Политика конфиденциальности». */
-  legalLinks?: { label: string; href?: string }[];
+  /** [sandwor.ru] hrefLang/lang/ariaLabel — для переключателя языка. */
+  legalLinks?: { label: string; href?: string; hrefLang?: string; lang?: string; ariaLabel?: string }[];
   /** Необязательная CTA-полоса сверху. */
   cta?: FooterCta;
   /** Ссылка логотипа, по умолчанию «/». */
@@ -970,6 +975,12 @@ export interface BriefFormCopy {
   successText?: (values: BriefFormValues) => string;
   successNumber?: (n: string | number) => string;
   successAction?: string;
+  /** [sandwor.ru] Заголовок блока «Что дальше» на экране успеха. */
+  successNextTitle?: string;
+  /** [sandwor.ru] Шаги после отправки; пустой список — блок не выводится. */
+  successSteps?: string[];
+  /** [sandwor.ru] Второе действие на экране успеха (ghost-ссылка). */
+  successLink?: { label: string; href: string } | null;
 }
 
 export interface BriefFormProps extends Omit<React.FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
@@ -1006,6 +1017,8 @@ export interface BriefFormProps extends Omit<React.FormHTMLAttributes<HTMLFormEl
    * (не отмечен заранее; без него заявка не уходит). Не передан — чекбокса нет. [sandwor.ru]
    */
   consent?: React.ReactNode;
+  /** [sandwor.ru] Сообщает о смене состояния: form | sending | error | success. */
+  onStatusChange?: (status: 'form' | 'sending' | 'error' | 'success') => void;
   className?: string;
 }
 

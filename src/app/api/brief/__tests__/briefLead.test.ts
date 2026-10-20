@@ -75,6 +75,24 @@ describe('бриф «Обсудим ваш проект»', () => {
     expect(lead.task).toContain('Удобный канал: звонок');
   });
 
+  it('пишет в заявку источник визита', () => {
+    const lead = buildBriefLead(
+      brief({
+        attribution: {
+          utm_source: 'yandex',
+          utm_medium: 'cpc',
+          landing: '/services/sites',
+          evil: 'x',
+        },
+      }),
+    );
+
+    expect(lead.task).toContain(
+      'Откуда: источник yandex, канал cpc, первая страница /services/sites',
+    );
+    expect(lead.task).not.toContain('evil');
+  });
+
   it('кладёт ник в поле Telegram', () => {
     const lead = buildBriefLead(brief({ contact: '@kedr_mebel' }));
 

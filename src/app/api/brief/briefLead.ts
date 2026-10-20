@@ -50,6 +50,10 @@ export interface BriefPayload {
   consent?: unknown;
   /** Время от открытия брифа до отправки, мс. */
   elapsedMs?: unknown;
+  /** Идентификатор отправки из браузера — один на все повторы одной заявки. */
+  requestId?: unknown;
+  /** Источник визита: UTM, первая страница, домен реферера (без ПД). */
+  attribution?: unknown;
 }
 
 export interface BriefLead {
@@ -139,6 +143,35 @@ export const isSpamBrief = ({ elapsedMs, task }: BriefPayload): boolean => {
  * контакт всегда уходит в «телефон» (поле обязательное), а в Telegram — если это
  * ник или клиент отметил «Удобнее в Telegram». Остальное собирается в примечание.
  */
+const ATTRIBUTION_LABELS: Record<string, string> = {
+  utm_source: 'источник',
+  utm_medium: 'канал',
+  utm_campaign: 'кампания',
+  utm_content: 'объявление',
+  utm_term: 'ключ',
+  landing: 'первая страница',
+  referrer: 'пришёл с',
+};
+
+/** «Откуда: источник yandex, канал cpc, первая страница /services/sites» — только известные поля. */
+export const formatAttribution = (raw: unknown): string => {
+  if (!raw || typeof raw !== 'object') return '';
+
+  const parts = Object.entries(ATTRIBUTION_LABELS)
+    .map(([key, label]) => {
+      const value = (raw as Record<string, unknown>)[key];
+      return typeof value === 'string' && value.trim()
+        ? `${label} ${value
+            .trim()
+            .slice(0, 120)
+            .replace(/[\r\n]+/g, ' ')}`
+        : '';
+    })
+    .filter(Boolean);
+
+  return parts.length ? `Откуда: ${parts.join(', ')}` : '';
+};
+
 export const buildBriefLead = (brief: BriefPayload): BriefLead => {
   const contact = brief.contact.trim();
   const prefersTelegram = brief.telegram || countDigits(contact) < PHONE_DIGITS;
@@ -153,6 +186,7 @@ export const buildBriefLead = (brief: BriefPayload): BriefLead => {
     isOneOf(BUDGETS, brief.budget) && `Бюджет: ${BUDGET_LABELS[brief.budget]}`,
     brief.task.trim() && `Задача: ${brief.task.trim()}`,
     `Удобный канал: ${prefersTelegram ? 'Telegram' : 'звонок'}`,
+    formatAttribution(brief.attribution),
     // Доказательство согласия: какую редакцию текста человек принял (152-ФЗ ст. 9 ч. 3).
     `Согласие на обработку ПД: дано, редакция ${LEGAL.consentVersion} от ${LEGAL.edition.ru}`,
   ];
@@ -163,4 +197,11 @@ export const buildBriefLead = (brief: BriefPayload): BriefLead => {
     telegram: prefersTelegram ? contact : '',
     task: lines.filter(Boolean).join('\n'),
   };
+};
+
+/** Идентификатор отправки из браузера, если он корректный. */
+export const getRequestId = ({ requestId }: BriefPayload): string | undefined => {
+  return typeof requestId === 'string' && /^[A-Za-z0-9_-]{8,40}$/.test(requestId)
+    ? requestId
+    : undefined;
 };

@@ -16,6 +16,7 @@ import { formatPrice } from '@/shared/lib/format';
 import { JsonLd, buildBreadcrumbs, buildService } from '@/shared/lib/jsonLd';
 import { FEATURES } from '@/shared/config/positioning';
 import { localizeHref } from '@/shared/ui/Link';
+import { PlansPanel } from '@/widgets/PlansPanel';
 import { PageHero } from '@/shared/ui/PageHero';
 import { Section } from '@/shared/ui/Section';
 import { SectionIntro } from '@/shared/ui/SectionIntro';
@@ -58,6 +59,7 @@ export const ServicePage = async ({ service }: ServicePageProps) => {
       />
 
       <PageHero
+        aside={service === 'sites' ? <PlansPanel href="#plans" /> : undefined}
         breadcrumbs={[
           { label: t('nav.home'), href: href('/') },
           { label: t('services.title'), href: href('/services') },

@@ -123,7 +123,14 @@ export function Footer({
             <ul className="sw-footer__legal-links">
               {legalLinks.map((l) => (
                 <li key={l.label}>
-                  <a href={l.href} className="sw-footer__legal-link">
+                  {/* [sandwor.ru] hrefLang / lang / aria-label — для ссылки на другой язык */}
+                  <a
+                    href={l.href}
+                    hrefLang={l.hrefLang}
+                    lang={l.lang}
+                    aria-label={l.ariaLabel}
+                    className="sw-footer__legal-link"
+                  >
                     {l.label}
                   </a>
                 </li>

@@ -10,6 +10,7 @@ import { BriefButton } from '@/features/brief';
 import { CaseCards } from '@/widgets/CaseCards';
 import { FaqSection, GENERAL_FAQ_KEY, type FaqItem } from '@/widgets/FaqSection';
 import { FounderSection } from '@/widgets/FounderSection';
+import { HeroActivity } from '@/widgets/HeroActivity';
 import { PostsGrid } from '@/widgets/PostsGrid';
 import { PriceCalculator } from '@/widgets/PriceCalculator';
 import { ProcessSection } from '@/widgets/ProcessSection';
@@ -65,6 +66,7 @@ export const HomePage = async () => {
 
       <PageHero
         size="l"
+        aside={<HeroActivity />}
         meta={t(`${hero}.meta`)}
         title={t(`${hero}.title`)}
         lead={t(`${hero}.lead`)}

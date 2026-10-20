@@ -24,7 +24,7 @@ export const LEGAL = {
   email: 'aovorobyov@mail.ru',
   /** Дата текущей редакции политики и согласий. */
   edition: { ru: '20 октября 2026', en: '20 October 2026' },
-  consentVersion: '1.0',
+  consentVersion: '1.1',
 } as const;
 
 type LegalLocale = 'ru' | 'en';

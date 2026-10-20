@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendAmoOrderLead } from '@/shared/api/amoForm';
 import { SITE_URL } from '@/shared/config/site';
-import { buildBriefLead, isBriefPayload, isSpamBrief, isValidBrief } from './briefLead';
+import {
+  buildBriefLead,
+  getRequestId,
+  isBriefPayload,
+  isSpamBrief,
+  isValidBrief,
+} from './briefLead';
+import { isDelivered, markDelivered } from './deliveredRequests';
 import { getClientIp, isRateLimited } from './rateLimit';
 
 /** Фолбэк для метки происхождения в amoCRM, если браузер не прислал Referer. */
@@ -44,13 +51,23 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
     return NextResponse.json({ error: 'Validation failed' }, { status: 422 });
   }
 
+  // Повтор уже доставленной заявки (браузер не дождался ответа и отправил снова) — не дублируем.
+  const requestId = getRequestId(payload);
+  if (requestId && isDelivered(requestId)) {
+    return NextResponse.json({ ok: true });
+  }
+
   const referer = req.headers.get('referer') || BRIEF_PAGE_URL;
-  const isLeadCreated = await sendAmoOrderLead({ ...buildBriefLead(payload), referer });
+  const isLeadCreated = await sendAmoOrderLead({ ...buildBriefLead(payload), referer, requestId });
 
   // amoCRM — единственный приёмник заявок, поэтому её отказ отдаём форме как ошибку:
   // посетитель увидит подсказку и напишет напрямую, а не решит, что заявка ушла.
   if (!isLeadCreated) {
     return NextResponse.json({ error: 'Failed to deliver message' }, { status: 502 });
+  }
+
+  if (requestId) {
+    markDelivered(requestId);
   }
 
   return NextResponse.json({ ok: true });

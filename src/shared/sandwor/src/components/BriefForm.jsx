@@ -79,6 +79,11 @@ const DEFAULT_COPY = {
   },
   successNumber: (n) => `Номер заявки #${n}`,
   successAction: 'Вернуться на сайт',
+  /** [sandwor.ru] «Что дальше» после отправки: заголовок и шаги; пустой список — блока нет. */
+  successNextTitle: 'Что дальше',
+  successSteps: [],
+  /** [sandwor.ru] Второе действие на экране успеха: { label, href }. */
+  successLink: null,
 };
 
 const STEP_FIELDS = [['services'], [], [], ['name', 'contact', 'consent']];
@@ -125,6 +130,7 @@ export function BriefForm({
   budgetOptions = BUDGET_OPTIONS,
   copy: copyProp,
   consent,
+  onStatusChange,
   className,
   ...rest
 }) {
@@ -146,8 +152,16 @@ export function BriefForm({
   const contactRef = useRef(null);
   const consentRef = useRef(null);
   const moved = useRef(false);
+  const formRef = useRef(null);
+  // [sandwor.ru] Высота формы в момент отправки: экран успеха занимает столько же — окно не прыгает.
+  const [lockedHeight, setLockedHeight] = useState(null);
   const alive = useRef(true);
-  useEffect(() => () => { alive.current = false; }, []);
+  // [sandwor.ru] Флаг выставляется и при повторном монтировании (StrictMode в dev монтирует
+  // эффекты дважды) — иначе после отправки форма навсегда оставалась в «Отправляем…».
+  useEffect(() => {
+    alive.current = true;
+    return () => { alive.current = false; };
+  }, []);
 
   // After a step change (not on mount) move focus to the new step title so it is announced.
   useEffect(() => {
@@ -155,6 +169,10 @@ export function BriefForm({
     if (status === 'success') { if (successRef.current) successRef.current.focus(); return; }
     if (headingRef.current) headingRef.current.focus();
   }, [step, status === 'success']); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (onStatusChange) onStatusChange(status);
+  }, [status]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const Heading = `h${Math.min(6, Math.max(1, headingLevel))}`;
   const id = (k) => `sw-brief-${uid}-${k}`;
@@ -197,6 +215,7 @@ export function BriefForm({
       (res) => {
         if (!alive.current) return;
         moved.current = true;
+        if (formRef.current) setLockedHeight(formRef.current.offsetHeight);
         setResult(res || null);
         setStatus('success');
       },
@@ -209,6 +228,7 @@ export function BriefForm({
     setValues({ ...EMPTY, ...(initialValues || {}) });
     setErrors({});
     setResult(null);
+    setLockedHeight(null);
     setStatus('form');
     setStep(0);
   };
@@ -217,23 +237,51 @@ export function BriefForm({
 
   if (status === 'success') {
     const num = (result && (result.number != null ? result.number : result.id)) ?? requestNumber;
+    const steps = Array.isArray(copy.successSteps) ? copy.successSteps.filter(Boolean) : [];
+    const { style: restStyle, ...restProps } = rest;
     return (
-      <div className={cx(rootCls, 'sw-brief--success')} {...rest}>
+      <div
+        className={cx(rootCls, 'sw-brief--success')}
+        style={lockedHeight ? { ...restStyle, minHeight: lockedHeight } : restStyle}
+        {...restProps}
+      >
         <div className="sw-brief__done">
-          <span className="sw-brief__done-tile" aria-hidden="true">
-            <Icon name="circle-check" size={32} />
+          <span className="sw-brief__done-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
+              <path className="sw-brief__done-check" d="M5 12.5l4.5 4.5L19 7.5" />
+            </svg>
           </span>
           <Heading ref={successRef} tabIndex={-1} className="sw-brief__title">{copy.successTitle}</Heading>
           <p className="sw-brief__done-text">{copy.successText(values)}</p>
           {num != null && <p className="sw-brief__done-num">{copy.successNumber(num)}</p>}
-          <Button
-            variant="secondary"
-            className="sw-brief__done-action"
-            href={returnHref}
-            onClick={onReturn || (returnHref ? undefined : reset)}
-          >
-            {copy.successAction}
-          </Button>
+          {steps.length > 0 && (
+            <div className="sw-brief__done-next">
+              <p className="sw-brief__done-next-title">{copy.successNextTitle}</p>
+              <ol className="sw-brief__done-steps">
+                {steps.map((text, i) => (
+                  <li key={i} className="sw-brief__done-step">
+                    <span className="sw-brief__done-step-num">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="sw-brief__done-step-text">{text}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
+          <div className="sw-brief__done-actions">
+            <Button
+              variant="secondary"
+              className="sw-brief__done-action"
+              href={returnHref}
+              onClick={onReturn || (returnHref ? undefined : reset)}
+            >
+              {copy.successAction}
+            </Button>
+            {copy.successLink && (
+              <Button variant="ghost" href={copy.successLink.href} iconEnd="arrow-right" onClick={onReturn}>
+                {copy.successLink.label}
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -372,6 +420,7 @@ export function BriefForm({
 
   return (
     <form
+      ref={formRef}
       className={rootCls}
       noValidate
       aria-labelledby={id('title')}

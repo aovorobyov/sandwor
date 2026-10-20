@@ -97,6 +97,23 @@ if (opt.full) {
     clip: { x: 0, y: 0, width: +w, height: Math.min(hh, +opt.full), scale: 1 },
   };
 }
+// --clip="css-селектор" — снять только этот элемент (прозрачный фон не нужен: снимок как есть).
+if (opt.clip) {
+  // Прозрачный фон страницы: блок ляжет на фон OG-шаблона без тёмного прямоугольника.
+  await send('Emulation.setDefaultBackgroundColorOverride', { color: { r: 0, g: 0, b: 0, a: 0 } });
+  await send('Runtime.evaluate', {
+    expression: `(() => { const st = document.createElement('style'); st.textContent = '*:not([data-hero-activity] *):not([data-hero-activity]) { background: transparent !important; background-image: none !important; } .amo-button-holder,[data-cookie-notice]{display:none!important} [data-hero-activity] [class*=toast]{animation:none!important;opacity:0!important} [data-hero-activity] [class*=toast]:first-child{opacity:1!important;transform:none!important} [data-hero-activity] *{animation-delay:-0.5s!important;animation-play-state:paused!important}'; document.head.append(st); })()`,
+  });
+  const r = await send('Runtime.evaluate', {
+    expression: `(() => { const el = document.querySelector(${JSON.stringify(opt.clip)}); el.scrollIntoView({block:'center'}); const b = el.getBoundingClientRect(); return [b.x, b.y, b.width, b.height]; })()`,
+    returnByValue: true,
+  });
+  const [x, y, width, height] = r.result.result.value;
+  await sleep(300);
+  shotOpts = { ...shotOpts, clip: { x, y, width, height, scale: +(opt.dpr || 2) } };
+}
+// --jpeg=85 — JPEG вместо PNG (OG-картинки: соцсети и мессенджеры читают его везде).
+if (opt.jpeg) shotOpts = { ...shotOpts, format: 'jpeg', quality: +opt.jpeg };
 const sh = await send('Page.captureScreenshot', shotOpts);
 writeFileSync(out, Buffer.from(sh.result.data, 'base64'));
 ws.close();

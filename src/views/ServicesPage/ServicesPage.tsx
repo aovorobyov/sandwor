@@ -6,8 +6,9 @@ import { PriceCalculator } from '@/widgets/PriceCalculator';
 import { ProcessSection } from '@/widgets/ProcessSection';
 import { ServicesGrid } from '@/widgets/ServicesGrid';
 import { JsonLd, buildBreadcrumbs } from '@/shared/lib/jsonLd';
-import { FEATURES, byPositioning } from '@/shared/config/positioning';
+import { FEATURES, POSITIONING, byPositioning } from '@/shared/config/positioning';
 import { localizeHref } from '@/shared/ui/Link';
+import { PlansPanel } from '@/widgets/PlansPanel';
 import { PageHero } from '@/shared/ui/PageHero';
 import { Section } from '@/shared/ui/Section';
 import { SectionIntro } from '@/shared/ui/SectionIntro';
@@ -26,6 +27,11 @@ export const ServicesPage = async () => {
       />
 
       <PageHero
+        aside={
+          POSITIONING === 'sites' ? (
+            <PlansPanel href={localizeHref('/services/sites#plans', locale)} />
+          ) : undefined
+        }
         breadcrumbs={[
           { label: t('nav.home'), href: localizeHref('/', locale) },
           { label: t('services.title') },

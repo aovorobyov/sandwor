@@ -6,7 +6,7 @@ import type { CaseDetail, CaseItem } from '@/entities/case/model/types';
 import { toMetaDescription } from '@/shared/lib/seo/metaDescription';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
-import { buildContentOgImage } from '@/shared/lib/seo/ogImage';
+import { buildContentOgImage, withStaticOg } from '@/shared/lib/seo/ogImage';
 
 interface Props {
   params: { locale: string; slug: string };
@@ -41,12 +41,16 @@ export async function generateMetadata({ params: { locale, slug } }: Props): Pro
       title: item.title,
       description: toMetaDescription(detail.lead),
       type: 'article',
-      image: buildContentOgImage({
+      image: withStaticOg(
+        `cases-${slug}`,
         locale,
-        tag: item.type,
-        title: item.title,
-        meta: item.scope.slice(0, OG_SCOPE_LIMIT).join(' · '),
-      }),
+        buildContentOgImage({
+          locale,
+          tag: item.type,
+          title: item.title,
+          meta: item.scope.slice(0, OG_SCOPE_LIMIT).join(' · '),
+        }),
+      ),
     }),
   };
 }

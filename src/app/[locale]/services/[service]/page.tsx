@@ -6,7 +6,7 @@ import { ServiceSoonPage } from '@/views/ServiceSoonPage';
 import { SERVICE_IDS, isServiceActive, isServiceId } from '@/entities/service';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
-import { buildPageOgImage } from '@/shared/lib/seo/ogImage';
+import { buildPageOgImage, withStaticOg } from '@/shared/lib/seo/ogImage';
 
 interface Props {
   params: { locale: string; service: string };
@@ -45,12 +45,16 @@ export async function generateMetadata({ params: { locale, service } }: Props): 
       path: `/services/${service}`,
       title: t('meta-title'),
       description: t('meta-description'),
-      image: buildPageOgImage({
+      image: withStaticOg(
+        `services-${service}`,
         locale,
-        tag: t('title'),
-        title: t('hero-title'),
-        lead: t('text'),
-      }),
+        buildPageOgImage({
+          locale,
+          tag: t('title'),
+          title: t('hero-title'),
+          lead: t('text'),
+        }),
+      ),
     }),
   };
 }

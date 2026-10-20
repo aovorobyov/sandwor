@@ -75,7 +75,15 @@ export const SiteFooter: FC = () => {
       legalLinks={[
         { label: t('footer.privacy'), href: href('/privacy') },
         { label: t('footer.consent'), href: href('/consent') },
-        { label: t('footer.language'), href: otherLocaleHref },
+        // hrefLang: переход на другой язык — полная загрузка страницы (LinkInterceptor
+        // её не перехватывает), чтобы чат amoCRM и всё прочее поднялись на новом языке.
+        {
+          label: t('footer.language'),
+          href: otherLocaleHref,
+          hrefLang: otherLocale,
+          lang: otherLocale,
+          ariaLabel: t('footer.language-aria'),
+        },
       ]}
     />
   );

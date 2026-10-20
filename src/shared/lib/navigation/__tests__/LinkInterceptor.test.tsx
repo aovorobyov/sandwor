@@ -19,6 +19,9 @@ const renderWithLinks = () => {
       </a>
       <a href="#calculator">якорь</a>
       <a href="/feed.xml">файл</a>
+      <a href="/en" hrefLang="en">
+        другой язык
+      </a>
     </>,
   );
 };
@@ -46,10 +49,12 @@ describe('LinkInterceptor', () => {
     expect(push).toHaveBeenCalledWith('/services/crm');
   });
 
-  it('не трогает внешние ссылки, новые вкладки, якоря и файлы', async () => {
+  it('не трогает внешние ссылки, новые вкладки, якоря, файлы и смену языка', async () => {
     renderWithLinks();
 
-    for (const text of ['внешняя', 'в новой вкладке', 'якорь', 'файл']) {
+    document.documentElement.lang = 'ru';
+
+    for (const text of ['внешняя', 'в новой вкладке', 'якорь', 'файл', 'другой язык']) {
       await userEvent.click(screen.getByText(text));
     }
 

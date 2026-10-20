@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CasesPage } from '@/views/CasesPage';
 import { buildPageAlternates } from '@/shared/lib/seo/buildPageAlternates';
 import { buildSocialMeta } from '@/shared/lib/seo/buildSocialMeta';
-import { buildPageOgImage } from '@/shared/lib/seo/ogImage';
+import { buildPageOgImage, withStaticOg } from '@/shared/lib/seo/ogImage';
 
 export async function generateMetadata({
   params: { locale },
@@ -20,12 +20,16 @@ export async function generateMetadata({
       path: '/cases',
       title: t('title'),
       description: t('lead'),
-      image: buildPageOgImage({
+      image: withStaticOg(
+        'cases',
         locale,
-        tag: t('meta'),
-        title: t('title'),
-        lead: t('lead'),
-      }),
+        buildPageOgImage({
+          locale,
+          tag: t('meta'),
+          title: t('title'),
+          lead: t('lead'),
+        }),
+      ),
     }),
   };
 }

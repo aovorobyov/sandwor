@@ -7,7 +7,7 @@ import type { ArticleDraft } from './articles.types';
 export const choosingWebDeveloper: ArticleDraft = {
   slug: 'kak-vybrat-veb-razrabotchika',
   date: '2026-07-04',
-  image: '/blog/photo-1600880292203-757bb62b4baf.webp',
+  image: '/blog/dev-cover.webp',
   translations: {
     ru: {
       title: 'Как выбрать веб-разработчика и не переплатить',
@@ -30,6 +30,14 @@ export const choosingWebDeveloper: ArticleDraft = {
 <p><strong>Студия или агентство.</strong> Надёжно и с процессами, но дорого — вы оплачиваете менеджеров, офис и красивые презентации. И общаетесь чаще с аккаунт-менеджером, а не с тем, кто реально делает сайт. Оправдано, когда проект крупный и вам нужны гарантии юрлица.</p>
 
 <p><strong>Частный специалист.</strong> Золотая середина для малого бизнеса: вы говорите напрямую с тем, кто пишет код, без наценки за офис и без риска анонимной биржи. Главное — убедиться, что человек на связи и никуда не денется. Как раз для этого и нужны признаки ниже.</p>
+
+<figure>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/dev-options-ru-m.webp" width="800" height="1454" />
+    <img src="/blog/dev-options-ru.webp" width="1200" height="800" loading="lazy" alt="Сравнение фрилансера с биржи, студии и частного специалиста по цене, надёжности и тому, с кем вы общаетесь" />
+  </picture>
+  <figcaption>Три варианта для малого бизнеса. Нет «лучшего вообще» — есть подходящий под размер и риск задачи.</figcaption>
+</figure>
 
 <h2>Как читать портфолио (а не просто листать)</h2>
 
@@ -57,8 +65,11 @@ export const choosingWebDeveloper: ArticleDraft = {
 </ol>
 
 <figure>
-  <img src="/blog/photo-1521737604893-d14cc237f11d.webp" alt="Команда обсуждает проект за ноутбуками" />
-  <figcaption>Хороший старт проекта — это разговор о вашей задаче, а не про технологии. Технологии подберутся под задачу; если начинают с них — что-то не так.</figcaption>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/dev-call-ru-m.webp" width="800" height="662" />
+    <img src="/blog/dev-call-ru.webp" width="1200" height="800" loading="lazy" alt="Четыре вопроса для первого созвона с разработчиком и признак хорошего ответа на каждый" />
+  </picture>
+  <figcaption>Слушайте не только ответы, но и то, как их дают: конкретика — хороший знак, «всё включено» — повод переспросить.</figcaption>
 </figure>
 
 <h2>Вопрос про доступы, из-за которого плачут</h2>
@@ -106,6 +117,14 @@ export const choosingWebDeveloper: ArticleDraft = {
 
 <p>Хорошая практика — разбить на понятные вехи: дизайн, вёрстка, запуск. Вы видите результат каждого этапа и платите за то, что уже можете потрогать. Если разработчик сам предлагает такую схему — отличный знак: он уверен в своей работе и не боится показывать её по частям.</p>
 
+<figure>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/dev-stages-ru-m.webp" width="800" height="859" />
+    <img src="/blog/dev-stages-ru.webp" width="1200" height="800" loading="lazy" alt="Схема оплаты: договор, предоплата, затем дизайн, вёрстка и запуск — каждый этап оплачивается после сдачи" />
+  </picture>
+  <figcaption>Вы платите за то, что уже можете потрогать. Стопроцентная предоплата за весь проект лишает вас рычага влияния.</figcaption>
+</figure>
+
 <blockquote>Договор пугает многих заказчиков, но именно он защищает в первую очередь вас. Пара страниц с описанием, что и к какому сроку, стоит спокойного сна больше, чем любые устные обещания «всё будет отлично».</blockquote>
 
 <h2>Красные флаги: беги, если слышишь это</h2>
@@ -150,6 +169,14 @@ export const choosingWebDeveloper: ArticleDraft = {
 
 <p><strong>The independent specialist.</strong> The sweet spot for small business: you talk directly to the person writing the code, with no office markup and none of the anonymous-marketplace risk. The main thing is to make sure the person is reachable and won't vanish. The signs below are exactly for that.</p>
 
+<figure>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/dev-options-en-m.webp" width="800" height="1454" />
+    <img src="/blog/dev-options-en.webp" width="1200" height="800" loading="lazy" alt="Comparison of a marketplace freelancer, a studio and an independent specialist by price, reliability and who you talk to" />
+  </picture>
+  <figcaption>Three options for a small business. There is no "best overall" — only the one that fits the size and risk of the task.</figcaption>
+</figure>
+
 <h2>How to read a portfolio (not just scroll it)</h2>
 
 <p>The first thing everyone looks at is the portfolio. And the first place almost everyone slips up: getting stuck on the pretty pictures. A picture lies. A design on a slide and a live, working site are two different things, and the whole difficulty of development lies between them.</p>
@@ -176,8 +203,11 @@ export const choosingWebDeveloper: ArticleDraft = {
 </ol>
 
 <figure>
-  <img src="/blog/photo-1521737604893-d14cc237f11d.webp" alt="A team discussing a project over laptops" />
-  <figcaption>A good project start is a conversation about your task, not about technologies. The technology will follow the task; if they lead with it, something's off.</figcaption>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/dev-call-en-m.webp" width="800" height="662" />
+    <img src="/blog/dev-call-en.webp" width="1200" height="800" loading="lazy" alt="Four questions for the first call with a developer and the sign of a good answer to each" />
+  </picture>
+  <figcaption>Listen not just to the answers but to how they are given: specifics are a good sign, "all-inclusive" is a reason to ask again.</figcaption>
 </figure>
 
 <h2>The access question that makes people cry</h2>
@@ -224,6 +254,14 @@ export const choosingWebDeveloper: ArticleDraft = {
 <p>Another place relationships break down is money. A healthy scheme looks like this: the work is split into stages, and each is paid on delivery. A deposit is normal — it confirms serious intent on both sides. But <strong>a hundred-percent prepayment for the whole project upfront</strong> is a risk: the contractor loses the incentive to hurry, and you lose your leverage.</p>
 
 <p>Good practice is to break it into clear milestones: design, build, launch. You see the result of each stage and pay for what you can already touch. If the developer proposes this scheme themselves, that's an excellent sign: they're confident in their work and aren't afraid to show it in parts.</p>
+
+<figure>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/dev-stages-en-m.webp" width="800" height="859" />
+    <img src="/blog/dev-stages-en.webp" width="1200" height="800" loading="lazy" alt="Payment scheme: contract, deposit, then design, build and launch, each stage paid on delivery" />
+  </picture>
+  <figcaption>You pay for what you can already touch. A hundred-percent prepayment for the whole project takes away your leverage.</figcaption>
+</figure>
 
 <blockquote>A contract scares many clients, but it protects you first and foremost. A couple of pages describing what and by when are worth more peaceful sleep than any verbal promise that "it'll all be great".</blockquote>
 

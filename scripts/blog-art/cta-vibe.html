@@ -1,0 +1,336 @@
+<!doctype html>
+<html data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../src/shared/sandwor/tokens/tokens.css" />
+    <style>
+      @font-face {
+        font-family: 'Unbounded';
+        src: url(../../src/shared/sandwor/fonts/Unbounded-Variable.woff2) format('woff2');
+        font-weight: 200 900;
+      }
+      @font-face {
+        font-family: 'Golos Text';
+        src: url(../../src/shared/sandwor/fonts/GolosText-Variable.woff2) format('woff2');
+        font-weight: 400 900;
+      }
+      @font-face {
+        font-family: 'Fira Code';
+        src: url(../../src/shared/sandwor/fonts/FiraCode-Variable.woff2) format('woff2');
+        font-weight: 300 700;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 1200px;
+        height: 800px;
+        overflow: hidden;
+        background: var(--bg-canvas);
+      }
+      body {
+        font-family: var(--font-text);
+        color: var(--text);
+        background-image: radial-gradient(var(--dot) 1.2px, transparent 1.3px);
+        background-size: 16px 16px;
+        background-position: 8px 8px;
+      }
+      .stage {
+        position: relative;
+        width: 1200px;
+        height: 800px;
+      }
+      .card {
+        position: absolute;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-float);
+      }
+      .bar {
+        height: 12px;
+        border-radius: 3px;
+        background: var(--surface-raised-2);
+      }
+      .bar.t {
+        height: 18px;
+        background: var(--text-disabled);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 52px;
+        padding: 0 26px;
+        border-radius: var(--radius-lg);
+        font: 600 18px/1 var(--font-text);
+        white-space: nowrap;
+      }
+      .btn.p {
+        background: var(--accent);
+        color: var(--on-accent);
+      }
+      .btn.s {
+        border: 1px solid var(--line-control);
+        color: var(--text);
+      }
+      .btn.g {
+        color: var(--accent-text);
+        padding: 0 4px;
+      }
+      .mono {
+        font: 450 15px/20px var(--font-mono);
+        color: var(--text-muted);
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+      .chrome {
+        display: flex;
+        gap: 7px;
+        padding: 16px 18px;
+        border-bottom: 1px solid var(--line);
+      }
+      .chrome i {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: var(--surface-raised-2);
+      }
+      .h {
+        font: 600 30px/36px var(--font-display);
+        letter-spacing: -0.02em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage" id="stage"></div>
+    <script>
+      const q = new URLSearchParams(location.search);
+      const kind = q.get('kind'),
+        lang = q.get('lang') || 'ru';
+      const T = (ru, en) => (lang === 'en' ? en : ru);
+      const st = document.getElementById('stage');
+      const mobile = q.get('m') === '1';
+      const size = (w, h) => {
+        for (const el of [document.documentElement, document.body, st]) {
+          el.style.width = w + 'px';
+          el.style.height = h + 'px';
+        }
+      };
+
+      const browser = (
+        x,
+        y,
+        w,
+        h,
+        inner,
+      ) => `<div class="card" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;overflow:hidden">
+  <div class="chrome"><i></i><i></i><i></i></div><div style="padding:30px 34px">${inner}</div></div>`;
+
+      const cursor = (
+        x,
+        y,
+      ) => `<svg style="position:absolute;left:${x}px;top:${y}px" width="44" height="52" viewBox="0 0 22 26">
+  <path d="M2 2 L2 21 L7 16.5 L10.5 24 L14 22.5 L10.5 15 L17 15 Z" fill="var(--text)" stroke="var(--bg)" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+
+      if (kind === 'cta-cover') {
+        st.innerHTML =
+          browser(
+            230,
+            130,
+            740,
+            540,
+            `
+    <div class="bar" style="width:120px;background:var(--accent-soft);margin-bottom:26px"></div>
+    <div class="bar t" style="width:520px;margin-bottom:14px"></div>
+    <div class="bar t" style="width:400px;margin-bottom:34px"></div>
+    <div class="bar" style="width:600px;margin-bottom:12px"></div>
+    <div class="bar" style="width:560px;margin-bottom:12px"></div>
+    <div class="bar" style="width:430px;margin-bottom:46px"></div>
+    <div style="display:flex;gap:18px;align-items:center">
+      <span class="btn p" style="height:64px;padding:0 44px;font-size:22px;box-shadow:0 0 0 10px var(--accent-soft)">CTA</span>
+      <span class="btn s" style="width:150px"><span class="bar" style="width:90px;height:10px"></span></span>
+    </div>
+    <div style="display:flex;gap:16px;margin-top:56px">
+      ${[0, 1, 2].map(() => `<div style="flex:1;height:90px;border:1px solid var(--line);border-radius:var(--radius-lg)"></div>`).join('')}
+    </div>`,
+          ) + cursor(366, 468);
+      }
+
+      if (kind === 'cta-figure') {
+        const many = T(
+          ['Купить', 'Заказать звонок', 'Скидка 10%', 'Подробнее', 'Написать нам'],
+          ['Buy now', 'Request a call', '10% off', 'Read more', 'Write to us'],
+        );
+        const left = browser(
+          60,
+          210,
+          510,
+          430,
+          `
+    <div class="bar t" style="width:360px;margin-bottom:12px"></div>
+    <div class="bar" style="width:300px;margin-bottom:34px"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:14px">${many.map((m) => `<span class="btn p">${m}</span>`).join('')}</div>`,
+        );
+        const right = browser(
+          630,
+          210,
+          510,
+          430,
+          `
+    <div class="bar t" style="width:360px;margin-bottom:12px"></div>
+    <div class="bar" style="width:300px;margin-bottom:34px"></div>
+    <span class="btn p" style="height:60px;padding:0 34px;font-size:20px">${T('Обсудить проект', 'Discuss a project')}</span>
+    <div style="display:flex;gap:18px;align-items:center;margin-top:22px">
+      <span class="btn s">${T('Смотреть кейсы', 'See case studies')}</span>
+      <span class="btn g">${T('Цены →', 'Prices →')}</span>
+    </div>
+    <div class="bar" style="width:380px;margin-top:40px;margin-bottom:12px"></div>
+    <div class="bar" style="width:320px"></div>`,
+        );
+        const label = (
+          x,
+          mark,
+          color,
+          text,
+        ) => `<div style="position:absolute;left:${x}px;top:150px;display:flex;gap:12px;align-items:center">
+    <span style="width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:600 17px/1 var(--font-text);background:${color};color:var(--bg)">${mark}</span>
+    <span class="mono" style="color:var(--text-secondary)">${text}</span></div>`;
+        st.innerHTML =
+          left +
+          right +
+          label(60, '✕', 'var(--text-muted)', T('Пять равных кнопок', 'Five equal buttons')) +
+          label(630, '✓', 'var(--accent)', T('Одна главная', 'One main action'));
+        if (mobile) {
+          // Телефон: панели друг под другом и крупнее, чтобы подписи читались на 343px.
+          size(800, 1320);
+          st.innerHTML = `<div style="zoom:1.4;position:relative;width:570px;height:943px">${(
+            left +
+            right +
+            label(60, '✕', 'var(--text-muted)', T('Пять равных кнопок', 'Five equal buttons')) +
+            label(630, '✓', 'var(--accent)', T('Одна главная', 'One main action'))
+          )
+            .replace(
+              'left:60px;top:210px;width:510px;height:430px',
+              'left:30px;top:80px;width:510px;height:350px',
+            )
+            .replace(
+              'left:630px;top:210px;width:510px;height:430px',
+              'left:30px;top:540px;width:510px;height:370px',
+            )
+            .replace('left:60px;top:150px', 'left:30px;top:30px')
+            .replace('left:630px;top:150px', 'left:30px;top:490px')}</div>`;
+        }
+      }
+
+      if (kind === 'vibe-cover') {
+        const code = [
+          [34, 140, 'var(--accent)'],
+          [34, 90, 'var(--text-muted)'],
+          [66, 220, 'var(--text-secondary)'],
+          [66, 160, 'var(--accent-line)'],
+          [98, 260, 'var(--text-secondary)'],
+          [98, 120, 'var(--text-muted)'],
+          [66, 190, 'var(--text-secondary)'],
+          [34, 60, 'var(--accent)'],
+        ];
+        const editor = `<div class="card" style="left:110px;top:150px;width:560px;height:500px;overflow:hidden">
+    <div class="chrome"><i></i><i></i><i></i></div>
+    <div style="padding:30px 0">${code
+      .map(
+        ([ind, w, c], i) => `<div style="display:flex;align-items:center;height:40px">
+      <span style="width:58px;text-align:right;padding-right:18px;font:400 15px/1 var(--font-mono);color:var(--text-disabled)">${i + 1}</span>
+      <span style="margin-left:${ind - 34}px;width:${w}px;height:12px;border-radius:3px;background:${c};opacity:.85"></span></div>`,
+      )
+      .join('')}
+      <div style="display:flex;align-items:center;height:40px"><span style="width:58px"></span><span style="width:12px;height:24px;background:var(--accent)"></span></div>
+    </div></div>`;
+        const chat = `<div class="card" style="left:560px;top:110px;width:330px;padding:22px 24px;background:var(--surface-raised)">
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>
+      <span class="bar" style="width:110px;background:var(--line-strong)"></span></div>
+    <div class="bar" style="width:260px;margin-bottom:10px;background:var(--line-strong)"></div>
+    <div class="bar" style="width:200px;background:var(--line-strong)"></div></div>`;
+        const site = browser(
+          740,
+          330,
+          360,
+          330,
+          `
+    <div class="bar t" style="width:230px;margin-bottom:12px"></div>
+    <div class="bar" style="width:180px;margin-bottom:28px"></div>
+    <span class="btn p" style="height:44px;width:150px"></span>
+    <div style="display:flex;gap:12px;margin-top:30px">${[0, 1].map(() => `<div style="flex:1;height:70px;border:1px solid var(--line);border-radius:var(--radius-lg)"></div>`).join('')}</div>`,
+        );
+        st.innerHTML = editor + site + chat;
+      }
+
+      if (kind === 'vibe-figure') {
+        const c = [
+          {
+            cx: 470,
+            cy: 330,
+            t: T('Вайбкодинг', 'Vibe coding'),
+            s: T('скорость', 'speed'),
+            lx: 370,
+            ly: 290,
+          },
+          {
+            cx: 730,
+            cy: 330,
+            t: T('Видение', 'Vision'),
+            s: T('куда идём', 'where we’re going'),
+            lx: 830,
+            ly: 290,
+          },
+          {
+            cx: 600,
+            cy: 540,
+            t: T('Знание ниши', 'Domain knowledge'),
+            s: T('что важно клиенту', 'what matters to the customer'),
+            lx: 600,
+            ly: 640,
+          },
+        ];
+        const r = 210;
+        st.innerHTML = `<svg width="1200" height="800" style="position:absolute;inset:0">
+    ${c.map((o) => `<circle cx="${o.cx}" cy="${o.cy}" r="${r}" fill="var(--accent-soft)" stroke="var(--accent-line)" stroke-width="2"/>`).join('')}
+  </svg>
+  ${c
+    .map(
+      (
+        o,
+      ) => `<div style="position:absolute;left:${o.lx - 200}px;top:${o.ly - 30}px;width:400px;text-align:center">
+    <div style="font:600 26px/32px var(--font-display);letter-spacing:-.01em">${o.t}</div>
+    <div class="mono" style="margin-top:6px">${o.s}</div></div>`,
+    )
+    .join('')}
+  <div class="center" style="position:absolute;left:470px;top:378px;width:260px;padding:16px 14px;text-align:center;background:var(--accent);color:var(--on-accent);border-radius:var(--radius-lg);box-shadow:var(--shadow-float);font:600 18px/23px var(--font-display)">${T('Сайт, который приносит заявки', 'A website that brings in leads')}</div>`;
+      }
+      if (kind === 'vibe-figure' && mobile) {
+        // Телефон: обрезаем пустые поля по бокам и укрупняем подписи.
+        size(800, 720);
+        st.style.transform = 'translate(-200px,-75px)';
+        st.style.width = '1200px';
+        st.style.height = '800px';
+        st.querySelectorAll('div > div:first-child').forEach((d) => {
+          if (d.style.font || getComputedStyle(d).fontFamily.includes('Unbounded'))
+            (d.style.fontSize = '34px'), (d.style.lineHeight = '40px');
+        });
+        st.querySelectorAll('.mono').forEach((d) => {
+          d.style.fontSize = '19px';
+          d.style.lineHeight = '24px';
+        });
+        const c = st.querySelector('.center');
+        c.style.fontSize = '23px';
+        c.style.lineHeight = '29px';
+        c.style.left = '450px';
+        c.style.width = '300px';
+        c.style.top = '366px';
+      }
+    </script>
+  </body>
+</html>

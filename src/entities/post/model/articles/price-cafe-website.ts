@@ -7,7 +7,7 @@ import type { ArticleDraft } from './articles.types';
 export const priceCafeWebsite: ArticleDraft = {
   slug: 'skolko-stoit-sajt-dlya-kofejni',
   date: '2026-06-20',
-  image: '/blog/photo-1554118811-1e0d58224f24.webp',
+  image: '/blog/cafe-cover.webp',
   translations: {
     ru: {
       title: 'Сколько стоит сайт для кофейни в 2026 году',
@@ -52,6 +52,14 @@ export const priceCafeWebsite: ArticleDraft = {
   <li><strong>Инфраструктура.</strong> Домен, хостинг, подключение аналитики, форм и оплаты. Небольшие, но обязательные расходы, о которых узнают в последний момент.</li>
 </ul>
 
+<figure>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/cafe-estimate-ru-m.webp" width="800" height="890" />
+    <img src="/blog/cafe-estimate-ru.webp" width="1200" height="800" loading="lazy" alt="Схема: дизайн, вёрстка и разработка, контент и инфраструктура вместе дают смету" />
+  </picture>
+  <figcaption>Четыре полки сметы. Если в коммерческом предложении одна итоговая цифра, попросите разложить её по ним.</figcaption>
+</figure>
+
 <p>Запомните эту четвёрку. Когда получите КП, разложите цену по этим полкам — и сразу увидите, где подрядчик сэкономил на вас, а где, наоборот, продаёт лишнее.</p>
 
 <h3>Пример реальной сметы для кофейни</h3>
@@ -93,7 +101,10 @@ export const priceCafeWebsite: ArticleDraft = {
 <p>Разница в цене — это не «наглость кастомщика». Это разница между «собрать из готовых блоков» и «сшить костюм по вашим меркам». Оба варианта могут быть правильными — зависит от того, что вам на самом деле нужно. Об этом у меня есть <a href="/blog/tilda-ili-kastomnaya-razrabotka">отдельный разбор Tilda против кастома</a>, если хотите копнуть глубже.</p>
 
 <figure>
-  <img src="/blog/photo-1501339847302-ac426a4a7cbb.webp" alt="Интерьер кофейни с посетителями" />
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/cafe-essentials-ru-m.webp" width="800" height="1269" />
+    <img src="/blog/cafe-essentials-ru.webp" width="1200" height="800" loading="lazy" alt="Схема сайта кофейни на телефоне: меню с ценами, адрес и часы работы, кнопка заказа; галерею, историю и блог можно добавить потом" />
+  </picture>
   <figcaption>Сайту кофейни важнее всего три вещи: меню, адрес и кнопка связи. Всё остальное — приятные дополнения, за которые часто переплачивают.</figcaption>
 </figure>
 
@@ -142,6 +153,14 @@ export const priceCafeWebsite: ArticleDraft = {
 <h2>Считаем не чек, а окупаемость</h2>
 
 <p>Давайте на пальцах. Средний чек в кофейне — скажем, 400 ₽. Если сайт с формой доставки приносит хотя бы пять заказов в день, это 60 тысяч в месяц выручки. Сайт за 120 тысяч окупается меньше чем за два месяца — а дальше работает бесплатно, годами, без зарплаты и выходных.</p>
+
+<figure>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/cafe-payback-ru-m.webp" width="800" height="754" />
+    <img src="/blog/cafe-payback-ru.webp" width="1200" height="800" loading="lazy" alt="График: выручка с заказов через сайт растёт на 60 000 ₽ в месяц и через два месяца догоняет стоимость сайта 120 000 ₽" />
+  </picture>
+  <figcaption>Пять заказов в день по 400 ₽ — и сайт за 120 000 ₽ окупается примерно за два месяца. Дальше каждая заявка с него — в плюс.</figcaption>
+</figure>
 
 <p>Вот почему я всегда прошу клиента думать не о цене, а о задаче. Сайт-визитка за 30 тысяч, который просто «есть», — это часто выброшенные деньги. А сайт за 120 тысяч, который каждый день собирает заказы, — это сотрудник, которому вы заплатили один раз.</p>
 
@@ -195,6 +214,14 @@ export const priceCafeWebsite: ArticleDraft = {
   <li><strong>Infrastructure.</strong> Domain, hosting, hooking up analytics, forms and payments. Small but unavoidable costs that tend to surface at the very last moment.</li>
 </ul>
 
+<figure>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/cafe-estimate-en-m.webp" width="800" height="860" />
+    <img src="/blog/cafe-estimate-en.webp" width="1200" height="800" loading="lazy" alt="Diagram: design, build and development, content and infrastructure add up to the estimate" />
+  </picture>
+  <figcaption>The four shelves of an estimate. If a proposal shows a single bottom-line figure, ask for it to be broken down onto them.</figcaption>
+</figure>
+
 <p>Memorise this quartet. When you get a proposal, sort the price onto these four shelves — and you'll immediately see where the contractor cut a corner on you and where, instead, they're selling you extras.</p>
 
 <h3>A real café estimate</h3>
@@ -236,7 +263,10 @@ export const priceCafeWebsite: ArticleDraft = {
 <p>The price gap isn't "the custom guy being greedy". It's the difference between "assembled from ready blocks" and "tailored to your measurements". Both can be the right call — it depends on what you actually need. I've written a <a href="/en/blog/tilda-ili-kastomnaya-razrabotka">separate breakdown of builder versus custom</a> if you want to dig deeper.</p>
 
 <figure>
-  <img src="/blog/photo-1501339847302-ac426a4a7cbb.webp" alt="Café interior with guests" />
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/cafe-essentials-en-m.webp" width="800" height="1269" />
+    <img src="/blog/cafe-essentials-en.webp" width="1200" height="800" loading="lazy" alt="Diagram of a café website on a phone: a menu with prices, the address and opening hours, an order button; a gallery, story and blog can wait" />
+  </picture>
   <figcaption>A café site cares about three things above all: the menu, the address, and a button to get in touch. Everything else is a nice extra people often overpay for.</figcaption>
 </figure>
 
@@ -285,6 +315,14 @@ export const priceCafeWebsite: ArticleDraft = {
 <h2>Count the payback, not the invoice</h2>
 
 <p>Let's do the math. Say the average café order is $5. If a site with a delivery form brings in just five orders a day, that's about $750 a month in revenue. A $1,500 site pays for itself in two months — and after that it works for free, for years, with no salary and no days off.</p>
+
+<figure>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/cafe-payback-en-m.webp" width="800" height="754" />
+    <img src="/blog/cafe-payback-en.webp" width="1200" height="800" loading="lazy" alt="Chart: revenue from site orders grows by $750 a month and catches up with the $1,500 site cost after two months" />
+  </picture>
+  <figcaption>Five orders a day at $5 each, and a $1,500 site pays for itself in about two months. After that every order it brings is a gain.</figcaption>
+</figure>
 
 <p>That's why I always ask a client to think about the task, not the price. A business-card site that just "exists" is often money thrown away. A site that collects orders every single day is an employee you paid for exactly once.</p>
 

@@ -7,7 +7,7 @@ import type { ArticleDraft } from './articles.types';
 export const tildaVsCustom: ArticleDraft = {
   slug: 'tilda-ili-kastomnaya-razrabotka',
   date: '2026-06-27',
-  image: '/blog/photo-1517245386807-bb43f82c33c4.webp',
+  image: '/blog/tilda-cover.webp',
   translations: {
     ru: {
       title: 'Tilda или кастомная разработка: что выбрать',
@@ -50,7 +50,10 @@ export const tildaVsCustom: ArticleDraft = {
 </ol>
 
 <figure>
-  <img src="/blog/photo-1559136555-9303baea8ebd.webp" alt="Рабочее место дизайнера с макетами интерфейса" />
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/tilda-blocks-ru-m.webp" width="800" height="1387" />
+    <img src="/blog/tilda-blocks-ru.webp" width="1200" height="800" loading="lazy" alt="Схема: слева страница из одинаковых готовых блоков, справа — страница, спроектированная под задачу, с калькулятором стоимости" />
+  </picture>
   <figcaption>Индивидуальный дизайн заметен в мелочах — там, где шаблон вынуждает пойти на компромисс, а вы соглашаетесь, потому что «и так сойдёт».</figcaption>
 </figure>
 
@@ -118,6 +121,14 @@ export const tildaVsCustom: ArticleDraft = {
 
 <p>Посчитайте на три года вперёд. Если вы правите сайт раз в полгода — кастом почти наверняка выйдет дешевле в сумме. Если вы меняете акции каждую неделю и любите всё делать сами — Tilda сэкономит вам и деньги, и нервы. Дело не в том, что дешевле «вообще», а в том, что дешевле <strong>для вашего ритма</strong>.</p>
 
+<figure>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/tilda-cost-ru-m.webp" width="800" height="879" />
+    <img src="/blog/tilda-cost-ru.webp" width="1200" height="800" loading="lazy" alt="График затрат за три года: у Tilda старт ниже, но линия растёт из-за подписки; у кастома старт выше и редкие ступеньки доработок" />
+  </picture>
+  <figcaption>Если правите сайт редко, кастом со временем догоняет и обгоняет Tilda по общей сумме. Если часто — наоборот.</figcaption>
+</figure>
+
 <blockquote>Tilda дешевле на старте, кастом — предсказуемее в долгую. Правильный ответ прячется не в прайсе, а в ответе на вопрос: как часто и насколько глубоко вы планируете менять сайт?</blockquote>
 
 <h2>Как это выглядит на практике</h2>
@@ -145,6 +156,14 @@ export const tildaVsCustom: ArticleDraft = {
   <li><strong>Есть ли в задаче что-то нестандартное?</strong> Калькулятор, личный кабинет, интеграция — почти всегда кастом. Услуги-меню-контакты-форма — конструктор справится.</li>
   <li><strong>Насколько важна уникальность?</strong> Если сайт — часть бренда и должен выделять — кастом. Если главное «чтобы было, работало и нашли в поиске» — Tilda.</li>
 </ol>
+
+<figure>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/tilda-test-ru-m.webp" width="800" height="1037" />
+    <img src="/blog/tilda-test-ru.webp" width="1200" height="800" loading="lazy" alt="Таблица экспресс-теста: три вопроса и ответы, которые указывают на Tilda или на кастом" />
+  </picture>
+  <figcaption>Экспресс-тест на одной картинке: сохраните её и пройдитесь по трём вопросам перед созвоном с подрядчиком.</figcaption>
+</figure>
 
 <p>Два ответа из трёх в одну сторону — и выбор, скорее всего, уже сделан. Ну а если ответы разбегаются — это как раз тот случай, когда стоит обсудить с человеком, а не гадать.</p>
 
@@ -196,7 +215,10 @@ export const tildaVsCustom: ArticleDraft = {
 </ol>
 
 <figure>
-  <img src="/blog/photo-1559136555-9303baea8ebd.webp" alt="Designer's desk with interface mockups" />
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/tilda-blocks-en-m.webp" width="800" height="1387" />
+    <img src="/blog/tilda-blocks-en.webp" width="1200" height="800" loading="lazy" alt="Diagram: a page assembled from identical ready blocks next to a page designed for the task, with a cost calculator" />
+  </picture>
   <figcaption>A bespoke design shows in the small things — where a template forces a compromise and you accept it, because "it'll do".</figcaption>
 </figure>
 
@@ -264,6 +286,14 @@ export const tildaVsCustom: ArticleDraft = {
 
 <p>Count it out three years ahead. If you edit the site once every six months, custom will almost certainly work out cheaper overall. If you swap promos every week and love doing everything yourself, a builder saves you both money and nerves. It's not about what's cheaper "in general" — it's about what's cheaper <strong>for your rhythm</strong>.</p>
 
+<figure>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/tilda-cost-en-m.webp" width="800" height="879" />
+    <img src="/blog/tilda-cost-en.webp" width="1200" height="800" loading="lazy" alt="Three-year cost chart: a builder starts lower but keeps rising with the subscription; custom starts higher with rare steps for edits" />
+  </picture>
+  <figcaption>If you rarely edit the site, custom catches up with the builder in total cost and overtakes it. If you edit often, it goes the other way.</figcaption>
+</figure>
+
 <blockquote>A builder is cheaper at the start; custom is more predictable over the long haul. The right answer hides not in the price list but in your answer to one question: how often, and how deeply, do you plan to change the site?</blockquote>
 
 <h2>What this looks like in practice</h2>
@@ -291,6 +321,14 @@ export const tildaVsCustom: ArticleDraft = {
   <li><strong>Is there anything non-standard in the task?</strong> A calculator, a customer account, an integration — almost always custom. Services-menu-contacts-form — a builder will manage.</li>
   <li><strong>How much does uniqueness matter?</strong> If the site is part of the brand and has to stand out — custom. If the main thing is "it exists, it works, and people find it in search" — a builder.</li>
 </ol>
+
+<figure>
+  <picture>
+    <source media="(max-width: 600px)" srcset="/blog/tilda-test-en-m.webp" width="800" height="1037" />
+    <img src="/blog/tilda-test-en.webp" width="1200" height="800" loading="lazy" alt="Quick-test table: three questions and the answers that point to a builder or to custom" />
+  </picture>
+  <figcaption>The quick test on one picture: save it and go through the three questions before talking to a contractor.</figcaption>
+</figure>
 
 <p>Two answers out of three pointing the same way, and the choice is probably already made. And if the answers scatter — that's exactly the case where it's worth talking it through with a person rather than guessing.</p>
 

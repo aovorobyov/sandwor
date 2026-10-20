@@ -1,0 +1,624 @@
+<!doctype html>
+<html data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../src/shared/sandwor/tokens/tokens.css" />
+    <style>
+      @font-face {
+        font-family: 'Unbounded';
+        src: url(../../src/shared/sandwor/fonts/Unbounded-Variable.woff2) format('woff2');
+        font-weight: 200 900;
+      }
+      @font-face {
+        font-family: 'Golos Text';
+        src: url(../../src/shared/sandwor/fonts/GolosText-Variable.woff2) format('woff2');
+        font-weight: 400 900;
+      }
+      @font-face {
+        font-family: 'Fira Code';
+        src: url(../../src/shared/sandwor/fonts/FiraCode-Variable.woff2) format('woff2');
+        font-weight: 300 700;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: var(--font-text);
+        color: var(--text);
+        background: var(--bg-canvas);
+        background-image: radial-gradient(var(--dot) 1.2px, transparent 1.3px);
+        background-size: 16px 16px;
+        background-position: 8px 8px;
+      }
+      /* десктоп: 1200×800, содержимое по центру; телефон: 800 по ширине, макет 615 и zoom 1.3 */
+      body.d {
+        width: 1200px;
+        height: 800px;
+        overflow: hidden;
+      }
+      body.d .wrap {
+        width: 1200px;
+        height: 800px;
+        padding: 64px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      body.m {
+        width: 800px;
+      }
+      body.d.cover .wrap {
+        padding: 0;
+        display: block;
+      }
+      body.m .wrap {
+        width: 615px;
+        zoom: 1.3;
+        padding: 36px 24px 40px;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-float);
+      }
+      .mono {
+        font: 450 14px/20px var(--font-mono);
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .h3 {
+        font: 600 18px/24px var(--font-display);
+        letter-spacing: -0.01em;
+      }
+      .h2 {
+        font: 600 22px/28px var(--font-display);
+        letter-spacing: -0.01em;
+      }
+      .body {
+        font: 400 16px/23px var(--font-text);
+        color: var(--text-secondary);
+      }
+      .ico {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        border-radius: var(--radius-lg);
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+      .num {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: var(--on-accent);
+        font: 600 15px/1 var(--font-text);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 44px;
+        padding: 0 20px;
+        border-radius: var(--radius-lg);
+        font: 600 15px/1 var(--font-text);
+        white-space: nowrap;
+      }
+      .btn.p {
+        background: var(--accent);
+        color: var(--on-accent);
+      }
+      .bar {
+        height: 10px;
+        border-radius: 3px;
+        background: var(--surface-raised-2);
+      }
+      .row {
+        display: flex;
+        gap: 20px;
+      }
+      .chrome {
+        display: flex;
+        gap: 7px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+      }
+      .chrome i {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--surface-raised-2);
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: var(--radius-lg);
+        font: 500 15px/20px var(--font-text);
+      }
+      .m .stack-m {
+        flex-direction: column;
+      }
+      .m .hide-m {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap" id="w"></div>
+    <script type="module">
+      import { ICONS } from '../../src/shared/sandwor/src/icons.js';
+      const q = new URLSearchParams(location.search);
+      const kind = q.get('kind'),
+        lang = q.get('lang') || 'ru',
+        M = q.get('m') === '1';
+      document.body.className = (M ? 'm' : 'd') + (kind.endsWith('-cover') ? ' cover' : '');
+      const T = (ru, en) => (lang === 'en' ? en : ru);
+      const W = M ? 567 : 1040; // ширина области содержимого
+      const icon = (n, s = 22, sw = 1.75) =>
+        `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${ICONS[n]}</svg>`;
+      const icoBox = (n, s = 44) =>
+        `<span class="ico" style="width:${s}px;height:${s}px">${icon(n, s * 0.5)}</span>`;
+      const dots = (n, of = 3) =>
+        Array.from(
+          { length: of },
+          (_, i) =>
+            `<span style="display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;background:${i < n ? 'var(--accent)' : 'var(--surface-raised-2)'}"></span>`,
+        ).join('');
+      const head = (t) => `<div class="mono" style="margin-bottom:22px">${t}</div>`;
+      const F = {};
+
+      /* ───────── обложки (без текста, только десктоп) ───────── */
+      F['cafe-cover'] = () => `<div style="position:relative;height:100%">
+  <div class="card" style="position:absolute;left:150px;top:190px;width:560px;padding:34px 36px">
+    <div class="bar" style="width:160px;height:14px;background:var(--text-disabled);margin-bottom:30px"></div>
+    ${['palette', 'code', 'photo', 'world']
+      .map(
+        (
+          n,
+          i,
+        ) => `<div style="display:flex;align-items:center;gap:18px;padding:14px 0;border-bottom:1px solid var(--line)">
+      ${icoBox(n, 40)}<span class="bar" style="width:${[190, 230, 150, 200][i]}px"></span>
+      <span class="bar" style="margin-left:auto;width:${[80, 100, 64, 56][i]}px;background:var(--line-strong)"></span></div>`,
+      )
+      .join('')}
+    <div style="display:flex;align-items:center;gap:18px;padding-top:24px">
+      <span class="bar" style="width:120px;height:14px;background:var(--text-disabled)"></span>
+      <span style="margin-left:auto;width:150px;height:22px;border-radius:4px;background:var(--accent)"></span></div>
+  </div>
+  <div class="card" style="position:absolute;left:780px;top:120px;width:280px;height:560px;border-radius:36px;padding:26px 22px;background:var(--surface-raised)">
+    <div class="bar" style="width:80px;margin:0 auto 26px"></div>
+    <div style="height:150px;border-radius:14px;background:var(--surface-raised-2);margin-bottom:20px;display:grid;place-items:center;color:var(--accent)">${icon('building-store', 54, 1.5)}</div>
+    ${[1, 2, 3].map(() => `<div style="display:flex;justify-content:space-between;margin-bottom:16px"><span class="bar" style="width:110px"></span><span class="bar" style="width:40px;background:var(--line-strong)"></span></div>`).join('')}
+    <div style="height:46px;border-radius:10px;background:var(--accent);margin-top:28px"></div>
+  </div></div>`;
+
+      F['tilda-cover'] = () => {
+        const blocks = [
+          [0, 0, 6, 2, 1],
+          [0, 2, 3, 2, 0],
+          [3, 2, 3, 2, 0],
+          [0, 4, 2, 2, 0],
+          [2, 4, 2, 2, 2],
+          [4, 4, 2, 2, 0],
+          [0, 6, 6, 1, 0],
+        ];
+        const u = 62;
+        return `<div style="position:relative;height:100%">
+  <div class="card" style="position:absolute;left:60px;top:120px;width:470px;height:560px;overflow:hidden"><div class="chrome"><i></i><i></i><i></i></div>
+    <div style="position:relative;margin:28px">${blocks
+      .map(
+        ([
+          x,
+          y,
+          w,
+          h,
+          a,
+        ]) => `<div style="position:absolute;left:${x * u + 2}px;top:${y * u + 2}px;width:${w * u - 8}px;height:${h * u - 8}px;border-radius:6px;
+      background:${a === 2 ? 'var(--accent)' : a ? 'var(--surface-raised-2)' : 'var(--surface-raised)'};border:1px solid var(--line-strong)"></div>`,
+      )
+      .join('')}</div></div>
+  <div style="position:absolute;left:565px;top:365px;width:70px;height:70px;border-radius:50%;background:var(--surface);border:1px solid var(--line-strong);display:grid;place-items:center;color:var(--text-muted)">${icon('arrows-right-left', 30)}</div>
+  <div class="card" style="position:absolute;left:670px;top:120px;width:470px;height:560px;overflow:hidden"><div class="chrome"><i></i><i></i><i></i></div>
+    <div style="padding:30px 0">${[
+      [0, 150, 'var(--accent)'],
+      [1, 220, 'var(--text-secondary)'],
+      [2, 180, 'var(--text-muted)'],
+      [2, 250, 'var(--text-secondary)'],
+      [1, 120, 'var(--accent-line)'],
+      [2, 200, 'var(--text-secondary)'],
+      [3, 160, 'var(--text-muted)'],
+      [2, 90, 'var(--text-secondary)'],
+      [1, 140, 'var(--accent-line)'],
+      [0, 70, 'var(--accent)'],
+    ]
+      .map(
+        (
+          [ind, w, c],
+          i,
+        ) => `<div style="display:flex;align-items:center;height:42px"><span style="width:54px;text-align:right;padding-right:18px;font:400 14px/1 var(--font-mono);color:var(--text-disabled)">${i + 1}</span>
+      <span style="margin-left:${ind * 30}px;width:${w}px;height:11px;border-radius:3px;background:${c}"></span></div>`,
+      )
+      .join('')}</div></div></div>`;
+      };
+
+      F['dev-cover'] = () => `<div style="position:relative;height:100%">
+  <div class="card" style="position:absolute;left:150px;top:160px;width:560px;padding:36px 38px">
+    <div class="bar" style="width:200px;height:14px;background:var(--text-disabled);margin-bottom:28px"></div>
+    ${[0, 1, 2, 3, 4]
+      .map(
+        (
+          i,
+        ) => `<div style="display:flex;align-items:center;gap:18px;padding:16px 0;border-bottom:${i < 4 ? '1px solid var(--line)' : 'none'}">
+      <span style="width:30px;height:30px;border-radius:50%;display:grid;place-items:center;${i < 3 ? 'background:var(--accent);color:var(--on-accent)' : 'border:1.5px solid var(--line-control)'}">${i < 3 ? icon('check', 18, 2.5) : ''}</span>
+      <span class="bar" style="width:${[300, 240, 330, 260, 200][i]}px"></span></div>`,
+      )
+      .join('')}
+  </div>
+  <div class="card" style="position:absolute;left:770px;top:220px;width:320px;padding:22px 24px;background:var(--surface-raised)">
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px"><span class="ico" style="width:40px;height:40px;border-radius:50%">${icon('phone', 20)}</span><span class="bar" style="width:120px;background:var(--line-strong)"></span></div>
+    <div class="bar" style="width:250px;margin-bottom:10px;background:var(--line-strong)"></div><div class="bar" style="width:190px;background:var(--line-strong)"></div></div>
+  <div class="card" style="position:absolute;left:830px;top:430px;width:260px;padding:20px 22px">
+    <div style="display:flex;gap:12px;align-items:center"><span class="ico" style="width:40px;height:40px">${icon('file-text', 20)}</span><span class="bar" style="width:140px"></span></div>
+    <div style="height:40px;border-radius:8px;background:var(--accent);margin-top:20px"></div></div></div>`;
+
+      /* ───────── кофейня ───────── */
+      F['cafe-essentials'] = () => {
+        const items = T(
+          [
+            ['Капучино', '250 ₽'],
+            ['Латте', '280 ₽'],
+            ['Круассан', '190 ₽'],
+          ],
+          [
+            ['Cappuccino', '$3.50'],
+            ['Latte', '$4.00'],
+            ['Croissant', '$2.80'],
+          ],
+        );
+        const mark = (n) =>
+          `<span class="num" style="position:absolute;right:-15px;top:-15px">${n}</span>`;
+        const phone = `<div class="card" style="width:330px;flex:none;border-radius:36px;padding:24px 20px;background:var(--surface-raised);${M ? 'margin:0 auto' : ''}">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px"><span style="font:600 15px/1 var(--font-display)">${T('Кофейня', 'Café')}</span><span style="color:var(--text-muted)">${icon('menu-2', 20)}</span></div>
+    <div style="position:relative;border:1.5px solid var(--accent-line);border-radius:12px;padding:16px">${mark(1)}
+      <div class="mono" style="margin-bottom:10px">${T('Меню', 'Menu')}</div>
+      ${items.map(([a, b]) => `<div style="display:flex;justify-content:space-between;font:500 15px/30px var(--font-text)"><span>${a}</span><span style="color:var(--text-secondary)">${b}</span></div>`).join('')}</div>
+    <div style="position:relative;border:1.5px solid var(--accent-line);border-radius:12px;padding:16px;margin-top:18px">${mark(2)}
+      <div style="display:flex;gap:10px;align-items:center;font:500 15px/28px var(--font-text)"><span style="color:var(--accent)">${icon('map-pin', 18)}</span>${T('ул. Садовая, 12', '12 Garden Street')}</div>
+      <div style="display:flex;gap:10px;align-items:center;font:500 15px/28px var(--font-text)"><span style="color:var(--accent)">${icon('clock', 18)}</span>${T('Ежедневно 8:00–22:00', 'Daily 8 am – 10 pm')}</div></div>
+    <div style="position:relative;margin-top:22px">${mark(3)}<div class="btn p" style="width:100%;height:50px">${T('Заказать доставку', 'Order delivery')}</div></div>
+    <div style="height:70px;border:1.5px dashed var(--line-strong);border-radius:12px;margin-top:18px;display:grid;place-items:center;color:var(--text-disabled)">${icon('photo', 26)}</div></div>`;
+        const must = T(
+          ['Меню с ценами', 'Адрес и часы работы', 'Кнопка связи или заказа'],
+          ['Menu with prices', 'Address and opening hours', 'A contact or order button'],
+        );
+        const later = T(
+          ['Галерея', 'История кофейни', 'Блог', 'Личный кабинет'],
+          ['Gallery', 'Our story', 'Blog', 'Customer account'],
+        );
+        const legend = `<div style="flex:1;${M ? 'margin-top:34px' : 'padding-left:30px'}">
+    ${head(T('Главное', 'What matters'))}
+    ${must.map((t, i) => `<div style="display:flex;gap:16px;align-items:center;margin-bottom:20px"><span class="num">${i + 1}</span><span class="h3">${t}</span></div>`).join('')}
+    <div class="mono" style="margin:38px 0 18px">${T('Можно добавить потом', 'Can wait')}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">${later.map((t) => `<span class="chip" style="border:1.5px dashed var(--line-strong);color:var(--text-muted)">${t}</span>`).join('')}</div></div>`;
+        return `<div class="row stack-m" style="align-items:center;gap:60px">${phone}${legend}</div>`;
+      };
+
+      F['cafe-estimate'] = () => {
+        const parts = T(
+          [
+            ['palette', 'Дизайн', 'от шаблона до индивидуальной отрисовки'],
+            ['code', 'Вёрстка и разработка', 'сайт работает на любом экране'],
+            ['photo', 'Контент', 'тексты, фото, меню'],
+            ['world', 'Инфраструктура', 'домен, хостинг, аналитика, оплата'],
+          ],
+          [
+            ['palette', 'Design', 'from a template to a bespoke look'],
+            ['code', 'Build and development', 'the site works on any screen'],
+            ['photo', 'Content', 'text, photos, menu'],
+            ['world', 'Infrastructure', 'domain, hosting, analytics, payments'],
+          ],
+        );
+        const card = ([ic, t, d]) =>
+          `<div class="card" style="flex:1;min-width:0;padding:26px 24px">${icoBox(ic, 48)}<div class="h3" style="margin:22px 0 10px">${t}</div><div class="body">${d}</div></div>`;
+        const plus = `<span class="hide-m" style="align-self:center;color:var(--text-muted)">${icon('plus', 26)}</span>`;
+        const grid = M
+          ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">${parts.map(card).join('')}</div>`
+          : `<div class="row" style="gap:14px;align-items:stretch">${parts.map(card).join(plus)}</div>`;
+        return `${head(T('Из чего складывается смета', 'What the estimate is made of'))}${grid}
+  <div style="display:flex;gap:16px;align-items:center;margin-top:30px;padding:20px 24px;border-radius:var(--radius-xl);background:var(--accent-soft);border:1px solid var(--accent-line)">
+    <span style="font:600 26px/1 var(--font-display);color:var(--accent)">=</span>
+    <span class="h3">${T('смета, которую можно разложить по полкам и сравнить', 'an estimate you can sort onto shelves and compare')}</span></div>`;
+      };
+
+      F['cafe-payback'] = () => {
+        const cw = W,
+          ch = M ? 400 : 430,
+          pl = M ? 78 : 96,
+          pb = 44,
+          pt = 16;
+        const x = (mo) => pl + (mo / 6) * (cw - pl - 20),
+          y = (v) => pt + (1 - v / 360) * (ch - pt - pb);
+        const ticks = [0, 120, 240, 360];
+        const tl = (v) =>
+          T(
+            v === 0 ? '0' : `${v} тыс. ₽`,
+            v === 0 ? '$0' : `$${(v * 12.5).toLocaleString('en-US')}`,
+          );
+        const svg = `<svg width="${cw}" height="${ch}" style="display:block;overflow:visible">
+    ${ticks.map((v) => `<line x1="${pl}" x2="${cw - 20}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" /><text x="${pl - 14}" y="${y(v) + 5}" text-anchor="end" fill="var(--text-muted)" style="font:450 14px var(--font-mono)">${tl(v)}</text>`).join('')}
+    ${[0, 1, 2, 3, 4, 5, 6].map((m) => `<text x="${x(m)}" y="${ch - 14}" text-anchor="middle" fill="var(--text-muted)" style="font:450 14px var(--font-mono)">${m}</text>`).join('')}
+    <polygon points="${x(2)},${y(120)} ${x(6)},${y(360)} ${x(6)},${y(120)}" fill="var(--accent-soft)" />
+    <line x1="${x(0)}" x2="${x(6)}" y1="${y(120)}" y2="${y(120)}" stroke="var(--text-secondary)" stroke-width="2.5" stroke-dasharray="8 7" />
+    <line x1="${x(0)}" x2="${x(6)}" y1="${y(0)}" y2="${y(360)}" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" />
+    <circle cx="${x(2)}" cy="${y(120)}" r="9" fill="var(--accent)" stroke="var(--bg)" stroke-width="4" />
+    <text x="${x(2) - 16}" y="${y(120) - 22}" text-anchor="end" fill="var(--text)" style="font:600 17px var(--font-display)">${T('Окупаемость', 'Break-even')}</text>
+    <text x="${x(4.6)}" y="${y(175)}" text-anchor="middle" fill="var(--accent-text)" style="font:600 15px var(--font-text)">${T('дальше сайт работает на вас', 'after that it works for you')}</text>
+  </svg>`;
+        const lg = (line, t) =>
+          `<div style="display:flex;gap:12px;align-items:center;font:500 15px/21px var(--font-text);color:var(--text-secondary)">${line}${t}</div>`;
+        return `<div class="${M ? '' : 'row'}" style="justify-content:space-between;align-items:flex-start;margin-bottom:26px;gap:${M ? 10 : 30}px;display:flex;flex-direction:${M ? 'column' : 'row'}">
+    ${lg('<span style="width:30px;height:4px;border-radius:2px;background:var(--accent);flex:none"></span>', T('Выручка с заказов через сайт: 5 в день × 400 ₽', 'Revenue from site orders: 5 a day × $5'))}
+    ${lg('<span style="width:30px;flex:none;border-top:2.5px dashed var(--text-secondary)"></span>', T('Стоимость сайта: 120 000 ₽', 'Site cost: $1,500'))}</div>
+    ${svg}<div class="mono" style="text-align:right;margin-top:6px">${T('месяцы', 'months')}</div>`;
+      };
+
+      /* ───────── Tilda или кастом ───────── */
+      F['tilda-blocks'] = () => {
+        const lbl = (t, ok) =>
+          `<div class="mono" style="margin-bottom:16px;display:flex;gap:10px;align-items:center">${icon(ok ? 'components' : 'layout-grid', 18)}${t}</div>`;
+        const b = (h, extra = '') =>
+          `<div style="height:${h}px;border-radius:6px;background:var(--surface-raised);border:1px solid var(--line-strong);${extra}"></div>`;
+        const left = `<div style="flex:1;min-width:0">${lbl(T('Из готовых блоков', 'Built from ready blocks'))}
+    <div class="card" style="padding:20px;display:grid;gap:12px">${b(36)}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">${b(120)}<div style="display:grid;gap:10px;align-content:center"><span class="bar" style="width:90%"></span><span class="bar" style="width:70%"></span><span class="bar" style="width:50%;height:28px;background:var(--line-strong)"></span></div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">${b(80)}${b(80)}${b(80)}</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">${b(80)}${b(80)}${b(80)}</div>${b(50)}</div></div>`;
+        const right = `<div style="flex:1;min-width:0">${lbl(T('Под задачу', 'Designed for the task'), 1)}
+    <div class="card" style="padding:20px;display:grid;gap:12px">${b(36)}
+      <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:12px;align-items:stretch">
+        <div style="display:grid;gap:12px;align-content:start;padding:8px 4px"><span class="bar" style="height:20px;width:95%;background:var(--text-disabled)"></span><span class="bar" style="height:20px;width:70%;background:var(--text-disabled)"></span><span class="bar" style="width:80%"></span><span style="width:120px;height:34px;border-radius:6px;background:var(--accent)"></span></div>
+        <div style="border:1.5px solid var(--accent-line);border-radius:8px;padding:12px;display:grid;gap:12px;background:var(--surface-raised)">
+          <span class="mono" style="font-size:12px;color:var(--accent-text)">${icon('calculator', 14)} ${T('калькулятор', 'calculator')}</span>
+          ${[60, 35, 80].map((p) => `<div style="height:6px;border-radius:3px;background:var(--surface-raised-2);position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:${p}%;border-radius:3px;background:var(--accent)"></span><span style="position:absolute;left:calc(${p}% - 7px);top:-4px;width:14px;height:14px;border-radius:50%;background:var(--text)"></span></div>`).join('')}
+          <span class="bar" style="height:18px;width:60%;background:var(--text-disabled)"></span></div></div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px">${b(130)}<div style="display:grid;gap:12px">${b(59)}${b(59)}</div></div>${b(50)}</div></div>`;
+        return `<div class="row stack-m" style="gap:${M ? 34 : 48}px">${left}${right}</div>`;
+      };
+
+      F['tilda-cost'] = () => {
+        const cw = W,
+          ch = M ? 380 : 420,
+          pl = 30,
+          pb = 46,
+          pt = 20;
+        const x = (t) => pl + (t / 3) * (cw - pl - 30),
+          y = (v) => pt + (1 - v / 3.2) * (ch - pt - pb);
+        const tilda = [0, 0.5, 1, 1.5, 2, 2.5, 3].map((t) => [t, 1 + 0.6 * t]);
+        let c = 1.9;
+        const custom = [[0, c]];
+        [0.5, 1, 1.5, 2, 2.5, 3].forEach((t) => {
+          custom.push([t, c]);
+          c += 0.1;
+          if (t < 3) custom.push([t, c]);
+        });
+        const path = (pts) =>
+          pts.map(([t, v], i) => `${i ? 'L' : 'M'}${x(t).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+        const xl = T(
+          ['Запуск', '1 год', '2 года', '3 года'],
+          ['Launch', 'Year 1', 'Year 2', 'Year 3'],
+        );
+        const svg = `<svg width="${cw}" height="${ch}" style="display:block;overflow:visible">
+    ${[0, 1, 2, 3].map((t) => `<line x1="${x(t)}" x2="${x(t)}" y1="${pt}" y2="${ch - pb}" stroke="var(--line)" /><text x="${x(t)}" y="${ch - 14}" text-anchor="${t === 0 ? 'start' : t === 3 ? 'end' : 'middle'}" fill="var(--text-muted)" style="font:450 14px var(--font-mono)">${xl[t]}</text>`).join('')}
+    <line x1="${pl}" x2="${cw - 30}" y1="${ch - pb}" y2="${ch - pb}" stroke="var(--line-strong)" />
+    <path d="${path(tilda)}" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" />
+    <path d="${path(custom)}" fill="none" stroke="var(--text)" stroke-width="3" stroke-linejoin="round" />
+    <circle cx="${x(0)}" cy="${y(1)}" r="6" fill="var(--accent)"/><circle cx="${x(0)}" cy="${y(1.9)}" r="6" fill="var(--text)"/>
+  </svg>`;
+        const lg = (sw, t, d) =>
+          `<div style="display:flex;gap:14px;align-items:flex-start"><span style="width:30px;height:4px;border-radius:2px;background:${sw};flex:none;margin-top:10px"></span><div><div class="h3">${t}</div><div class="body" style="font-size:15px">${d}</div></div></div>`;
+        return `<div style="display:flex;flex-direction:${M ? 'column' : 'row'};gap:${M ? 16 : 40}px;margin-bottom:26px">
+    ${lg('var(--accent)', T('Tilda', 'Builder'), T('дешевле старт, но подписка каждый месяц', 'cheaper start, but a monthly subscription'))}
+    ${lg('var(--text)', T('Кастом', 'Custom'), T('дороже старт, дальше — хостинг и оплата доработок', 'pricier start, then hosting and paid edits'))}</div>
+    <div class="mono" style="margin-bottom:12px">${T('Затраты нарастающим итогом · сценарий: правки раз в полгода', 'Cumulative cost · scenario: edits twice a year')}</div>
+    ${svg}<div class="mono" style="margin-top:12px;color:var(--text-disabled)">${T('Иллюстрация, не расчёт: точка пересечения зависит от вашего ритма правок', 'An illustration, not a calculation: the crossing point depends on how often you edit')}</div>`;
+      };
+
+      F['tilda-test'] = () => {
+        const rows = T(
+          [
+            ['Как часто вы будете сами менять сайт?', 'Каждую неделю', 'Пару раз в год'],
+            [
+              'Есть ли в задаче что-то нестандартное?',
+              'Услуги, меню, контакты, форма',
+              'Калькулятор, кабинет, интеграции',
+            ],
+            [
+              'Насколько важна уникальность?',
+              'Главное — работает и находится',
+              'Сайт — часть бренда',
+            ],
+          ],
+          [
+            [
+              'How often will you change the site yourself?',
+              'Every week',
+              'A couple of times a year',
+            ],
+            [
+              'Anything non-standard in the task?',
+              'Services, menu, contacts, form',
+              'Calculator, account, integrations',
+            ],
+            [
+              'How much does uniqueness matter?',
+              'It just needs to work and be found',
+              'The site is part of the brand',
+            ],
+          ],
+        );
+        const colT = `<span style="display:flex;gap:8px;align-items:center;color:var(--accent-text)">${icon('layout-grid', 18)}${T('Tilda', 'Builder')}</span>`;
+        const colC = `<span style="display:flex;gap:8px;align-items:center;color:var(--text)">${icon('code', 18)}${T('Кастом', 'Custom')}</span>`;
+        const chipT = (t) =>
+          `<span class="chip" style="background:var(--accent-soft);border:1px solid var(--accent-line);color:var(--text)">${t}</span>`;
+        const chipC = (t) =>
+          `<span class="chip" style="background:var(--surface-raised);border:1px solid var(--line-strong);color:var(--text)">${t}</span>`;
+        const body = M
+          ? rows
+              .map(
+                (
+                  [qq, a, b],
+                  i,
+                ) => `<div class="card" style="padding:20px 20px;margin-bottom:14px"><div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:16px"><span class="num">${i + 1}</span><span class="h3">${qq}</span></div>
+        <div style="display:grid;gap:10px"><div style="display:flex;gap:10px;align-items:center"><span class="mono" style="width:80px;font-size:12px">${colT}</span>${chipT(a)}</div><div style="display:flex;gap:10px;align-items:center"><span class="mono" style="width:80px;font-size:12px">${colC}</span>${chipC(b)}</div></div></div>`,
+              )
+              .join('')
+          : `<div style="display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px 22px;align-items:center">
+        <span></span><span class="mono">${colT}</span><span class="mono">${colC}</span>
+        ${rows
+          .map(
+            (
+              [qq, a, b],
+              i,
+            ) => `<div style="display:flex;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--line)"><span class="num">${i + 1}</span><span class="h3" style="font-size:17px">${qq}</span></div>
+          <div style="border-top:1px solid var(--line);padding:14px 0">${chipT(a)}</div><div style="border-top:1px solid var(--line);padding:14px 0">${chipC(b)}</div>`,
+          )
+          .join('')}</div>`;
+        return `${head(T('Экспресс-тест: три вопроса', 'Quick test: three questions'))}${body}
+    <div style="display:flex;gap:14px;align-items:center;margin-top:24px;padding:18px 22px;border-radius:var(--radius-xl);background:var(--surface);border:1px solid var(--line)">
+      <span style="color:var(--accent)">${icon('circle-check', 26)}</span><span class="h3" style="font-size:17px">${T('Два ответа из трёх в одну сторону — выбор, скорее всего, сделан', 'Two answers out of three point the same way — the choice is probably made')}</span></div>`;
+      };
+
+      /* ───────── выбор разработчика ───────── */
+      F['dev-options'] = () => {
+        const cols = T(
+          [
+            ['Фрилансер с биржи', '₽', 1, 'с исполнителем', 'мелкие разовые задачи'],
+            [
+              'Студия или агентство',
+              '₽₽₽',
+              3,
+              'с менеджером',
+              'крупные проекты, где нужны гарантии юрлица',
+            ],
+            ['Частный специалист', '₽₽', 2, 'с исполнителем', 'сайты для малого бизнеса'],
+          ],
+          [
+            ['Marketplace freelancer', '$', 1, 'the developer', 'small one-off tasks'],
+            [
+              'Studio or agency',
+              '$$$',
+              3,
+              'an account manager',
+              'large projects that need a legal entity’s guarantees',
+            ],
+            ['Independent specialist', '$$', 2, 'the developer', 'small-business websites'],
+          ],
+        );
+        const rl = T(
+          ['Цена', 'Надёжность', 'Общаетесь', 'Подходит для'],
+          ['Price', 'Reliability', 'You talk to', 'Best for'],
+        );
+        const card = (
+          [t, p, r, c, f],
+          i,
+        ) => `<div class="card" style="flex:1;min-width:0;padding:26px 24px;${i === 2 ? 'border-color:var(--accent-line);box-shadow:0 0 0 1px var(--accent-line),var(--shadow-float)' : ''}">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px">${icoBox(['user', 'building', 'user-circle'][i], 44)}<span class="h3">${t}</span></div>
+    ${[
+      [
+        rl[0],
+        `<span style="font:600 20px/1 var(--font-text);color:var(--text)">${p}</span><span style="font:600 20px/1 var(--font-text);color:var(--surface-raised-2)">${p.slice(0, 1).repeat(3 - p.length)}</span>`,
+      ],
+      [rl[1], dots(r)],
+      [rl[2], `<span style="font:500 15px/20px var(--font-text)">${c}</span>`],
+      [rl[3], `<span class="body" style="font-size:15px;color:var(--text-secondary)">${f}</span>`],
+    ]
+      .map(
+        ([k, v]) =>
+          `<div style="padding:12px 0;border-top:1px solid var(--line)"><div class="mono" style="font-size:12px;margin-bottom:6px">${k}</div><div>${v}</div></div>`,
+      )
+      .reduce(
+        (acc, r, j) =>
+          M && j < 2
+            ? j === 0
+              ? `<div style="display:grid;grid-template-columns:1fr 1fr;column-gap:20px">${r}`
+              : `${acc}${r}</div>`
+            : acc + r,
+        '',
+      )}
+  </div>`;
+        return `<div class="row stack-m" style="gap:18px;align-items:stretch">${cols.map(card).join('')}</div>`;
+      };
+
+      F['dev-call'] = () => {
+        const qs = T(
+          [
+            ['Что входит в стоимость, а что отдельно?', 'сразу перечисляет, что за рамками'],
+            ['Кто готовит тексты и фотографии?', 'договариваетесь об этом до старта'],
+            ['Что будет с сайтом после запуска?', 'условия правок известны заранее'],
+            ['Как передаются доступы?', 'домен, хостинг и админка оформлены на вас'],
+          ],
+          [
+            ['What’s included, and what costs extra?', 'lists what’s out of scope right away'],
+            ['Who prepares the text and photos?', 'you agree on it before the start'],
+            ['What happens to the site after launch?', 'the terms for edits are known in advance'],
+            ['How is access handed over?', 'domain, hosting and admin are in your name'],
+          ],
+        );
+        return `${head(T('Четыре вопроса на первом созвоне', 'Four questions for the first call'))}
+  <div class="card" style="padding:${M ? '8px 22px' : '10px 34px'}">${qs
+    .map(
+      (
+        [a, b],
+        i,
+      ) => `<div style="display:flex;gap:20px;align-items:${M ? 'flex-start' : 'center'};padding:${M ? 18 : 22}px 0;${i ? 'border-top:1px solid var(--line)' : ''}">
+    <span style="font:500 15px/24px var(--font-mono);color:var(--text-muted);flex:none">0${i + 1}</span>
+    <div style="display:flex;flex-direction:${M ? 'column' : 'row'};gap:${M ? 8 : 20}px;flex:1;align-items:${M ? 'flex-start' : 'center'};justify-content:space-between">
+      <span class="h3">${a}</span>
+      <span style="display:flex;gap:8px;align-items:center;font:500 15px/21px var(--font-text);color:var(--text-secondary);flex:none;${M ? '' : 'max-width:400px'}"><span style="color:var(--accent);flex:none">${icon('circle-check', 20)}</span>${b}</span></div></div>`,
+    )
+    .join('')}</div>`;
+      };
+
+      F['dev-stages'] = () => {
+        const st = T(
+          [
+            ['file-text', 'Договор', 'что и к какому сроку'],
+            ['credit-card', 'Предоплата', 'подтверждает намерения'],
+            ['palette', 'Дизайн', 'сдача → оплата'],
+            ['code', 'Вёрстка', 'сдача → оплата'],
+            ['rocket', 'Запуск', 'сдача → оплата'],
+          ],
+          [
+            ['file-text', 'Contract', 'what and by when'],
+            ['credit-card', 'Deposit', 'confirms intent'],
+            ['palette', 'Design', 'delivery → payment'],
+            ['code', 'Build', 'delivery → payment'],
+            ['rocket', 'Launch', 'delivery → payment'],
+          ],
+        );
+        const step = ([ic, t, d], i) =>
+          M
+            ? `<div style="display:flex;gap:18px;align-items:center;position:relative;padding:10px 0">${icoBox(ic, 52)}<div><div class="h3">${t}</div><div class="body" style="font-size:15px">${d}</div></div>
+        ${i < 4 ? '<span style="position:absolute;left:25px;top:62px;height:20px;border-left:2px solid var(--line-strong)"></span>' : ''}</div>`
+            : `<div style="flex:1;min-width:0;text-align:center;position:relative">${i < 4 ? '<span style="position:absolute;left:calc(50% + 36px);right:calc(-50% + 36px);top:30px;border-top:2px solid var(--line-strong)"></span>' : ''}
+        <div style="display:flex;justify-content:center">${icoBox(ic, 60)}</div><div class="h3" style="margin-top:18px">${t}</div><div class="body" style="font-size:15px;margin-top:6px">${d}</div></div>`;
+        return `${head(T('Здоровая схема оплаты', 'A healthy payment scheme'))}
+  <div class="card" style="padding:${M ? '20px 24px' : '36px 24px'}"><div style="display:flex;flex-direction:${M ? 'column' : 'row'};gap:${M ? 10 : 0}px">${st.map(step).join('')}</div></div>
+  <div style="display:flex;gap:14px;align-items:center;margin-top:20px;padding:18px 22px;border-radius:var(--radius-xl);border:1px dashed var(--line-strong);color:var(--text-muted)">
+    <span style="flex:none">${icon('circle-x', 24)}</span><span style="font:500 16px/22px var(--font-text)">${T('100% предоплаты за весь проект — у исполнителя пропадает стимул торопиться, а у вас — рычаг влияния', '100% upfront for the whole project — the contractor loses the incentive to hurry, and you lose your leverage')}</span></div>`;
+      };
+
+      document.getElementById('w').innerHTML = F[kind]();
+      document.body.dataset.ready = '1';
+    </script>
+  </body>
+</html>

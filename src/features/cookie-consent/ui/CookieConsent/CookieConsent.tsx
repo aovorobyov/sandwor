@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@sw/components/Button';
 import { Icon } from '@sw/components/Icon';
 import type { Locale } from '@/i18n-routing';
+import { consentPath } from '@/shared/config/legal';
 import { YandexMetrika } from '@/shared/lib/analytics';
 import { AmoCrmButton } from '@/shared/lib/crm';
 import { Link } from '@/shared/ui/Link';
@@ -12,7 +13,7 @@ import { useCookieNotice } from '../../lib/useCookieNotice';
 import s from './CookieConsent.module.css';
 
 /** Текст согласия на cookie и веб-аналитику (отдельно от политики). */
-const POLICY_HREF = '/consent#cookies';
+const POLICY_HREF = consentPath('cookies');
 
 /**
  * Уведомление о cookie («Продолжая пользоваться сайтом…» + «Хорошо») и то,

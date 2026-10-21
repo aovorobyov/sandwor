@@ -16,12 +16,35 @@ describe('useCookieNotice', () => {
     jest.useRealTimers();
   });
 
-  it('при первом визите показывает уведомление и ставит отметку', () => {
+  it('при первом визите показывает уведомление, но отметку о согласии ещё не ставит', () => {
     const { result } = renderHook(() => useCookieNotice());
 
     expect(result.current.state).toBe('visible');
     expect(result.current.isAnalyticsAllowed).toBe(false);
+    expect(window.localStorage.getItem('cookie-notice')).toBeNull();
+  });
+
+  it('отметка появляется, когда человек продолжил пользоваться сайтом', () => {
+    renderHook(() => useCookieNotice());
+
+    act(() => {
+      window.dispatchEvent(new Event('scroll'));
+    });
+
     expect(window.localStorage.getItem('cookie-notice')).not.toBeNull();
+  });
+
+  it('кто ушёл, ничего не сделав, в следующий визит снова видит уведомление', () => {
+    const first = renderHook(() => useCookieNotice());
+    act(() => {
+      jest.advanceTimersByTime(3000);
+    });
+    first.unmount();
+
+    const { result } = renderHook(() => useCookieNotice());
+
+    expect(result.current.state).toBe('visible');
+    expect(result.current.isAnalyticsAllowed).toBe(false);
   });
 
   it('разрешает аналитику через 5 секунд и скрывается само через 30', () => {
@@ -50,13 +73,15 @@ describe('useCookieNotice', () => {
     expect(result.current.isAnalyticsAllowed).toBe(true);
   });
 
-  it('в повторный визит не показывается, аналитика — сразу', () => {
-    window.localStorage.setItem('cookie-notice', new Date().toISOString());
+  it('в повторный визит не показывается, аналитика — сразу, отметка не продлевается', () => {
+    const monthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+    window.localStorage.setItem('cookie-notice', monthAgo);
 
     const { result } = renderHook(() => useCookieNotice());
 
     expect(result.current.state).toBe('hidden');
     expect(result.current.isAnalyticsAllowed).toBe(true);
+    expect(window.localStorage.getItem('cookie-notice')).toBe(monthAgo);
   });
 
   it('через год показывает уведомление снова', () => {

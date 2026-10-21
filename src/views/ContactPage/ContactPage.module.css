@@ -98,6 +98,13 @@
   color: var(--text-secondary);
 }
 
+.owner {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  font: 400 12px/17px var(--font-text);
+  color: var(--text-muted);
+}
+
 @media (max-width: 1000px) {
   .layout {
     grid-template-columns: minmax(0, 1fr);

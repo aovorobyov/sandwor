@@ -3,6 +3,12 @@
   padding-bottom: var(--space-24);
 }
 
+/* В текстах есть адреса страниц без пробелов: на телефоне они переносятся, а не вылезают. */
+.wrap p,
+.wrap li {
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 760px) {
   .wrap {
     padding-top: var(--space-6);

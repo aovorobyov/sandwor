@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getPosts } from '@/entities/post/api/posts';
 import { ACTIVE_SERVICE_IDS, getServiceHref } from '@/entities/service';
 import { PUBLISHED_CASE_SLUGS } from '@/entities/case';
+import { CONSENT_DOCS, consentPath } from '@/shared/config/legal';
 import { buildLocaleUrl } from '@/shared/lib/seo/buildLocaleUrl';
 import { defaultLocale, locales } from '@/i18n-routing';
 
@@ -47,6 +48,11 @@ const STATIC_PATHS = [
   { path: '/contact', priority: 0.5, changeFrequency: 'yearly' as const },
   { path: '/privacy', priority: 0.2, changeFrequency: 'yearly' as const },
   { path: '/consent', priority: 0.2, changeFrequency: 'yearly' as const },
+  ...CONSENT_DOCS.map((id) => ({
+    path: consentPath(id),
+    priority: 0.2,
+    changeFrequency: 'yearly' as const,
+  })),
 ];
 
 /**

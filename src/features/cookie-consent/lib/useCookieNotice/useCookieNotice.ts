@@ -3,7 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
-/** Когда уведомление показали впервые (ISO-дата). Через NOTICE_DAYS покажем снова. */
+/**
+ * Когда человек продолжил пользоваться сайтом после уведомления (ISO-дата) — это и есть
+ * согласие на cookie и Метрику. Через NOTICE_DAYS уведомление покажется снова.
+ */
 const STORAGE_KEY = 'cookie-notice';
 const NOTICE_DAYS = 365;
 
@@ -50,7 +53,9 @@ const markSeen = () => {
  * Уведомление о cookie в режиме «продолжая пользоваться — соглашаетесь»
  * (как на skynia.space): без кнопок «Принять» / «Отклонить», только «Хорошо».
  *
- * - Показывается один раз: отметка в localStorage живёт NOTICE_DAYS дней.
+ * - Отметка в localStorage ставится, только когда человек продолжил пользоваться сайтом
+ *   после показа, и живёт NOTICE_DAYS дней. Кто ушёл, ничего не сделав, в следующий
+ *   визит снова увидит уведомление, а Метрика до тех пор не подключится.
  * - Скрывается само через HIDE_MS показа (таймер стоит, пока вкладка скрыта),
  *   по «Хорошо» или Esc.
  * - Аналитика (`isAnalyticsAllowed`) стартует при продолжении пользования:
@@ -66,6 +71,8 @@ export const useCookieNotice = () => {
   const pathname = usePathname();
   const firstPath = useRef(pathname);
   const terms = useRef<TermsState>('idle');
+  /** Уведомление показано в этот визит: продолжение пользования станет согласием. */
+  const isShownNow = useRef(false);
 
   const allowAnalytics = useCallback(() => {
     setIsAnalyticsAllowed(true);
@@ -90,13 +97,21 @@ export const useCookieNotice = () => {
     setState('visible');
   }, []);
 
-  // Отметку о показе ставим отдельно: в StrictMode эффект выше запускается дважды,
-  // и отметка из первого прогона спрятала бы уведомление во втором.
   useEffect(() => {
     if (state === 'visible') {
-      markSeen();
+      isShownNow.current = true;
     }
   }, [state]);
+
+  // Отметку ставим в момент согласия, а не показа: иначе тот, кто ушёл, ничего не сделав,
+  // в следующий визит попал бы в Метрику без уведомления. В повторные визиты отметку
+  // не продлеваем — через NOTICE_DAYS человек увидит уведомление снова.
+  useEffect(() => {
+    if (isAnalyticsAllowed && isShownNow.current) {
+      isShownNow.current = false;
+      markSeen();
+    }
+  }, [isAnalyticsAllowed]);
 
   // Переход на другую страницу — тоже продолжение пользования. Кроме перехода
   // по «Подробнее» на сами условия: согласием станет уже следующий переход.

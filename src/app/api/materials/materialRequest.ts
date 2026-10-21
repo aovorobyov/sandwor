@@ -10,7 +10,8 @@ import {
   type MaterialId,
   type MaterialPlacement,
 } from '@/entities/material';
-import { LEGAL } from '@/shared/config/legal';
+import { LEGAL, consentPath } from '@/shared/config/legal';
+import { SITE_HOST } from '@/shared/config/site';
 import { formatAttribution } from '../brief/briefLead';
 
 const MAX_NAME = 100;
@@ -70,7 +71,7 @@ export const buildMaterialNote = (request: MaterialRequest): string => {
   return [
     `Запросил материал: «${MATERIAL_TITLES[request.materialId]}»`,
     `Где предложен: ${PLACEMENT_TITLES[request.placement]}`,
-    `Согласие на обработку ПД (получение материалов): дано, редакция ${LEGAL.consentVersion} от ${LEGAL.edition.ru}`,
+    `Согласие на обработку ПД (получение материалов): дано, редакция ${LEGAL.consentVersion} от ${LEGAL.edition.ru}, текст — ${SITE_HOST}${consentPath('materials')}`,
     formatAttribution(request.attribution),
   ]
     .filter(Boolean)

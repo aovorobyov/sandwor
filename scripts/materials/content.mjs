@@ -11,46 +11,54 @@ export const MATERIALS = {
     ru: {
       kicker: 'Чек-лист',
       title: 'Сайт и закон: что проверить перед запуском',
-      lead: 'Тринадцать пунктов, которые чаще всего упускают на сайтах малого бизнеса: персональные данные, cookie, реклама и продажи онлайн. Пройдите по списку до открытия сайта — исправить заранее проще и дешевле, чем после жалобы или проверки.',
+      lead: 'Пункты, которые чаще всего упускают на сайтах малого бизнеса: персональные данные, cookie, реклама, продажи и контент. Сверено с законами на октябрь 2026 года. Пройдите по списку до открытия сайта — исправить заранее проще и дешевле, чем после письма Роскомнадзора или жалобы клиента.',
       sections: [
         {
           title: 'Персональные данные (152-ФЗ)',
           items: [
             [
-              'Политика обработки персональных данных опубликована',
-              'Отдельная страница, ссылка на неё — в подвале каждой страницы. В политике: кто оператор, какие данные, зачем, куда передаются и сколько хранятся (ст. 18.1).',
+              'Политика обработки данных опубликована',
+              'Отдельная страница, ссылка на неё — в подвале и у каждой формы. В политике: кто оператор, какие данные, зачем и на каком основании, кому передаются, сколько хранятся и как защищены (ст. 18.1).',
             ],
             [
-              'В каждой форме — отдельный чекбокс согласия',
-              'Не отмечен заранее, ведёт на текст согласия. С сентября 2025 года согласие оформляется отдельно от других документов — фраза «отправляя форму, вы соглашаетесь с политикой» больше не подходит (ст. 9).',
+              'Согласие — отдельный документ для каждой цели',
+              'Свой текст на заявку, на рассылку, на cookie; чекбокс не отмечен заранее и ведёт на текст именно этого согласия. С 1 сентября 2025 года согласие нельзя «вшивать» в политику или оферту, а фраза «отправляя форму, вы соглашаетесь» не подходит (ст. 9).',
+            ],
+            [
+              'Согласие просят только там, где оно нужно',
+              'Если человек сам просит договор или ответ, хватает этого основания (ст. 6). Лишние согласия Роскомнадзор называет типичным нарушением, а согласие, которое расходится с политикой по данным и целям, уже приводило к штрафам.',
             ],
             [
               'Форма собирает только нужное',
               'Для заявки обычно хватает имени и телефона. Каждое лишнее поле — и потеря заявок, и лишние данные, за которые вы отвечаете (ст. 5).',
             ],
             [
-              'Данные россиян записываются в базы в России',
-              'Хостинг сайта, CRM и почта, куда приходят заявки, — с серверами в России (ст. 18 ч. 5). Проверьте и сервисы форм: многие зарубежные конструкторы хранят заявки за рубежом.',
+              'Данные россиян — только в российских базах',
+              'С 1 июля 2025 года при сборе нельзя использовать зарубежные базы: Google Forms, Google Analytics, иностранные конструкторы форм и CRM (ст. 18 ч. 5). Проверьте хостинг, CRM, почту и сервис форм. Штраф для компании и ИП — от 1 до 6 млн ₽.',
             ],
             [
-              'Уведомление в Роскомнадзор подано до начала сбора данных',
-              'Подаётся онлайн через Госуслуги на pd.rkn.gov.ru, бесплатно (ст. 22). Проверьте себя в реестре операторов.',
+              'Уведомление в Роскомнадзор подано до начала обработки',
+              'Онлайн через Госуслуги на pd.rkn.gov.ru, бесплатно (ст. 22). Обязательно почти всем, включая самозанятых и ИП. Сведения в уведомлении должны совпадать с политикой на сайте — Роскомнадзор их сверяет.',
             ],
             [
-              'Переписка в зарубежных мессенджерах учтена',
-              'Если клиенты пишут вам в WhatsApp или Telegram, это трансграничная передача: нужно отдельное уведомление в Роскомнадзор (ст. 12) — или переводите общение в российские сервисы.',
+              'Cookie и аналитика — только после согласия',
+              'Метрика и другие счётчики подключаются после уведомления и согласия посетителя, а в политике описано, что они собирают. Суды в 2025–2026 годах штрафовали за Метрику без согласия. Надёжнее всего — кнопки «Разрешить» и «Отклонить»; Вебвизор не записывает поля форм.',
             ],
             [
-              'Cookie и аналитика оформлены',
-              'Уведомление о cookie и аналитике при первом визите; Вебвизор Метрики не записывает содержимое полей форм.',
+              'Переписка в мессенджерах продумана',
+              'Роскомнадзор публично не считает переписку с клиентами в Telegram передачей данных за рубеж, но хранятся они там на зарубежных серверах. Переносите нужное в CRM и не просите присылать сканы документов в мессенджер.',
             ],
             [
-              'Понятно, кто видит заявки, и доступы защищены',
-              'Пароли и двухфакторная аутентификация в CRM, хостинге и почте; доступ только у тех, кому он нужен для работы.',
+              'Доступы защищены, внутренние документы есть',
+              'Двухфакторная аутентификация в CRM, хостинге и почте; доступ только у тех, кому он нужен. Акт оценки вреда и решение об уровне защищённости — короткие документы, которые закон требует от всех операторов (ст. 18.1, 19).',
             ],
             [
-              'Есть адрес для запросов и отзыва согласия',
-              'Человек может узнать, какие данные о нём есть, и попросить их удалить. Отвечать нужно в течение 10 рабочих дней (ст. 14, 20).',
+              'Запросы людей и Роскомнадзора — в срок',
+              'Человек может узнать, какие данные о нём есть, и потребовать их удалить: ответ — 10 рабочих дней, после отзыва согласия данные уничтожают за 30 дней и оформляют акт (ст. 14, 21). На письма Роскомнадзора — тоже 10 рабочих дней.',
+            ],
+            [
+              'Есть план на случай утечки',
+              'О взломе CRM или почты сообщают в Роскомнадзор за 24 часа, о результатах расследования — за 72 часа (ст. 21 ч. 3.1). Не сообщили — до 3 млн ₽ для компании и ИП.',
             ],
           ],
         },
@@ -58,12 +66,16 @@ export const MATERIALS = {
           title: 'Реклама и рассылки',
           items: [
             [
-              'Рекламные письма и SMS — только с отдельного согласия',
-              'Согласие на обработку данных для заявки не даёт права слать рекламу. Для рассылок нужно своё согласие, и его наличие доказываете вы (38-ФЗ «О рекламе», ст. 18).',
+              'Реклама в интернете маркируется',
+              'Посты у блогеров, в каналах, объявления в VK и Яндексе — с пометкой «Реклама», рекламодателем и токеном erid (38-ФЗ, ст. 18.1). Цены и акции на собственном сайте рекламой не считаются.',
             ],
             [
-              'Реклама в интернете маркируется',
-              'Посты у блогеров, объявления в соцсетях и пабликах — с токеном erid и пометкой «Реклама» (38-ФЗ, ст. 18.1).',
+              'Без рекламы на запрещённых площадках и логотипов Instagram',
+              'С 1 сентября 2025 года нельзя размещать рекламу в Instagram, Facebook и на других заблокированных ресурсах (38-ФЗ, ст. 5). За логотипы Instagram и Facebook на сайте наказывают по ст. 20.3 КоАП.',
+            ],
+            [
+              'Рекламные письма и SMS — только с согласия на рекламу',
+              'Согласие на обработку данных для заявки не даёт права слать рекламу. Нужна отдельная отметка со словом «реклама», отписка — сразу (38-ФЗ, ст. 18). Штраф для компании — до 1 млн ₽.',
             ],
           ],
         },
@@ -71,62 +83,78 @@ export const MATERIALS = {
           title: 'Продажи и контент',
           items: [
             [
-              'Если продаёте онлайн — на сайте есть данные продавца',
-              'Наименование, адрес, ОГРН или ОГРНИП, условия оплаты, доставки и возврата (Закон о защите прав потребителей, ст. 26.1).',
+              'На сайте есть сведения о владельце и продавце',
+              'Любой сайт показывает имя или наименование владельца, адрес и почту (149-ФЗ, ст. 10). Интернет-магазин — ещё ОГРН или ОГРНИП, оферту, условия оплаты, доставки и возврата (ЗоЗПП, ст. 26.1; новые Правила продажи с 1 сентября 2026 года).',
             ],
             [
-              'Фото, тексты и шрифты — свои или с лицензией',
-              'Картинка «из интернета» на коммерческом сайте — частая причина претензий от правообладателей и фотобанков.',
+              'Тексты для покупателей — на русском',
+              'С 1 марта 2026 года информация для потребителей на сайте — на русском; английская версия допустима как равнозначный дубль, товарные знаки не переводятся (ЗоЗПП, ст. 10.1).',
+            ],
+            [
+              'Фото, тексты, шрифты и отзывы — с правами',
+              'Картинка «из интернета» — компенсация от 10 тыс. до 10 млн ₽ (ГК, ст. 1301). Фото и имена клиентов в отзывах и кейсах — с их согласием, в том числе на распространение персональных данных (152-ФЗ, ст. 10.1).',
+            ],
+            [
+              'Личный кабинет — вход по российскому номеру или Госуслугам',
+              'Если на сайте есть регистрация, вход только по почте или через Google не подходит (149-ФЗ, ст. 8 ч. 10); штрафы за это действуют с июля 2026 года.',
             ],
           ],
         },
       ],
-      note: 'Штрафы за нарушения при обработке персональных данных (КоАП, ст. 13.11) с 2025 года заметно выросли. Чек-лист — не юридическая консультация: в спорных случаях покажите сайт юристу.',
+      note: 'С 30 мая 2025 года штрафы за нарушения с персональными данными выросли в разы, а ИП по большинству составов платит как компания. Чек-лист — не юридическая консультация: в спорных случаях покажите сайт юристу.',
       cta: 'Хотите, проверим ваш сайт по этому списку и всё поправим? Напишите на sandwor.ru — ответим в течение рабочего дня.',
     },
     en: {
       kicker: 'Checklist',
       title: 'Your website and the law: what to check before launch',
-      lead: 'Thirteen points small-business websites in Russia most often miss: personal data, cookies, advertising and online sales. Go through the list before the site goes live — fixing things in advance is easier and cheaper than after a complaint or an inspection.',
+      lead: 'Points small-business websites in Russia most often miss: personal data, cookies, advertising, sales and content. Checked against the law as of October 2026. Go through the list before the site goes live — fixing things in advance is easier and cheaper than after a letter from Roskomnadzor or a customer complaint.',
       sections: [
         {
           title: 'Personal data (Federal Law 152-FZ)',
           items: [
             [
-              'A personal data policy is published',
-              'A separate page linked from the footer of every page. It says who the operator is, what data is collected, why, where it goes and how long it is kept (art. 18.1).',
+              'A data processing policy is published',
+              'A separate page linked from the footer and from every form. It says who the operator is, what data is collected, why and on what legal basis, who receives it, how long it is kept and how it is protected (art. 18.1).',
             ],
             [
-              'Every form has a separate consent checkbox',
-              'Not pre-ticked, linking to the consent text. Since September 2025 consent must be separate from other documents — "by submitting the form you accept the policy" no longer works (art. 9).',
+              'Consent is a separate document for each purpose',
+              'A text of its own for requests, for mailings, for cookies; the checkbox is not pre-ticked and links to that specific consent. Since 1 September 2025 consent cannot be buried in a policy or terms of sale, and "by submitting the form you agree" no longer works (art. 9).',
+            ],
+            [
+              'Consent is requested only where it is needed',
+              'If a person asks for a contract or an answer, that is a legal basis in itself (art. 6). Roskomnadzor calls unnecessary consents a typical violation, and consent that contradicts the policy on data and purposes has already led to fines.',
             ],
             [
               'The form collects only what is needed',
               'A request usually needs just a name and a phone number. Every extra field costs you leads and adds data you are responsible for (art. 5).',
             ],
             [
-              'Data of Russian citizens is recorded in databases in Russia',
-              'Hosting, CRM and the mailbox that receives requests run on servers in Russia (art. 18 part 5). Check form services too: many foreign builders store submissions abroad.',
+              'Data of Russian citizens stays in Russian databases',
+              'Since 1 July 2025 foreign databases may not be used when collecting data: Google Forms, Google Analytics, foreign form builders and CRMs (art. 18 part 5). Check your hosting, CRM, email and form service. The fine for a company or a sole proprietor is 1–6 million roubles.',
             ],
             [
-              'The Roskomnadzor notification is filed before you start collecting data',
-              'Filed online via Gosuslugi at pd.rkn.gov.ru, free of charge (art. 22). Check yourself in the register of operators.',
+              'The Roskomnadzor notification is filed before processing starts',
+              'Online via Gosuslugi at pd.rkn.gov.ru, free of charge (art. 22). Required of almost everyone, including the self-employed and sole proprietors. The notification must match the policy on the site — Roskomnadzor compares them.',
             ],
             [
-              'Chats in foreign messengers are accounted for',
-              'If clients message you on WhatsApp or Telegram, that is a cross-border transfer: it needs a separate notification (art. 12) — or move conversations to Russian services.',
+              'Cookies and analytics only after consent',
+              'Metrica and other counters load after the notice and the visitor\'s consent, and the policy describes what they collect. In 2025–2026 courts fined site owners for Metrica without consent. The most reliable option is "Allow" and "Decline" buttons; Webvisor does not record form fields.',
             ],
             [
-              'Cookies and analytics are disclosed',
-              'A cookie and analytics notice on the first visit; Metrica Webvisor does not record the contents of form fields.',
+              'Messenger chats are thought through',
+              'Roskomnadzor has said publicly that chatting with clients on Telegram is not a cross-border transfer, but the data is stored on foreign servers. Move what you need to your CRM and do not ask clients to send document scans via messengers.',
             ],
             [
-              'You know who sees requests, and access is protected',
-              'Passwords and two-factor authentication in the CRM, hosting and email; access only for those who need it.',
+              'Access is protected and internal documents exist',
+              'Two-factor authentication in the CRM, hosting and email; access only for those who need it. A harm assessment record and a security level decision are short documents the law requires from every operator (art. 18.1, 19).',
             ],
             [
-              'There is an address for requests and consent withdrawal',
-              'People can ask what data you hold about them and request deletion. You must reply within 10 working days (art. 14, 20).',
+              'Requests from people and Roskomnadzor are answered on time',
+              'People can ask what data you hold and demand deletion: reply within 10 working days; after consent is withdrawn, destroy the data within 30 days and record it (art. 14, 21). Letters from Roskomnadzor also need a reply within 10 working days.',
+            ],
+            [
+              'There is a plan for a data breach',
+              'If your CRM or email is hacked, notify Roskomnadzor within 24 hours and report the investigation results within 72 hours (art. 21 part 3.1). Failing to do so costs a company or a sole proprietor up to 3 million roubles.',
             ],
           ],
         },
@@ -134,12 +162,16 @@ export const MATERIALS = {
           title: 'Advertising and mailings',
           items: [
             [
-              'Promotional emails and SMS only with separate consent',
-              'Consent to process data for a request does not allow sending ads. Mailings need their own consent, and the burden of proof is on you (Advertising Law 38-FZ, art. 18).',
+              'Online ads are labelled',
+              'Posts by bloggers, in channels, ads in VK and Yandex carry the label "Advertising", the advertiser and an erid token (Advertising Law 38-FZ, art. 18.1). Prices and offers on your own website are not advertising.',
             ],
             [
-              'Online ads are labelled',
-              'Posts by bloggers and ads in social networks carry an erid token and the label "Advertising" (38-FZ, art. 18.1).',
+              'No ads on banned platforms and no Instagram logos',
+              'Since 1 September 2025 ads may not be placed on Instagram, Facebook and other blocked resources (38-FZ, art. 5). Instagram and Facebook logos on a website are punished under art. 20.3 of the Administrative Code.',
+            ],
+            [
+              'Promotional emails and SMS only with consent to advertising',
+              'Consent to process data for a request does not allow sending ads. You need a separate tick with the word "advertising", and unsubscribing must work at once (38-FZ, art. 18). The fine for a company is up to 1 million roubles.',
             ],
           ],
         },
@@ -147,17 +179,25 @@ export const MATERIALS = {
           title: 'Sales and content',
           items: [
             [
-              'If you sell online, the site shows seller details',
-              'Name, address, OGRN or OGRNIP, payment, delivery and return terms (Consumer Protection Law, art. 26.1).',
+              'The site shows owner and seller details',
+              "Every website shows the owner's name, address and email (Information Law 149-FZ, art. 10). An online store also shows OGRN or OGRNIP, terms of sale, payment, delivery and returns (Consumer Protection Law, art. 26.1; new Rules of Sale since 1 September 2026).",
             ],
             [
-              'Photos, texts and fonts are your own or licensed',
-              'An image "from the internet" on a commercial site is a common reason for claims from rights holders and photo banks.',
+              'Consumer information is in Russian',
+              'Since 1 March 2026 consumer information on a website must be in Russian; an English version is allowed as an equivalent duplicate, and trademarks are not translated (Consumer Protection Law, art. 10.1).',
+            ],
+            [
+              'Photos, texts, fonts and reviews are licensed',
+              'An image "from the internet" can cost from 10 thousand to 10 million roubles in compensation (Civil Code, art. 1301). Client photos and names in reviews and case studies need their consent, including consent to the distribution of personal data (152-FZ, art. 10.1).',
+            ],
+            [
+              'Account login by Russian phone number or Gosuslugi',
+              'If your site has registration, login by email only or via Google is not enough (149-FZ, art. 8 part 10); fines for this apply since July 2026.',
             ],
           ],
         },
       ],
-      note: 'Fines for personal data violations (Administrative Code, art. 13.11) increased noticeably in 2025. This checklist is not legal advice: in doubtful cases, show your site to a lawyer.',
+      note: 'Since 30 May 2025 fines for personal data violations have risen several times, and for most of them a sole proprietor pays as much as a company. This checklist is not legal advice: in doubtful cases, show your site to a lawyer.',
       cta: 'Want us to check your site against this list and fix everything? Write to us at sandwor.ru — we reply within one business day.',
     },
   },
@@ -250,7 +290,7 @@ export const MATERIALS = {
             ],
             [
               'Документы',
-              'Политика обработки персональных данных, согласие для форм; для продаж онлайн — оферта и условия возврата.',
+              'Политика обработки персональных данных, отдельное согласие для каждой формы и уведомление в Роскомнадзор; для продаж онлайн — оферта и условия возврата.',
             ],
           ],
         },
@@ -348,7 +388,7 @@ export const MATERIALS = {
             ],
             [
               'Documents',
-              'A personal data policy and consent for forms; for online sales — terms of sale and returns.',
+              'A personal data policy, a separate consent for each form and a Roskomnadzor notification; for online sales — terms of sale and returns.',
             ],
           ],
         },
@@ -422,8 +462,8 @@ export const MATERIALS = {
               'Для первого контакта хватит имени и телефона. Остальное — в разговоре.',
             ],
             [
-              'Нет согласия на обработку данных',
-              'Это и нарушение закона, и сигнал «несерьёзный сайт» для внимательного клиента.',
+              'Нет отдельного согласия на обработку данных',
+              'С сентября 2025 года это отдельный чекбокс со своим текстом. Без него — и нарушение закона, и сигнал «несерьёзный сайт» для внимательного клиента.',
             ],
             [
               'После отправки ничего не происходит',
@@ -536,8 +576,8 @@ export const MATERIALS = {
               'A name and a phone are enough for a first contact. The rest — in conversation.',
             ],
             [
-              'No consent to data processing',
-              'It breaks the law and signals "not a serious site" to an attentive client.',
+              'No separate consent to data processing',
+              'Since September 2025 it is a separate checkbox with its own text. Without it the site breaks the law and signals "not a serious site" to an attentive client.',
             ],
             [
               'Nothing happens after submitting',

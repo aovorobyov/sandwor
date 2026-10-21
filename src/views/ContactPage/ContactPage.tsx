@@ -3,6 +3,7 @@ import { Badge } from '@sw/components/Badge';
 import { Icon } from '@sw/components/Icon';
 import { BriefCard } from '@/features/brief';
 import { CONTACT_CHANNELS } from '@/shared/config/contacts';
+import { fillLegal } from '@/shared/config/legal';
 import { JsonLd, buildBreadcrumbs, buildOrganization } from '@/shared/lib/jsonLd';
 import { byPositioning } from '@/shared/config/positioning';
 import { localizeHref } from '@/shared/ui/Link';
@@ -78,6 +79,9 @@ export const ContactPage = async () => {
               <Icon name="map-pin" size={16} />
               {t('contact-page.geo')}
             </p>
+
+            {/* Сведения о владельце сайта — ч. 2 ст. 10 149-ФЗ. */}
+            <p className={s.owner}>{fillLegal(t.raw('contact-page.owner') as string, locale)}</p>
           </aside>
         </div>
       </Section>

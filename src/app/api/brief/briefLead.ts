@@ -4,7 +4,8 @@
  */
 
 import { ACTIVE_SERVICE_IDS } from '@/entities/service';
-import { LEGAL } from '@/shared/config/legal';
+import { LEGAL, consentPath } from '@/shared/config/legal';
+import { SITE_HOST } from '@/shared/config/site';
 
 export const BRIEF_SERVICES = ['crm', 'sites', 'smm', 'ai'] as const;
 const TEAM_SIZES = ['1-5', '6-20', '20+'] as const;
@@ -187,8 +188,8 @@ export const buildBriefLead = (brief: BriefPayload): BriefLead => {
     brief.task.trim() && `Задача: ${brief.task.trim()}`,
     `Удобный канал: ${prefersTelegram ? 'Telegram' : 'звонок'}`,
     formatAttribution(brief.attribution),
-    // Доказательство согласия: какую редакцию текста человек принял (152-ФЗ ст. 9 ч. 3).
-    `Согласие на обработку ПД: дано, редакция ${LEGAL.consentVersion} от ${LEGAL.edition.ru}`,
+    // Доказательство согласия: какой текст и в какой редакции человек принял (152-ФЗ ст. 9 ч. 3).
+    `Согласие на обработку ПД: дано, редакция ${LEGAL.consentVersion} от ${LEGAL.edition.ru}, текст — ${SITE_HOST}${consentPath('request')}`,
   ];
 
   return {

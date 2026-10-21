@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import type { BriefFormProps } from '@sw/components/BriefForm';
 import { ACTIVE_SERVICE_IDS, type ServiceId } from '@/entities/service';
+import { consentPath } from '@/shared/config/legal';
 import { byPositioning } from '@/shared/config/positioning';
 import { reachGoal, YM_GOAL } from '@/shared/lib/analytics';
 import { localizeHref } from '@/shared/ui/Link/localizeHref';
@@ -59,7 +60,7 @@ export const useBriefFormProps = (preset?: ServiceId[]): BriefFormBaseProps => {
   return {
     onSubmit,
     // Согласие — отдельным обязательным чекбоксом, не в тексте политики (152-ФЗ ст. 9 в ред. 156-ФЗ).
-    consent: docLink('/consent#request', tConsent('checkbox')),
+    consent: docLink(consentPath('request'), tConsent('checkbox')),
     initialStep: isSingle ? 2 : 1,
     initialValues: services.length > 0 ? { services } : undefined,
     services: ACTIVE_SERVICE_IDS.map((id) => ({

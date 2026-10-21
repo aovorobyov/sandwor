@@ -8,6 +8,7 @@ import { Icon } from '@sw/components/Icon';
 import { Modal } from '@sw/components/Modal';
 import { TextField } from '@sw/components/TextField';
 import { getMaterialGoal, type MaterialId, type MaterialPlacement } from '@/entities/material';
+import { consentPath } from '@/shared/config/legal';
 import { reachGoal } from '@/shared/lib/analytics';
 import { createRequestId } from '@/shared/lib/requestId';
 import { localizeHref } from '@/shared/ui/Link/localizeHref';
@@ -27,7 +28,7 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 /**
  * Форма «имя + почта + согласие» → ссылка на PDF сразу, без рассылки.
- * Отдельное согласие на получение материалов (/consent#materials).
+ * Отдельное согласие на получение материалов (/consent/materials).
  */
 export const MaterialModal = ({ open, onClose, materialId, placement }: MaterialModalProps) => {
   const t = useTranslations('materials');
@@ -130,7 +131,7 @@ export const MaterialModal = ({ open, onClose, materialId, placement }: Material
             checked={consent}
             error={errors.consent}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConsent(e.target.checked)}
-            label={docLink('/consent#materials', t('form.consent'))}
+            label={docLink(consentPath('materials'), t('form.consent'))}
           />
 
           {status === 'error' && (

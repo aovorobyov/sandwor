@@ -27,11 +27,23 @@ export const ProcessSection = async ({ tone = 'default' }: ProcessSectionProps) 
           переходит в столбец лишь с 760px, поэтому рендерим обе раскладки и
           показываем нужную по ширине (скрытая убрана и от скринридера). */}
       <div className={s.row}>
-        <ProcessSteps steps={steps} onCanvas orientation="horizontal" labels={labels} />
+        <ProcessSteps
+          steps={steps}
+          onCanvas
+          orientation="horizontal"
+          labels={labels}
+          padNumbers={false}
+        />
       </div>
 
       <div className={s.column}>
-        <ProcessSteps steps={steps} onCanvas orientation="vertical" labels={labels} />
+        <ProcessSteps
+          steps={steps}
+          onCanvas
+          orientation="vertical"
+          labels={labels}
+          padNumbers={false}
+        />
       </div>
     </Section>
   );

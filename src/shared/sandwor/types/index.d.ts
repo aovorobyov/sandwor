@@ -1022,6 +1022,8 @@ export interface BriefFormProps extends Omit<React.FormHTMLAttributes<HTMLFormEl
   /** [sandwor.ru] Сообщает о смене состояния: form | sending | error | success. */
   onStatusChange?: (status: 'form' | 'sending' | 'error' | 'success') => void;
   className?: string;
+  /** [sandwor.ru] Номера шагов «Что дальше» на экране успеха с ведущим нулём (01, 02…) — по умолчанию; false — 1, 2, 3. */
+  padNumbers?: boolean;
 }
 
 /** Бриф в четыре шага со степпером, проверкой на «Дальше», отправкой через промис и экраном успеха. */
@@ -1423,6 +1425,8 @@ export interface ProcessStepsProps extends React.OlHTMLAttributes<HTMLOListEleme
   headingLevel?: 2 | 3 | 4 | 5 | 6;
   /** Тексты для скринридера: list — подпись списка («Этапы работы»), done, current, duration. */
   labels?: { list?: string; done?: string; current?: string; duration?: string };
+  /** [sandwor.ru] Номера с ведущим нулём (01, 02…) — по умолчанию; false — 1, 2, 3. */
+  padNumbers?: boolean;
 }
 
 /** Нумерованная последовательность этапов работы с портами и связями. */

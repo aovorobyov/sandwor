@@ -24,6 +24,7 @@ type BriefFormBaseProps = Pick<
   | 'initialStep'
   | 'initialValues'
   | 'consent'
+  | 'padNumbers'
 >;
 
 /**
@@ -62,6 +63,8 @@ export const useBriefFormProps = (preset?: ServiceId[]): BriefFormBaseProps => {
     // Согласие — отдельным обязательным чекбоксом, не в тексте политики (152-ФЗ ст. 9 в ред. 156-ФЗ).
     consent: docLink(consentPath('request'), tConsent('checkbox')),
     initialStep: isSingle ? 2 : 1,
+    // Номера шагов «Что дальше» — 1, 2, 3, без ведущего нуля.
+    padNumbers: false,
     initialValues: services.length > 0 ? { services } : undefined,
     services: ACTIVE_SERVICE_IDS.map((id) => ({
       value: id,

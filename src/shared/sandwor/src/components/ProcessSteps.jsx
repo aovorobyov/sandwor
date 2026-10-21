@@ -5,6 +5,8 @@ import { cx } from '../utils.js';
 
 const LABELS = { list: 'Этапы работы', done: 'выполнено', current: 'идёт сейчас', duration: 'Срок' };
 const pad = (n) => String(n).padStart(2, '0');
+// [sandwor.ru] padNumbers=false — номера без ведущего нуля: 1, 2, 3.
+const stepNumber = (n, padNumbers) => (padNumbers ? pad(n) : String(n));
 
 /**
  * «Как мы работаем» — a real, numbered sequence. Each step has a port (01, 02…),
@@ -21,6 +23,7 @@ export function ProcessSteps({
   orientation = 'auto',
   headingLevel = 3,
   labels,
+  padNumbers = true,
   className,
   style,
   ...rest
@@ -51,7 +54,7 @@ export function ProcessSteps({
             aria-current={state === 'current' ? 'step' : undefined}
           >
             <span className="sw-process__port" aria-hidden="true">
-              {state === 'done' ? <Icon name="check" size={16} /> : pad(i + 1)}
+              {state === 'done' ? <Icon name="check" size={16} /> : stepNumber(i + 1, padNumbers)}
             </span>
             {i < last && (
               <span className={cx('sw-process__edge', hasCurrent && i < current && 'is-live')} aria-hidden="true" />

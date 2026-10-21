@@ -131,6 +131,7 @@ export function BriefForm({
   copy: copyProp,
   consent,
   onStatusChange,
+  padNumbers = true,
   className,
   ...rest
 }) {
@@ -260,7 +261,8 @@ export function BriefForm({
               <ol className="sw-brief__done-steps">
                 {steps.map((text, i) => (
                   <li key={i} className="sw-brief__done-step">
-                    <span className="sw-brief__done-step-num">{String(i + 1).padStart(2, '0')}</span>
+                    {/* [sandwor.ru] padNumbers=false — номера шагов без ведущего нуля. */}
+                    <span className="sw-brief__done-step-num">{padNumbers ? String(i + 1).padStart(2, '0') : i + 1}</span>
                     <span className="sw-brief__done-step-text">{text}</span>
                   </li>
                 ))}

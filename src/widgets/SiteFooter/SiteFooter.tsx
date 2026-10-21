@@ -12,7 +12,7 @@ import { useLocalePaths } from '@/shared/lib/i18n';
 import { SERVICE_NAV, SITE_NAV } from '../lib/siteNav';
 
 /** Соцсети под логотипом: только каналы, где нам можно написать. */
-const SOCIAL_IDS = ['telegram', 'whatsapp'] as const;
+const SOCIAL_IDS = ['telegram'] as const;
 
 /**
  * Подвал на Footer дизайн-системы: CTA-полоса с брифом, услуги, разделы,

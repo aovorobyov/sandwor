@@ -48,7 +48,6 @@
   "contacts": {
     "email": "Email",
     "telegram": "Telegram",
-    "whatsapp": "WhatsApp",
     "phone": "Phone"
   },
   "common": {
@@ -1156,7 +1155,7 @@
         "heading": "1. The operator and general provisions",
         "paragraphs": [
           "The personal data operator is {operator}, a self-employed professional income tax payer{inn_part}{address_part} (the Operator). The Operator provides services under the sandwor name and owns the sandwor.ru website (the Site).",
-          "This policy follows Federal Law No. 152-FZ of 27.07.2006 \"On Personal Data\" and is published on the Site with free access (art. 18.1 part 2). It covers all data the Operator receives through the Site, its online chat, email, phone and the messengers listed on the Site.",
+          "This policy follows Federal Law No. 152-FZ of 27.07.2006 \"On Personal Data\" and is published on the Site with free access (art. 18.1 part 2). It covers all data the Operator receives through the Site, its online chat, email, phone and Telegram.",
           "The Operator does not process special categories of personal data (health, beliefs and the like) or biometric data. No decisions with legal consequences for you are made solely on the basis of automated processing.",
           "Questions about data processing, requests and consent withdrawal: {email}."
         ]
@@ -1165,7 +1164,7 @@
         "heading": "2. Whose data is processed",
         "paragraphs": [
           [
-            "clients and people who contact the Operator about work — via the brief, chat, email, phone or a messenger;",
+            "clients and people who contact the Operator about work — via the brief, chat, email, phone or Telegram;",
             "company representatives who contact the Operator or sign a contract on behalf of a company;",
             "Site visitors — web analytics data and server logs;",
             "people who request materials on the Site, such as checklists."
@@ -1177,8 +1176,8 @@
         "paragraphs": [
           "Purpose: preparing, concluding and performing a civil law contract — reviewing a request or an inquiry, contacting you, preparing an offer, concluding and performing a service contract.",
           "Data from the brief: name; phone number or Telegram username; preferred contact method; company name and number of salespeople, selected services, task description and budget — if you provide them. Stored together with the request: the page address, the visit source (campaign tags, the first page on the Site and the domain of the referring site), the date and time of sending and the consent record with its version number.",
-          "From the chat, email, phone and messengers: name or nickname, the contacts you provide, message text and attachments. When a contract is concluded — the data needed for the contract, payment and receipt.",
-          "Legal basis: for the brief — your consent, given with a separate checkbox (art. 6 part 1 clause 1 of 152-FZ); for inquiries via chat, email, phone or messenger — steps to conclude a contract at your request (art. 6 part 1 clause 5), and if you contact the Operator on behalf of a company — the Operator's legitimate interest in answering the inquiry (art. 6 part 1 clause 7); after a contract is concluded — its performance (art. 6 part 1 clause 5) and the Operator's obligations under tax law (art. 6 part 1 clause 2).",
+          "From the chat, email, phone and Telegram: name or nickname, the contacts you provide, message text and attachments. When a contract is concluded — the data needed for the contract, payment and receipt.",
+          "Legal basis: for the brief — your consent, given with a separate checkbox (art. 6 part 1 clause 1 of 152-FZ); for inquiries via chat, email, phone or Telegram — steps to conclude a contract at your request (art. 6 part 1 clause 5), and if you contact the Operator on behalf of a company — the Operator's legitimate interest in answering the inquiry (art. 6 part 1 clause 7); after a contract is concluded — its performance (art. 6 part 1 clause 5) and the Operator's obligations under tax law (art. 6 part 1 clause 2).",
           "How it is processed: the request is sent over a secure connection (HTTPS) to the Site server, checked for spam and recorded in the amoCRM CRM system; it is not stored on the Site server. Chat conversations are stored in amoCRM, emails in the Mail.ru email service. Requests from the Site are not forwarded to messengers or email.",
           "Retention: if no contract is concluded — until the purpose is achieved, but no longer than 1 year from the date of the request or the last message; if one is — for the term of the contract and 5 years after its performance (the retention period for income documents, Tax Code art. 23 para 1 subpara 8). The data is then destroyed (section 11)."
         ]
@@ -1227,7 +1226,7 @@
             "JSC Selectel (TIN 7810962785; 21A Tsvetochnaya St., St. Petersburg 196006) — hosting: the Site server that requests pass through, and server logs;",
             "YANDEX LLC (TIN 7736207543; 16 Lva Tolstogo St., Moscow 119021) — Yandex Metrica (section 5)."
           ],
-          "Services you use on their own terms: Mail.ru email — VK LLC (OGRN 1027739850962; 39 bld. 79 Leningradsky Ave., Moscow 125167) stores the emails you send to the Operator; Telegram and WhatsApp — if you message the Operator there yourself (section 8). WhatsApp is owned by Meta Platforms, Inc., whose activities are recognised as extremist and banned in Russia.",
+          "Services you use on their own terms: Mail.ru email — VK LLC (OGRN 1027739850962; 39 bld. 79 Leningradsky Ave., Moscow 125167) stores the emails you send to the Operator; Telegram — if you message the Operator there yourself (section 8).",
           "Data is disclosed to government authorities only when required by law."
         ]
       },
@@ -1235,7 +1234,7 @@
         "heading": "8. Where the data is stored",
         "paragraphs": [
           "Recording, systematisation, accumulation, storage, updating and retrieval of personal data of Russian citizens take place in databases located in Russia: on the Site server, in amoCRM, in Yandex Metrica and in Mail.ru email (art. 18 part 5 of 152-FZ).",
-          "The Operator does not transfer personal data abroad. If you message the Operator on Telegram or WhatsApp yourself, the conversation is stored on those services' servers outside Russia under their rules. To keep your data in Russia, use the brief, the chat on the Site, email or phone."
+          "The Operator does not transfer personal data abroad. If you message the Operator on Telegram yourself, the conversation is stored on Telegram's servers outside Russia under its rules. To keep your data in Russia, use the brief, the chat on the Site, email or phone."
         ]
       },
       {

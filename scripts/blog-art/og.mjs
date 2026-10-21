@@ -127,8 +127,8 @@ for (const l of LOCALES) {
       type: 'channels',
       items: [
         { icon: 'brand-telegram', label: 'Telegram', value: '@sandworbot' },
-        { icon: 'brand-whatsapp', label: 'WhatsApp', value: '+7 985 431-69-70' },
         { icon: 'mail', label: l === 'en' ? 'Email' : 'Почта', value: 'sandwor@mail.ru' },
+        { icon: 'phone', label: l === 'en' ? 'Phone' : 'Телефон', value: '+7 985 431-69-70' },
       ],
     },
   });

@@ -102,18 +102,11 @@
         margin-top: 0;
       }
       h2 {
-        display: flex;
-        gap: 3mm;
-        align-items: baseline;
         padding-bottom: 2.5mm;
         border-bottom: 1.5px solid var(--text);
         font: 600 13pt/1.25 var(--font-display);
         letter-spacing: -0.01em;
         break-after: avoid;
-      }
-      h2 span {
-        font: 450 8.5pt/1 var(--font-mono);
-        color: var(--text-muted);
       }
       .item {
         display: grid;
@@ -130,10 +123,11 @@
         border: 1.3px solid var(--line-control);
         border-radius: 1mm;
       }
+      /* Номер пункта — обычной цифрой на линии заголовка пункта, без ведущего нуля. */
       .num {
-        padding-top: 0.6mm;
-        font: 450 8.5pt/1.4 var(--font-mono);
-        color: var(--accent-text);
+        font: 600 10.5pt/1.4 var(--font-text);
+        font-variant-numeric: tabular-nums;
+        color: var(--text-muted);
       }
       .item b {
         display: block;
@@ -203,12 +197,12 @@
         <main>
           ${d.sections
             .map(
-              (s, si) => `<section>
-                <h2><span>${String(si + 1).padStart(2, '0')}</span>${esc(s.title)}</h2>
+              (s) => `<section>
+                <h2>${esc(s.title)}</h2>
                 ${s.items
                   .map(([title, text]) => {
                     n += 1;
-                    return `<div class="item"><i class="box"></i><span class="num">${String(n).padStart(2, '0')}</span><div><b>${esc(title)}</b><p>${esc(text)}</p></div></div>`;
+                    return `<div class="item"><i class="box"></i><span class="num">${n}</span><div><b>${esc(title)}</b><p>${esc(text)}</p></div></div>`;
                   })
                   .join('')}
               </section>`,

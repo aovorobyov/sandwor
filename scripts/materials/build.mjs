@@ -22,6 +22,36 @@ const CHROME =
 const EDITION = { ru: 'Редакция: октябрь 2026', en: 'Edition: October 2026' };
 const POINTS = { ru: 'пунктов', en: 'points' };
 
+/**
+ * Неразрывные пробелы, чтобы в PDF не было переносов «до 1 / млн ₽», «ст. / 9» и строк,
+ * начинающихся с тире: число + единица, сокращения перед числом, однобуквенные слова (RU).
+ */
+const NBSP = '\u00a0';
+const UNITS =
+  'тыс\\.|млн|млрд|₽|рабоч|дн|час|лет|год|месяц|минут|пункт|thousand|million|roubles|working|days|hours|years|months';
+const typograph = (text, locale) => {
+  let out = text
+    .replace(new RegExp(`(\\d) (?=${UNITS})`, 'g'), `$1${NBSP}`)
+    .replace(/(\d), (?=\d)/g, `$1,${NBSP}`)
+    .replace(/(^|[\s(])(ст\.|ч\.|п\.|пп\.|№|art\.|part|clause|No\.) (?=\d)/g, `$1$2${NBSP}`)
+    .replace(/ —/g, `${NBSP}—`);
+  if (locale === 'ru') {
+    // Два прохода: «и в своём» — у второго слова пробел перед ним уже занят первым.
+    for (let i = 0; i < 2; i++) {
+      out = out.replace(/(^|[\s(«])([вВиИсСкКоОуУаАяЯ]) /g, `$1$2${NBSP}`);
+    }
+  }
+  return out;
+};
+const typographAll = (value, locale) => {
+  if (typeof value === 'string') return typograph(value, locale);
+  if (Array.isArray(value)) return value.map((item) => typographAll(item, locale));
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, typographAll(v, locale)]));
+  }
+  return value;
+};
+
 const TYPES = {
   '.html': 'text/html',
   '.css': 'text/css',
@@ -89,7 +119,11 @@ await send('Emulation.setDeviceMetricsOverride', {
 for (const [materialId, locales] of Object.entries(MATERIALS)) {
   if (!materialId.startsWith(only)) continue;
   for (const [locale, data] of Object.entries(locales)) {
-    const payload = { ...data, edition: EDITION[locale], pointsLabel: POINTS[locale] };
+    const payload = {
+      ...typographAll(data, locale),
+      edition: EDITION[locale],
+      pointsLabel: POINTS[locale],
+    };
     const url = `http://127.0.0.1:8814/scripts/materials/material.html?v=${materialId}-${locale}#${encodeURIComponent(JSON.stringify(payload))}`;
     await send('Page.navigate', { url });
     for (let i = 0; i < 50; i++) {

@@ -1222,10 +1222,10 @@
         "paragraphs": [
           "The Operator does not sell personal data or share it for advertising. The following process data on the Operator's instructions, only to the extent needed for their service:",
           [
-            "JSC amoCRM (TIN 7709477879; 38 Lyusinovskaya St., Moscow 115093) — the amoCRM CRM system and the online chat on the Site: storing requests, material requests and correspondence;",
             "JSC Selectel (TIN 7810962785; 21A Tsvetochnaya St., St. Petersburg 196006) — hosting: the Site server that requests pass through, and server logs;",
             "YANDEX LLC (TIN 7736207543; 16 Lva Tolstogo St., Moscow 119021) — Yandex Metrica (section 5)."
           ],
+          "The Operator itself processes requests, material requests and chat conversations from the Site in the amoCRM CRM system, which it uses under a licence agreement with JSC amoCRM (TIN 7709477879; 38 Lyusinovskaya St., Moscow 115093). amoCRM data is stored in data centres located in Russia; JSC amoCRM provides the software and does not determine the purposes or means of processing.",
           "Services you use on their own terms: Mail.ru email — VK LLC (OGRN 1027739850962; 39 bld. 79 Leningradsky Ave., Moscow 125167) stores the emails you send to the Operator; Telegram — if you message the Operator there yourself (section 8).",
           "Data is disclosed to government authorities only when required by law."
         ]
@@ -1292,8 +1292,8 @@
           "By ticking \"I consent to the processing of personal data to review my request\" and sending the brief on sandwor.ru, I freely, of my own will and in my own interest consent to {operator_dat}, a self-employed professional income tax payer{inn_part}{address_part} (the Operator), processing my personal data on the terms below.",
           "Purpose: to review my request, contact me, prepare an offer and, if we agree, conclude a service contract.",
           "Data: name; phone number or Telegram username; preferred contact method; company name and number of salespeople, selected services, task description and budget — if I provide them; the page address, the date and time of the request, the visit source (campaign tags, the first page and the domain of the referring site).",
-          "Actions: collection, recording, systematisation, accumulation, storage, updating, retrieval, use, transfer (provision, access) to processors, blocking, deletion and destruction — with and without automation.",
-          "Processors the Operator entrusts with processing: JSC amoCRM (TIN 7709477879; 38 Lyusinovskaya St., Moscow 115093) — the amoCRM CRM system where the request is stored; JSC Selectel (TIN 7810962785; 21A Tsvetochnaya St., St. Petersburg 196006) — the website server the request passes through. Data is processed in databases located in Russia.",
+          "Actions: collection, recording, systematisation, accumulation, storage, updating, retrieval, use, transfer (provision, access) to the services named below, blocking, deletion and destruction — with and without automation.",
+          "The Operator processes the request in the amoCRM CRM system — software of JSC amoCRM (TIN 7709477879; 38 Lyusinovskaya St., Moscow 115093) that it uses under a licence agreement. Processor acting on the Operator's instructions: JSC Selectel (TIN 7810962785; 21A Tsvetochnaya St., St. Petersburg 196006) — the website server the request passes through. Data is processed in databases located in Russia.",
           "Term: the consent is valid until the purpose is achieved, but no longer than 1 year from the date of the request. If we conclude a contract, the data is processed to perform it under the policy.",
           "Withdrawal: at any time by writing to {email}. The Operator will stop processing and destroy the data within 30 days unless there are other legal grounds to keep it.",
           "Together with the request the Operator keeps a consent record: the date and time, the version number and the address of this text."
@@ -1325,8 +1325,8 @@
           "By ticking \"I consent to the processing of personal data to receive the material\" in the form on sandwor.ru, I freely, of my own will and in my own interest consent to {operator_dat}, a self-employed professional income tax payer{inn_part}{address_part} (the Operator), processing my personal data on the terms below.",
           "Purpose: to provide me with the requested material and answer my questions about it if needed. No advertising mailings are sent using this data.",
           "Data: name; email address; which material I requested and on which page; the visit source (campaign tags, the first page and the domain of the referring site); the date and time of the request.",
-          "Actions: collection, recording, systematisation, accumulation, storage, updating, retrieval, use, transfer (provision, access) to processors, blocking, deletion and destruction — with and without automation.",
-          "Processors the Operator entrusts with processing: JSC amoCRM (TIN 7709477879; 38 Lyusinovskaya St., Moscow 115093) — the amoCRM CRM system where the request is stored; JSC Selectel (TIN 7810962785; 21A Tsvetochnaya St., St. Petersburg 196006) — the website server the request passes through. Data is processed in databases located in Russia.",
+          "Actions: collection, recording, systematisation, accumulation, storage, updating, retrieval, use, transfer (provision, access) to the services named below, blocking, deletion and destruction — with and without automation.",
+          "The Operator processes the request in the amoCRM CRM system — software of JSC amoCRM (TIN 7709477879; 38 Lyusinovskaya St., Moscow 115093) that it uses under a licence agreement. Processor acting on the Operator's instructions: JSC Selectel (TIN 7810962785; 21A Tsvetochnaya St., St. Petersburg 196006) — the website server the request passes through. Data is processed in databases located in Russia.",
           "Term: the consent is valid until the purpose is achieved, but no longer than 1 year from the date of the request.",
           "Withdrawal: at any time by writing to {email}. The Operator will stop processing and destroy the data within 30 days.",
           "Together with the request the Operator keeps a consent record: the date and time, the version number and the address of this text."

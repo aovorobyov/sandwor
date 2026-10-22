@@ -487,8 +487,12 @@ a.sw-logo:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; 
   background-color: var(--surface-overlay); border-bottom-color: var(--line);
   -webkit-backdrop-filter: none; backdrop-filter: none;
 }
-/* в открытом меню своя кнопка «Обсудить проект» — вторую в шапке прячем */
-.sw-header.is-menu-open .sw-header__cta { visibility: hidden; }
+/* в открытом меню своя кнопка «Обсудить проект» и контакты — CTA и иконку в шапке прячем,
+   место за ними остаётся, чтобы крестик не сдвигался */
+.sw-header.is-menu-open .sw-header__cta,
+.sw-header.is-menu-open .sw-header__secondary { visibility: hidden; }
+/* [sandwor.ru] иконка-ссылка того же цвета, что бургер, а не приглушённая */
+.sw-header__secondary .sw-btn { color: var(--text); }
 .sw-burger {
   align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0;
   color: var(--text); background: transparent; border: 0; border-radius: var(--radius-md); cursor: pointer;

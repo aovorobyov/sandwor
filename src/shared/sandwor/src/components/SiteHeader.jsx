@@ -96,9 +96,10 @@ export function SiteHeader({
           <div className="sw-header__actions">
             {secondary && (
               <Tooltip content={secondary.label} type="label" placement="bottom" className="sw-header__secondary">
+                {/* [sandwor.ru] size m: кнопка 40px и иконка 20px — вровень с бургером */}
                 <Button
                   variant="quiet"
-                  size="s"
+                  size="m"
                   iconOnly
                   icon={secondary.icon}
                   href={secondary.href}

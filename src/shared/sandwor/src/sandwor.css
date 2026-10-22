@@ -647,6 +647,11 @@ a.sw-mmenu__service:hover .sw-mmenu__tile, .sw-mmenu__service.is-hover .sw-mmenu
 /* tablets: a sheet from the top, the page dims under the scrim */
 @container sw-mmenu (min-width: 761px) {
   .sw-mmenu__panel { bottom: auto; max-height: 100%; border-bottom: 1px solid var(--line); box-shadow: var(--shadow-overlay); }
+  /* [sandwor.ru] под шапкой: лист не уходит за нижний край экрана, а колонка 560px
+     не оставляет пустую полосу справа — меню на всю ширину, направления в две колонки */
+  .sw-mmenu--under-header .sw-mmenu__panel { max-height: calc(100% - 64px); }
+  .sw-mmenu--under-header .sw-mmenu__body > *, .sw-mmenu--under-header .sw-mmenu__foot > * { max-width: none; }
+  .sw-mmenu--under-header .sw-mmenu__services { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-6); }
 }
 /* phones */
 @container sw-mmenu (max-width: 760px) {

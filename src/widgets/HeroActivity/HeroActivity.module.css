@@ -8,6 +8,13 @@
   max-width: 600px;
 }
 
+/* Под текстом (до 1100px) сцена встаёт по центру, а не прижимается к левому краю. */
+@media (max-width: 1100px) {
+  .root {
+    margin-inline: auto;
+  }
+}
+
 .stage {
   --u: calc(100cqi / 560);
 

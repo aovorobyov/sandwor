@@ -57,13 +57,16 @@ export function MobileMenu({
     };
   }, [open, contained]);
 
+  // [sandwor.ru] Прокрутку блокируем на <html>, а не на <body>: если у корня overflow-x: clip,
+  // body с overflow: hidden становится своим контейнером прокрутки, и липкая шапка над меню
+  // уезжала вверх вместе со страницей — крестик оказывался за экраном.
   useEffect(() => {
     if (!open || contained) return undefined;
-    const { body } = document;
-    const prevOverflow = body.style.overflow;
-    body.style.overflow = 'hidden';
+    const root = document.documentElement;
+    const prevOverflow = root.style.overflow;
+    root.style.overflow = 'hidden';
     return () => {
-      body.style.overflow = prevOverflow;
+      root.style.overflow = prevOverflow;
     };
   }, [open, contained]);
 

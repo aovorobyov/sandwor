@@ -3,7 +3,9 @@
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import type { FC, ReactNode } from 'react';
 import type { ServiceId } from '@/entities/service';
+import { reachGoal, YM_GOAL } from '@/shared/lib/analytics';
 import dynamic from 'next/dynamic';
+import type { BriefPlacement } from './placement';
 
 // Окно брифа (форма, чипы, поля) грузится при первом открытии, а не на каждой странице.
 const BriefModal = dynamic(() => import('../ui/BriefModal').then((mod) => mod.BriefModal), {
@@ -11,12 +13,14 @@ const BriefModal = dynamic(() => import('../ui/BriefModal').then((mod) => mod.Br
 });
 
 export interface OpenBriefOptions {
+  /** Какая кнопка открыла бриф — для целей Метрики и заявки в amoCRM. */
+  placement: BriefPlacement;
   /** Услуги, отмеченные на первом шаге (из калькулятора или страницы услуги). */
   services?: ServiceId[];
 }
 
 interface BriefApi {
-  openBrief: (options?: OpenBriefOptions) => void;
+  openBrief: (options: OpenBriefOptions) => void;
 }
 
 const BriefContext = createContext<BriefApi | null>(null);
@@ -24,6 +28,7 @@ const BriefContext = createContext<BriefApi | null>(null);
 interface BriefState {
   isOpen: boolean;
   services?: ServiceId[];
+  placement?: BriefPlacement;
   /** Новый ключ на каждое открытие — бриф начинается с первого шага. */
   session: number;
 }
@@ -35,8 +40,9 @@ interface BriefState {
 export const BriefProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [state, setState] = useState<BriefState>({ isOpen: false, session: 0 });
 
-  const openBrief = useCallback((options?: OpenBriefOptions) => {
-    setState((prev) => ({ isOpen: true, services: options?.services, session: prev.session + 1 }));
+  const openBrief = useCallback(({ placement, services }: OpenBriefOptions) => {
+    reachGoal(YM_GOAL.briefOpen, { brief_placement: placement });
+    setState((prev) => ({ isOpen: true, services, placement, session: prev.session + 1 }));
   }, []);
 
   const closeBrief = useCallback(() => {
@@ -55,6 +61,7 @@ export const BriefProvider: FC<{ children: ReactNode }> = ({ children }) => {
           open={state.isOpen}
           onClose={closeBrief}
           services={state.services}
+          placement={state.placement ?? 'header'}
         />
       )}
     </BriefContext.Provider>

@@ -93,6 +93,12 @@ describe('бриф «Обсудим ваш проект»', () => {
     expect(lead.task).not.toContain('evil');
   });
 
+  it('пишет в заявку, какая кнопка открыла бриф', () => {
+    expect(buildBriefLead(brief({ placement: 'plans' })).task).toContain('Кнопка: тарифы');
+    // Неизвестное значение от браузера в CRM не попадает.
+    expect(buildBriefLead(brief({ placement: 'hack' })).task).not.toContain('Кнопка:');
+  });
+
   it('кладёт ник в поле Telegram', () => {
     const lead = buildBriefLead(brief({ contact: '@kedr_mebel' }));
 

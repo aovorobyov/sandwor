@@ -71,7 +71,7 @@ export const ServicePage = async ({ service }: ServicePageProps) => {
         lead={t(`${item}.hero-lead`)}
         actions={
           <>
-            <BriefButton size="l" services={[service]}>
+            <BriefButton size="l" services={[service]} placement="service">
               {t('services.cta')}
             </BriefButton>
 

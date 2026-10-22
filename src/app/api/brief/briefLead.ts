@@ -4,6 +4,7 @@
  */
 
 import { ACTIVE_SERVICE_IDS } from '@/entities/service';
+import { BRIEF_PLACEMENT_LABELS, isBriefPlacement } from '@/features/brief/model/placement';
 import { LEGAL, consentPath } from '@/shared/config/legal';
 import { SITE_HOST } from '@/shared/config/site';
 
@@ -55,6 +56,8 @@ export interface BriefPayload {
   requestId?: unknown;
   /** Источник визита: UTM, первая страница, домен реферера (без ПД). */
   attribution?: unknown;
+  /** Какая кнопка открыла бриф (`BriefPlacement`). */
+  placement?: unknown;
 }
 
 export interface BriefLead {
@@ -187,6 +190,7 @@ export const buildBriefLead = (brief: BriefPayload): BriefLead => {
     isOneOf(BUDGETS, brief.budget) && `Бюджет: ${BUDGET_LABELS[brief.budget]}`,
     brief.task.trim() && `Задача: ${brief.task.trim()}`,
     `Удобный канал: ${prefersTelegram ? 'Telegram' : 'звонок'}`,
+    isBriefPlacement(brief.placement) && `Кнопка: ${BRIEF_PLACEMENT_LABELS[brief.placement]}`,
     formatAttribution(brief.attribution),
     // Доказательство согласия: какой текст и в какой редакции человек принял (152-ФЗ ст. 9 ч. 3).
     `Согласие на обработку ПД: дано, редакция ${LEGAL.consentVersion} от ${LEGAL.edition.ru}, текст — ${SITE_HOST}${consentPath('request')}`,

@@ -151,7 +151,7 @@ export const CasePage = async ({ slug }: CasePageProps) => {
               ))}
             </dl>
 
-            <BriefButton variant="secondary" block services={[...services]}>
+            <BriefButton variant="secondary" block services={[...services]} placement="case">
               {t('services.cta')}
             </BriefButton>
           </aside>

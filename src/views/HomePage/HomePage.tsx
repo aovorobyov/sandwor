@@ -72,7 +72,7 @@ export const HomePage = async () => {
         lead={t(`${hero}.lead`)}
         actions={
           <>
-            <BriefButton size="l" iconEnd="arrow-right">
+            <BriefButton size="l" iconEnd="arrow-right" placement="home">
               {t('home.hero-cta')}
             </BriefButton>
 

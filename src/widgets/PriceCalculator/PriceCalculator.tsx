@@ -37,7 +37,7 @@ export const PriceCalculator: FC<PriceCalculatorProps> = ({ services }) => {
       terms={Object.fromEntries(
         SERVICE_IDS.map((id) => [id, { text: t(`terms.${id}`), days: CALCULATOR_TERM_DAYS[id] }]),
       )}
-      onCta={(_estimate, value) => openBrief({ services: value.services })}
+      onCta={(_estimate, value) => openBrief({ placement: 'calculator', services: value.services })}
       copy={{
         services: t('services'),
         servicesHint: t('services-hint'),

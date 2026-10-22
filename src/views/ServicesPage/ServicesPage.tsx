@@ -43,7 +43,9 @@ export const ServicesPage = async () => {
         )}
         actions={
           <>
-            <BriefButton size="l">{t('services.cta')}</BriefButton>
+            <BriefButton size="l" placement="services">
+              {t('services.cta')}
+            </BriefButton>
 
             {FEATURES.calculator ? (
               <Button variant="secondary" size="l" href="#calculator">

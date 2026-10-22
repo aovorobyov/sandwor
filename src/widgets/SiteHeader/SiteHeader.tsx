@@ -21,7 +21,7 @@ export const SiteHeader: FC = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const cta = { label: t('header.cta'), onClick: () => openBrief() };
+  const cta = { label: t('header.cta'), onClick: () => openBrief({ placement: 'header' }) };
 
   // Из мобильного меню бриф открывается после его закрытия: два диалога сразу —
   // две ловушки фокуса.
@@ -29,7 +29,7 @@ export const SiteHeader: FC = () => {
     label: t('header.cta'),
     onClick: () => {
       setIsMenuOpen(false);
-      openBrief();
+      openBrief({ placement: 'menu' });
     },
   };
 

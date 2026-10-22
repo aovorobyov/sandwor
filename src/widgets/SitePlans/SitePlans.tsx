@@ -37,7 +37,7 @@ export const SitePlans: FC = () => {
   const plans = t.raw('services.items.sites.plans') as SitePlan[];
   const groups = t.raw('services.items.sites.compare') as CompareGroup[];
   const from = t('common.from');
-  const choose = () => openBrief({ services: ['sites'] });
+  const choose = () => openBrief({ placement: 'plans', services: ['sites'] });
 
   const priceOf = (plan: SitePlan) => SITE_PLAN_PRICES[plan.id] ?? plan.price ?? '';
 

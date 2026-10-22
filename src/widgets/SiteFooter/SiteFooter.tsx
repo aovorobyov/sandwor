@@ -33,7 +33,10 @@ export const SiteFooter: FC = () => {
       cta={{
         title: t('footer.cta-title'),
         text: t('footer.cta-text'),
-        action: { label: t('footer.cta-action'), onClick: () => openBrief() },
+        action: {
+          label: t('footer.cta-action'),
+          onClick: () => openBrief({ placement: 'footer' }),
+        },
       }}
       columns={[
         {

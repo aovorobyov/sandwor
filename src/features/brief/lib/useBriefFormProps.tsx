@@ -9,6 +9,7 @@ import { byPositioning } from '@/shared/config/positioning';
 import { reachGoal, YM_GOAL } from '@/shared/lib/analytics';
 import { localizeHref } from '@/shared/ui/Link/localizeHref';
 import { createRequestId, sendBrief } from '../api/sendBrief';
+import type { BriefPlacement } from '../model/placement';
 
 const TEAM_SIZES = ['1-5', '6-20', '20+'] as const;
 const BUDGETS = ['lt100', '100-300', 'gt300', 'unknown'] as const;
@@ -31,7 +32,10 @@ type BriefFormBaseProps = Pick<
  * Тексты, варианты и отправка брифа — общие для модального окна и страницы контактов.
  * Время заполнения считается от первого рендера формы: по нему сервер отсекает ботов.
  */
-export const useBriefFormProps = (preset?: ServiceId[]): BriefFormBaseProps => {
+export const useBriefFormProps = (
+  placement: BriefPlacement,
+  preset?: ServiceId[],
+): BriefFormBaseProps => {
   const t = useTranslations('brief');
   const tConsent = useTranslations('consent');
   const locale = useLocale();
@@ -48,8 +52,8 @@ export const useBriefFormProps = (preset?: ServiceId[]): BriefFormBaseProps => {
 
   const onSubmit: BriefFormProps['onSubmit'] = async (values) => {
     requestId.current ??= createRequestId();
-    await sendBrief(values, Date.now() - startedAt.current, requestId.current);
-    reachGoal(YM_GOAL.orderWebsites);
+    await sendBrief(values, Date.now() - startedAt.current, requestId.current, placement);
+    reachGoal(YM_GOAL.orderWebsites, { brief_placement: placement });
   };
 
   // В брифе только работающие направления. Если оно одно — отмечаем его и начинаем

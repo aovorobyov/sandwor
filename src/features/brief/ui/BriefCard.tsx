@@ -10,7 +10,7 @@ import { useBriefFormProps } from '../lib/useBriefFormProps';
 /** Бриф прямо на странице (контакты): карточка surface вместо модального окна. */
 export const BriefCard: FC<{ className?: string }> = ({ className }) => {
   const locale = useLocale();
-  const formProps = useBriefFormProps();
+  const formProps = useBriefFormProps('contact');
 
   return (
     <BriefForm

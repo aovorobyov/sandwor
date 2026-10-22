@@ -79,7 +79,7 @@ export const ArticlePage = async ({ slug }: ArticlePageProps) => {
           <ArticleCallout title={t('blog-page.cta-title')} icon="message-circle" className={s.cta}>
             <p>{t('blog-page.cta-text')}</p>
 
-            <BriefButton variant="secondary" className={s.ctaButton}>
+            <BriefButton variant="secondary" className={s.ctaButton} placement="article">
               {t('blog-page.cta')}
             </BriefButton>
           </ArticleCallout>

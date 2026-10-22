@@ -7,17 +7,19 @@ import { Modal } from '@sw/components/Modal';
 import { BriefForm } from '@sw/components/BriefForm';
 import type { ServiceId } from '@/entities/service';
 import { useBriefFormProps } from '../lib/useBriefFormProps';
+import type { BriefPlacement } from '../model/placement';
 
 interface BriefModalProps {
   open: boolean;
   onClose: () => void;
   services?: ServiceId[];
+  placement: BriefPlacement;
 }
 
 /** Бриф в модальном окне; на мобильном Modal сам становится нижним листом. */
-export const BriefModal: FC<BriefModalProps> = ({ open, onClose, services }) => {
+export const BriefModal: FC<BriefModalProps> = ({ open, onClose, services, placement }) => {
   const t = useTranslations();
-  const formProps = useBriefFormProps(services);
+  const formProps = useBriefFormProps(placement, services);
   // После отправки подзаголовок «Четыре коротких шага…» уже не к месту.
   const [isDone, setIsDone] = useState(false);
 

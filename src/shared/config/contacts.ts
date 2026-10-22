@@ -18,7 +18,7 @@ export const CONTACT_EMAIL = 'sandwor@mail.ru';
 /**
  * Каналы связи по порядку важности: шапка, мобильное меню, подвал, страница контактов.
  * WhatsApp убран 21.10.2026: заблокирован в России с февраля 2026 года, переписка в нём
- * хранится за рубежом (см. docs/rkn-notification.md, шаг 3).
+ * хранится за рубежом (см. локальную инструкцию docs/rkn-notification.md, шаг 3).
  */
 export const CONTACT_CHANNELS: readonly ContactChannel[] = [
   {

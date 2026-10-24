@@ -1,8 +1,15 @@
 import { ImageResponse } from 'next/og';
+import {
+  LOGO_STEM,
+  LOGO_STUDIO,
+  LOGO_STUDIO_SHIFT,
+  LOGO_STUDIO_VIEWBOX,
+  LOGO_WORD,
+} from '@sw/logoPaths';
 import { SITE_HOST } from '@/shared/config/site';
 import { FIRA_400, GOLOS_400, UNBOUNDED_600, UNBOUNDED_700 } from './brandFonts';
 import { OFFER_COPY } from './offerCopy';
-import type { CardFact, CardParams, OgLocale, OgVariant } from './route.types';
+import type { CardFact, CardParams, OgVariant } from './route.types';
 
 export const runtime = 'edge';
 
@@ -28,12 +35,6 @@ const AC = '#FFB21F';
 const LINE = '#2A2520';
 const LINE_SOFT = '#1F1B17';
 const GLOW = 'radial-gradient(circle at 84% 6%, rgba(255, 178, 31, 0.16), rgba(15, 13, 11, 0) 62%)';
-
-/** Словесный знак логотипа — тот же, что в шапке сайта (Logo дизайн-системы). */
-const WORDMARK: Record<OgLocale, string> = {
-  ru: 'sandwor',
-  en: 'sandwor',
-};
 
 /** Семейства шрифтов сайта: дисплейный, текстовый, моно. */
 const DISP = 'Unbounded';
@@ -102,33 +103,20 @@ const monoStyle = (color: string, size = 13) => {
   };
 };
 
-/** Логотип: словесный знак дисплейным шрифтом + акцентная точка. */
-const renderLogo = (wordmark: string) => {
-  return (
-    <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-      <div
-        style={{
-          fontFamily: DISP,
-          fontSize: 30,
-          fontWeight: 700,
-          letterSpacing: -0.9,
-          color: TEXT,
-        }}
-      >
-        {wordmark}
-      </div>
+/** Логотип «sandwor studio» — тот же векторный знак, что в шапке сайта (Logo дизайн-системы). */
+const LOGO_WIDTH = 172;
 
-      <div
-        style={{
-          width: 8,
-          height: 8,
-          borderRadius: 4,
-          background: AC,
-          marginLeft: 7,
-          marginBottom: 4,
-        }}
-      />
-    </div>
+const renderLogo = () => {
+  return (
+    <svg
+      width={LOGO_WIDTH}
+      height={Math.round((LOGO_WIDTH * 234.7) / 1122)}
+      viewBox={LOGO_STUDIO_VIEWBOX}
+    >
+      <path d={LOGO_WORD} fill={TEXT} />
+      <path d={LOGO_STEM} fill={TEXT} />
+      <path d={LOGO_STUDIO} fill={AC} transform={`translate(0 ${LOGO_STUDIO_SHIFT})`} />
+    </svg>
   );
 };
 
@@ -184,7 +172,7 @@ const renderFooterLine = (text: string) => {
  * фактами (продающая) или строкой с доменом (контентная).
  */
 const renderCard = (params: CardParams) => {
-  const { eyebrow, title, lead, meta, facts, tagline, wordmark } = params;
+  const { eyebrow, title, lead, meta, facts, tagline } = params;
 
   return (
     <div
@@ -229,7 +217,7 @@ const renderCard = (params: CardParams) => {
             borderBottom: `1px solid ${LINE_SOFT}`,
           }}
         >
-          {renderLogo(wordmark)}
+          {renderLogo()}
 
           <div style={monoStyle(DIM)}>{SITE_HOST}</div>
         </div>
@@ -302,7 +290,6 @@ const buildParams = (variant: OgVariant, searchParams: URLSearchParams): CardPar
         meta,
         facts: [],
         tagline: copy.tagline,
-        wordmark: WORDMARK[locale],
       };
     case 'page':
       return {
@@ -312,7 +299,6 @@ const buildParams = (variant: OgVariant, searchParams: URLSearchParams): CardPar
         meta: '',
         facts: [],
         tagline: copy.tagline,
-        wordmark: WORDMARK[locale],
       };
     default:
       return {
@@ -322,7 +308,6 @@ const buildParams = (variant: OgVariant, searchParams: URLSearchParams): CardPar
         meta: '',
         facts: copy.facts,
         tagline: copy.tagline,
-        wordmark: WORDMARK[locale],
       };
   }
 };

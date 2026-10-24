@@ -60,16 +60,24 @@ body {
 .sw-logo--mono .sw-logo__studio { fill: currentColor; }
 a.sw-logo:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
 
-/* sandwor ⇄ sandwor studio, по кругу за 7 с:
-   0–0,4 с — обычный знак; 0,4–0,8 — палочка «d» вытягивается; 0,68–1,5 — «studio» выезжает
-   из-за неё и мягко тормозит; 1,5–5 — пауза на полном знаке; 5–5,7 — «studio» с ускорением
-   уезжает обратно за палочку; 5,7–6,05 — палочка опускается; дальше пауза ≈1,35 с до нового круга.
-   Проценты — от 7000 мс. Единицы translate — единицы SVG. */
+/* sandwor ⇄ sandwor studio. Круг 7 с: 0–0,4 с обычный знак; 0,4–0,8 палочка «d» вытягивается;
+   0,68–1,5 «studio» выезжает из-за неё; 1,5–5 пауза; 5–5,7 «studio» уезжает обратно; 5,7–6,05
+   палочка опускается; дальше пауза до нового круга. После двух кругов (14 с) знак собирается
+   ещё раз и остаётся «sandwor studio» (is-rest). При наведении — один круг обратно-вперёд
+   (is-replay, 2,45 с). Пока открыт диалог (меню, бриф) — пауза. Единицы translate — единицы SVG.
+   Порядок в animation важен: при совпадении свойства побеждает анимация, стоящая позже. */
 .sw-logo--animate .sw-logo__stem {
   transform-box: fill-box; transform-origin: 50% 100%;
-  animation: sw-logo-stem 7s linear infinite both;
+  animation: sw-logo-stem-in 400ms cubic-bezier(0.4, 0, 0.2, 1) 14.4s both, sw-logo-stem 7s linear 0s 2;
 }
-.sw-logo--animate .sw-logo__studio { animation: sw-logo-studio 7s linear infinite both; }
+.sw-logo--animate .sw-logo__studio {
+  animation: sw-logo-studio-in 820ms cubic-bezier(0.25, 0.8, 0.25, 1) 14.68s both, sw-logo-studio 7s linear 0s 2;
+}
+.sw-logo--animate.is-rest .sw-logo__stem, .sw-logo--animate.is-rest .sw-logo__studio { animation: none; }
+.sw-logo--animate.is-replay .sw-logo__stem { animation: sw-logo-stem-replay 2.45s linear both; }
+.sw-logo--animate.is-replay .sw-logo__studio { animation: sw-logo-studio-replay 2.45s linear both; }
+:root:has([aria-modal="true"]) .sw-logo--animate :is(.sw-logo__stem, .sw-logo__studio) { animation-play-state: paused; }
+
 @keyframes sw-logo-stem {
   0%, 5.714% { transform: scaleY(0); animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
   11.429%, 81.429% { transform: none; animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1); }
@@ -80,9 +88,24 @@ a.sw-logo:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; 
   21.429%, 71.429% { transform: none; animation-timing-function: cubic-bezier(0.55, 0, 0.75, 0.2); }
   81.429%, 100% { transform: translateX(-500px); }
 }
-@media (prefers-reduced-motion: reduce) {
-  .sw-logo--animate .sw-logo__stem, .sw-logo--animate .sw-logo__studio { animation: none; }
+@keyframes sw-logo-stem-in { from { transform: scaleY(0); } to { transform: none; } }
+@keyframes sw-logo-studio-in { from { transform: translateX(-500px); } to { transform: none; } }
+/* повтор по наведению: 0–0,6 «studio» уезжает; 0,6–0,95 палочка вниз; пауза 0,4; 1,35–1,75 палочка
+   вверх; 1,63–2,45 «studio» выезжает */
+@keyframes sw-logo-stem-replay {
+  0%, 24.49% { transform: none; animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1); }
+  38.776%, 55.102% { transform: scaleY(0); animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+  71.429%, 100% { transform: none; }
 }
+@keyframes sw-logo-studio-replay {
+  0% { transform: none; animation-timing-function: cubic-bezier(0.55, 0, 0.75, 0.2); }
+  24.49%, 66.531% { transform: translateX(-500px); animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1); }
+  100% { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sw-logo--animate .sw-logo__stem, .sw-logo--animate .sw-logo__studio { animation: none !important; }
+}
+
 
 
 /* ── Avatar ───────────────────────────────────────────────────── */

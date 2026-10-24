@@ -1,13 +1,13 @@
 {
   "brand": {
-    "name": "sandwor",
+    "name": "sandwor studio",
     "tagline": "Turnkey websites for business: Tilda landing pages and stores, custom development. CRM setup, SMM and AI automation are coming soon.",
     "tagline-studio": "CRM, websites, social media and AI automation for small and mid-sized businesses. One team owns the whole customer journey."
   },
   "meta": {
-    "title": "sandwor — turnkey websites for business",
+    "title": "sandwor studio — turnkey websites for business",
     "description": "We build websites that bring leads: Tilda landing pages from 50,000 ₽, Tilda stores from 100,000 ₽ and custom development. CRM setup, SMM and AI automation are coming soon.",
-    "title-studio": "sandwor — CRM, websites, social media and AI automation",
+    "title-studio": "sandwor studio — CRM, websites, social media and AI automation",
     "description-studio": "We bring order to sales: amoCRM setup, websites that send leads straight to your CRM, social media and AI bots."
   },
   "nav": {
@@ -39,7 +39,7 @@
     "services": "Services",
     "company": "Company",
     "contacts-title": "Get in touch",
-    "rights": "© {year} sandwor",
+    "rights": "© {year} sandwor studio",
     "privacy": "Data policy",
     "language": "Русский",
     "language-aria": "Переключить на русский",
@@ -1154,7 +1154,7 @@
       {
         "heading": "1. The operator and general provisions",
         "paragraphs": [
-          "The personal data operator is {operator}, a self-employed professional income tax payer{inn_part}{address_part} (the Operator). The Operator provides services under the sandwor name and owns the sandwor.ru website (the Site).",
+          "The personal data operator is {operator}, a self-employed professional income tax payer{inn_part}{address_part} (the Operator). The Operator provides services under the sandwor studio name and owns the sandwor.ru website (the Site).",
           "This policy follows Federal Law No. 152-FZ of 27.07.2006 \"On Personal Data\" and is published on the Site with free access (art. 18.1 part 2). It covers all data the Operator receives through the Site, its online chat, email, phone and Telegram.",
           "The Operator does not process special categories of personal data (health, beliefs and the like) or biometric data. No decisions with legal consequences for you are made solely on the basis of automated processing.",
           "On 22 October 2026 the Operator notified Roskomnadzor of its intention to process personal data (art. 22 of 152-FZ). Questions about data processing, requests and consent withdrawal: {email}."

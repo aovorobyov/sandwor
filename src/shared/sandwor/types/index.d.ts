@@ -11,7 +11,7 @@ export interface LogoProps extends React.HTMLAttributes<HTMLElement> {
   mono?: boolean;
   /**
    * [sandwor.ru] Длинный знак «sandwor studio»: палочка «d» вытянута вверх, справа от неё — «studio».
-   * `'animate'` — по кругу (7 с): sandwor → sandwor studio → sandwor (шапка сайта).
+   * `'animate'` — два круга sandwor ⇄ sandwor studio, затем «sandwor studio»; наведение — ещё круг (шапка сайта).
    * Дополнительная высота рисуется над блоком логотипа и вёрстку не сдвигает.
    */
   studio?: boolean | 'animate';

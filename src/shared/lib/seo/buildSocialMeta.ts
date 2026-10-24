@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BRAND_NAME } from '@/shared/config/site';
 import type { SocialMetaOptions } from './buildSocialMeta.types';
 import { buildLocaleUrl } from './buildLocaleUrl';
 
@@ -12,7 +13,7 @@ const buildOpenGraph = (options: SocialMetaOptions): Metadata['openGraph'] => {
   const common = {
     title,
     description,
-    siteName: 'sandwor',
+    siteName: BRAND_NAME,
     images: [image],
     ...(locale ? { locale: locale === 'en' ? 'en_US' : 'ru_RU' } : {}),
     ...(locale && path !== undefined ? { url: buildLocaleUrl(locale, path) } : {}),

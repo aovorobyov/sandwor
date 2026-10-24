@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { BRAND_NAME } from '@/shared/config/site';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
@@ -29,7 +30,7 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 
   return {
     title: {
-      template: '%s | sandwor',
+      template: `%s | ${BRAND_NAME}`,
       absolute: t(byPositioning({ sites: 'title', studio: 'title-studio' })),
     },
     description: t(byPositioning({ sites: 'description', studio: 'description-studio' })),

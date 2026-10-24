@@ -18,7 +18,6 @@ export interface CardParams {
   meta: string;
   facts: CardFact[];
   tagline: string;
-  wordmark: string;
 }
 
 /** Маркетинговый текст продающей обложки для одной локали. */

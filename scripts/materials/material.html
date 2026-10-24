@@ -53,7 +53,8 @@
       }
       .cover .logo {
         display: block;
-        height: 6.5mm;
+        /* знак sandwor studio: 2/3 высоты — слово, сверху «studio» */
+        height: 9.7mm;
       }
       .kicker {
         display: flex;
@@ -171,7 +172,7 @@
       }
       .cta .logo {
         flex: none;
-        height: 5mm;
+        height: 7.5mm;
       }
     </style>
   </head>
@@ -188,7 +189,7 @@
 
       document.body.innerHTML = `
         <header class="cover" data-theme="dark">
-          <img class="logo" src="../../src/shared/sandwor/logo/sandwor-wordmark-on-dark.svg" alt="sandwor">
+          <img class="logo" src="../../src/shared/sandwor/logo/sandwor-wordmark-on-dark.svg" alt="sandwor studio">
           <div class="kicker">${esc(d.kicker)}</div>
           <h1>${esc(d.title)}</h1>
           <p class="lead">${esc(d.lead)}</p>

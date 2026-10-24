@@ -10,7 +10,7 @@
 | --- | --- |
 | `tokens/` | `tokens.css` — CSS-переменные тем `dark` (по умолчанию) и `light`, шрифты и классы типографики; `tokens.json` — те же токены данными |
 | `fonts/` | Unbounded, Golos Text, Fira Code — variable woff2 (латиница + кириллица) и лицензии OFL |
-| `logo/` | SVG логотипа: для тёмного и светлого фона и одноцветный |
+| `logo/` | SVG знака «sandwor studio»: для тёмного и светлого фона и одноцветный (контуры — `src/logoPaths.js`) |
 | `icons/` | 138 иконок Tabler outline в SVG с `currentColor` |
 | `src/` | React-компоненты (`components/*.jsx`), общий `sandwor.css`, стили по компонентам, `utils.js`, `icons.js`, `index.js` |
 | `types/` | `index.d.ts` — типы пропсов с описаниями |

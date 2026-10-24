@@ -158,7 +158,7 @@ for (const l of LOCALES) {
       tag: a[l].tag,
       title: a[l].title,
       meta: minutes
-        ? `${minutes} ${l === 'en' ? 'min read' : 'мин чтения'} · ${l === 'en' ? 'sandwor blog' : 'блог sandwor'}`
+        ? `${minutes} ${l === 'en' ? 'min read' : 'мин чтения'} · ${l === 'en' ? 'sandwor studio blog' : 'блог sandwor studio'}`
         : '',
       art: { type: 'cover', src: `../../public${a.image}` },
     });

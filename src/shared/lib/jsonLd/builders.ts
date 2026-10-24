@@ -1,4 +1,5 @@
 import { CONTACT_EMAIL } from '@/shared/config/contacts';
+import { BRAND_NAME } from '@/shared/config/site';
 import { buildLocaleUrl } from '@/shared/lib/seo/buildLocaleUrl';
 import { SAME_AS, SITE_URL } from './config';
 import type {
@@ -71,7 +72,8 @@ export const buildOrganization = (input: OrganizationInput) => {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'sandwor',
+    name: BRAND_NAME,
+    alternateName: 'sandwor',
     url: SITE_URL,
     description,
     email: CONTACT_EMAIL,
@@ -90,7 +92,7 @@ export const buildService = (input: ServiceInput) => {
     name,
     description,
     url: buildLocaleUrl(locale, path),
-    provider: { '@type': 'Organization', name: 'sandwor', url: SITE_URL },
+    provider: { '@type': 'Organization', name: BRAND_NAME, url: SITE_URL },
     areaServed: 'RU',
     offers: {
       '@type': 'Offer',

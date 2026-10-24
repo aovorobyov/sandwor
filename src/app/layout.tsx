@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { OG_DEFAULT_IMAGE } from '@/shared/lib/seo/ogImage';
-import { SITE_URL } from '@/shared/config/site';
+import { BRAND_NAME, SITE_URL } from '@/shared/config/site';
 // Порядок важен: токены и шрифты ДС → сброс отступов → стили компонентов ДС → глобальные стили сайта.
 import '@/shared/sandwor/tokens/tokens.css';
 import './reset.css';
@@ -10,8 +10,8 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    template: '%s | sandwor',
-    default: 'sandwor',
+    template: `%s | ${BRAND_NAME}`,
+    default: BRAND_NAME,
   },
   // Запасное описание (404 и страницы без своего): совпадает с позиционированием «сайты».
   description:
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    siteName: 'sandwor',
+    siteName: BRAND_NAME,
     type: 'website',
     images: [OG_DEFAULT_IMAGE],
   },

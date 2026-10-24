@@ -7,8 +7,14 @@ export interface LogoProps extends React.HTMLAttributes<HTMLElement> {
   size?: number;
   /** Ссылка на главную: рендерит <a>. */
   href?: string;
-  /** Одноцветный: точка в цвет текста (гравировка, печать в одну краску). */
+  /** Одноцветный: «studio» в цвет текста (гравировка, печать в одну краску). */
   mono?: boolean;
+  /**
+   * [sandwor.ru] Длинный знак «sandwor studio»: палочка «d» вытянута вверх, справа от неё — «studio».
+   * `'animate'` — переход sandwor → sandwor studio один раз при монтировании (шапка сайта).
+   * Дополнительная высота рисуется над блоком логотипа и вёрстку не сдвигает.
+   */
+  studio?: boolean | 'animate';
 }
 export declare function Logo(props: LogoProps): React.ReactElement;
 

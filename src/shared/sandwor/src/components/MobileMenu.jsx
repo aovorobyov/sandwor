@@ -121,7 +121,7 @@ export function MobileMenu({
         onKeyDown={onKeyDown}
       >
         <div className="sw-mmenu__bar">
-          <Logo size={18} href={logoHref} />
+          <Logo size={18} href={logoHref} studio />
           <Button variant="quiet" iconOnly icon="x" aria-label={closeLabel} onClick={close} className="sw-mmenu__close" />
         </div>
 

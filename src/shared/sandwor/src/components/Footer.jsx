@@ -53,7 +53,7 @@ export function Footer({
 
         <div className="sw-footer__main">
           <div className="sw-footer__brand">
-            <Logo size={24} href={logoHref} />
+            <Logo size={24} href={logoHref} studio />
             {tagline && <p className="sw-footer__tagline">{tagline}</p>}
             {socials && socials.length > 0 && (
               <ul className="sw-footer__socials">

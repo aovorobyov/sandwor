@@ -72,7 +72,8 @@ export function SiteHeader({
         {...rest}
       >
         <div className="sw-header__inner">
-          <Logo size={18} href={logoHref} className="sw-header__logo" />
+          {/* [sandwor.ru] sandwor → sandwor studio при загрузке */}
+          <Logo size={18} href={logoHref} studio="animate" className="sw-header__logo" />
 
           {hasNav && (
             <nav className="sw-header__nav" aria-label={navLabel}>

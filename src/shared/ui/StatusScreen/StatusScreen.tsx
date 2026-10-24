@@ -20,7 +20,7 @@ export const StatusScreen: FC<StatusScreenProps> = (props) => {
 
   return (
     <div className={s.root}>
-      {logoHref && <Logo size={24} href={logoHref} className={s.logo} />}
+      {logoHref && <Logo size={24} href={logoHref} studio className={s.logo} />}
 
       <Canvas bordered className={s.canvas}>
         <div className={s.panel}>

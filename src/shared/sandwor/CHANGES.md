@@ -60,6 +60,14 @@ MobileMenu: прокрутку страницы блокирует на `<html>`
 SiteHeader: иконка-ссылка (`secondary`) — кнопка размера m (40px, иконка 20px), вровень с
 бургером; пока открыто меню, она скрыта так же, как CTA (`visibility: hidden`, место остаётся).
 
+Logo: знак векторный (из `sandworlogo.svg` / `sandworlogowide.svg`), а не живой текст с точкой.
+Блок по-прежнему 1em (`size` — прежний кегль), слово 0.79em в высоту. Новый проп `studio` —
+длинный знак «sandwor studio» (палочка «d» вверх, «studio» акцентом справа от неё над «wor»);
+`studio="animate"` — переход при монтировании: палочка растёт 400 мс, «studio» выезжает из-за
+неё 820 мс, старт через 400 мс; при `prefers-reduced-motion` — сразу финал. Шапка — `animate`,
+подвал, MobileMenu и StatusScreen — `studio`. Стили — в `sandwor.css` (`styles/Logo.css` не
+подключается).
+
 Типы новых пропсов — в `types/index.d.ts`, помечены `[sandwor.ru]`.
 
 Ещё добавлены файлы `src/components/*.d.ts` и `src/utils.d.ts` — их генерирует

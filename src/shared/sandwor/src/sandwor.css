@@ -51,6 +51,7 @@ body {
    слово 0.79em по высоте ≈ 5.6em в ширину. Продолжение палочки «d» и «studio» рисуются
    выше блока (overflow: visible), поэтому вёрстка вокруг логотипа не сдвигается. */
 .sw-logo {
+  font-size: calc(var(--sw-logo-size, 18px) * var(--sw-logo-scale, 1));
   display: inline-flex; align-items: center; height: 1em; line-height: 1;
   color: var(--text); text-decoration: none; white-space: nowrap; border-radius: var(--radius-sm);
 }
@@ -59,21 +60,30 @@ body {
 .sw-logo--mono .sw-logo__studio { fill: currentColor; }
 a.sw-logo:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
 
-/* sandwor → sandwor studio: палочка «d» вытягивается вверх (400 мс), под конец её роста
-   «studio» выезжает вправо из-за палочки (820 мс, мягкое торможение). Пауза 400 мс после
-   загрузки — чтобы сначала был виден обычный знак. Всего ≈ 1,5 с. Единицы translate — единицы SVG. */
+/* sandwor ⇄ sandwor studio, по кругу за 7 с:
+   0–0,4 с — обычный знак; 0,4–0,8 — палочка «d» вытягивается; 0,68–1,5 — «studio» выезжает
+   из-за неё и мягко тормозит; 1,5–5 — пауза на полном знаке; 5–5,7 — «studio» с ускорением
+   уезжает обратно за палочку; 5,7–6,05 — палочка опускается; дальше пауза ≈1,35 с до нового круга.
+   Проценты — от 7000 мс. Единицы translate — единицы SVG. */
 .sw-logo--animate .sw-logo__stem {
   transform-box: fill-box; transform-origin: 50% 100%;
-  animation: sw-logo-stem 400ms cubic-bezier(0.4, 0, 0.2, 1) 400ms both;
+  animation: sw-logo-stem 7s linear infinite both;
 }
-.sw-logo--animate .sw-logo__studio {
-  animation: sw-logo-studio 820ms cubic-bezier(0.25, 0.8, 0.25, 1) 680ms both;
+.sw-logo--animate .sw-logo__studio { animation: sw-logo-studio 7s linear infinite both; }
+@keyframes sw-logo-stem {
+  0%, 5.714% { transform: scaleY(0); animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+  11.429%, 81.429% { transform: none; animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1); }
+  86.429%, 100% { transform: scaleY(0); }
 }
-@keyframes sw-logo-stem { from { transform: scaleY(0); } to { transform: none; } }
-@keyframes sw-logo-studio { from { transform: translateX(-500px); } to { transform: none; } }
+@keyframes sw-logo-studio {
+  0%, 9.714% { transform: translateX(-500px); animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1); }
+  21.429%, 71.429% { transform: none; animation-timing-function: cubic-bezier(0.55, 0, 0.75, 0.2); }
+  81.429%, 100% { transform: translateX(-500px); }
+}
 @media (prefers-reduced-motion: reduce) {
   .sw-logo--animate .sw-logo__stem, .sw-logo--animate .sw-logo__studio { animation: none; }
 }
+
 
 /* ── Avatar ───────────────────────────────────────────────────── */
 .sw-avatar {
@@ -542,6 +552,8 @@ a.sw-logo:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; 
   .sw-header__secondary { display: none; }
   /* [sandwor.ru] на телефоне CTA наезжал на логотип; он остаётся внизу MobileMenu */
   .sw-header__cta { display: none; }
+  /* [sandwor.ru] знак крупнее (18 → 24px): иначе «studio» над словом — около 6px */
+  .sw-header__logo { --sw-logo-scale: 1.3333; }
 }
 
 /* ── MobileMenu ───────────────────────────────────────────────── */

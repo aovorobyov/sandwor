@@ -31,7 +31,9 @@ export function Logo({ size = 18, href, mono = false, studio = false, className,
     <Tag
       href={href}
       className={cx('sw-logo', mono && 'sw-logo--mono', withStudio && 'sw-logo--studio', animate && 'sw-logo--animate', className)}
-      style={{ fontSize: size, ...style }}
+      // Кегль — через переменную: контейнер может масштабировать знак (--sw-logo-scale),
+      // не перебивая inline-стиль.
+      style={{ '--sw-logo-size': `${size}px`, ...style }}
       aria-label={rest['aria-label'] || (withStudio ? 'sandwor studio' : 'sandwor')}
       {...rest}
     >

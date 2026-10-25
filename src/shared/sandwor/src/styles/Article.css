@@ -121,7 +121,7 @@
 }
 :where(.sw-prose) > ol > li { counter-increment: sw-prose-ol; }
 :where(.sw-prose) > ol > li::before {
-  content: counter(sw-prose-ol, decimal-leading-zero);
+  content: counter(sw-prose-ol);
   position: absolute; left: calc(var(--space-8) * -1); line-height: inherit;
   font-family: var(--font-mono); font-size: 13px; font-weight: 450; font-variant-numeric: tabular-nums;
   color: var(--text-muted);

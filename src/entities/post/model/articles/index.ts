@@ -5,6 +5,7 @@ import { tildaVsCustom } from './tilda-vs-custom';
 import { choosingWebDeveloper } from './choosing-web-developer';
 import { whatIsCta } from './what-is-cta';
 import { vibeCoding } from './vibe-coding';
+import { webAnalytics } from './web-analytics';
 
 const WORDS_PER_MINUTE = 200;
 
@@ -26,6 +27,7 @@ const toPost = (draft: ArticleDraft, locale: ArticleLocale): Post => {
 
 /** Новые статьи добавляются сюда — по файлу на статью в этой же директории. */
 const DRAFTS: ArticleDraft[] = [
+  webAnalytics,
   vibeCoding,
   whatIsCta,
   priceCafeWebsite,

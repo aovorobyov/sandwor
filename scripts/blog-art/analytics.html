@@ -1,0 +1,337 @@
+<!doctype html>
+<html data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../src/shared/sandwor/tokens/tokens.css" />
+    <style>
+      @font-face {
+        font-family: 'Unbounded';
+        src: url(../../src/shared/sandwor/fonts/Unbounded-Variable.woff2) format('woff2');
+        font-weight: 600 700;
+      }
+      @font-face {
+        font-family: 'Golos Text';
+        src: url(../../src/shared/sandwor/fonts/GolosText-Variable.woff2) format('woff2');
+        font-weight: 400 700;
+      }
+      @font-face {
+        font-family: 'Fira Code';
+        src: url(../../src/shared/sandwor/fonts/FiraCode-Variable.woff2) format('woff2');
+        font-weight: 400 600;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 1200px;
+        height: 800px;
+        overflow: hidden;
+        background: var(--bg-canvas);
+      }
+      body {
+        font-family: var(--font-text);
+        color: var(--text);
+        background-image: radial-gradient(var(--dot) 1.2px, transparent 1.3px);
+        background-size: 16px 16px;
+        background-position: 8px 8px;
+      }
+      .stage {
+        position: relative;
+        width: 1200px;
+        height: 800px;
+      }
+      .card {
+        position: absolute;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-float);
+      }
+      .bar {
+        height: 12px;
+        border-radius: 3px;
+        background: var(--surface-raised-2);
+      }
+      .mono {
+        font: 450 15px/20px var(--font-mono);
+        color: var(--text-muted);
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+      .chrome {
+        display: flex;
+        gap: 7px;
+        padding: 16px 18px;
+        border-bottom: 1px solid var(--line);
+      }
+      .chrome i {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: var(--surface-raised-2);
+      }
+      .h {
+        font: 600 24px/30px var(--font-display);
+        letter-spacing: -0.01em;
+      }
+      .t {
+        font: 400 18px/26px var(--font-text);
+        color: var(--text-secondary);
+      }
+      .num {
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: var(--on-accent);
+        font: 600 18px/1 var(--font-mono);
+      }
+      /* вопросы → отчёты */
+      .q {
+        display: grid;
+        grid-template-columns: 1fr 52px 1fr;
+        align-items: center;
+        gap: 0;
+      }
+      .q + .q {
+        margin-top: 18px;
+      }
+      .q__ask {
+        padding: 18px 22px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: var(--surface);
+        font: 600 20px/26px var(--font-display);
+        letter-spacing: -0.01em;
+      }
+      .q__arrow {
+        height: 2px;
+        margin: 0 8px;
+        background: var(--accent-line);
+        position: relative;
+      }
+      .q__arrow::after {
+        content: '';
+        position: absolute;
+        right: -2px;
+        top: -5px;
+        border: 6px solid transparent;
+        border-left-color: var(--accent);
+        border-right: 0;
+      }
+      .q__where {
+        padding: 16px 22px;
+        border-radius: var(--radius-lg);
+        background: var(--accent-soft);
+        border: 1px solid var(--accent-line);
+      }
+      .q__where b {
+        display: block;
+        font: 600 18px/24px var(--font-text);
+        color: var(--text);
+      }
+      .q__where span {
+        font: 450 14px/20px var(--font-mono);
+        color: var(--text-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage" id="stage"></div>
+    <script>
+      const q = new URLSearchParams(location.search);
+      const kind = q.get('kind'),
+        lang = q.get('lang') || 'ru';
+      const T = (ru, en) => (lang === 'en' ? en : ru);
+      const st = document.getElementById('stage');
+      const mobile = q.get('m') === '1';
+      const size = (w, h) => {
+        for (const el of [document.documentElement, document.body, st]) {
+          el.style.width = w + 'px';
+          el.style.height = h + 'px';
+        }
+      };
+
+      /* ── обложка: дашборд аналитики и след курсора, как в записи Вебвизора ── */
+      if (kind === 'analytics-cover') {
+        const bars = [120, 180, 150, 230, 205, 290, 260, 360, 310];
+        const chart = bars
+          .map(
+            (h, i) =>
+              `<div style="position:absolute;left:${40 + i * 52}px;bottom:40px;width:30px;height:${h}px;border-radius:6px 6px 2px 2px;background:${i === 7 ? 'var(--accent)' : 'var(--surface-raised-2)'}"></div>`,
+          )
+          .join('');
+        const dash = `<div class="card" style="left:120px;top:120px;width:620px;height:560px;overflow:hidden">
+    <div class="chrome"><i></i><i></i><i></i></div>
+    <div style="padding:28px 34px 0;display:flex;gap:16px">
+      ${[
+        ['var(--accent)', 110],
+        ['var(--text-disabled)', 80],
+        ['var(--text-disabled)', 96],
+      ]
+        .map(
+          ([
+            c,
+            w,
+          ]) => `<div style="flex:1;padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius-lg)">
+        <div class="bar" style="width:${w}px;height:20px;background:${c};margin-bottom:10px"></div>
+        <div class="bar" style="width:70px;height:9px"></div></div>`,
+        )
+        .join('')}
+    </div>
+    <div style="position:relative;height:420px">${chart}</div></div>`;
+        // окно записи сессии: страница и след курсора поверх
+        const replay = `<div class="card" style="left:640px;top:250px;width:440px;height:400px;overflow:hidden;background:var(--surface-raised)">
+    <div class="chrome"><i></i><i></i><i></i><span style="margin-left:auto;display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:var(--accent)"></span><span class="mono" style="font-size:13px">REC</span></span></div>
+    <div style="padding:26px 30px">
+      <div class="bar" style="width:220px;height:16px;background:var(--text-disabled);margin-bottom:12px"></div>
+      <div class="bar" style="width:300px;margin-bottom:10px"></div>
+      <div class="bar" style="width:260px;margin-bottom:30px"></div>
+      <div style="display:flex;gap:12px"><span style="width:150px;height:44px;border-radius:var(--radius-lg);background:var(--accent)"></span><span style="width:110px;height:44px;border-radius:var(--radius-lg);border:1px solid var(--line-control)"></span></div>
+      <div style="display:flex;gap:12px;margin-top:34px">${[0, 1, 2]
+        .map(
+          () =>
+            `<div style="flex:1;height:70px;border:1px solid var(--line);border-radius:var(--radius-lg)"></div>`,
+        )
+        .join('')}</div>
+    </div>
+    <svg style="position:absolute;inset:0" width="440" height="400" viewBox="0 0 440 400">
+      <path d="M380 330 C 320 300, 300 250, 250 240 S 150 230, 120 205" fill="none" stroke="var(--accent)" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round"/>
+      <circle cx="120" cy="205" r="16" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+      <path d="M118 203 L118 228 L124 222 L128 231 L132 229 L128 220 L136 220 Z" fill="var(--text)" stroke="var(--bg)" stroke-width="1.6" stroke-linejoin="round"/>
+    </svg></div>`;
+        st.innerHTML = dash + replay;
+      }
+
+      /* ── как данные попадают в отчёты ── */
+      if (kind === 'analytics-flow') {
+        const steps = [
+          [
+            T('Посетитель открывает сайт', 'A visitor opens the site'),
+            T(
+              'браузер загружает страницу и код счётчика',
+              'the browser loads the page and the counter code',
+            ),
+          ],
+          [
+            T('Счётчик собирает данные', 'The counter collects data'),
+            T(
+              'ставит cookie, фиксирует просмотры, клики, цели',
+              'sets a cookie, records views, clicks, goals',
+            ),
+          ],
+          [
+            T('Данные уходят на серверы', 'Data goes to the servers'),
+            T(
+              'Яндекса или Google — там считаются визиты',
+              'Yandex or Google — visits are counted there',
+            ),
+          ],
+          [
+            T('Вы смотрите отчёты', 'You look at the reports'),
+            T(
+              'источники, конверсии, устройства, записи',
+              'sources, conversions, devices, recordings',
+            ),
+          ],
+        ];
+        if (!mobile) {
+          st.innerHTML = steps
+            .map(
+              (
+                [h, t],
+                i,
+              ) => `<div class="card" style="left:${50 + i * 280}px;top:250px;width:250px;height:300px;padding:28px 24px">
+      <div class="num">${i + 1}</div>
+      <div class="h" style="margin-top:22px;font-size:21px;line-height:27px">${h}</div>
+      <div class="t" style="margin-top:12px;font-size:16px;line-height:23px">${t}</div></div>${
+        i < 3
+          ? `<div style="position:absolute;left:${300 + i * 280}px;top:396px;width:30px;height:2px;background:var(--accent-line)"></div>`
+          : ''
+      }`,
+            )
+            .join('');
+        } else {
+          size(800, 1240);
+          st.innerHTML = steps
+            .map(
+              (
+                [h, t],
+                i,
+              ) => `<div class="card" style="left:40px;top:${40 + i * 300}px;width:720px;height:250px;padding:36px 40px;display:flex;gap:30px">
+      <div class="num" style="flex:none;width:56px;height:56px;font-size:24px">${i + 1}</div>
+      <div><div class="h" style="font-size:32px;line-height:38px">${h}</div>
+      <div class="t" style="margin-top:14px;font-size:25px;line-height:34px">${t}</div></div></div>${
+        i < 3
+          ? `<div style="position:absolute;left:400px;top:${290 + i * 300}px;width:2px;height:50px;background:var(--accent-line)"></div>`
+          : ''
+      }`,
+            )
+            .join('');
+        }
+      }
+
+      /* ── вопрос бизнеса → где смотреть ── */
+      if (kind === 'analytics-questions') {
+        const rows = [
+          [
+            T('Откуда приходят клиенты?', 'Where do customers come from?'),
+            T('Источники → Сводка', 'Sources → Summary'),
+            'GA4: Acquisition',
+          ],
+          [
+            T('Какие страницы ведут к заявке?', 'Which pages lead to a request?'),
+            T('Конверсии + Страницы входа', 'Conversions + Landing pages'),
+            'GA4: Funnel, Path',
+          ],
+          [
+            T('Где бросают форму?', 'Where do people abandon the form?'),
+            T('Аналитика форм, Вебвизор', 'Form analytics, Session Replay'),
+            T('GA4: только form_start и form_submit', 'GA4: only form_start and form_submit'),
+          ],
+          [
+            T('Что мешает на телефоне?', 'What gets in the way on mobile?'),
+            T('Технологии → Устройства', 'Technology → Devices'),
+            'GA4: Tech',
+          ],
+          [
+            T('Окупается ли реклама?', 'Does advertising pay off?'),
+            T('UTM-метки + цели', 'UTM tags + goals'),
+            'GA4: Key events',
+          ],
+        ];
+        const html = rows
+          .map(
+            ([
+              a,
+              b,
+              c,
+            ]) => `<div class="q"><div class="q__ask">${a}</div><div class="q__arrow"></div>
+      <div class="q__where"><b>${b}</b><span>${c}</span></div></div>`,
+          )
+          .join('');
+        const head = `<div style="display:grid;grid-template-columns:1fr 52px 1fr;margin-bottom:16px"><span class="mono">${T('Вопрос', 'Question')}</span><span></span><span class="mono">${T('Где смотреть в Метрике', 'Where to look in Metrica')}</span></div>`;
+        if (!mobile) {
+          st.innerHTML = `<div style="position:absolute;left:90px;top:90px;width:1020px">${head}${html}</div>`;
+        } else {
+          size(800, 1140);
+          st.innerHTML = `<div style="position:absolute;left:30px;top:30px;width:740px">${rows
+            .map(
+              ([
+                a,
+                b,
+                c,
+              ]) => `<div style="margin-bottom:26px"><div class="q__ask" style="font-size:28px;line-height:34px;padding:24px 28px">${a}</div>
+        <div class="q__where" style="margin-top:10px;margin-left:40px;padding:20px 26px"><b style="font-size:25px;line-height:32px">${b}</b><span style="font-size:20px;line-height:28px">${c}</span></div></div>`,
+            )
+            .join('')}</div>`;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -4,21 +4,19 @@ import { ViewTransitions } from 'next-view-transitions';
 import { OG_DEFAULT_IMAGE } from '@/shared/lib/seo/ogImage';
 import { YandexMetrika } from '@/shared/lib/analytics';
 import { SITE_URL } from '@/shared/config/site';
+import { IS_SITE_CLOSED } from '@/shared/config/soon';
 import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    template: '%s | sandwor',
-    default: 'sandwor',
+    template: '%s | sandwor studio',
+    default: 'sandwor studio',
   },
   description: 'Personal website',
   verification: {
-    // По тегу на каждый ресурс Search Console — у доменов свои токены, Google берёт свой.
-    google: [
-      'u0eIVBtknauZqtkXlaBQ18pLIkExBF5UJifDJ0KeUCo', // sandwor.ru
-      'arN6y5jaZLjtoMERFP81bY07HuVvPbBbhVysMeZRFRk', // sandwor.online
-    ],
+    // Ресурс sandwor.ru в Search Console.
+    google: 'u0eIVBtknauZqtkXlaBQ18pLIkExBF5UJifDJ0KeUCo',
   },
   alternates: {
     types: {
@@ -26,7 +24,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    siteName: 'sandwor',
+    siteName: 'sandwor studio',
     type: 'website',
     images: [OG_DEFAULT_IMAGE],
   },
@@ -41,11 +39,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ViewTransitions>
       <html suppressHydrationWarning>
         <body>
-          <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
+          {/* Заглушка собрана на дизайн-системе v2, у неё одна тема — тёмная. */}
+          <ThemeProvider
+            attribute="data-theme"
+            defaultTheme="system"
+            enableSystem
+            forcedTheme={IS_SITE_CLOSED ? 'dark' : undefined}
+          >
             {children}
           </ThemeProvider>
 
-          <YandexMetrika />
+          {/* На заглушке нет политики и уведомления о cookie — Метрику не подключаем. */}
+          {!IS_SITE_CLOSED && <YandexMetrika />}
         </body>
       </html>
     </ViewTransitions>

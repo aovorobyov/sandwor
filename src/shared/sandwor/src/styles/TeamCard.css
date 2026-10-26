@@ -1,0 +1,52 @@
+/* ── TeamCard ─────────────────────────────────────────────────── */
+.sw-team-card {
+  min-width: 0;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  color: var(--text);
+}
+.sw-team-card__who { flex: 1 1 auto; min-width: 0; }
+.sw-team-card__role {
+  margin: 2px 0 0;
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 400;
+  color: var(--text-secondary); text-wrap: pretty;
+}
+
+/* founder */
+.sw-team-card--founder { display: flex; flex-direction: column; padding: var(--space-6); }
+.sw-team-card__head { display: flex; align-items: center; gap: var(--space-4); }
+.sw-team-card--founder .sw-team-card__name {
+  margin: 0;
+  font-family: var(--font-display); font-size: 20px; line-height: 25px; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--text); text-wrap: balance;
+}
+.sw-team-card__quote { margin: var(--space-6) 0 0; padding: 0; }
+.sw-team-card__quote p {
+  margin: 0;
+  font-family: var(--font-text); font-size: 17px; line-height: 27px; font-weight: 400;
+  color: var(--text); text-wrap: pretty;
+  text-indent: -0.42em; /* the opening « hangs outside the text edge */
+}
+.sw-team-card__foot { margin-top: auto; padding-top: var(--space-6); }
+.sw-team-card__meta {
+  margin: 0;
+  font-family: var(--font-mono); font-size: 13px; line-height: 20px; font-weight: 450; font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+.sw-team-card__contact { margin: var(--space-4) 0 -10px; padding-top: var(--space-2); border-top: 1px solid var(--line); }
+.sw-team-card__foot > .sw-team-card__contact:first-child { margin-top: 0; }
+/* optically align the ghost's icon with the text edge above it */
+.sw-team-card__contact-btn { margin-left: -10px; }
+
+/* member — compact row */
+.sw-team-card--member { display: flex; align-items: center; gap: 14px; padding: var(--space-4) 18px; }
+.sw-team-card--member .sw-team-card__name {
+  margin: 0;
+  font-family: var(--font-text); font-size: 15px; line-height: 20px; font-weight: 600; letter-spacing: 0;
+  color: var(--text);
+}
+.sw-team-card--member .sw-team-card__role { margin-top: 1px; }
+.sw-team-card__service { flex: none; margin-left: auto; }
+
+/* list of members */
+.sw-team-card-list { list-style: none; display: grid; gap: var(--space-3); margin: 0; padding: 0; min-width: 0; }
+.sw-team-card-list__item { min-width: 0; }

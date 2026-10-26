@@ -14,7 +14,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   const t = await getTranslations({ locale: getRequestedLocale(), namespace: 'soon' });
 
   return {
-    title: t('title'),
+    title: { absolute: t('meta-title') },
     description: t('lead'),
   };
 };

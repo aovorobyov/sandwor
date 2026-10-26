@@ -19,3 +19,7 @@ export const SOON_LOCALE_HEADER = 'x-soon-locale';
 
 /** `Retry-After` в секундах — подсказка поисковикам, когда вернуться. */
 export const SOON_RETRY_AFTER_SECONDS = 3600;
+
+/** Каналы связи на заглушке — только Telegram и почта студии. */
+export const SOON_TELEGRAM_URL = 'https://t.me/sandworbot';
+export const SOON_EMAIL = 'sandwor@mail.ru';

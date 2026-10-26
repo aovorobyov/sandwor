@@ -1,0 +1,89 @@
+/* ── ServiceCard ──────────────────────────────────────────────── */
+.sw-service-card {
+  position: relative; display: flex; flex-direction: column; min-width: 0;
+  padding: var(--space-6);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  color: var(--text);
+  transition: background-color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard);
+}
+
+/* top: icon tile + service label */
+.sw-service-card__top { display: flex; align-items: center; gap: var(--space-3); min-height: 40px; }
+.sw-service-card__tile {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 40px; height: 40px;
+  background: var(--surface-raised); border: 1px solid var(--line-strong); border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  transition: color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard);
+}
+.sw-service-card__service {
+  font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 450;
+  font-variant-numeric: tabular-nums; color: var(--text-secondary);
+}
+
+/* title — heading-2 */
+.sw-service-card__title {
+  margin: var(--space-5) 0 0;
+  font-family: var(--font-display); font-size: 20px; line-height: 25px; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--text); text-wrap: balance; overflow-wrap: break-word;
+}
+.sw-service-card__link { color: inherit; text-decoration: none; outline: none; }
+/* the stretched link: its ::after covers the whole card, border included */
+.sw-service-card__link::after {
+  content: ""; position: absolute; inset: -1px; border-radius: var(--radius-lg);
+  transition: box-shadow var(--duration-base) var(--ease-standard);
+}
+.sw-service-card__link:focus-visible::after,
+.sw-service-card.is-focus .sw-service-card__link::after { box-shadow: var(--focus-ring); }
+
+/* text — body */
+.sw-service-card__text {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-text); font-size: 15px; line-height: 23px; font-weight: 400;
+  color: var(--text-secondary); text-wrap: pretty;
+}
+.sw-service-card--bare .sw-service-card__text { margin-bottom: var(--space-5); }
+
+/* includes — check + text, 1px line between rows; the footer's line closes the list */
+.sw-service-card__includes { list-style: none; margin: var(--space-4) 0 0; padding: 0; }
+.sw-service-card__include {
+  display: flex; align-items: flex-start; gap: 10px; padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 400; color: var(--text);
+}
+.sw-service-card__check { flex: none; margin-top: 2px; color: var(--text-muted); }
+
+/* footer — mono meta left, ghost «Подробнее» right; pinned to the bottom in a grid row */
+.sw-service-card__footer {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  margin-top: auto; padding-top: var(--space-4); border-top: 1px solid var(--line);
+}
+.sw-service-card__meta {
+  display: flex; flex-direction: column; min-width: 0; margin: 0;
+  font-family: var(--font-mono); font-size: 13px; line-height: 20px; font-weight: 450; font-variant-numeric: tabular-nums;
+}
+.sw-service-card__price { color: var(--text); }
+.sw-service-card__suffix { color: var(--text-secondary); }
+.sw-service-card__term { color: var(--text-muted); }
+/* the ghost's own 10px padding would push the arrow off the content edge */
+.sw-service-card__more { flex: none; margin-right: -10px; pointer-events: none; }
+.sw-service-card--compact .sw-service-card__more { margin-right: -9px; }
+.sw-service-card__arrow { transition: transform var(--duration-base) var(--ease-standard); }
+
+/* compact — no includes, smaller title and text; for a 4-up grid */
+.sw-service-card--compact .sw-service-card__title {
+  margin-top: var(--space-4); font-size: 16px; line-height: 21px; letter-spacing: 0;
+}
+.sw-service-card--compact .sw-service-card__text { font-size: 14px; line-height: 20px; }
+
+/* clickable card */
+.sw-service-card--link { cursor: pointer; }
+.sw-service-card--link.is-hover { background: var(--surface-hover); border-color: var(--line-control); }
+.sw-service-card--link.is-hover .sw-service-card__tile { color: var(--accent-text); border-color: var(--accent-line); }
+.sw-service-card--link.is-hover .sw-service-card__arrow { transform: translateX(2px); }
+@media (hover: hover) {
+  .sw-service-card--link:hover { background: var(--surface-hover); border-color: var(--line-control); }
+  .sw-service-card--link:hover .sw-service-card__tile { color: var(--accent-text); border-color: var(--accent-line); }
+  .sw-service-card--link:hover .sw-service-card__arrow { transform: translateX(2px); }
+}
+.sw-service-card--link:active { background: var(--surface-pressed); }

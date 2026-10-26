@@ -1,0 +1,88 @@
+/* ── Checkbox · Radio ─────────────────────────────────────────── */
+.sw-checkbox {
+  --sw-cb-size: 18px;
+  --sw-cb-top: calc((23px - var(--sw-cb-size)) / 2); /* box centred on the first 23px line */
+  position: relative; display: inline-flex; align-items: flex-start; gap: var(--space-3);
+  max-width: 100%; min-width: 0; vertical-align: top;
+  font-family: var(--font-text); font-size: 15px; line-height: 23px; font-weight: 400; color: var(--text);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.sw-checkbox--bare { --sw-cb-top: 0px; }
+
+/* the real input sits exactly over the drawn box: clickable, focusable, read by screen readers */
+.sw-checkbox__input {
+  position: absolute; left: 0; top: var(--sw-cb-top); z-index: 1;
+  width: var(--sw-cb-size); height: var(--sw-cb-size); margin: 0; padding: 0;
+  opacity: 0; cursor: inherit;
+}
+
+.sw-checkbox__box {
+  position: relative; flex: none; display: block;
+  width: var(--sw-cb-size); height: var(--sw-cb-size); margin-top: var(--sw-cb-top);
+  background: var(--bg-sunken); border: 1px solid var(--line-control); border-radius: var(--radius-sm);
+  color: var(--on-accent);
+  transition: background-color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard);
+}
+.sw-checkbox .sw-checkbox__mark {
+  position: absolute; inset: 0; margin: auto; stroke-width: 2.5; opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.sw-checkbox__body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.sw-checkbox__label { text-wrap: pretty; }
+/* body-s */
+.sw-checkbox__desc { font-size: 14px; line-height: 20px; color: var(--text-secondary); text-wrap: pretty; }
+.sw-checkbox__msg {
+  display: flex; align-items: flex-start; gap: 6px; margin-top: 2px;
+  font-size: 13px; line-height: 18px; color: var(--danger); text-wrap: pretty;
+}
+.sw-checkbox__msg-icon { margin-top: 2px; }
+
+/* hover */
+.sw-checkbox:hover .sw-checkbox__input:not(:disabled) + .sw-checkbox__box,
+.sw-checkbox.is-hover .sw-checkbox__box { border-color: var(--line-control-hover); }
+
+/* focus — ring on the box */
+.sw-checkbox__input:focus-visible + .sw-checkbox__box,
+.sw-checkbox.is-focus .sw-checkbox__box { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* error (unchecked) */
+.sw-checkbox.is-error .sw-checkbox__box,
+.sw-checkbox.is-error:hover .sw-checkbox__input:not(:disabled) + .sw-checkbox__box { border-color: var(--danger); }
+
+/* note: a radio whose group has nothing checked also matches :indeterminate — hence [type="checkbox"] */
+/* checked · indeterminate — amber fill, dark mark */
+.sw-checkbox__input:checked + .sw-checkbox__box,
+.sw-checkbox__input[type="checkbox"]:indeterminate + .sw-checkbox__box,
+.sw-checkbox.is-indeterminate .sw-checkbox__box { background: var(--accent); border-color: var(--accent); }
+.sw-checkbox:hover .sw-checkbox__input:checked:not(:disabled) + .sw-checkbox__box,
+.sw-checkbox:hover .sw-checkbox__input[type="checkbox"]:indeterminate:not(:disabled) + .sw-checkbox__box,
+.sw-checkbox.is-hover .sw-checkbox__input:checked + .sw-checkbox__box { background: var(--accent-hover); border-color: var(--accent-hover); }
+.sw-checkbox__input:checked:not(:indeterminate) + .sw-checkbox__box .sw-checkbox__mark--check { opacity: 1; }
+.sw-checkbox__input[type="checkbox"]:indeterminate + .sw-checkbox__box .sw-checkbox__mark--minus,
+.sw-checkbox.is-indeterminate .sw-checkbox__mark--minus { opacity: 1; }
+.sw-checkbox.is-indeterminate .sw-checkbox__mark--check { opacity: 0; }
+
+/* radio — round; checked = 5px amber ring around a dark centre */
+.sw-checkbox--radio .sw-checkbox__box { border-radius: var(--radius-round); }
+.sw-checkbox--radio .sw-checkbox__input:checked + .sw-checkbox__box {
+  background: var(--on-accent); border-color: var(--accent); box-shadow: inset 0 0 0 4px var(--accent);
+}
+.sw-checkbox--radio:hover .sw-checkbox__input:checked:not(:disabled) + .sw-checkbox__box,
+.sw-checkbox--radio.is-hover .sw-checkbox__input:checked + .sw-checkbox__box {
+  background: var(--on-accent); border-color: var(--accent-hover); box-shadow: inset 0 0 0 4px var(--accent-hover);
+}
+
+/* disabled */
+.sw-checkbox.is-disabled { cursor: not-allowed; color: var(--text-disabled); }
+.sw-checkbox.is-disabled .sw-checkbox__desc { color: var(--text-disabled); }
+.sw-checkbox.is-disabled .sw-checkbox__box { background: transparent; border-color: var(--line-strong); border-style: dashed; }
+.sw-checkbox.is-disabled .sw-checkbox__input:checked + .sw-checkbox__box,
+.sw-checkbox.is-disabled .sw-checkbox__input[type="checkbox"]:indeterminate + .sw-checkbox__box,
+.sw-checkbox.is-disabled.is-indeterminate .sw-checkbox__box {
+  background: var(--surface-raised-2); border-color: var(--surface-raised-2); border-style: solid; color: var(--text-disabled);
+}
+.sw-checkbox--radio.is-disabled .sw-checkbox__input:checked + .sw-checkbox__box {
+  background: var(--text-disabled); border-color: var(--surface-raised-2); box-shadow: inset 0 0 0 4px var(--surface-raised-2);
+}

@@ -1,0 +1,57 @@
+/* ── Accordion ────────────────────────────────────────────────── */
+.sw-acc { border-top: 1px solid var(--line); }
+.sw-acc__item { border-bottom: 1px solid var(--line); }
+.sw-acc__heading { margin: 0; font: inherit; }
+
+.sw-acc__trigger {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4);
+  width: 100%; margin: 0; padding: var(--space-5) 0; border: 0; border-radius: var(--radius-sm); background: transparent;
+  /* heading-3: the question is the h3 of its row */
+  font-family: var(--font-display); font-size: 16px; line-height: 21px; font-weight: 600; letter-spacing: 0;
+  color: var(--text); text-align: left; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: padding-bottom var(--duration-base) var(--ease-standard);
+}
+.sw-acc__question { flex: 1 1 auto; min-width: 0; text-wrap: balance; }
+
+/* 28px tile, centred on the first line of the question (21px): -4px above, -3px below */
+.sw-acc__tile {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; margin: -4px 0 -3px;
+  background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  transition: border-color var(--duration-base) var(--ease-standard), color var(--duration-base) var(--ease-standard),
+    background-color var(--duration-base) var(--ease-standard);
+}
+.sw-acc__icon { transition: transform var(--duration-base) var(--ease-standard); }
+
+.sw-acc__trigger:hover:not(:disabled) .sw-acc__tile, .sw-acc__item.is-hover .sw-acc__tile { background: var(--surface-raised-2); border-color: var(--line-control); color: var(--text); }
+.sw-acc__trigger:active:not(:disabled) .sw-acc__tile, .sw-acc__item.is-pressed .sw-acc__tile { background: var(--surface-pressed); }
+.sw-acc__trigger:focus-visible, .sw-acc__item.is-focus .sw-acc__trigger { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sw-acc__trigger:disabled { cursor: not-allowed; color: var(--text-disabled); }
+.sw-acc__trigger:disabled .sw-acc__tile { color: var(--text-disabled); border-color: var(--line); }
+
+/* open: plus turns into a cross, the answer slides in (grid 0fr → 1fr) */
+.sw-acc__item.is-open > .sw-acc__heading .sw-acc__trigger { padding-bottom: var(--space-3); }
+.sw-acc__item.is-open .sw-acc__icon { transform: rotate(45deg); }
+.sw-acc__item.is-open .sw-acc__tile { color: var(--text); }
+
+.sw-acc__panel {
+  display: grid; grid-template-rows: 0fr; visibility: hidden;
+  transition: grid-template-rows var(--duration-base) var(--ease-standard), visibility 0s linear var(--duration-base);
+}
+.sw-acc__item.is-open > .sw-acc__panel {
+  grid-template-rows: 1fr; visibility: visible;
+  transition: grid-template-rows var(--duration-base) var(--ease-standard), visibility 0s linear 0s;
+}
+.sw-acc__clip { min-height: 0; overflow: hidden; }
+.sw-acc__answer {
+  max-width: 68ch; padding: 0 var(--space-10) 20px 0;
+  font-family: var(--font-text); font-size: 15px; line-height: 23px; font-weight: 400;
+  color: var(--text-secondary); text-wrap: pretty;
+}
+
+@media (max-width: 760px) {
+  .sw-acc__trigger { padding: var(--space-4) 0; gap: var(--space-3); }
+  .sw-acc__item.is-open > .sw-acc__heading .sw-acc__trigger { padding-bottom: var(--space-2); }
+  .sw-acc__answer { padding-right: 0; }
+}

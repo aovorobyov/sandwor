@@ -1,0 +1,65 @@
+/* ── Avatar ───────────────────────────────────────────────────── */
+.sw-avatar {
+  --sw-avatar-size: 44px;
+  --sw-avatar-radius: var(--radius-lg);
+  --sw-avatar-ring: var(--surface);
+  position: relative; display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: var(--sw-avatar-size); height: var(--sw-avatar-size);
+  border: 1px solid var(--line-strong); border-radius: var(--sw-avatar-radius);
+  background: var(--surface-raised); color: var(--text);
+  font-family: var(--font-display); font-size: 14px; line-height: 1; font-weight: 600; letter-spacing: 0.02em;
+  vertical-align: middle; user-select: none;
+}
+.sw-avatar--s { --sw-avatar-size: 28px; --sw-avatar-radius: var(--radius-md); font-size: 11px; }
+.sw-avatar--l { --sw-avatar-size: 72px; font-size: 22px; }
+
+/* trailing tracking would push the pair left — balance it */
+.sw-avatar__initials { display: block; padding-left: 0.02em; white-space: nowrap; }
+
+/* founder — the one amber person; opaque so it can sit in a stack */
+.sw-avatar--founder {
+  background-color: var(--surface);
+  background-image: linear-gradient(var(--accent-soft), var(--accent-soft));
+  border-color: var(--accent-line); color: var(--accent-text);
+}
+
+/* photo — later; the hairline border stays over the picture */
+.sw-avatar--photo { background: var(--surface-raised); }
+.sw-avatar__img {
+  position: absolute; inset: 0; display: block; width: 100%; height: 100%;
+  object-fit: cover; border-radius: calc(var(--sw-avatar-radius) - 1px);
+}
+
+/* online — round success dot with a ring in the surface colour */
+.sw-avatar__status {
+  position: absolute; right: -4px; bottom: -4px; width: 14px; height: 14px;
+  border-radius: var(--radius-round); background: var(--success);
+  box-shadow: 0 0 0 3px var(--sw-avatar-ring);
+}
+.sw-avatar--on-bg { --sw-avatar-ring: var(--bg); }
+.sw-avatar--s .sw-avatar__status { right: -3px; bottom: -3px; width: 8px; height: 8px; box-shadow: 0 0 0 2px var(--sw-avatar-ring); }
+.sw-avatar--m .sw-avatar__status { width: 10px; height: 10px; right: -3px; bottom: -3px; }
+.sw-avatar--l .sw-avatar__status { width: 12px; height: 12px; right: -4px; bottom: -4px; }
+
+/* ── AvatarGroup ── */
+.sw-avatar-group {
+  --sw-avatar-group-ring: var(--bg);
+  --sw-avatar-group-overlap: 8px;
+  display: inline-flex; align-items: center; isolation: isolate; vertical-align: middle;
+}
+.sw-avatar-group--on-surface { --sw-avatar-group-ring: var(--surface); }
+.sw-avatar-group__item { box-shadow: 0 0 0 2px var(--sw-avatar-group-ring); }
+.sw-avatar-group__item + .sw-avatar-group__item { margin-left: calc(-1 * var(--sw-avatar-group-overlap)); }
+/* centre the initials in the part of the tile that stays visible */
+.sw-avatar-group__item:not(:last-child) { padding-right: var(--sw-avatar-group-overlap); }
+/* 28px tiles are filled by two initials — they sit side by side, 4px apart, no overlap */
+.sw-avatar-group--s .sw-avatar-group__item { box-shadow: none; padding-right: 0; }
+.sw-avatar-group--s .sw-avatar-group__item + .sw-avatar-group__item { margin-left: 4px; }
+.sw-avatar--more {
+  background: var(--surface-raised-2); color: var(--text-secondary);
+  font-family: var(--font-mono); font-weight: 500; letter-spacing: 0; font-variant-numeric: tabular-nums;
+}
+.sw-avatar--more .sw-avatar__initials { padding-left: 0; }
+.sw-avatar--more.sw-avatar--s { font-size: 11.5px; }
+.sw-avatar--more.sw-avatar--m { font-size: 14px; }
+.sw-avatar--more.sw-avatar--l { font-size: 20px; }

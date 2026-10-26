@@ -1,0 +1,34 @@
+/* ─── Сброс отступов ─────────────────────────────────────────
+   Подключается ДО стилей дизайн-системы и весь на :where() — с нулевой
+   специфичностью. Так типографика ДС (ArticleProse, карточки) переопределяет
+   его, а не наоборот: обычный `p { margin: 0 }` перебил бы
+   `:where(.sw-prose) > * + *` и абзацы статьи слиплись бы. */
+
+:where(h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd) {
+  margin: 0;
+}
+
+:where(img, svg, video) {
+  max-width: 100%;
+}
+
+:where(a) {
+  color: inherit;
+}
+
+:where(button, input, textarea, select) {
+  font: inherit;
+  color: inherit;
+}
+
+/* Запасное кольцо фокуса для своих элементов; у компонентов ДС — свои. */
+:where(:focus-visible) {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Фон документа под заглушкой — чтобы при оттягивании страницы не мелькал фон v1. */
+:where(html, body) {
+  margin: 0;
+  background: var(--bg);
+}

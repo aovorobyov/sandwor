@@ -1,0 +1,47 @@
+/* ── Breadcrumbs ──────────────────────────────────────────────── */
+.sw-crumbs { min-width: 0; }
+.sw-crumbs__list {
+  display: flex; align-items: center; flex-wrap: nowrap; min-width: 0;
+  margin: 0; padding: 0; list-style: none;
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 400;
+}
+.sw-crumbs__item { display: flex; align-items: center; flex: none; min-width: 0; }
+.sw-crumbs__item--current { flex: 0 1 auto; }
+.sw-crumbs__sep { flex: none; width: 14px; height: 14px; margin: 0 6px; color: var(--text-muted); }
+
+.sw-crumbs__link {
+  display: block; max-width: 28ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  color: var(--text-secondary); text-decoration: none; border-radius: var(--radius-sm);
+  text-decoration-thickness: 1px; text-underline-offset: 3px;
+  transition: color var(--duration-base) var(--ease-standard);
+}
+.sw-crumbs__link:hover, .sw-crumbs__item.is-hover > .sw-crumbs__link { color: var(--text); text-decoration-line: underline; }
+.sw-crumbs__link:focus-visible, .sw-crumbs__item.is-focus > .sw-crumbs__link { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sw-crumbs__text { white-space: nowrap; color: var(--text-muted); }
+.sw-crumbs__current { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text); }
+
+/* «…» — the collapsed middle; hidden until the chain collapses */
+.sw-crumbs__item--more { display: none; }
+.sw-crumbs__more {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 20px; margin: 0 -2px; padding: 0 4px;
+  border: 0; border-radius: var(--radius-sm); background: transparent;
+  font-family: var(--font-text); font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: 0.02em;
+  color: var(--text-secondary); cursor: pointer;
+  transition: color var(--duration-base) var(--ease-standard), background-color var(--duration-base) var(--ease-standard);
+}
+/* the glyph is 20px tall: a 40×36 invisible hit area for fingers, without moving the row */
+.sw-crumbs__more::before { content: ""; position: absolute; inset: -8px -10px; }
+.sw-crumbs__more:hover, .sw-crumbs__more.is-hover { color: var(--text); background: var(--tint-hover); }
+.sw-crumbs__more:focus-visible, .sw-crumbs__more.is-focus { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.sw-crumbs--collapsed:not(.is-expanded) .sw-crumbs__item--middle { display: none; }
+.sw-crumbs--collapsed:not(.is-expanded) .sw-crumbs__item--more { display: flex; }
+.sw-crumbs.is-expanded .sw-crumbs__list { flex-wrap: wrap; row-gap: var(--space-1); }
+
+@media (max-width: 760px) {
+  .sw-crumbs--auto:not(.is-expanded) .sw-crumbs__item--middle { display: none; }
+  .sw-crumbs--auto:not(.is-expanded) .sw-crumbs__item--more { display: flex; }
+  .sw-crumbs__link { max-width: 20ch; }
+}

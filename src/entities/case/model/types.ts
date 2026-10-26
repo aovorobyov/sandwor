@@ -26,7 +26,7 @@ export interface CaseDetail {
   lead: string;
   facts: CaseFact[];
   blocks: CaseBlock[];
-  /** Цифры о нашей работе (не о бизнесе клиента): «15 страниц», «97 из 100». */
+  /** Цифры о нашей работе (не о бизнесе клиента): «12 страниц», «800+ пар в словаре». */
   metrics?: CaseMetric[];
   gallery?: CaseGalleryItem[];
 }

@@ -32,10 +32,7 @@ export const isPublishedCase = (slug: string): boolean => {
 
 /** Внешние ссылки кейса: живой сайт и, если код открыт, репозиторий. */
 export const CASE_LINKS: Partial<Record<CaseSlug, readonly CaseLink[]>> = {
-  'model-agency': [
-    { kind: 'site', href: 'https://openupmodels.ru' },
-    { kind: 'repo', href: 'https://github.com/aovorobyov/translation_module' },
-  ],
+  'model-agency': [{ kind: 'site', href: 'https://openupmodels.ru' }],
 };
 
 /** Направления кейса — бейджи на карточке и фильтр на странице кейсов. */
@@ -104,11 +101,13 @@ export const CASE_SHOTS: Partial<Record<CaseSlug, CaseShots>> = {
     domain: 'openupmodels.ru',
     cover: 'catalog',
     shots: {
-      catalog: { device: 'desktop' },
-      menu: { device: 'desktop' },
+      hero: { device: 'desktop' },
       news: { device: 'desktop' },
+      'news-en': { device: 'desktop' },
+      post: { device: 'desktop' },
+      menu: { device: 'desktop' },
+      catalog: { device: 'desktop' },
       'mobile-menu-ru': { device: 'mobile' },
-      'mobile-menu-en': { device: 'mobile' },
       'mobile-catalog': { device: 'mobile' },
     },
   },
